@@ -124,10 +124,46 @@ namespace SiCGA.Clases.Controladores {
             else
             { return false; }
 		}
-
+        /// <summary>
+        /// Consultar El Total de Registros de los Usuarios
+        /// </summary>
+        /// <returns>Boolean</returns>
 		public override bool ConsultarRegistros(){
 
-			return false;
+            if (Abrir())
+            {
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>();
+                    lista.Add(new Parametros(@"opc", "1"));// Opción para actualizar dentro del procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
+                    lista.Add(new Parametros(@"usr", string.Empty));
+                    lista.Add(new Parametros(@"pwd", string.Empty));
+                    lista.Add(new Parametros(@"nom", string.Empty));
+                    lista.Add(new Parametros(@"pat", string.Empty));
+                    lista.Add(new Parametros(@"mat", string.Empty));
+                    lista.Add(new Parametros(@"fondo", string.Empty));
+                    lista.Add(new Parametros(@"subf", string.Empty));
+                    lista.Add(new Parametros(@"unidad", string.Empty));
+                    lista.Add(new Parametros(@"jera", string.Empty));
+                    lista.Add(new Parametros(@"est", string.Empty));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
+
+                    string proce = "sp_usuarios_crud";
+
+                    if (ConsultarProcedimiento(proce, lista))
+                    { return true; }
+                    else
+                    { return false; }
+                }
+                catch (Exception e)
+                {
+                    Error = e.Message.ToString();
+                    return false;
+                }
+                finally { Cerrar(); }
+            }
+            else
+            { return false; }
 		}
 
 		/// <summary>
