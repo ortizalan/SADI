@@ -89,8 +89,8 @@ namespace SiCGA.Clases.Controladores {
                     try
                     {
                         List<Parametros> lista = new List<Parametros>();
-                        lista.Add(new Parametros(@"opc", "4"));
-                        lista.Add(new Parametros(@"id", u.Id.ToString()));
+                        lista.Add(new Parametros(@"opc", "4"));// Opcioón para consultar un registro solamente
+                        lista.Add(new Parametros(@"id", u.Id.ToString()));// Identificador del registro
                         lista.Add(new Parametros(@"usr", string.Empty));
                         lista.Add(new Parametros(@"pwd", string.Empty));
                         lista.Add(new Parametros(@"nom", string.Empty));
@@ -102,27 +102,27 @@ namespace SiCGA.Clases.Controladores {
                         lista.Add(new Parametros(@"jera", string.Empty));
                         lista.Add(new Parametros(@"est", string.Empty));
 
-                        string proce = "sp_usuarios_crud";
+                        string proce = "sp_usuarios_crud";// Nombre del procedimiento
 
                         if (ConsultarProcedimiento(proce, lista))
                         {
-                            return true;
+                            return true;// Consulta exitosa
                         }
                         else
-                        { return false; }
+                        { return false; }// Consulta no exitosa
                     }
-                    catch(Exception e)
+                    catch(Exception e)// Cachar el error
                     {
-                        Error = e.Message.ToString();
-                        return false;
+                        Error = e.Message.ToString();// Guardar el mensaje de error
+                        return false;// Indicar operación No Exitosa
                     }
-                    finally { Cerrar(); }
+                    finally { Cerrar(); }// Cerrar la conexión
                 }
                 else
-                { return false; }
+                { return false; }//No se pudo Abrir la Conexión
             }
             else
-            { return false; }
+            { return false; }// No es del tipo UsuariosModel
 		}
         /// <summary>
         /// Consultar El Total de Registros de los Usuarios
@@ -157,13 +157,13 @@ namespace SiCGA.Clases.Controladores {
                 }
                 catch (Exception e)
                 {
-                    Error = e.Message.ToString();
-                    return false;
+                    Error = e.Message.ToString();// Guardar el mensaje de error
+                    return false;// Indicar Operación NO Exitosa
                 }
-                finally { Cerrar(); }
+                finally { Cerrar(); }// Cerrar la conexión
             }
             else
-            { return false; }
+            { return false; }// No se pudo Abrir la COnexión
 		}
 
 		/// <summary>
@@ -173,7 +173,50 @@ namespace SiCGA.Clases.Controladores {
 		/// <param name="o">Objeto de tipo Usuario</param>
 		public override bool IngresarRegisto(object o){
 
-			return false;
+            if (o.GetType() == typeof(UsuariosModel))// Validar que el Objeto sea del tipo UsuariosModel
+            {
+                var u = (UsuariosModel)o;// Castear la variable al tipo UsuariosModel
+
+                if(Abrir())// Intentar Abrir la Conexión
+                {
+                    // Si se estableció la conexión
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();
+                        lista.Add(new Parametros(@"opc", "2"));// Opción para Ingresar Registro dentro del procedimiento
+                        lista.Add(new Parametros(@"id", u.Id.ToString()));
+                        lista.Add(new Parametros(@"usr", u.Usuario));
+                        lista.Add(new Parametros(@"pwd", u.Contraseña));
+                        lista.Add(new Parametros(@"nom", u.Nombre));
+                        lista.Add(new Parametros(@"pat", u.Paterno));
+                        lista.Add(new Parametros(@"mat", (!string.IsNullOrEmpty(u.Materno) ? u.Materno : string.Empty)));// Validar que la variable materno no sea nula
+                        lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));
+                        lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));
+                        lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));
+                        lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
+                        lista.Add(new Parametros(@"est", "1"));// Si se vá a ingresar, siempre será activo
+
+                        string proce = "sp_usuarios_crud";
+
+                        if(EjecutarProcedimiento(proce, lista))// Ejecutar el procedimiento
+                        { return true; }// Operación Exitosa
+                        else
+                        { return false; }// Operación NO Exitosa, consultar el Error
+
+                    }
+                    catch(Exception e)// Cachar el error
+                    {
+                        Error = e.Message.ToString();// Guardar el mensaje de error
+                        return false;// Indicar que la operación NO fue exitosa
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+
+                }
+                else
+                { return false; }// No Se Pudo Abrir la Conexión, ver mensaje de error
+            }
+            else
+            { return false; }// No es del mismo tipo
 		}
 
 	}//end UsuariosController

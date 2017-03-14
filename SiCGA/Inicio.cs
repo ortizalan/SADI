@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SiCGA.Clases.Controladores;
 using SiCGA.Clases.Modelos;
+using DatosBD;
 
 namespace SiCGA
 {
@@ -29,17 +30,10 @@ namespace SiCGA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            mUser.Id = 1;
-            Object u = mUser;
+            Operaciones op = new Operaciones();
+            int r = op.multiplicar(int.Parse(textBox1.Text.ToString()), int.Parse(textBox2.Text.ToString()));
+            MessageBox.Show("La Multiplicación es :".ToUpper() + r.ToString() );
 
-            if (cUser.ConsultarRegistro(u))
-            {
-                MessageBox.Show("el usuario es :".ToUpper() + cUser.Tabla.Rows[0]["Nombre"].ToString());
-            }
-            else
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + cUser.Error);
-            }
            
             
         }

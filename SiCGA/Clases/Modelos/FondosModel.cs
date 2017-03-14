@@ -33,24 +33,29 @@ namespace SiCGA.Clases.Modelos {
 		}
 
 		/// 
-		/// <param name="id"></param>
-		/// <param name="fondo"></param>
+		/// <param name="id">Identificador del Fondo</param>
+		/// <param name="fondo">Descripción del Fondo</param>
 		public FondosModel(int id, string fondo){
-
+            this.Id = id;
+            this.Fondo = fondo;
 		}
 
 		~FondosModel(){
 
 		}
-
-		public int Fondo{
-			get;
-			set;
+        /// <summary>
+        /// Acceder a la Propiedad Fondo
+        /// </summary>
+		public string Fondo{
+            get { return _fondo; }
+            set { _fondo = value; }
 		}
-
+        /// <summary>
+        /// Acceder a la Propiedad Id
+        /// </summary>
 		public int Id{
-			get;
-			set;
+            get { return _id; }
+            set { _id = value; }
 		}
 
 	}//end FondosModel

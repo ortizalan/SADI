@@ -46,21 +46,21 @@ namespace SiCGA.Clases
         /// <returns>valor Boleano</returns>
         public bool Abrir()
         {
-            if (Connection.State == ConnectionState.Closed)
+            if (Connection.State == ConnectionState.Closed)// Verificar que la conexión esté cerrada
             {
                 try
                 {
-                    Connection.Open();
-                    return true;
+                    Connection.Open();// Abrir la Conexión
+                    return true;// Indicar que la operación fue exitosa
                 }
-                catch (SqlException e)
+                catch (SqlException e)// Cachar el error
                 {
-                    Error = e.Message.ToString();
-                    return false;
+                    Error = e.Message.ToString();// Mostrar el error
+                    return false;// Operación no Exitosa
                 }
             }
             else
-            { return false; }
+            { return false; }// No está cerrada la conexión 
         }
 
         /// <summary>
@@ -141,8 +141,25 @@ namespace SiCGA.Clases
         /// <param name="lista">Arreglo de Parámetros de SQL</param>
         protected bool EjecutarProcedimiento(string procedimiento, List<Parametros> lista)
         {
+            try
+            {
+                Command = new SqlCommand();// Inicializar el Commando
+                Command.CommandType = CommandType.StoredProcedure;// Indicarle el tipo de comando
+                Command.CommandText = procedimiento;// Indicarle el nombre del procedimiento de la BD
+                Command.Connection = Connection;// Asignarle la Conexión
+                foreach (Parametros p in lista)// Agregar los parámetros si los tiene
+                {
+                    Command.Parameters.AddWithValue(p.NombreParametro, p.ValorParametro);
+                }
+                Command.ExecuteNonQuery();// Ejecutar el comando
+                return true;// Se realizó la operación con éxito
+            }
+            catch(Exception e)// Cachar el error
+            {
+                Error = e.Message.ToString();// Mostrar el error en la varibale
+                return false;// Indicar que no fue exitosa la operación
+            }
 
-            return false;
         }
 
         /// <summary>
@@ -150,8 +167,8 @@ namespace SiCGA.Clases
         /// </summary>
         public string Error
         {
-            get;
-            set;
+            get { return _error; }
+            set { _error = value; }
         }
 
         /// <summary>
@@ -159,8 +176,8 @@ namespace SiCGA.Clases
         /// </summary>
         public DataTable Tabla
         {
-            get;
-            set;
+            get { return _tabla; }
+            set { _tabla = value; }
         }
 
     }//end Conexion
