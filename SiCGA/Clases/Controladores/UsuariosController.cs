@@ -26,12 +26,52 @@ namespace SiCGA.Clases.Controladores {
 		~UsuariosController(){
 
 		}
-
-		/// 
+        /// <summary>
+        /// Método para Actualizar el Registro del Modelo Usuario
+        /// </summary>
 		/// <param name="o"></param>
 		public override bool ActualizarRegistro(object o){
 
-			return false;
+            if (o.GetType() == typeof(UsuariosModel))// Validar que el objeto dea del Tipo UsuariosModel
+            {
+                var u = (UsuariosModel)o; // Casteamos el Objeto al tipo UsuariosModel
+
+                if(Abrir()) // Si Abre la conexión
+                {
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();
+                        lista.Add(new Parametros(@"opc", "3"));// Opción para actualizar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", u.Id.ToString()));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
+                        lista.Add(new Parametros(@"usr", u.Usuario));
+                        lista.Add(new Parametros(@"pwd", u.Contraseña));
+                        lista.Add(new Parametros(@"nom", u.Nombre));
+                        lista.Add(new Parametros(@"pat", u.Paterno));
+                        lista.Add(new Parametros(@"mat", u.Materno));
+                        lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));
+                        lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));
+                        lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));
+                        lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
+                        lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
+
+                        string proce = "sp_usuarios_crud";
+
+                        if(EjecutarProcedimiento(proce, lista))
+                        { return true; }// Se ejecutó el procedimiento exitosamente
+                        else { return false; }// No se ejecutó el procedimiento
+                    }
+                    catch(Exception e)
+                    {
+                        Error = e.Message.ToString(); // Catchar el error
+                        return false; // Indicar que no se realizo la consulta/procedimiento
+                    }
+                    finally { Cerrar(); } // Asegurarnos de que se cierra la conexión siempre
+                }
+                else // Si no abre la conexión
+                { return false; }
+            }
+            else // Si no es del tipo UsuariosModel
+            { return false; }
 		}
 
 		/// <summary>
