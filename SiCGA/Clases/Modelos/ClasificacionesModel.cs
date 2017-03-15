@@ -31,10 +31,11 @@ namespace SiCGA.Clases.Modelos {
 		public ClasificacionesModel(){
 
 		}
-
-        /// 
-        /// <param name="id"></param>
-        /// <param name="clasi"></param>
+        /// <summary>
+        /// Constructor de la Clase que Recibe Parámetros
+        /// </summary>
+        /// <param name="id">Identificador del Clasificación</param>
+        /// <param name="clasi">Descripción de la Clasificación</param>
         public ClasificacionesModel(int id, string clasi)
         {
             this.Id = id;

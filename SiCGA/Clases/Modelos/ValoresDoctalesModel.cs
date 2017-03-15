@@ -39,6 +39,8 @@ namespace SiCGA.Clases.Modelos {
 		/// <param name="val"></param>
 		public ValoresDoctalesModel(int id, string val){
 
+            this.Id = id;
+            this.Valor = val;
 		}
 
 		~ValoresDoctalesModel(){
@@ -48,17 +50,19 @@ namespace SiCGA.Clases.Modelos {
 		/// <summary>
 		/// Acceder a la Propiedad Id
 		/// </summary>
-		public int Id(){
+		public int Id{
 
-			return 0;
+            get { return _id; }
+            set { _id = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Valor
 		/// </summary>
-		public string Valor(){
+		public string Valor{
 
-			return "";
+            get { return _valor; }
+            set { _valor = value; }
 		}
 
 	}//end ValoresDoctalesModel

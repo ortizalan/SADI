@@ -26,25 +26,33 @@ namespace SiCGA.Clases.Modelos {
 
 		}
 
-		/// 
-		/// <param name="id"></param>
-		/// <param name="valoracion"></param>
+		/// <summary>
+        /// Cobstructor de la Clase que recibe parámetros
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="valoracion"></param>
 		public ValoracionDoctalModel(int id, string valoracion){
 
+            this.Id = id;
+            this.Valoracion = valoracion;
 		}
 
 		~ValoracionDoctalModel(){
 
 		}
-
+        /// <summary>
+        /// Acceder a la Propiedad Id
+        /// </summary>
 		public int Id{
-			get;
-			set;
+            get { return _id; }
+            set { _id = value; }
 		}
-
+        /// <summary>
+        /// Acceder a la Propiedad Valoración
+        /// </summary>
 		public string Valoracion{
-			get;
-			set;
+            get { return _valoracion; }
+            set { _valoracion = value; }
 		}
 
 	}//end ValoracionDoctalModel

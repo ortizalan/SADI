@@ -35,10 +35,11 @@ namespace SiCGA.Clases.Modelos {
 		/// <summary>
 		/// Constructor de la Clase que recibe Parámetros
 		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="mov"></param>
+		/// <param name="id">Identificador del Modelo</param>
+		/// <param name="mov">Descripción del Movimiento</param>
 		public MovimientosModel(int id, string mov){
-
+            this.Id = id;
+            this.Movimiento = mov;
 		}
 
 		~MovimientosModel(){
@@ -49,16 +50,16 @@ namespace SiCGA.Clases.Modelos {
 		/// Acceder a la Propiedad ID
 		/// </summary>
 		public int Id{
-			get;
-			set;
+            get { return _id; }
+            set { _id = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Movimiento
 		/// </summary>
 		public string Movimiento{
-			get;
-			set;
+            get { return _movimiento; }
+            set { _movimiento = value; }
 		}
 
 	}//end MovimientosModel

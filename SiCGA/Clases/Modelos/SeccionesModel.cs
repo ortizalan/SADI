@@ -21,7 +21,9 @@ namespace SiCGA.Clases.Modelos {
 
 		private int _id;
 		private string _seccion;
-
+        /// <summary>
+        /// Construcrtor de la Clase que no recibe parámetros
+        /// </summary>
 		public SeccionesModel(){
 
 		}
@@ -32,7 +34,8 @@ namespace SiCGA.Clases.Modelos {
 		/// <param name="id"></param>
 		/// <param name="secc"></param>
 		public SeccionesModel(int id, string secc){
-
+            this.Id = id;
+            this.Seccion = secc;
 		}
 
 		~SeccionesModel(){
@@ -43,16 +46,16 @@ namespace SiCGA.Clases.Modelos {
 		/// Acceder a la Propiedad Id
 		/// </summary>
 		public int Id{
-			get;
-			set;
+            get { return _id; }
+            set { _id = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Sección
 		/// </summary>
-		public int Seccion{
-			get;
-			set;
+		public string Seccion{
+            get { return _seccion; }
+            set { _seccion = value; }
 		}
 
 	}//end SeccionesModel

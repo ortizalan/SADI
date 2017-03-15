@@ -44,11 +44,33 @@ namespace SiCGA.Clases.Modelos {
 		/// Identificador de la Transferencia a la que pertenece la caja
 		/// </summary>
 		private TransferenciasModel _transferencia;
-
+        /// <summary>
+        /// Constructor sin Parámetros del Modelo
+        /// </summary>
 		public CajasModel(){
 
 		}
-
+        /// <summary>
+        /// Constructor de la Clase con Parámetros
+        /// </summary>
+        /// <param name="id">Identificador del Modelo</param>
+        /// <param name="num">Numero de Caja del Modelo</param>
+        /// <param name="fol_car">Número de Folder o Carpetas de la Caja</param>
+        /// <param name="año">Año de la Caja del Modelo</param>
+        /// <param name="n_d_m">Número dentro del Grupo de la Caja</param>
+        /// <param name="trans">Identificador de la Transferencia</param>
+        public CajasModel(int id, int num, int fol_car, int año, int n_d_m, TransferenciasModel trans)
+        {
+            this.Id = id;
+            this.Numero = num;
+            this.Folders_Carpetas = fol_car;
+            this.Año = año;
+            this.NdeM = n_d_m;
+            this.Transferencia = trans;
+        }
+        /// <summary>
+        /// Destructor del Modelo
+        /// </summary>
 		~CajasModel(){
 
 		}
@@ -60,7 +82,9 @@ namespace SiCGA.Clases.Modelos {
             get { return _id; }
             set { _id = value; }
 		}
-
+        /// <summary>
+        /// Acceso a la Propiedad Número
+        /// </summary>
 		public int Numero{
             get { return _numero; }
             set { _numero = value; }

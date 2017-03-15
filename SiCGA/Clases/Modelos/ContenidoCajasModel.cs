@@ -29,11 +29,27 @@ namespace SiCGA.Clases.Modelos {
 		/// Propiedad identificadora dela Serie Documental del contenido
 		/// </summary>
 		private RegistrosModel _seriedoctal;
-
+        /// <summary>
+        /// Constructor Vacío del Modelo
+        /// </summary>
 		public ContenidoCajasModel(){
 
 		}
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
+        /// <param name="id">Identificador del Modelo</param>
+        /// <param name="caja">Número de Caja</param>
+        /// <param name="seriedoc">Serie Documental del Contenido</param>
+        public ContenidoCajasModel(int id, CajasModel caja, RegistrosModel seriedoc)
+        {
+            this.Id = id;
+            this.Caja = caja;
+            this.SerieDoctal = seriedoc;
+        }
+        /// <summary>
+        /// Destructor del Modelo
+        /// </summary>
 		~ContenidoCajasModel(){
 
 		}

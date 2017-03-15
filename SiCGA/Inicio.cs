@@ -33,8 +33,6 @@ namespace SiCGA
             Operaciones op = new Operaciones();
             int r = op.multiplicar(int.Parse(textBox1.Text.ToString()), int.Parse(textBox2.Text.ToString()));
             MessageBox.Show("La Multiplicación es :".ToUpper() + r.ToString() );
-
-           
             
         }
     }

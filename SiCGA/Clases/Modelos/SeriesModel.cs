@@ -42,13 +42,16 @@ namespace SiCGA.Clases.Modelos {
 		}
 
 		/// <summary>
-		/// Constructor que recibe Parámetros
-		/// </summary>
-		/// <param name="idserie"></param>
-		/// <param name="serie"></param>
-		/// <param name="seccion"></param>
-		public SeriesModel(int idserie, string serie, SeccionesModel seccion){
+        /// Constructor de la Clase que recibe parámetros
+        /// </summary>
+        /// <param name="idserie">Identificador de la Serie</param>
+        /// <param name="seccion">Sección a la que Pertenece</param>
+        /// <param name="serie">Descripción de la Serie</param>
+		public SeriesModel(int idserie, SeccionesModel seccion, string serie){
 
+            this.IdSerie = idserie;
+            this.Seccion = seccion;
+            this.Serie = serie;
 		}
 
 		~SeriesModel(){
@@ -59,32 +62,32 @@ namespace SiCGA.Clases.Modelos {
 		/// Acceder a la llave de la Serie
 		/// </summary>
 		public int Id{
-			get;
-			set;
+            get { return _id; }
+            set { _id = value; }
 		}
 
 		/// <summary>
 		/// Acceder al Identificador de la Serie
 		/// </summary>
 		public int IdSerie{
-			get;
-			set;
+            get { return _idserie; }
+            set { _idserie = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Sección
 		/// </summary>
 		public SeccionesModel Seccion{
-			get;
-			set;
+            get { return _seccion; }
+            set { _seccion = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Serie
 		/// </summary>
 		public string Serie{
-			get;
-			set;
+            get { return _serie; }
+            set { _serie = value; }
 		}
 
 	}//end SeriesModel

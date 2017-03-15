@@ -48,14 +48,39 @@ namespace SiCGA.Clases.Modelos {
 		/// Propiedad de la IP o MAC Address desde dónde se realizó el movimiento
 		/// </summary>
 		private string _idcomputadora;
-
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
 		public BitacoraModel(){
 
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~BitacoraModel(){
 
 		}
+        /// <summary>
+        /// Constructor de la Clase que recibe parámetros
+        /// </summary>
+        /// <param name="id">Identificador del Modelo</param>
+        /// <param name="seriedoc">Serie Documental del Modelo</param>
+        /// <param name="fec">Fecha del Movimiento en el Modelo</param>
+        /// <param name="mov">Movimiento en el Modelo</param>
+        /// <param name="usr">Usuario que realizó el Movimiento</param>
+        /// <param name="comp">Computadora desde dónde se realizó el movimiento</param>
+        /// <param name="idcomp">identificador de la computadora desde dónde se realizó el movimiento</param>
+        public BitacoraModel(int id, RegistrosModel seriedoc, DateTime fec, MovimientosModel mov,
+            UsuariosModel usr, string comp, string idcomp)
+        {
+            this.Id = id;
+            this.SerieDoctal = seriedoc;
+            this.Fecha = fec;
+            this.Movimiento = mov;
+            this.Usuario = usr;
+            this.Computadora = comp;
+            this.IdComputadora = idcomp;
+        }
 
 		/// <summary>
 		/// Acceso a la Propiedad Identificación del movimiento
@@ -64,7 +89,9 @@ namespace SiCGA.Clases.Modelos {
             get { return _id; }
             set { _id = value; }
 		}
-
+        /// <summary>
+        /// Acceso a la Propiedad SerieDoctal
+        /// </summary>
 		public RegistrosModel SerieDoctal{
             get { return _seriedocal; }
             set { _seriedocal = value; }

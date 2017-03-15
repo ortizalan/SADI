@@ -19,13 +19,27 @@ namespace SiCGA.Clases.Modelos {
 	/// </summary>
 	public class UnidadesAdmvasModel {
 
-		private int _id;
-		private string _unidad;
-
+		private int _id;// Propiedad de la Identificación del Modelo
+		private string _unidad;// Propiedad de la Descripción de la Unidad
+        /// <summary>
+        /// Constructor vacío de la Clase
+        /// </summary>
 		public UnidadesAdmvasModel(){
 
 		}
-
+        /// <summary>
+        /// Constructor de la Clase con Parámetros
+        /// </summary>
+        /// <param name="id">Identificador del Modelo</param>
+        /// <param name="unidad">Descripción de la Unidad del Modelo</param>
+        public UnidadesAdmvasModel(int id, string unidad)
+        {
+            this.Id = id;
+            this.Unidad = unidad;
+        }
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~UnidadesAdmvasModel(){
 
 		}
@@ -34,16 +48,16 @@ namespace SiCGA.Clases.Modelos {
 		/// Acceder a la Propiedad Id
 		/// </summary>
 		public int Id{
-			get;
-			set;
+            get { return _id; }
+            set { _id = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la propiedad Unidad
 		/// </summary>
 		public string Unidad{
-			get;
-			set;
+            get { return _unidad; }
+            set { _unidad = value; }
 		}
 
 	}//end UnidadesAdmvasModel
