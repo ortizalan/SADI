@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using SiCGA.Clases.Modelos;
 
 
 
@@ -35,7 +36,19 @@ namespace SiCGA.Clases.Controladores {
 		/// <param name="o">Objeto del Tipo class</param>
 		public override bool ConsultarRegistro(Object o){
 
-			return false;
+			if(o.GetType()==typeof(ClasificacionesModel))// Validar que el Objeto sea del Modelo ClasificacionesModel
+            {
+                var c = (ClasificacionesModel)o;// Castear la variable "c" al tipo ClasificacionesModel
+
+                if(Abrir())// Intentar Abrir la Conexión
+                {
+                    //
+                }
+                else
+                { return false; }// Error al intentar abrir la conexión, consultar Error
+            }
+            else
+            { return false; }// No es del miismo tipo
 		}
 
 		/// <summary>
