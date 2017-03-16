@@ -137,6 +137,7 @@
     <Compile Include="Clases\Modelos\ValoracionDoctalModel.cs" />
     <Compile Include="Clases\Modelos\ValoresDoctalesModel.cs" />
     <Compile Include="Clases\Parametros.cs" />
+    <Compile Include="Clases\ViewModelos\ViewUsuariosModel.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using DatosBD;
+//using DatosBD;
 
 
 
@@ -32,7 +32,7 @@ namespace SiCGA.Clases
         /// </summary>
         protected Conexion()
         {
-            _connection = new SqlConnection("Server =" + DatosUsuarios.Servidor + "; Initial Catalog =" + DatosUsuarios.BaseDeDatos + ";Persist Security Info=False;Integrated Security=true;");
+            //_connection = new SqlConnection("Server =" + DatosUsuarios.Servidor + "; Initial Catalog =" + DatosUsuarios.BaseDeDatos + ";Persist Security Info=False;Integrated Security=true;");
         }
 
         ~Conexion()

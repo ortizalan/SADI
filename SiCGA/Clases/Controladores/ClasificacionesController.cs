@@ -193,7 +193,7 @@ namespace SiCGA.Clases.Controladores {
                 { return false; }// Error al intentar abrir la conexión, consultar Error
             }
             
-        }
+        
 
 	}//end ClasificacionesController
 

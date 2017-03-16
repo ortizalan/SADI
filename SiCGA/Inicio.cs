@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SiCGA.Clases.Controladores;
 using SiCGA.Clases.Modelos;
-using DatosBD;
-
+using SiCGA.Clases.ViewModelos;
 namespace SiCGA
 {
     public partial class Inicio : Form
     {
         UsuariosController cUser = new UsuariosController();
         UsuariosModel mUser = new UsuariosModel();
+        ViewUsuariosModel vUser = new ViewUsuariosModel();
     
         public Inicio()
         {
@@ -26,14 +26,15 @@ namespace SiCGA
         private void Inicio_Load(object sender, EventArgs e)
         {
             mUser.Id = 1;
+
+            vUser.Edad = 33;
+
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnPruebas_Click(object sender, EventArgs e)
         {
-            Operaciones op = new Operaciones();
-            int r = op.multiplicar(int.Parse(textBox1.Text.ToString()), int.Parse(textBox2.Text.ToString()));
-            MessageBox.Show("La Multiplicación es :".ToUpper() + r.ToString() );
-            
+            MessageBox.Show(vUser.Edad.ToString());
         }
     }
 }
