@@ -9,11 +9,16 @@ namespace SiCGA.Clases.Controladores
 {
     class BitacoraController : Metodos
     {
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
 		public BitacoraController()
 		{
 			
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
         ~BitacoraController() {
         }
 
@@ -92,10 +97,10 @@ namespace SiCGA.Clases.Controladores
 
                         string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 
-                        if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
-                        { return true; }// Consulta Exitosa, Consultar Tabla
+                        if (EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa, Consultar Tabla
                         else
-                        { return false; }// Consulta NO Exitosa, consultar Error
+                        { return false; }// Ejecución NO Exitosa, consultar Error
                     }
                     catch (Exception e)// Cachar error
                     {
@@ -139,10 +144,10 @@ namespace SiCGA.Clases.Controladores
 
                         string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 
-                        if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
-                        { return true; }// Consulta Exitosa, Consultar Tabla
+                        if (EjecutarProcedimiento(proce, lista))// Ejecución el Procedimiento
+                        { return true; }// Ejecución Exitosa, Consultar Tabla
                         else
-                        { return false; }// Consulta NO Exitosa, consultar Error
+                        { return false; }// Ejecución NO Exitosa, consultar Error
                     }
                     catch (Exception e)// Cachar error
                     {
