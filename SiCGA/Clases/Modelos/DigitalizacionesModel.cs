@@ -37,6 +37,9 @@ namespace SiCGA.Clases.Modelos {
 		/// </summary>
 		private int _folio;
 
+        /// <summary>
+        /// Constructo Vacio
+        /// </summary>
 		public DigitalizacionesModel(){
 
 		}
@@ -44,12 +47,15 @@ namespace SiCGA.Clases.Modelos {
 		/// <summary>
 		/// Constructor de la Clase
 		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="seried"></param>
-		/// <param name="doc"></param>
-		/// <param name="folio"></param>
-		public DigitalizacionesModel(int id, string seried, byte[] doc, int folio){
-
+		/// <param name="id">Identificador del Modelo</param>
+		/// <param name="seried">Serie Documental del Modelos</param>
+		/// <param name="doc">Documeto</param>
+		/// <param name="folio">Folio del Documento</param>
+		public DigitalizacionesModel(int id, RegistrosModel seried, byte[] doc, int folio){
+            this.Id = id;
+            this.SerieDoctal = seried;
+            this.Documento = doc;
+            this.Folio = folio;
 		}
 
 		~DigitalizacionesModel(){
@@ -60,32 +66,32 @@ namespace SiCGA.Clases.Modelos {
 		/// Acceder a la propiedad Id
 		/// </summary>
 		public int Id{
-			get;
-			set;
+			get { return _id; }
+            set { _id = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad que aloja la serie documental
-		/// </summary>
-		public RegistrosModel SerieDoctal{
-			get;
-			set;
+		/// </summary>a
+		public RegistrosModel SDoctal{
+            get { return _seriedoctal; }
+            set { _seriedoctal = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad del Documento digitalizado
 		/// </summary>
 		public byte[] Documento{
-			get;
-			set;
+            get { return _documento; }
+            set { _documento = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la propiedad del Folio del Documento
 		/// </summary>
 		public int Folio{
-			get;
-			set;
+            get { return _folio; }
+            set { _folio = value; }
 		}
 
 	}//end DigitalizacionesModel

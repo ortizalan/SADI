@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using SiCGA.Clases.Modelos;
 
 
 
@@ -19,11 +20,15 @@ namespace SiCGA.Clases.Controladores {
 	/// Controlador para el Modelo Digitalizaciones
 	/// </summary>
 	public class DigitalizacionesController : Metodos {
-
+        /// <summary>
+        /// Constructor de Clase
+        /// </summary>
 		public DigitalizacionesController(){
 
 		}
-
+        /// <summary>
+        /// Destructor
+        /// </summary>
 		~DigitalizacionesController(){
 
 		}
@@ -35,7 +40,41 @@ namespace SiCGA.Clases.Controladores {
 		/// <param name="o">Objeto del Tipo class</param>
 		public override bool ConsultarRegistro(Object o){
 
-			return false;
+            if (o.GetType() == typeof(DigitalizacionesModel))// Verificar si el objeto es del tipo DigitalizacionesModel
+            {
+                var di = (DigitalizacionesModel)o; // Castear variable "di" al tipo Digitalización Model
+
+                if(Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear una lista de parámetros
+                        lista.Add(new Parametros(@"opc", "4"));// Mandarle la opción al procedimiento
+                        lista.Add(new Parametros(@"id", di.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"seriedoc", string.Empty));// VAcío
+                        lista.Add(new Parametros(@"docu", string.Empty));// Vacio
+                        lista.Add(new Parametros(@"folio", string.Empty));// Vacío
+
+                        string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento
+
+                        if (ConsultarProcedimiento(proce, lista))// Intentar Consultar el Procedimiento
+                        { return true; }// Consulta Exitosa, Consulte Tabla
+                        else
+                        { return false; }// COnsulta NO Exitosa, Consulte Error
+                    }
+                    catch (Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que exoste el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// Intento de Conexión Fallido, Consultar Error
+            }
+            else
+            { return false; }// No es del tipo DigitalizacionesModel
 		}
 
 		/// <summary>
@@ -45,8 +84,42 @@ namespace SiCGA.Clases.Controladores {
 		/// <param name="o">Objeto del Tipo class</param>
 		public override bool ActualizarRegistro(Object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(DigitalizacionesModel))// Verificar si el objeto es del tipo DigitalizacionesModel
+            {
+                var di = (DigitalizacionesModel)o; // Castear variable "di" al tipo Digitalización Model
+
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear una lista de parámetros
+                        lista.Add(new Parametros(@"opc", "3"));// Mandarle la opción al procedimiento
+                        lista.Add(new Parametros(@"id", di.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"seriedoc", di.SDoctal.SerieDoctal));// Serie Documetal
+                        lista.Add(new Parametros(@"docu", di.Documento.ToString()));// Documento Digitalizado
+                        lista.Add(new Parametros(@"folio", di.Folio.ToString()));// Folio del Documento
+
+                        string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento
+
+                        if (EjecutarProcedimiento(proce, lista))// Intentar Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa, Consulte Tabla
+                        else
+                        { return false; }// Ejecución NO Exitosa, Consulte Error
+                    }
+                    catch (Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que exoste el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// Intento de Conexión Fallido, Consultar Error
+            }
+            else
+            { return false; }// No es del tipo DigitalizacionesModel
+        }
 
 		/// <summary>
 		/// Método para Ingresar un Registro
@@ -55,8 +128,42 @@ namespace SiCGA.Clases.Controladores {
 		/// <param name="o">Objeto del Tipo Class</param>
 		public override bool IngresarRegisto(Object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(DigitalizacionesModel))// Verificar si el objeto es del tipo DigitalizacionesModel
+            {
+                var di = (DigitalizacionesModel)o; // Castear variable "di" al tipo Digitalización Model
+
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear una lista de parámetros
+                        lista.Add(new Parametros(@"opc", "2"));// Mandarle la opción al procedimiento
+                        lista.Add(new Parametros(@"id", di.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"seriedoc", di.SDoctal.SerieDoctal));// Serie Documetal
+                        lista.Add(new Parametros(@"docu", di.Documento.ToString()));// Documento Digitalizado
+                        lista.Add(new Parametros(@"folio", di.Folio.ToString()));// Folio del Documento
+
+                        string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento
+
+                        if (EjecutarProcedimiento(proce, lista))// Intentar Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa, Consulte Tabla
+                        else
+                        { return false; }// Ejecución NO Exitosa, Consulte Error
+                    }
+                    catch (Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que exoste el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// Intento de Conexión Fallido, Consultar Error
+            }
+            else
+            { return false; }// No es del tipo DigitalizacionesModel
+        }
 
 		/// <summary>
 		/// Método para Consultar Todos los Registros
@@ -64,8 +171,35 @@ namespace SiCGA.Clases.Controladores {
 		/// <returns>Boleano</returns>
 		public override bool ConsultarRegistros(){
 
-			return false;
-		}
+            if (Abrir())// Intentar Abrir la Conexión
+            {
+                // Intento Exitoso
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>();// Crear una lista de parámetros
+                    lista.Add(new Parametros(@"opc", "1"));// Mandarle la opción al procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty));// Vacío
+                    lista.Add(new Parametros(@"seriedoc", string.Empty));// VAcío
+                    lista.Add(new Parametros(@"docu", string.Empty));// Vacio
+                    lista.Add(new Parametros(@"folio", string.Empty));// Vacío
+
+                    string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento
+
+                    if (ConsultarProcedimiento(proce, lista))// Intentar Consultar el Procedimiento
+                    { return true; }// Consulta Exitosa, Consulte Tabla
+                    else
+                    { return false; }// COnsulta NO Exitosa, Consulte Error
+                }
+                catch (Exception e)//Atrapar el Error
+                {
+                    Error = e.Message.ToString();// Guardar el Error
+                    return false;// Indicar que exoste el error
+                }
+                finally { Cerrar(); }// Cerrar la conexión
+            }
+            else
+            { return false; }// Intento de Conexión Fallido, Consultar Error
+        }
 
 	}//end DigitalizacionesController
 
