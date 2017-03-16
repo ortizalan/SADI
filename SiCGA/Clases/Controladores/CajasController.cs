@@ -19,12 +19,16 @@ namespace SiCGA.Clases.Controladores
 {
     public class CajasController : Metodos
     {
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
         public CajasController()
         {
 
         }
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
         ~CajasController()
         {
 
@@ -105,10 +109,10 @@ namespace SiCGA.Clases.Controladores
 
                         string proce = "sp_cajas_crud";// Nombre del Procedimiento
 
-                        if (ConsultarProcedimiento(proce, lista))// Consultar el Procedimiento
-                        { return true; }// Consulta Exitosa, Cnsultar Tabla
+                        if (EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa, Cnsultar Tabla
                         else
-                        { return false; }// Consulta NO Exitosa, Consultar Error
+                        { return false; }// Ejecución NO Exitosa, Consultar Error
                     }
                     catch (Exception e)// Atrapar el Error
                     {
@@ -152,10 +156,10 @@ namespace SiCGA.Clases.Controladores
 
                         string proce = "sp_cajas_crud";// Nombre del Procedimiento
 
-                        if (ConsultarProcedimiento(proce, lista))// Consultar el Procedimiento
-                        { return true; }// Consulta Exitosa, Cnsultar Tabla
+                        if (EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa, Cnsultar Tabla
                         else
-                        { return false; }// Consulta NO Exitosa, Consultar Error
+                        { return false; }// Ejecución NO Exitosa, Consultar Error
                     }
                     catch (Exception e)// Atrapar el Error
                     {
