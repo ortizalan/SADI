@@ -19,7 +19,9 @@ namespace SiCGA.Clases.Controladores {
 	/// Controlador para el Modelo ValoresDoctales
 	/// </summary>
 	public class ValoresDoctalesController : Metodos {
-
+        /// <summary>
+        /// Constructor modificado por Rafa Matuz, Eseeee
+        /// </summary>
 		public ValoresDoctalesController(){
 
 		}
