@@ -22,12 +22,16 @@ namespace SiCGA.Clases.Controladores
     /// </summary>
     public class SubFondosController : Metodos
     {
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
         public SubFondosController()
         {
 
         }
-
+        /// <summary>
+        /// Desctructor de la Clase
+        /// </summary>
         ~SubFondosController()
         {
 
@@ -37,7 +41,7 @@ namespace SiCGA.Clases.Controladores
         /// Método Para Consultar un Registro
         /// </summary>
         /// <returns>Boleano</returns>
-        /// <param name="o">Objeto del Tipo class</param>
+        /// <param name="o">Objeto del Tipo SubFondosModel</param>
         public override bool ConsultarRegistro(Object o)
         {
             if (o.GetType() == typeof(SubFondosModel))// Verificar si el Objeto es del tipo SubFondoModel
@@ -82,84 +86,85 @@ namespace SiCGA.Clases.Controladores
         /// Método Para Actualizar los Registros
         /// </summary>
         /// <returns>Boleano</returns>
-        /// <param name="o">Objeto del Tipo class</param>
+        /// <param name="o">Objeto del Tipo SubFondosModel</param>
         public override bool ActualizarRegistro(Object o)
         {
-            if (o.GetType() == typeof(SubFondosModel))
+            if (o.GetType() == typeof(SubFondosModel))// Verificar si el Objeto es del tipo SubFondosModel
             {
-                var sf = (SubFondosModel)o;
-                if (Abrir())
+                var sf = (SubFondosModel)o;// Castear la Variable "sf" al tipo SubFondosModel
+                if (Abrir())// Intentar Abrir la Conexión
                 {
                     try
                     {
-                        List<Parametros> lista = new List<Parametros>();
-                        lista.Add(new Parametros(@"opc", "3"));
-                        lista.Add(new Parametros(@"id", sf.Id.ToString()));
-                        lista.Add(new Parametros(@"fondo", sf.Fondo.Id.ToString()));
-                        lista.Add(new Parametros(@"subfondo", sf.SubFondo));
+                        List<Parametros> lista = new List<Parametros>();// Crear la Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "3"));// Indicarle la Opción dentro del Procedimiento
+                        lista.Add(new Parametros(@"id", sf.Id.ToString()));// Indentificador del Registro
+                        lista.Add(new Parametros(@"fondo", sf.Fondo.Id.ToString()));// Identificador del Fondo al que Pertenece
+                        lista.Add(new Parametros(@"subfondo", sf.SubFondo));// Descripción del SubFondo
 
-                        string proce = "sp_subfondo_crud";
+                        string proce = "sp_subfondo_crud";// Indicarle el Nombre del Procedimiento
 
-                        if (EjecutarProcedimiento(proce, lista))
-                        { return true; }// Ejecución Exitosa, Consultar Tabla
+                        if (EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa
                         else
                         { return false; }// Ejecución NO exitosa, Consultar Error
                     }
-                    catch (Exception e)
+                    catch (Exception e)// Atrapar el Error
                     {
-                        Error = e.Message.ToString();
-                        return false;
+                        Error = e.Message.ToString();// Guardar el error
+                        return false;// Indicar que existe error
                     }
-                    finally { Cerrar(); }
+                    finally { Cerrar(); }// Cerrar la conexión
                 }
                 else
-                { return false; }
+                { return false; }// No se pudo abriri la conexión, consultar Error
             }
             else
-            { return false; }
+            { return false; }// El Objeto no es del tipo SubFondosModel
         }
 
         /// <summary>
         /// Método para Ingresar un Registro
         /// </summary>
         /// <returns>Boleano</returns>
-        /// <param name="o">Objeto del Tipo Class</param>
+        /// <param name="o">Objeto del Tipo SubFondosModel</param>
         public override bool IngresarRegisto(Object o)
         {
-            if (o.GetType() == typeof(SubFondosModel))
+            if (o.GetType() == typeof(SubFondosModel))// Verificar si el Objeto es del tipo SubFondosModel
             {
-                var sf = (SubFondosModel)o;
+                var sf = (SubFondosModel)o;// Castear la variable "sf al tipo SubFondosModel
 
-                if (Abrir())
+                if (Abrir())// Intentar Abrir la Conexión
                 {
+                    // Intento Exitoso
                     try
                     {
-                        List<Parametros> lista = new List<Parametros>();
-                        lista.Add(new Parametros(@"opc", "2"));
-                        lista.Add(new Parametros(@"id", sf.Id.ToString()));
-                        lista.Add(new Parametros(@"fondo", sf.Fondo.Id.ToString()));
-                        lista.Add(new Parametros(@"subfondo", sf.SubFondo));
+                        List<Parametros> lista = new List<Parametros>();// Crear Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "2"));// Indicar la Opción dentro del procedimiento
+                        lista.Add(new Parametros(@"id", sf.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"fondo", sf.Fondo.Id.ToString()));// Indicador del Subfondo
+                        lista.Add(new Parametros(@"subfondo", sf.SubFondo));// Nombre del Subfondo
 
-                        string proce = "sp_subfondos_crud";
+                        string proce = "sp_subfondos_crud";// Indicar el Nombre del procedimiento
 
-                        if(EjecutarProcedimiento(proce,lista))
+                        if (EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
                         { return true; } // Exitosa, Consultar Table
                         else
                         { return false; }// NO Exitosa, Consultar Error
                     }
-                    catch(Exception e)
+                    catch (Exception e)// Atrapar el error
                     {
-                        Error = e.Message.ToString();
-                        return false;
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que existe un error
                     }
-                    finally { Cerrar(); }
+                    finally { Cerrar(); }// Cerrar la conexión
                 }
                 else
-                { return false; }
+                { return false; }// Intento fallido de Conexión
 
             }
             else
-            { return false; }
+            { return false; }// No es el Objeto del Tipo 
         }
 
         /// <summary>
@@ -168,8 +173,35 @@ namespace SiCGA.Clases.Controladores
         /// <returns>Boleano</returns>
         public override bool ConsultarRegistros()
         {
+            if (Abrir())//Intentar Establecer Conexión con BD
+            {
 
-            return false;
+                // Intento Exitoso
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>();
+                    lista.Add(new Parametros(@"opc", "1"));// Mandar la opción a ejecutar al Procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty));
+                    lista.Add(new Parametros(@"fondo", string.Empty));
+                    lista.Add(new Parametros(@"fondo", string.Empty));
+
+                    string proce = "sp_subfondos_crud";// Indicar el Nombre del Procedimiento
+
+                    if (ConsultarProcedimiento(proce, lista))// Efectuar la consulta
+                    { return true; }// Exitosa, consultar Tabla
+                    else
+                    { return false; }// NO Exitosa, Consultar Error
+                }
+                catch (Exception e)// Atrapar el Error
+                {
+                    Error = e.Message.ToString();// Guardar el Error
+                    return false;// Indicar que existe el error
+                }
+                finally { Cerrar(); }// Cerrar la conexión
+            }
+            else
+            { return false; }// Intento de Conexión Fallido
+
         }
 
     }//end SubFondosController
