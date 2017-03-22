@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
+using SiCGA.Clases.Modelos;
 
 
 using SiCGA.Clases;
@@ -19,40 +19,178 @@ namespace SiCGA.Clases.Controladores {
 	/// Controlador del Modelo UnidadesAdmvas
 	/// </summary>
 	public class UnidadesAdmvasController : Metodos {
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
 		public UnidadesAdmvasController(){
 
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~UnidadesAdmvasController(){
 
 		}
 
-		/// 
-		/// <param name="o"></param>
+		/// <summary>
+        /// Método para Actualizar un Registro del Modelo UnidadesAdmvas
+        /// </summary>
+        /// <param name="o">Objeto del Tipo UnidadesAdmvasModel</param>
+        /// <returns>Boleano</returns>
 		public override bool ActualizarRegistro(object o){
 
-			return false;
+			if(o.GetType() == typeof(UnidadesAdmvasModel))// Verificar que el Objeto sea del tipo del Modelo
+            {
+                var ua = (UnidadesAdmvasModel)o;// Castear la variable ua al tipo del Modelo
+
+                if(Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>(); // Nueva lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "3"));// Indicar la Opción a Ejecutar en el Procedimiento
+                        lista.Add(new Parametros(@"id", ua.Id.ToString())); //Identificador del Registro
+                        lista.Add(new Parametros(@"unidad", ua.Unidad)); // Descripción de la Unidad Administrativa
+
+                        string proce = "sp_unidadesadmvas_crud"; // Indicarle el nombre del procedimiento
+
+                        if(EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa
+                        else
+                        { return false; }// Ejecución NO Existosa, ver Error
+                    }
+                    catch(Exception e) // Atrapar el Error
+                    {
+                        Error = e.Message.ToString(); // Guardar el Error
+                        return false;// Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// Intento de Abrir Conexión Fallido
+            }
+            else
+            { return false; }
 		}
 
-		/// 
-		/// <param name="o"></param>
+		/// <summary>
+        /// Método para Para Consultar un Registro del Modelo
+        /// </summary>
+        /// <param name="o">Obketo del tipo UnidadesAdmvasModel</param>
+        /// <returns>Boleano</returns>
 		public override bool ConsultarRegistro(object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(UnidadesAdmvasModel))// Verificar que el Objeto sea del tipo del Modelo
+            {
+                var ua = (UnidadesAdmvasModel)o;// Castear la variable ua al tipo del Modelo
+
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>(); // Nueva lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "4"));// Indicar la Opción a Ejecutar en el Procedimiento
+                        lista.Add(new Parametros(@"id", ua.Id.ToString())); //Identificador del Registro
+                        lista.Add(new Parametros(@"unidad", string.Empty)); // Vacío
+
+                        string proce = "sp_unidadesadmvas_crud"; // Indicarle el nombre del procedimiento
+
+                        if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
+                        { return true; }// Consulta Exitosa, ver Table
+                        else
+                        { return false; }// Consulta NO Existosa, ver Error
+                    }
+                    catch (Exception e) // Atrapar el Error
+                    {
+                        Error = e.Message.ToString(); // Guardar el Error
+                        return false;// Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// Intento de Abrir Conexión Fallido
+            }
+            else
+            { return false; }// Objeto distinto al Modelo
+        }
 
 		public override bool ConsultarRegistros(){
 
-			return false;
-		}
+            if (Abrir())// Intentar Abrir la Conexión
+            {
+                // Intento Exitoso
 
-		/// 
-		/// <param name="o"></param>
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>(); // Nueva lista de Parámetros
+                    lista.Add(new Parametros(@"opc", "1"));// Indicar la Opción a Ejecutar en el Procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty)); //Identificador del Registro
+                    lista.Add(new Parametros(@"unidad", string.Empty)); // Descripción de la Unidad Administrativa
+
+                    string proce = "sp_unidadesadmvas_crud"; // Indicarle el nombre del procedimiento
+
+                    if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
+                    { return true; }// Consulta Exitosa, ver Table
+                    else
+                    { return false; }// Consulta NO Existosa, ver Error
+                }
+                catch (Exception e) // Atrapar el Error
+                {
+                    Error = e.Message.ToString(); // Guardar el Error
+                    return false;// Indicar que existe el error
+                }
+                finally { Cerrar(); }// Cerrar la conexión
+            }
+            else
+            { return false; }// Intento de Abrir Conexión Fallido
+        }
+
+		/// <summary>
+        /// Método para Ingresar un Registro al Modelo
+        /// </summary>
+        /// <param name="o">Objeto del tipo UnidadesAdmvasModel</param>
+        /// <returns>Boleano</returns>
 		public override bool IngresarRegisto(object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(UnidadesAdmvasModel))// Verificar que el Objeto sea del tipo del Modelo
+            {
+                var ua = (UnidadesAdmvasModel)o;// Castear la variable ua al tipo del Modelo
+
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>(); // Nueva lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "3"));// Indicar la Opción a Ejecutar en el Procedimiento
+                        lista.Add(new Parametros(@"id", string.Empty)); //Vacío
+                        lista.Add(new Parametros(@"unidad", ua.Unidad)); // Descripción de la Unidad Administrativa
+
+                        string proce = "sp_unidadesadmvas_crud"; // Indicarle el nombre del procedimiento
+
+                        if (EjecutarProcedimiento(proce, lista))// Ejecutar el Procedimiento
+                        { return true; }// Ejecución Exitosa
+                        else
+                        { return false; }// Ejecución NO Existosa, ver Error
+                    }
+                    catch (Exception e) // Atrapar el Error
+                    {
+                        Error = e.Message.ToString(); // Guardar el Error
+                        return false;// Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// Intento de Abrir Conexión Fallido
+            }
+            else
+            { return false; }
+        }
 
 	}//end UnidadesAdmvasController
 

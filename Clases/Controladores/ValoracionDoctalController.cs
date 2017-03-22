@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using SiCGA.Clases.Modelos;
 
 
 
@@ -19,11 +20,15 @@ namespace SiCGA.Clases.Controladores {
 	/// Controlador para el Modelo ValoracionDoctal
 	/// </summary>
 	public class ValoracionDoctalController : Metodos {
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
 		public ValoracionDoctalController(){
 
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~ValoracionDoctalController(){
 
 		}
@@ -32,31 +37,127 @@ namespace SiCGA.Clases.Controladores {
 		/// Método Para Consultar un Registro
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
+		/// <param name="o">Objeto del Tipo ValoracionDoctalModel</param>
 		public override bool ConsultarRegistro(Object o){
 
-			return false;
+			if(o.GetType() == typeof(ValoracionDoctalModel))// Validar que el Objeto sea del Tipo ValoracionDoctalModel
+            {
+                if(Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento exitoso
+                    var vd = (ValoracionDoctalModel)o; // Castear la varibale "vd" al Modelo
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();
+                        lista.Add(new Parametros(@"opc", "4"));// Indicar la Opción a ejecutar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", vd.Id.ToString()));// Indicar el Identificador del Registro
+                        lista.Add(new Parametros(@"valoracion", string.Empty)); // Vacío
+
+                        string proce = "sp_valoraciondoctal_crud";// Indicar el nombre del procedimiento
+
+                        if (ConsultarProcedimiento(proce, lista))// Consultar el procedimiento
+                        { return true; }//Consulta Existosa, ver Tabla
+                        else
+                        { return false; }// Consulta NO Exitosa, ver Error
+                    }
+                    catch(Exception e)// Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que Existe un error
+                    }
+                    finally { Cerrar(); }// Cerrar la Conexion
+                }
+                else
+                { return false; }// intento fallido para Abrir la Conexión
+            }
+            else
+            { return false; }// Objeto no es del tipo del Modelo
 		}
 
 		/// <summary>
 		/// Método Para Actualizar los Registros
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
+		/// <param name="o">Objeto del Tipo ValoracionDoctalModel</param>
 		public override bool ActualizarRegistro(Object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(ValoracionDoctalModel))// Validar que el Objeto sea del Tipo ValoracionDoctalModel
+            {
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento exitoso
+                    var vd = (ValoracionDoctalModel)o; // Castear la varibale "vd" al Modelo
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();
+                        lista.Add(new Parametros(@"opc", "3"));// Indicar la Opción a ejecutar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", vd.Id.ToString()));// Indicar el Identificador del Registro
+                        lista.Add(new Parametros(@"valoracion", vd.Valoracion)); // Descripción de la Valoración Documental
+
+                        string proce = "sp_valoraciondoctal_crud";// Indicar el nombre del procedimiento
+
+                        if (ConsultarProcedimiento(proce, lista))// Consultar el procedimiento
+                        { return true; }//Ejecución Existosa
+                        else
+                        { return false; }// Ejecución NO Exitosa, ver Error
+                    }
+                    catch (Exception e)// Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que Existe un error
+                    }
+                    finally { Cerrar(); }// Cerrar la Conexion
+                }
+                else
+                { return false; }// intento fallido para Abrir la Conexión
+            }
+            else
+            { return false; }// Objeto no es del tipo del Modelo
+        }
 
 		/// <summary>
 		/// Método para Ingresar un Registro
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo Class</param>
+		/// <param name="o">Objeto del Tipo ValoracionDoctalModel</param>
 		public override bool IngresarRegisto(Object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(ValoracionDoctalModel))// Validar que el Objeto sea del Tipo ValoracionDoctalModel
+            {
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento exitoso
+                    var vd = (ValoracionDoctalModel)o; // Castear la varibale "vd" al Modelo
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();
+                        lista.Add(new Parametros(@"opc", "2"));// Indicar la Opción a ejecutar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", string.Empty));// Vacío
+                        lista.Add(new Parametros(@"valoracion", vd.Valoracion)); // Descripción de la Valoración
+
+                        string proce = "sp_valoraciondoctal_crud";// Indicar el nombre del procedimiento
+
+                        if (ConsultarProcedimiento(proce, lista))// Consultar el procedimiento
+                        { return true; }//Consulta Existosa, ver Tabla
+                        else
+                        { return false; }// Consulta NO Exitosa, ver Error
+                    }
+                    catch (Exception e)// Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false;// Indicar que Existe un error
+                    }
+                    finally { Cerrar(); }// Cerrar la Conexion
+                }
+                else
+                { return false; }// intento fallido para Abrir la Conexión
+            }
+            else
+            { return false; }// Objeto no es del tipo del Modelo
+        }
 
 		/// <summary>
 		/// Método para Consultar Todos los Registros
@@ -64,8 +165,34 @@ namespace SiCGA.Clases.Controladores {
 		/// <returns>Boleano</returns>
 		public override bool ConsultarRegistros(){
 
-			return false;
-		}
+            if (Abrir())// Intentar Abrir la Conexión
+            {
+                // Intento exitoso
+                
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>();
+                    lista.Add(new Parametros(@"opc", "1"));// Indicar la Opción a ejecutar dentro del procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty));// Vacío
+                    lista.Add(new Parametros(@"valoracion", string.Empty)); // Vacío
+
+                    string proce = "sp_valoraciondoctal_crud";// Indicar el nombre del procedimiento
+
+                    if (ConsultarProcedimiento(proce, lista))// Consultar el procedimiento
+                    { return true; }//Consulta Existosa, ver Tabla
+                    else
+                    { return false; }// Consulta NO Exitosa, ver Error
+                }
+                catch (Exception e)// Atrapar el Error
+                {
+                    Error = e.Message.ToString();// Guardar el Error
+                    return false;// Indicar que Existe un error
+                }
+                finally { Cerrar(); }// Cerrar la Conexion
+            }
+            else
+            { return false; }// intento fallido para Abrir la Conexión
+        }
 
 	}//end ValoracionDoctalController
 

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using SiCGA.Clases.Modelos;
 
 
 
@@ -19,11 +20,15 @@ namespace SiCGA.Clases.Controladores {
 	/// Controlador de el Modelo Transferencias
 	/// </summary>
 	public class TransferenciasController : Metodos {
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
 		public TransferenciasController(){
 
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~TransferenciasController(){
 
 		}
@@ -32,31 +37,133 @@ namespace SiCGA.Clases.Controladores {
 		/// Método Para Consultar un Registro
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
+		/// <param name="o">Objeto del Tipo TransferenciasModel</param>
 		public override bool ConsultarRegistro(Object o){
 
-			return false;
+			if(o.GetType() == typeof(TransferenciasModel))// Verificar que el Objeto sea del tipo TransferenicasModel
+            {
+                var t = (TransferenciasModel)o; // Castear la variable "t" al tipo del Modelo
+
+                if(Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "4")); // Indicar la opción a ejecutar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", t.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"desc", string.Empty));// Vacío
+                        lista.Add(new Parametros(@"fecha", string.Empty));// Vacío
+
+                        string proce = "sp_transferencias_crud";
+
+                        if(ConsultarProcedimiento(proce,lista))// Intentar consultar procedimiento
+                        { return true; }// Consulta Exitosa, Ver Tabla
+                        else
+                        { return false; }// Consulta NO Exitosa, Ver Error
+                    }
+                    catch(Exception e)// Atrapar Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false; // Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar Conexión
+                }
+                else
+                { return false; }// Intento fallido al Intentar Abrir la Conexión
+            }
+            else
+            { return false; }// No es Objeto del mismo tipo que el Modelo
 		}
 
 		/// <summary>
 		/// Método Para Actualizar los Registros
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
+		/// <param name="o">Objeto del Tipo TransferenciasModel</param>
 		public override bool ActualizarRegistro(Object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(TransferenciasModel))// Verificar que el Objeto sea del tipo TransferenicasModel
+            {
+                var t = (TransferenciasModel)o; // Castear la variable "t" al tipo del Modelo
+
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "3")); // Indicar la opción a ejecutar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", t.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"desc", t.Descripcion));// Descripción de la Transferencia
+                        lista.Add(new Parametros(@"fecha", (!string.IsNullOrEmpty(t.Fecha.ToString()) ? t.Fecha.ToString("yyyy-MM-dd"):string.Empty)));// Fecha de la Transferencia
+
+                        string proce = "sp_transferencias_crud";
+
+                        if (ConsultarProcedimiento(proce, lista))// Intentar Ejecutar procedimiento
+                        { return true; }// Ejecución Exitosa
+                        else
+                        { return false; }// Ejecución NO Exitosa, Ver Error
+                    }
+                    catch (Exception e)// Atrapar Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false; // Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar Conexión
+                }
+                else
+                { return false; }// Intento fallido al Intentar Abrir la Conexión
+            }
+            else
+            { return false; }// No es Objeto del mismo tipo que el Modelo
+        }
 
 		/// <summary>
 		/// Método para Ingresar un Registro
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo Class</param>
+		/// <param name="o">Objeto del Tipo TransferenciasModel</param>
 		public override bool IngresarRegisto(Object o){
 
-			return false;
-		}
+            if (o.GetType() == typeof(TransferenciasModel))// Verificar que el Objeto sea del tipo TransferenicasModel
+            {
+                var t = (TransferenciasModel)o; // Castear la variable "t" al tipo del Modelo
+
+                if (Abrir())// Intentar Abrir la Conexión
+                {
+                    // Intento Exitoso
+
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "2")); // Indicar la opción a ejecutar dentro del procedimiento
+                        lista.Add(new Parametros(@"id", t.Id.ToString()));// Identificador del Registro
+                        lista.Add(new Parametros(@"desc", t.Descripcion));// Descripción de la Transferencia
+                        lista.Add(new Parametros(@"fecha", (!string.IsNullOrEmpty(t.Fecha.ToString()) ? t.Fecha.ToString("yyyy-MM-dd") : string.Empty)));// Fecha de la Transferencia
+
+                        string proce = "sp_transferencias_crud";
+
+                        if (ConsultarProcedimiento(proce, lista))// Intentar Ejecutar procedimiento
+                        { return true; }// Ejecución Exitosa
+                        else
+                        { return false; }// Ejecución NO Exitosa, Ver Error
+                    }
+                    catch (Exception e)// Atrapar Error
+                    {
+                        Error = e.Message.ToString();// Guardar el Error
+                        return false; // Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar Conexión
+                }
+                else
+                { return false; }// Intento fallido al Intentar Abrir la Conexión
+            }
+            else
+            { return false; }// No es Objeto del mismo tipo que el Modelo
+        }
 
 		/// <summary>
 		/// Método para Consultar Todos los Registros
@@ -64,8 +171,35 @@ namespace SiCGA.Clases.Controladores {
 		/// <returns>Boleano</returns>
 		public override bool ConsultarRegistros(){
 
-			return false;
-		}
+            if (Abrir())// Intentar Abrir la Conexión
+            {
+                // Intento Exitoso
+
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>();// Crear Lista de Parámetros
+                    lista.Add(new Parametros(@"opc", "1")); // Indicar la opción a ejecutar dentro del procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty));// Identificador del Registro
+                    lista.Add(new Parametros(@"desc", string.Empty));// Vacío
+                    lista.Add(new Parametros(@"fecha", string.Empty));// Vacío
+
+                    string proce = "sp_transferencias_crud";
+
+                    if (ConsultarProcedimiento(proce, lista))// Intentar consultar procedimiento
+                    { return true; }// Consulta Exitosa, Ver Tabla
+                    else
+                    { return false; }// Consulta NO Exitosa, Ver Error
+                }
+                catch (Exception e)// Atrapar Error
+                {
+                    Error = e.Message.ToString();// Guardar el Error
+                    return false; // Indicar que existe el error
+                }
+                finally { Cerrar(); }// Cerrar Conexión
+            }
+            else
+            { return false; }// Intento fallido al Intentar Abrir la Conexión
+        }
 
 	}//end TransferenciasController
 
