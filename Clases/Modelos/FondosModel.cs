@@ -13,6 +13,7 @@ using System.IO;
 
 
 
+
 namespace SiCGA.Clases.Modelos {
 	/// <summary>
 	/// Modelo de la Tabla Fondos

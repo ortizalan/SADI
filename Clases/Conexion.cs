@@ -12,7 +12,11 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+<<<<<<< HEAD:SiCGA/Clases/Conexion.cs
 //using DatosBD;
+=======
+using DatosBD; // Librería que Contiene los Datos de la Conexión al Servidor
+>>>>>>> 3c357bd32c39a640e0f85ec76a73424eb6180034:Clases/Conexion.cs
 
 
 
@@ -32,9 +36,16 @@ namespace SiCGA.Clases
         /// </summary>
         protected Conexion()
         {
+<<<<<<< HEAD:SiCGA/Clases/Conexion.cs
             //_connection = new SqlConnection("Server =" + DatosUsuarios.Servidor + "; Initial Catalog =" + DatosUsuarios.BaseDeDatos + ";Persist Security Info=False;Integrated Security=true;");
+=======
+            // Parámetros de la Conexión protegidos en la Librería DatosBD
+            _connection = new SqlConnection("Server =" + DatosUsuarios.Servidor + "; Initial Catalog =" + DatosUsuarios.BaseDeDatos + ";Persist Security Info=False;Integrated Security=true;");
+>>>>>>> 3c357bd32c39a640e0f85ec76a73424eb6180034:Clases/Conexion.cs
         }
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
         ~Conexion()
         {
 

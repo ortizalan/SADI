@@ -18,18 +18,23 @@ namespace SiCGA.Clases.Controladores {
 	/// Controlador del Modelo Usuarios
 	/// </summary>
 	public class UsuariosController : Metodos {
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
 		public UsuariosController(){
 
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~UsuariosController(){
 
 		}
         /// <summary>
         /// Método para Actualizar el Registro del Modelo Usuario
         /// </summary>
-		/// <param name="o"></param>
+		/// <param name="o">Objeto del Tipo UsuariosModel</param>
+        /// <returns>Boleano</returns>
 		public override bool ActualizarRegistro(object o){
 
             if (o.GetType() == typeof(UsuariosModel))// Validar que el objeto dea del Tipo UsuariosModel
@@ -43,27 +48,27 @@ namespace SiCGA.Clases.Controladores {
                         List<Parametros> lista = new List<Parametros>();
                         lista.Add(new Parametros(@"opc", "3"));// Opción para actualizar dentro del procedimiento
                         lista.Add(new Parametros(@"id", u.Id.ToString()));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
-                        lista.Add(new Parametros(@"usr", u.Usuario));
-                        lista.Add(new Parametros(@"pwd", u.Contraseña));
-                        lista.Add(new Parametros(@"nom", u.Nombre));
-                        lista.Add(new Parametros(@"pat", u.Paterno));
-                        lista.Add(new Parametros(@"mat", u.Materno));
-                        lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));
-                        lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));
-                        lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));
-                        lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
+                        lista.Add(new Parametros(@"usr", u.Usuario));// Nombre de Usuario
+                        lista.Add(new Parametros(@"pwd", u.Contraseña));// Contraseña del Usuario
+                        lista.Add(new Parametros(@"nom", u.Nombre));// Nombre del Usuario
+                        lista.Add(new Parametros(@"pat", u.Paterno));// Apellido Paterno del Usuario
+                        lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
+                        lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));// Fondo al que pertence el Usuario
+                        lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));// SubFondo al que pertenece el Usuario
+                        lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));// Unidad Administrativa a la que Pertenece el Usuario
+                        lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario
                         lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
 
-                        string proce = "sp_usuarios_crud";
+                        string proce = "sp_usuarios_crud";// Nombre del Procedimiento
 
                         if(EjecutarProcedimiento(proce, lista))
                         { return true; }// Se ejecutó el procedimiento exitosamente
-                        else { return false; }// No se ejecutó el procedimiento
+                        else { return false; }// No se ejecutó el procedimiento, ver Error
                     }
-                    catch(Exception e)
+                    catch(Exception e)// Atrapar el Error
                     {
-                        Error = e.Message.ToString(); // Catchar el error
-                        return false; // Indicar que no se realizo la consulta/procedimiento
+                        Error = e.Message.ToString(); // guardar el error
+                        return false; // Indicar que existe errir
                     }
                     finally { Cerrar(); } // Asegurarnos de que se cierra la conexión siempre
                 }
@@ -78,7 +83,7 @@ namespace SiCGA.Clases.Controladores {
 		/// Consultar un Usuario del Sistema
 		/// </summary>
 		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del tipo Usuario</param>
+		/// <param name="o">Objeto del tipo UsuariosModel</param>
 		public override bool ConsultarRegistro(object o){
 
             if (o.GetType() == typeof(UsuariosModel))
