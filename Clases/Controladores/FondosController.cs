@@ -10,11 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using SiCGA.Clases.Modelos; // Acceder a los Modelos
+using SADI.Clases.Modelos; // Acceder a los Modelos
 
 
-using SiCGA.Clases;
-namespace SiCGA.Clases.Controladores
+using SADI.Clases;
+namespace SADI.Clases.Controladores
 {
     /// <summary>
     /// Controlador para el Modelo Fondos

@@ -12,7 +12,7 @@ using System.Text;
 using System.IO;
 
 
-namespace SiCGA.Clases {
+namespace SADI.Clases {
 	public abstract class Metodos : Conexion {
 
 		public Metodos(){
@@ -52,4 +52,4 @@ namespace SiCGA.Clases {
 
 	}//end Metodos
 
-}//end namespace SiCGA.Clases
+}//end namespace SADI.Clases

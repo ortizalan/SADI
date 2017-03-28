@@ -13,8 +13,8 @@ using System.IO;
 
 
 
-using SiCGA.Clases;
-namespace SiCGA.Clases.Controladores {
+using SADI.Clases;
+namespace SADI.Clases.Controladores {
 	/// <summary>
 	/// Controlador para el Modelo Series
 	/// </summary>

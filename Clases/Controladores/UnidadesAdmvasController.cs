@@ -10,11 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using SiCGA.Clases.Modelos;
+using SADI.Clases.Modelos;
 
 
-using SiCGA.Clases;
-namespace SiCGA.Clases.Controladores {
+using SADI.Clases;
+namespace SADI.Clases.Controladores {
 	/// <summary>
 	/// Controlador del Modelo UnidadesAdmvas
 	/// </summary>

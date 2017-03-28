@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SiCGA.Clases.Controladores;
-using SiCGA.Clases.Modelos;
+using SADI.Clases.Controladores;
+using SADI.Clases.Modelos;
 using DatosBD;
 
-namespace SiCGA
+namespace SADI
 {
     public partial class Inicio : Form
     {

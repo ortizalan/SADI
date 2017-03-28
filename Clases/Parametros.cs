@@ -13,7 +13,7 @@ using System.IO;
 
 
 
-namespace SiCGA.Clases {
+namespace SADI.Clases {
 	public class Parametros {
 
 		private string _nomparam;
@@ -55,4 +55,4 @@ namespace SiCGA.Clases {
 
 	}//end Parametros
 
-}//end namespace SiCGA.Clases
+}//end namespace SADI.Clases

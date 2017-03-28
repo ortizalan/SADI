@@ -1,4 +1,4 @@
-﻿namespace SiCGA
+﻿namespace SADI
 {
     partial class Inicio
     {

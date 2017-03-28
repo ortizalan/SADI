@@ -13,8 +13,8 @@ using System.IO;
 
 
 
-using SiCGA.Clases.Modelos;
-namespace SiCGA.Clases.Modelos {
+using SADI.Clases.Modelos;
+namespace SADI.Clases.Modelos {
 	/// <summary>
 	/// Modelo para la Tabla Cajas
 	/// </summary>

@@ -10,10 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using SiCGA.Clases.Modelos;
+using SADI.Clases.Modelos;
 
 
-namespace SiCGA.Clases.Controladores {
+namespace SADI.Clases.Controladores {
 	/// <summary>
 	/// Controlador del Modelo Usuarios
 	/// </summary>

@@ -14,7 +14,7 @@ using System.IO;
 
 
 
-namespace SiCGA.Clases.Modelos {
+namespace SADI.Clases.Modelos {
 	/// <summary>
 	/// Modelo de la Tabla Fondos
 	/// </summary>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SiCGA.Clases.Modelos;
+using SADI.Clases.Modelos;
 
-namespace SiCGA.Clases.Controladores
+namespace SADI.Clases.Controladores
 {
     class BitacoraController : Metodos
     {

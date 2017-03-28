@@ -16,7 +16,7 @@ using DatosBD; // Librería que Contiene los Datos de la Conexión al Servidor
 
 
 
-namespace SiCGA.Clases
+namespace SADI.Clases
 {
     public class Conexion
     {
@@ -185,4 +185,4 @@ namespace SiCGA.Clases
 
     }//end Conexion
 
-}//end namespace SiCGA.Clases
+}//end namespace SADI.Clases
