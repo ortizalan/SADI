@@ -58,7 +58,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc", "4"));// Mandar la opción a ejecutar al Procedimiento
                         lista.Add(new Parametros(@"id", sf.Id.ToString()));
                         lista.Add(new Parametros(@"fondo", sf.Fondo.Id.ToString()));
-                        lista.Add(new Parametros(@"fondo", sf.SubFondo));
+                        lista.Add(new Parametros(@"subfondo", sf.SubFondo));
 
                         string proce = "sp_subfondos_crud";
 
@@ -183,7 +183,7 @@ namespace SADI.Clases.Controladores
                     lista.Add(new Parametros(@"opc", "1"));// Mandar la opción a ejecutar al Procedimiento
                     lista.Add(new Parametros(@"id", string.Empty));
                     lista.Add(new Parametros(@"fondo", string.Empty));
-                    lista.Add(new Parametros(@"fondo", string.Empty));
+                    lista.Add(new Parametros(@"subfondo", string.Empty));
 
                     string proce = "sp_subfondos_crud";// Indicar el Nombre del Procedimiento
 

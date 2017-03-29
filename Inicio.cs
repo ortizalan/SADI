@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
+using SADI.Vistas.Usuarios;
+
 using DatosBD;
+
 
 namespace SADI
 {
@@ -30,10 +33,8 @@ namespace SADI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Operaciones op = new Operaciones();
-            int r = op.multiplicar(int.Parse(textBox1.Text.ToString()), int.Parse(textBox2.Text.ToString()));
-            MessageBox.Show("La Multiplicación es :".ToUpper() + r.ToString() );
-            
+            AgregarUsuarios AddUsr = new AgregarUsuarios();
+            AddUsr.Show();
         }
     }
 }

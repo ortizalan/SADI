@@ -117,7 +117,10 @@ namespace SADI.Clases.Controladores {
             else
             { return false; }// Objeto distinto al Modelo
         }
-
+        /// <summary>
+        /// Método par Consultar Todos los Registros en el Modelo Unidad Administrativa
+        /// </summary>
+        /// <returns>Boleano</returns>
 		public override bool ConsultarRegistros(){
 
             if (Abrir())// Intentar Abrir la Conexión

@@ -14,7 +14,7 @@ using SADI.Clases.Modelos;
 
 
 using SADI.Clases;
-namespace SADI.SADI.Clases.Controladores
+namespace SADI.Clases.Controladores
 {
     public class ContenidoCajasController : Metodos
     {

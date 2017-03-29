@@ -53,7 +53,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"id", j.Id.ToString()));// Indicar el identificador del Registro
                         lista.Add(new Parametros(@"jera", j.Jerarquia));// Indicar la descripción del registro Jerarquia
 
-                        string proce = "sp_jerarquia_crud";// Indicar el procedimiento a ejecutar
+                        string proce = "sp_jerarquias_crud";// Indicar el procedimiento a ejecutar
 
                         if(EjecutarProcedimiento(proce, lista))//Ejecutar el Procedimiento
                         { return true; }// Ejecución Exitosa
@@ -93,7 +93,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"id", j.Id.ToString()));// Indicar el identificador del Registro
                         lista.Add(new Parametros(@"jera",string.Empty));// Vacío
 
-                        string proce = "sp_jerarquia_crud";// Indicar el procedimiento a ejecutar
+                        string proce = "sp_jerarquias_crud";// Indicar el procedimiento a ejecutar
 
                         if (EjecutarProcedimiento(proce, lista))//Consultar el Procedimiento
                         { return true; }// Consulta Exitosa, Ver Table
@@ -128,7 +128,7 @@ namespace SADI.Clases.Controladores {
                     lista.Add(new Parametros(@"id", string.Empty));// Indicar el identificador del Registro
                     lista.Add(new Parametros(@"jera", string.Empty));// Indicar la descripción del registro Jerarquia
 
-                    string proce = "sp_jerarquia_crud";// Indicar el procedimiento a ejecutar
+                    string proce = "sp_jerarquias_crud";// Indicar el procedimiento a ejecutar
 
                     if (ConsultarProcedimiento(proce, lista))//Consultar el Procedimiento
                     { return true; }// Consulta Exitosa, Ver Tabla
@@ -166,7 +166,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"id", j.Id.ToString()));// Indicar el identificador del Registro
                         lista.Add(new Parametros(@"jera", j.Jerarquia));// Indicar la descripción del registro Jerarquia
 
-                        string proce = "sp_jerarquia_crud";// Indicar el procedimiento a ejecutar
+                        string proce = "sp_jerarquias_crud";// Indicar el procedimiento a ejecutar
 
                         if (EjecutarProcedimiento(proce, lista))//Ejecutar el Procedimiento
                         { return true; }// Ejecución Exitosa

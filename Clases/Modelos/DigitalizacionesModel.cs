@@ -53,7 +53,7 @@ namespace SADI.Clases.Modelos {
 		/// <param name="folio">Folio del Documento</param>
 		public DigitalizacionesModel(int id, RegistrosModel seried, byte[] doc, int folio){
             this.Id = id;
-            this.SerieDoctal = seried;
+            this.SDoctal = seried;
             this.Documento = doc;
             this.Folio = folio;
 		}
