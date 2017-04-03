@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SADI.Clases.Modelos;
 using SADI.Clases.Controladores;
+using SADI.Clases;
 
 namespace SADI.Vistas.Usuarios
 {
@@ -30,8 +31,6 @@ namespace SADI.Vistas.Usuarios
 
         private void AgregarUsuarios_Load(object sender, EventArgs e)
         {
-            chkEstatus.Checked = true;
-            chkEstatus.Enabled = false;
             this.LLenasCombos();// LLenar los combos
         }
         /// <summary>
@@ -92,93 +91,25 @@ namespace SADI.Vistas.Usuarios
                 return null;
             }
         }
+        
         /// <summary>
         /// Método para el Llenado de los COmbos
         /// </summary>
         private void LLenasCombos()
         {
-            cboJerarquia.DataSource = this.Jerarquias();
-            cboJerarquia.ValueMember = "Id";
-            cboJerarquia.DisplayMember = "Jerarquia";
-            cboSubFondo.DataSource = this.SubFondo();
-            cboSubFondo.ValueMember = "Id";
-            cboSubFondo.DisplayMember = "SubFondo";
-            cboUnidadAdmva.DataSource = this.UnidadAdmva();
-            cboUnidadAdmva.ValueMember = "Id";
-            cboUnidadAdmva.DisplayMember = "Unidad";
-        }
-        /// <summary>
-        /// Función para la validación de los controles dela forma
-        /// </summary>
-        /// <returns>Boleano</returns>
-        private bool validarControles()
-        {
-            if(!string.IsNullOrEmpty(txtNombre.Text))// Validar que no este vació el campo de Nombre del Usuario
-            {
-                if(!string.IsNullOrEmpty(txtPaterno.Text))// Validar que no esté vació el campo del Apellido Paterno
-                {
-                    if(!string.IsNullOrEmpty(txtUsuario.Text))// Validar que no esté vació el campo de Usuario
-                    {
-                        if(txtUsuario.Text.Length < 6)// Validar que el campos usuario no sea menor a 6 caracteres
-                        {
-                            if(!string.IsNullOrEmpty(txtContraseña.Text))// Validar que el campo contraseña no esté vació
-                            {
-                                if(txtContraseña.Text.Length < 6)// Validar que la contraseña no sea menor a 6 caracteres
-                                {
-                                    return true;// Todos los campos validos
-                                }
-                                else
-                                {
-                                    MessageBox.Show("la contraseña no puede ser menor a 6 caracteres.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    txtContraseña.SelectAll();
-                                    txtContraseña.Focus();
-                                    return false;
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("No deje vaío el campo contraseña.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                txtContraseña.Focus();
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("el usuario no puede ser menor a 6 caracteres.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            txtUsuario.SelectAll();
-                            txtUsuario.Focus();
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No deje vaío el campo Usuario.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        txtUsuario.Focus();
-                        return false;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No deje vaío el campo apellido paterno.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtPaterno.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("No deje vaío el campo nombre.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNombre.Focus();
-                return false;
-            }
-
-            return false;
+            usuariosControl1.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
+            usuariosControl1.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
+            usuariosControl1.UnidadAdmva = this.UnidadAdmva();// Llenar el combo de UnidadesAdmvas en el Control
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(this.validarControles())
+            if(usuariosControl1.ValidarControl())
             {
-
+                // Probando el cifrado de la contraseña
+                string cifrado = Seguridad.Encriptar(usuariosControl1.Constraseña);
+                MessageBox.Show("el mensaje cifrado es :".ToUpper() + "\n" + cifrado +
+                    "\n\n" + "y descifrado es :" + "\n" + Seguridad.Desencriptar(cifrado));
             }
         }
     }

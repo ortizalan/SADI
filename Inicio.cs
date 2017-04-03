@@ -36,5 +36,11 @@ namespace SADI
             AgregarUsuarios AddUsr = new AgregarUsuarios();
             AddUsr.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            modificarUsuariocs upUsr = new modificarUsuariocs();
+            upUsr.Show();
+        }
     }
 }

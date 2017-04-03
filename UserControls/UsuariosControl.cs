@@ -54,6 +54,7 @@ namespace SADI.UserControls
             set
             {
                 _jerarquias = value;
+                this.LLenarJerarquias();
             }
         }
         /// <summary>
@@ -61,14 +62,22 @@ namespace SADI.UserControls
         /// </summary>
         public DataTable SubFondo
         {
-            set { _subfondo = value; }
+            set
+            {
+                _subfondo = value;
+                this.LLenarSubFondo();
+            }
         }
         /// <summary>
         /// Asignar Valores a la Unidad Administrativa
         /// </summary>
         public DataTable UnidadAdmva
         {
-            set { _unidadAdmva = value; }
+            set
+            {
+                _unidadAdmva = value;
+                this.LLenarUnidadAdmva();
+            }
         }
         /// <summary>
         /// Acceder a la Propiedad Nombre
@@ -130,6 +139,18 @@ namespace SADI.UserControls
                 txtContraseña.Text = _contraseña;
             }
         }
+        /// <summary>
+        /// Accerder a la Propiedad Estatus
+        /// </summary>
+        public bool Estatus
+        {
+            get { return _estatus; }
+            set
+            {
+                _estatus = value;
+                chkEstatus.Checked = _estatus;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -144,11 +165,11 @@ namespace SADI.UserControls
                 {
                     if (!string.IsNullOrEmpty(txtUsuario.Text))// Validar que no esté vació el campo de Usuario
                     {
-                        if (txtUsuario.Text.Length < 6)// Validar que el campos usuario no sea menor a 6 caracteres
+                        if (txtUsuario.Text.Length >= 6)// Validar que el campos usuario no sea menor a 6 caracteres
                         {
                             if (!string.IsNullOrEmpty(txtContraseña.Text))// Validar que el campo contraseña no esté vació
                             {
-                                if (txtContraseña.Text.Length < 6)// Validar que la contraseña no sea menor a 6 caracteres
+                                if (txtContraseña.Text.Length >= 6)// Validar que la contraseña no sea menor a 6 caracteres
                                 {
                                     return true;// Todos los campos validos
                                 }
@@ -200,13 +221,13 @@ namespace SADI.UserControls
         //Si cambia el Valor Nombre
         private void txtNombre_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(this.txtNombre.Text))
+            if (!string.IsNullOrEmpty(this.txtNombre.Text))
             { this.Nombre = txtNombre.Text; }
         }
         //Si cambia el Valor Paterno
         private void txtPaterno_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtPaterno.Text))
+            if (!string.IsNullOrEmpty(txtPaterno.Text))
             {
                 this.Paterno = txtPaterno.Text;
             }
@@ -214,7 +235,7 @@ namespace SADI.UserControls
         // Si cambia el Valor Materno
         private void txtMaterno_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtMaterno.Text))
+            if (!string.IsNullOrEmpty(txtMaterno.Text))
             {
                 this.Materno = txtMaterno.Text;
             }
@@ -222,7 +243,7 @@ namespace SADI.UserControls
         // Si cambia el Valor de Usuario
         private void txtUsuario_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtUsuario.Text))
+            if (!string.IsNullOrEmpty(txtUsuario.Text))
             {
                 this.Usuario = txtUsuario.Text;
             }
@@ -230,9 +251,48 @@ namespace SADI.UserControls
         // Si cambia el Valor
         private void txtContraseña_Leave(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtContraseña.Text))
+            if (!string.IsNullOrEmpty(txtContraseña.Text))
             {
                 this.Constraseña = txtContraseña.Text;
+            }
+        }
+        // Método para Llenar el combo Jerarquías
+        private void LLenarJerarquias()
+        {
+            if (_jerarquias != null)
+            {
+                if (_jerarquias.Rows.Count > 0)
+                {
+                    cboJerarquia.DataSource = _jerarquias;
+                    cboJerarquia.ValueMember = "Id";
+                    cboJerarquia.DisplayMember = "Jerarquia";
+                }
+            }
+        }
+        // Método para Llenar el Combo SubFondos
+        private void LLenarSubFondo()
+        {
+            if (_subfondo != null)
+            {
+                if (_subfondo.Rows.Count > 0)
+                {
+                    cboSubFondo.DataSource = _subfondo;
+                    cboSubFondo.ValueMember = "Id";
+                    cboSubFondo.DisplayMember = "SubFondo";
+                }
+            }
+        }
+        //  Método para Llenar el Combo UnidadesAdmvas
+        private void LLenarUnidadAdmva()
+        {
+            if (_unidadAdmva != null)
+            {
+                if (_unidadAdmva.Rows.Count > 0)
+                {
+                    cboUnidadAdmva.DataSource = _unidadAdmva;
+                    cboUnidadAdmva.ValueMember = "Id";
+                    cboUnidadAdmva.DisplayMember = "Unidad";
+                }
             }
         }
     }

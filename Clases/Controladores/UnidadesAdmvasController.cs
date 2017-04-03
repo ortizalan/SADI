@@ -99,7 +99,7 @@ namespace SADI.Clases.Controladores {
 
                         string proce = "sp_unidadesadmvas_crud"; // Indicarle el nombre del procedimiento
 
-                        if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
+                        if (ConsultarProcedimiento(proce, lista))// Consultar el Procedimiento
                         { return true; }// Consulta Exitosa, ver Table
                         else
                         { return false; }// Consulta NO Existosa, ver Error
@@ -136,7 +136,7 @@ namespace SADI.Clases.Controladores {
 
                     string proce = "sp_unidadesadmvas_crud"; // Indicarle el nombre del procedimiento
 
-                    if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
+                    if (ConsultarProcedimiento(proce, lista))// Consultar el Procedimiento
                     { return true; }// Consulta Exitosa, ver Table
                     else
                     { return false; }// Consulta NO Existosa, ver Error

@@ -28,19 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.usuariosControl1 = new SADI.UserControls.UsuariosControl();
             this.SuspendLayout();
+            // 
+            // usuariosControl1
+            // 
+            this.usuariosControl1.Constraseña = null;
+            this.usuariosControl1.Location = new System.Drawing.Point(12, 3);
+            this.usuariosControl1.Materno = null;
+            this.usuariosControl1.Name = "usuariosControl1";
+            this.usuariosControl1.Nombre = null;
+            this.usuariosControl1.Opcion = 0;
+            this.usuariosControl1.Paterno = null;
+            this.usuariosControl1.Size = new System.Drawing.Size(718, 312);
+            this.usuariosControl1.TabIndex = 0;
+            this.usuariosControl1.Usuario = null;
             // 
             // modificarUsuariocs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 329);
+            this.ClientSize = new System.Drawing.Size(736, 344);
+            this.Controls.Add(this.usuariosControl1);
             this.Name = "modificarUsuariocs";
             this.Text = "modificarUsuariocs";
+            this.Load += new System.EventHandler(this.modificarUsuariocs_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private UserControls.UsuariosControl usuariosControl1;
     }
 }
