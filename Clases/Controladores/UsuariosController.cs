@@ -224,6 +224,7 @@ namespace SADI.Clases.Controladores {
 
         public bool PruebaTablaTemp()
         {
+            // Prueba de utilización de tablas temporales
             if (Abrir())
             {
                 try
@@ -231,13 +232,13 @@ namespace SADI.Clases.Controladores {
                     List<Parametros> lista = new List<Parametros>();
 
                     string sentencia = string.Empty;
-                    sentencia = "declare @rafita ";
-                    sentencia += "table(id int, descri varchar(20));";
-                    sentencia += "insert into @rafita values (1, 'Valor UNO');";
-                    sentencia += "insert into @rafita values (2, 'Valor DOS');";
-                    sentencia += "select* from @rafita;";
+                    sentencia = "declare @rafita ";// declaramos
+                    sentencia += "table(id int, descri varchar(20));";// creamos
+                    sentencia += "insert into @rafita values (1, 'Valor UNO');";// insertamos valores
+                    sentencia += "insert into @rafita values (2, 'Valor DOS');";// --
+                    sentencia += "select* from @rafita;";// Realizamos la selección
 
-                    if (ConsultarSentenciaSQL(sentencia, lista))
+                    if (ConsultarSentenciaSQL(sentencia))
                     { return true; }
                     else
                     { return false; }

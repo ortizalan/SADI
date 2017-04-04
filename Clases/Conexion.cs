@@ -170,16 +170,16 @@ namespace SADI.Clases
         /// <param name="sentencia">Sentencia SQL</param>
         /// <param name="lista">Lista de Parámetros</param>
         /// <returns>Boleano</returns>
-        protected bool ConsultarSentenciaSQL(string sentencia, List<Parametros> lista)
+        protected bool ConsultarSentenciaSQL(string sentencia/*, List<Parametros> lista*/)
         {
             Command = new SqlCommand();
             Command.CommandType = CommandType.Text;
             Command.CommandText = sentencia;
             Command.Connection = Connection;
-            foreach (Parametros p in lista)
-            {
-                Command.Parameters.AddWithValue(p.NombreParametro, p.ValorParametro);
-            }
+            //foreach (Parametros p in lista)
+            //{
+            //    Command.Parameters.AddWithValue(p.NombreParametro, p.ValorParametro);
+            //}
             Tabla = new DataTable();
             Adapter = new SqlDataAdapter();
             Adapter.SelectCommand = Command;
