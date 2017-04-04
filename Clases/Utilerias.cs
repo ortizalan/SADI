@@ -26,11 +26,11 @@ namespace SADI.Clases
         /// <returns>Cadena Encriptada</returns>
         public static string Encriptar(string cadena)
         {
-            string resultado = string.Empty;
-            byte[] encryptado = System.Text.Encoding.Unicode.GetBytes(cadena);
-            resultado = Convert.ToBase64String(encryptado);
+            string resultado = string.Empty;// Variable dónde guardaremos la encriptación
+            byte[] encryptado = System.Text.Encoding.Unicode.GetBytes(cadena);// Encriptado de arreglo de Bytes de la cadena
+            resultado = Convert.ToBase64String(encryptado);//Conversión a cadena del encriptado
 
-            return resultado;
+            return resultado;// Retornamos cadena encriptada
         }
         /// <summary>
         /// Función Estática para Desencriptar un Texto
@@ -39,11 +39,27 @@ namespace SADI.Clases
         /// <returns>Cadena Desencriptada</returns>
         public static string Desencriptar(string cadena)
         {
-            string resultado = string.Empty;
-            byte[] desencryptado = Convert.FromBase64String(cadena);
-            resultado = System.Text.Encoding.Unicode.GetString(desencryptado);
+            string resultado = string.Empty;// Variable dónde guadaremos la desencriptación
+            byte[] desencryptado = Convert.FromBase64String(cadena);// Desencriptado del Arreglo de bytes
+            resultado = System.Text.Encoding.Unicode.GetString(desencryptado);// Conversión del resultado a cadena
 
-            return resultado;
+            return resultado;// Retorno de cadena desencriptada
         }
+    }
+    /// <summary>
+    /// Clase para manejar los datos de la computadora del usuario
+    /// </summary>
+    public static class Equipos
+    {
+        private static string _nomcompu;
+        /// <summary>
+        /// Acceso a la Propiedad Nombre de Computadora
+        /// </summary>
+        public static string NombreCompu
+        {
+            get { return _nomcompu; }
+            set { _nomcompu = value; }
+        }
+
     }
 }
