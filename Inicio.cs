@@ -42,5 +42,15 @@ namespace SADI
             modificarUsuariocs upUsr = new modificarUsuariocs();
             upUsr.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if(cUser.PruebaTablaTemp())
+            {
+                cboRafita.DataSource = cUser.Tabla;
+                cboRafita.ValueMember = "id";
+                cboRafita.DisplayMember = "descri";
+            }
+        }
     }
 }

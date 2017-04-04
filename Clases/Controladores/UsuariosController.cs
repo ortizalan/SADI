@@ -78,7 +78,6 @@ namespace SADI.Clases.Controladores {
             else // Si no es del tipo UsuariosModel
             { return false; }
 		}
-
 		/// <summary>
 		/// Consultar un Usuario del Sistema
 		/// </summary>
@@ -170,7 +169,6 @@ namespace SADI.Clases.Controladores {
             else
             { return false; }// No se pudo Abrir la COnexión
 		}
-
 		/// <summary>
 		/// Ingresar un Usuario al Sistema
 		/// </summary>
@@ -223,6 +221,40 @@ namespace SADI.Clases.Controladores {
             else
             { return false; }// No es del mismo tipo
 		}
+
+        public bool PruebaTablaTemp()
+        {
+            if (Abrir())
+            {
+                try
+                {
+                    List<Parametros> lista = new List<Parametros>();
+
+                    string sentencia = string.Empty;
+                    sentencia = "declare @rafita ";
+                    sentencia += "table(id int, descri varchar(20));";
+                    sentencia += "insert into @rafita values (1, 'Valor UNO');";
+                    sentencia += "insert into @rafita values (2, 'Valor DOS');";
+                    sentencia += "select* from @rafita;";
+
+                    if (ConsultarSentenciaSQL(sentencia, lista))
+                    { return true; }
+                    else
+                    { return false; }
+
+                }
+                catch(Exception e)
+                {
+                    Error = e.Message.ToString();
+                    return false;
+                }
+                finally { Cerrar(); }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 	}//end UsuariosController
 

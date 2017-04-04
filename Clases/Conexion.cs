@@ -164,6 +164,29 @@ namespace SADI.Clases
             }
 
         }
+        /// <summary>
+        /// Realizar COnsultas Directas a la Base de Datos
+        /// </summary>
+        /// <param name="sentencia">Sentencia SQL</param>
+        /// <param name="lista">Lista de Parámetros</param>
+        /// <returns>Boleano</returns>
+        protected bool ConsultarSentenciaSQL(string sentencia, List<Parametros> lista)
+        {
+            Command = new SqlCommand();
+            Command.CommandType = CommandType.Text;
+            Command.CommandText = sentencia;
+            Command.Connection = Connection;
+            foreach (Parametros p in lista)
+            {
+                Command.Parameters.AddWithValue(p.NombreParametro, p.ValorParametro);
+            }
+            Tabla = new DataTable();
+            Adapter = new SqlDataAdapter();
+            Adapter.SelectCommand = Command;
+            Command.ExecuteScalar();// Lo utilizamos para ejecutar sentencias directas
+            Adapter.Fill(Tabla);
+            return true;
+        }
 
         /// <summary>
         /// Acceder al Error que resulte en los intentos de conexion
