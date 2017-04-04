@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
+using System.Security.Principal;
+
 
 namespace SADI.Clases
 {
@@ -11,7 +16,60 @@ namespace SADI.Clases
     /// </summary>
     public static class Utilerias
     {
+        private static string _ipadd;// Propiedad para la IP del equipo
+        private static string _compname = Dns.GetHostName();// Propiedad del Nombre del Equipo
+        private static WindowsIdentity _winUser = WindowsIdentity.GetCurrent();// Obtener los datos de Sesión de Windows
+        private static string _userdomain = _winUser.Name;// Usuario de Dominio
+           
+        private static string _dominio = IPGlobalProperties.GetIPGlobalProperties().DomainName;// Nombre del Dominio
+        private static IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// Obtener la Información del Host del Dominio
+        /// <summary>
+        /// Acceso a la Propiedad del Nombre del Equipo
+        /// </summary>
+        public static string IpAddress
+        {
+            get
+            {
+                IpLocal();
+                return _ipadd;
+            }
+        }
+        /// <summary>
+        /// Acceso a la Propiedad Nombre de la Computadora
+        /// </summary>
+        public static string ComputerName
+        {
+            get { return _compname; }
+            //set { _compname = value; }
+        }
+        /// <summary>
+        /// Acceso al Nombre del Usuario del Dominio
+        /// </summary>
+        public static string UserDomain
+        {
+            get { return _userdomain; }
+            //set { _userdomain = value; }
+        }
+        /// <summary>
+        /// Acceso  al Nombre del Dominio
+        /// </summary>
+        public static string NombreDominio
+        {
+            get { return _dominio; }
+        }
+        // Obtener la IP Local
+        private static void IpLocal()
+        {
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    _ipadd = ip.ToString();
+                    break;
+                }
+            }
 
+        }
     }
 
     /// <summary>

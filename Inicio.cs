@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
 using SADI.Vistas.Usuarios;
+using SADI.Clases;
 
 using DatosBD;
 
@@ -51,6 +52,15 @@ namespace SADI
                 cboRafita.ValueMember = "id";
                 cboRafita.DisplayMember = "descri";
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+           string u = Utilerias.UserDomain;
+            MessageBox.Show("nombre del equipo : " + Utilerias.ComputerName + "\n\n" + 
+                 "dirección IP: " + Utilerias.IpAddress + "\n\n" + 
+                 "nombre del Dominio : " + Utilerias.NombreDominio + "\n\n" + 
+                 "usuario de Dominio : " + Utilerias.UserDomain);
         }
     }
 }
