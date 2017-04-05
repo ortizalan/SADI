@@ -95,6 +95,7 @@
             this.cboJerarquia.Name = "cboJerarquia";
             this.cboJerarquia.Size = new System.Drawing.Size(188, 21);
             this.cboJerarquia.TabIndex = 2;
+            this.cboJerarquia.SelectedIndexChanged += new System.EventHandler(this.cboJerarquia_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -116,6 +117,7 @@
             this.chkEstatus.TabIndex = 3;
             this.chkEstatus.Text = "Activo";
             this.chkEstatus.UseVisualStyleBackColor = true;
+            this.chkEstatus.CheckedChanged += new System.EventHandler(this.chkEstatus_CheckedChanged);
             // 
             // txtContraseña
             // 
@@ -229,6 +231,7 @@
             this.cboUnidadAdmva.Name = "cboUnidadAdmva";
             this.cboUnidadAdmva.Size = new System.Drawing.Size(238, 21);
             this.cboUnidadAdmva.TabIndex = 1;
+            this.cboUnidadAdmva.SelectedIndexChanged += new System.EventHandler(this.cboUnidadAdmva_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -248,6 +251,7 @@
             this.cboSubFondo.Name = "cboSubFondo";
             this.cboSubFondo.Size = new System.Drawing.Size(238, 21);
             this.cboSubFondo.TabIndex = 0;
+            this.cboSubFondo.SelectedIndexChanged += new System.EventHandler(this.cboSubFondo_SelectedIndexChanged);
             // 
             // label9
             // 

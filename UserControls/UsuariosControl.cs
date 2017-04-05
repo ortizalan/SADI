@@ -27,6 +27,9 @@ namespace SADI.UserControls
         private bool _estatus;// Propiedad para Indicar el Estatus del Usuario
         private string _usuario;// Propiedad del Usuario
         private string _contraseña;// Propiedad Contraseña
+        private int _idJerarquia;// Identificador de la Jerarquia
+        private int _idSubFondo;// Identificador del Subfondo
+        private int _idUnidadAdmva;// Identificador de la Unidad Administrativa
         #endregion
         /// <summary>
         /// Constructor del Control
@@ -40,6 +43,7 @@ namespace SADI.UserControls
         /// <summary>
         /// Acceder a la Propiedad Opción del Control para evaluar
         /// Operaciones a Efectuar
+        /// Opcion: 1) Ingresar Nuevo, 2) Modificar Usuario, 3) Ver Detalles Usuario
         /// </summary>
         public int Opcion
         {
@@ -150,6 +154,30 @@ namespace SADI.UserControls
                 _estatus = value;
                 chkEstatus.Checked = _estatus;
             }
+        }
+        /// <summary>
+        /// Identificador de la jerarquía
+        /// </summary>
+        public int IdJerarquia
+        {
+            get { return _idJerarquia; }
+            set { _idJerarquia = value; }
+        }
+        /// <summary>
+        /// Identificador del SubFondo
+        /// </summary>
+        public int IdSubFondo
+        {
+            get { return _idSubFondo; }
+            set { _idSubFondo = value; }
+        }
+        /// <summary>
+        /// Identificador de la Unidad Administrativa
+        /// </summary>
+        public int IdUnidadAdmva
+        {
+            get { return _idUnidadAdmva; }
+            set { _idUnidadAdmva = value; }
         }
         #endregion
 
@@ -293,6 +321,160 @@ namespace SADI.UserControls
                     cboUnidadAdmva.ValueMember = "Id";
                     cboUnidadAdmva.DisplayMember = "Unidad";
                 }
+            }
+        }
+        /// <summary>
+        /// Método para Limpiar el Control Usuario
+        /// </summary>
+        public void LimpiarControl()
+        {
+            txtNombre.Text = string.Empty;// Limpiar campo Nombre
+            txtPaterno.Text = string.Empty;// Limpiar Campo Paterno
+            txtMaterno.Text = string.Empty;// Limpiar Campo Maerno
+            txtUsuario.Text = string.Empty;// Limpiar Campo Usuario
+            txtContraseña.Text = string.Empty;// Limpiar Campo Contraseña
+            if (_oopcion == 1)// Si la opción es Ingresar un Nuevo Usuario
+            {
+                chkEstatus.Enabled = false;
+                chkEstatus.Checked = true;
+            }
+            else
+            {
+                chkEstatus.Enabled = true;
+                chkEstatus.Checked = false;
+            }
+        }
+        //Cambio de Valor Seleccionado en ComboBox Jerarquias
+        private void cboJerarquia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboJerarquia.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idJerarquia = (int)cboJerarquia.SelectedValue;
+            }
+        }
+        //Cambio de Valor Seleccionado en ComboBox SubFondos
+        private void cboSubFondo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idSubFondo = (int)cboSubFondo.SelectedValue;
+            }
+        }
+        // Cambio de Valor Seleccionado en ComboBox UnidadAdmva
+        private void cboUnidadAdmva_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboUnidadAdmva.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idUnidadAdmva = (int)cboUnidadAdmva.SelectedValue;
+            }
+        }
+        // Cambio de valor CheckBox Estatus
+        private void chkEstatus_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_oopcion == 1)// Si es ingreso de nuevo Usuario, siempre será Activo
+            {
+                chkEstatus.Checked = true;
+                chkEstatus.Enabled = false;
+            }
+            _estatus = chkEstatus.Checked;// Adquirir el valor Boelanos de la operación
+        }
+        /// <summary>
+        /// Método Público para Asegurarnos que se carga el control con la información Enviada
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public bool CargaDeDatosControl()
+        {
+            object o = string.Empty;
+            EventArgs e = null;
+
+            if (_oopcion == 0)
+            {
+                switch (_oopcion)
+                {
+                    case 1:// Ingresar Usuario
+                        this.chkEstatus_CheckedChanged(o, e);
+                        return true;
+
+                    case 2:// Modificar Usuario
+                        if (_idJerarquia != 0 && _idSubFondo != 0 && _idUnidadAdmva != 0)// Verificar que tenga valores asignado el usuario
+                        {
+                            if (_jerarquias.Rows.Count > 0 && _subfondo.Rows.Count > 0 &&
+                                _unidadAdmva.Rows.Count > 0)// Verificar que exista información para cargar a los combos
+                            {
+                                txtNombre.Text = _nombre;// Asignar el Nombre
+                                txtPaterno.Text = _paterno;// Asignar el Apellido Paterno
+                                txtMaterno.Text = (!string.IsNullOrEmpty(_materno) ? _materno : string.Empty); // Asignar Materno
+                                txtUsuario.Text = _usuario;//Asignar Usuario
+                                txtContraseña.Text = _contraseña;// Asignar contraseña
+                                chkEstatus.Checked = _estatus;// Asignar Estatus
+                                cboJerarquia.SelectedValue = _idJerarquia;// Indicarle la Jerarquía
+                                cboSubFondo.SelectedValue = _idSubFondo;// Indicarle el SubFondo
+                                cboUnidadAdmva.SelectedValue = _idUnidadAdmva;// Indicarle la Unidad Adsministrativa
+                                return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Debe enviar información a los combobox".ToUpper(),
+                                    ":: mensaje desde el control usuarios ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("debe de enviar la información del usuario al control".ToUpper(),
+                                ":: mensaje del contro ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+
+                    case 3:// Mostrar Detalles del Usuario
+                        if (_idJerarquia != 0 && _idSubFondo != 0 && _idUnidadAdmva != 0)// Verificar que tenga valores asignado el usuario
+                        {
+                            if (_jerarquias.Rows.Count > 0 && _subfondo.Rows.Count > 0 &&
+                                _unidadAdmva.Rows.Count > 0)// Verificar que exista información para cargar a los combos
+                            {
+                                txtNombre.Text = _nombre;// Asignar el Nombre
+                                txtNombre.Enabled = false;// Deshabilitar el control
+                                txtPaterno.Text = _paterno;// Asignar el Apellido Paterno
+                                txtPaterno.Enabled = false;//Deshabilitar el control
+                                txtMaterno.Text = (!string.IsNullOrEmpty(_materno) ? _materno : string.Empty); // Asignar Materno
+                                txtMaterno.Enabled = false;//Deshabilitar el control
+                                txtUsuario.Text = _usuario;//Asignar Usuario
+                                txtUsuario.Enabled = false;//Deshabilitar el control
+                                txtContraseña.Text = _contraseña;// Asignar contraseña
+                                txtContraseña.Enabled = false;// Deshabilitar el control
+                                chkEstatus.Checked = _estatus;// Asignar Estatus
+                                chkEstatus.Enabled = false;//Deshabilitar el control
+                                cboJerarquia.SelectedValue = _idJerarquia;// Indicarle la Jerarquía
+                                cboJerarquia.Enabled = false;// Inhabilitar Combo
+                                cboSubFondo.SelectedValue = _idSubFondo;// Indicarle el SubFondo
+                                cboSubFondo.Enabled = false;
+                                cboUnidadAdmva.SelectedValue = _idUnidadAdmva;// Indicarle la Unidad Adsministrativa
+                                cboUnidadAdmva.Enabled = false;
+                                return true;
+                            }
+
+                            else
+                            {
+                                MessageBox.Show("Debe enviar información a los combobox".ToUpper(),
+                                       ":: mensaje desde el control usuarios ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("debe de enviar la información del usuario al control".ToUpper(),
+                                   ":: mensaje del contro ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
+
+                    default:
+                        return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("debe de enviar un valor en opción.".ToUpper(), ":: mensaje desde el control usuarios ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
         }
     }
