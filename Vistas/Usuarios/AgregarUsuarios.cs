@@ -20,6 +20,7 @@ namespace SADI.Vistas.Usuarios
         JerarquiasController CtrllJerarquia = new JerarquiasController(); // Instancia del controlador Jerarquías
         SubFondosController CtrllSubF = new SubFondosController(); // Instancia del Cntrolador SubFondos
         UnidadesAdmvasController CtrllUniAdm = new UnidadesAdmvasController(); // Instancia del Controlador UnidadAdmva
+        SeccionesController CtrllSeccion = new SeccionesController();// Instancia del Controlador Secciones
 
         /// <summary>
         /// Constructor de la Forma
@@ -46,7 +47,7 @@ namespace SADI.Vistas.Usuarios
         /// <summary>
         /// Función para LLenar el Combo Jerarquías
         /// </summary>
-        /// <returns></returns>
+        /// <returns>DataTable</returns>
         private DataTable Jerarquias()
         {
             if(CtrllJerarquia.ConsultarRegistros())
@@ -62,7 +63,7 @@ namespace SADI.Vistas.Usuarios
         /// <summary>
         /// Función Para llenar el Combo SubFondo
         /// </summary>
-        /// <returns></returns>
+        /// <returns>DataTable</returns>
         private DataTable SubFondo()
         {
             if(CtrllSubF.ConsultarRegistros())
@@ -78,7 +79,7 @@ namespace SADI.Vistas.Usuarios
         /// <summary>
         /// Función para LLenar el Combo Unidad Administrativa
         /// </summary>
-        /// <returns></returns>
+        /// <returns>DataTable</returns>
         private DataTable UnidadAdmva()
         {
             if(CtrllUniAdm.ConsultarRegistros())
@@ -91,7 +92,23 @@ namespace SADI.Vistas.Usuarios
                 return null;
             }
         }
-        
+        /// <summary>
+        /// Funcion Para LLenar el COmbo Secciones
+        /// </summary>
+        /// <returns>DataTable</returns>
+        private DataTable Secciones()
+        {
+            if(CtrllSeccion.ConsultarRegistros())
+            {
+                return CtrllSeccion.Tabla;
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + CtrllSeccion.Error, "..:: error en base de datos ::..".ToUpper()
+                    ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return null;
+            }
+        }
         /// <summary>
         /// Método para el Llenado de los COmbos
         /// </summary>
@@ -100,6 +117,7 @@ namespace SADI.Vistas.Usuarios
             usuariosControl1.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
             usuariosControl1.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
             usuariosControl1.UnidadAdmva = this.UnidadAdmva();// Llenar el combo de UnidadesAdmvas en el Control
+            usuariosControl1.Seccion = this.Secciones(); // Llenar el combo Secciones en el control
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -110,6 +128,19 @@ namespace SADI.Vistas.Usuarios
                 string cifrado = Seguridad.Encriptar(usuariosControl1.Constraseña);
                 MessageBox.Show("el mensaje cifrado es :".ToUpper() + "\n" + cifrado +
                     "\n\n" + "y descifrado es :" + "\n" + Seguridad.Desencriptar(cifrado));
+
+                usuariosControl1.CargaDeDatosControl();
+                MessageBox.Show("datos en el control :".ToUpper() + "\n\n" +
+                    "nombre :" + usuariosControl1.Nombre + "\n" +
+                    "paterno :" + usuariosControl1.Paterno + "\n" +
+                    "materno :" + usuariosControl1.Materno + "\n" +
+                    "usuario :" + usuariosControl1.Usuario + "\n" +
+                    "email :" + usuariosControl1.Email + "\n" +
+                    "Estatus :" + usuariosControl1.Estatus + "\n" +
+                    "jerarquia :" + usuariosControl1.IdJerarquia.ToString() + "\n" +
+                    "subfondo :" + usuariosControl1.IdSubFondo.ToString() + "\n" +
+                    "Unidad Administrativa:" + usuariosControl1.IdUnidadAdmva.ToString() + "\n" +
+                    "Sección :" + usuariosControl1.IdSeccion.ToString());
             }
         }
     }

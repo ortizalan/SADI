@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Security.Principal;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace SADI.Clases
@@ -68,6 +69,21 @@ namespace SADI.Clases
                     break;
                 }
             }
+
+        }
+        /// <summary>
+        /// Función para Validar el Correo Electrónico del Usuario
+        /// </summary>
+        /// <param name="email">Correo Electrónico</param>
+        /// <returns>Boleano</returns>
+        public static bool ValidarEmail(string email)
+        {
+            var foo = new EmailAddressAttribute();
+            bool bar;
+
+            bar = foo.IsValid(email);
+
+            return bar;
 
         }
     }

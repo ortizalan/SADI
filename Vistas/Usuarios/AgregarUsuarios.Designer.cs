@@ -37,7 +37,7 @@
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAgregar.Location = new System.Drawing.Point(459, 243);
+            this.btnAgregar.Location = new System.Drawing.Point(459, 268);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(125, 57);
             this.btnAgregar.TabIndex = 3;
@@ -48,7 +48,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(584, 243);
+            this.btnSalir.Location = new System.Drawing.Point(584, 268);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(125, 57);
             this.btnSalir.TabIndex = 0;
@@ -59,13 +59,19 @@
             // usuariosControl1
             // 
             this.usuariosControl1.Constraseña = null;
+            this.usuariosControl1.Email = null;
+            this.usuariosControl1.Estatus = false;
+            this.usuariosControl1.IdJerarquia = 0;
+            this.usuariosControl1.IdSeccion = null;
+            this.usuariosControl1.IdSubFondo = 0;
+            this.usuariosControl1.IdUnidadAdmva = 0;
             this.usuariosControl1.Location = new System.Drawing.Point(3, 0);
             this.usuariosControl1.Materno = null;
             this.usuariosControl1.Name = "usuariosControl1";
             this.usuariosControl1.Nombre = null;
             this.usuariosControl1.Opcion = 0;
             this.usuariosControl1.Paterno = null;
-            this.usuariosControl1.Size = new System.Drawing.Size(718, 312);
+            this.usuariosControl1.Size = new System.Drawing.Size(718, 336);
             this.usuariosControl1.TabIndex = 4;
             this.usuariosControl1.Usuario = null;
             // 
@@ -75,7 +81,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAgregar;
-            this.ClientSize = new System.Drawing.Size(722, 312);
+            this.ClientSize = new System.Drawing.Size(722, 337);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.usuariosControl1);

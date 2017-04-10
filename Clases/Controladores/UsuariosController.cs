@@ -57,6 +57,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));// SubFondo al que pertenece el Usuario
                         lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));// Unidad Administrativa a la que Pertenece el Usuario
                         lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario
+                        lista.Add(new Parametros(@"email",(!string.IsNullOrEmpty(u.Email)?u.Email:string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
 
                         string proce = "sp_usuarios_crud";// Nombre del Procedimiento
@@ -197,6 +198,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));
                         lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));
                         lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
+                        lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", "1"));// Si se vá a ingresar, siempre será activo
 
                         string proce = "sp_usuarios_crud";

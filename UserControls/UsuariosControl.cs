@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SADI.Clases;
 
 
 namespace SADI.UserControls
@@ -21,15 +22,18 @@ namespace SADI.UserControls
         private DataTable _jerarquias;// Tabla para llenar el Combo Jerarquías
         private DataTable _subfondo;// Tabla para llenar el Combo SubFondos
         private DataTable _unidadAdmva; // Tabla para llenar la Unidad Administrativa
+        private DataTable _seccion; // Tabla para llenar la Sección del Usuario
         private string _nombre;// Propiedad para el nombre del Usuario
         private string _paterno;// Propiedad para el Apellido Paterno del Usuario
         private string _materno;// Propiedad para el Apellido Materno del Usuario
+        private string _email; // Propiedad para el correo electrónico del Usuario
         private bool _estatus;// Propiedad para Indicar el Estatus del Usuario
         private string _usuario;// Propiedad del Usuario
         private string _contraseña;// Propiedad Contraseña
         private int _idJerarquia;// Identificador de la Jerarquia
         private int _idSubFondo;// Identificador del Subfondo
         private int _idUnidadAdmva;// Identificador de la Unidad Administrativa
+        private string _idSeccion;// Identificador de la Sección
         #endregion
         /// <summary>
         /// Constructor del Control
@@ -81,6 +85,17 @@ namespace SADI.UserControls
             {
                 _unidadAdmva = value;
                 this.LLenarUnidadAdmva();
+            }
+        }
+        /// <summary>
+        /// Asignar Valores a la Sección
+        /// </summary>
+        public DataTable Seccion
+        {
+            set
+            {
+                _seccion = value;
+                this.LLenarSeccion();
             }
         }
         /// <summary>
@@ -144,6 +159,18 @@ namespace SADI.UserControls
             }
         }
         /// <summary>
+        /// Acceder a la propiedad de correo electrónico
+        /// </summary>
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                txtEmail.Text = _email;
+            }
+        }
+        /// <summary>
         /// Accerder a la Propiedad Estatus
         /// </summary>
         public bool Estatus
@@ -179,8 +206,15 @@ namespace SADI.UserControls
             get { return _idUnidadAdmva; }
             set { _idUnidadAdmva = value; }
         }
+        /// <summary>
+        /// Identificador de la Sección
+        /// </summary>
+        public string IdSeccion
+        {
+            get { return _idSeccion; }
+            set { _idSeccion = value; }
+        }
         #endregion
-
         /// <summary>
         /// Validar el Control Para su Utilización en la Base de Datos
         /// </summary>
@@ -199,11 +233,31 @@ namespace SADI.UserControls
                             {
                                 if (txtContraseña.Text.Length >= 6)// Validar que la contraseña no sea menor a 6 caracteres
                                 {
-                                    return true;// Todos los campos validos
+                                    if(!string.IsNullOrEmpty(txtEmail.Text))// Validar que no esté vació el campo del correo electrónico
+                                    {
+                                        if (Utilerias.ValidarEmail(txtEmail.Text))// Validar que sea válida la dirección de correo electrónico
+                                        {
+                                            return true;// Todos los campos validos
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("ingrese una dirección de correo electrónico válida.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            txtEmail.SelectAll();
+                                            txtEmail.Focus();
+                                            return false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("no deje vació el campo del correo electrónico".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        txtEmail.Focus();
+                                        return false;
+                                    }
+                                    
                                 }
                                 else
                                 {
-                                    MessageBox.Show("la contraseña no puede ser menor a 6 caracteres.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    MessageBox.Show("la contraseña no puede ser menor a 6 caracteres.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     txtContraseña.SelectAll();
                                     txtContraseña.Focus();
                                     return false;
@@ -211,14 +265,14 @@ namespace SADI.UserControls
                             }
                             else
                             {
-                                MessageBox.Show("No deje vaío el campo contraseña.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                MessageBox.Show("No deje vaío el campo contraseña.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 txtContraseña.Focus();
                                 return false;
                             }
                         }
                         else
                         {
-                            MessageBox.Show("el usuario no puede ser menor a 6 caracteres.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("el usuario no puede ser menor a 6 caracteres.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             txtUsuario.SelectAll();
                             txtUsuario.Focus();
                             return false;
@@ -226,21 +280,21 @@ namespace SADI.UserControls
                     }
                     else
                     {
-                        MessageBox.Show("No deje vaío el campo Usuario.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("No deje vaío el campo Usuario.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         txtUsuario.Focus();
                         return false;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No deje vaío el campo apellido paterno.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No deje vaío el campo apellido paterno.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtPaterno.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("No deje vaío el campo nombre.".ToUpper(), "..:: advertencia del sistema ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No deje vaío el campo nombre.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNombre.Focus();
                 return false;
             }
@@ -284,6 +338,14 @@ namespace SADI.UserControls
                 this.Constraseña = txtContraseña.Text;
             }
         }
+        // Si cambia el valor en el control
+        private void txtEmail_Leave_1(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtEmail.Text))
+            {
+                _email = txtEmail.Text;// Asignar el valor de correo electrónico
+            }
+        }
         // Método para Llenar el combo Jerarquías
         private void LLenarJerarquias()
         {
@@ -323,6 +385,19 @@ namespace SADI.UserControls
                 }
             }
         }
+        // Método para Llenar el Combo Seccion
+        private void LLenarSeccion()
+        {
+            if(_seccion != null)// Que no esté vacia la tabla
+            {
+                if(_seccion.Rows.Count > 0)// Que contenga al menos 1 registro
+                {
+                    cboSeccion.DataSource = _seccion;
+                    cboSeccion.ValueMember = "Id";
+                    cboSeccion.DisplayMember = "Seccion";
+                }
+            }
+        }
         /// <summary>
         /// Método para Limpiar el Control Usuario
         /// </summary>
@@ -333,6 +408,7 @@ namespace SADI.UserControls
             txtMaterno.Text = string.Empty;// Limpiar Campo Maerno
             txtUsuario.Text = string.Empty;// Limpiar Campo Usuario
             txtContraseña.Text = string.Empty;// Limpiar Campo Contraseña
+            txtEmail.Text = string.Empty;// Limpiar el Campo Email
             if (_oopcion == 1)// Si la opción es Ingresar un Nuevo Usuario
             {
                 chkEstatus.Enabled = false;
@@ -366,6 +442,14 @@ namespace SADI.UserControls
             if (cboUnidadAdmva.SelectedValue.ToString() != "System.Data.DataRowView")
             {
                 _idUnidadAdmva = (int)cboUnidadAdmva.SelectedValue;
+            }
+        }
+        // Cambio de Valor Seleccionado en ComboBox Sección
+        private void cboSeccion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idSeccion = (string)cboSeccion.SelectedValue;
             }
         }
         // Cambio de valor CheckBox Estatus
@@ -406,6 +490,7 @@ namespace SADI.UserControls
                                 txtMaterno.Text = (!string.IsNullOrEmpty(_materno) ? _materno : string.Empty); // Asignar Materno
                                 txtUsuario.Text = _usuario;//Asignar Usuario
                                 txtContraseña.Text = _contraseña;// Asignar contraseña
+                                txtEmail.Text = _email;// Asignar el correo electrónico
                                 chkEstatus.Checked = _estatus;// Asignar Estatus
                                 cboJerarquia.SelectedValue = _idJerarquia;// Indicarle la Jerarquía
                                 cboSubFondo.SelectedValue = _idSubFondo;// Indicarle el SubFondo
@@ -442,14 +527,16 @@ namespace SADI.UserControls
                                 txtUsuario.Enabled = false;//Deshabilitar el control
                                 txtContraseña.Text = _contraseña;// Asignar contraseña
                                 txtContraseña.Enabled = false;// Deshabilitar el control
+                                txtEmail.Text = _email;// Asignar el correo electrónico
+                                txtEmail.Enabled = false;//Deshabilitar el control
                                 chkEstatus.Checked = _estatus;// Asignar Estatus
                                 chkEstatus.Enabled = false;//Deshabilitar el control
                                 cboJerarquia.SelectedValue = _idJerarquia;// Indicarle la Jerarquía
                                 cboJerarquia.Enabled = false;// Inhabilitar Combo
                                 cboSubFondo.SelectedValue = _idSubFondo;// Indicarle el SubFondo
-                                cboSubFondo.Enabled = false;
+                                cboSubFondo.Enabled = false;// Inhabilitar control
                                 cboUnidadAdmva.SelectedValue = _idUnidadAdmva;// Indicarle la Unidad Adsministrativa
-                                cboUnidadAdmva.Enabled = false;
+                                cboUnidadAdmva.Enabled = false;// Inhabilitar control
                                 return true;
                             }
 
@@ -477,5 +564,7 @@ namespace SADI.UserControls
                 return false;
             }
         }
+
+       
     }
 }

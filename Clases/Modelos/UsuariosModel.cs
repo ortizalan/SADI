@@ -31,6 +31,8 @@ namespace SADI.Clases.Modelos {
 		private UnidadesAdmvasModel _unidadAdmva;
 		private FondosModel _fondo;
 		private SubFondosModel _subfondo;
+        private SeccionesModel _seccion;
+        private string _email;
 		private string _usuario;
 
 		/// <summary>
@@ -38,13 +40,17 @@ namespace SADI.Clases.Modelos {
 		/// </summary>
 		/// <param name="u">Objeto del Tipo Usuarios</param>
 		public UsuariosModel(UsuariosModel u){
-
+         
 		}
-
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
 		public UsuariosModel(){
 
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~UsuariosModel(){
 
 		}
@@ -122,18 +128,36 @@ namespace SADI.Clases.Modelos {
 			set { _usuario = value; }
 		}
         /// <summary>
-        /// 
+        /// Acceso a la Propiedad Fondo
         /// </summary>
         public FondosModel Fondo
         {
             get { return _fondo; }
             set { _fondo = value; }
         }
-
+        /// <summary>
+        /// Acceso a la Propiedad SubFondo
+        /// </summary>
         public SubFondosModel SubFondo
         {
             get { return _subfondo; }
             set { _subfondo = value; }
+        }
+        /// <summary>
+        /// Acceso a la Propiedad Email
+        /// </summary>
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; }
+        }
+        /// <summary>
+        /// Acceso a la Propiedad Sección
+        /// </summary>
+        public SeccionesModel Seccion
+        {
+            get { return _seccion; }
+            set { _seccion = value; }
         }
 	}//end UsuariosModel
 
