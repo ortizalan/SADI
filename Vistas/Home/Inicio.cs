@@ -26,7 +26,14 @@ namespace SADI
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Constructor de la Forma
+        /// </summary>
+        /// <param name="u">Objeto del tipo UsuariosModel</param>
+        public Inicio(UsuariosModel u)
+        {
+            InitializeComponent();
+        }
         private void Inicio_Load(object sender, EventArgs e)
         {
             mUser.Id = 1;
@@ -62,5 +69,7 @@ namespace SADI
                  "nombre del Dominio : " + Utilerias.NombreDominio + "\n\n" + 
                  "usuario de Dominio : " + Utilerias.UserDomain);
         }
+
+
     }
 }

@@ -34,12 +34,15 @@
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.cmdIN = new System.Windows.Forms.Button();
             this.cmdOUT = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 85);
+            this.label1.Location = new System.Drawing.Point(77, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 0;
@@ -48,7 +51,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 121);
+            this.label2.Location = new System.Drawing.Point(52, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 1;
@@ -56,32 +59,34 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(166, 82);
+            this.txtUsuario.Location = new System.Drawing.Point(154, 72);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(148, 20);
             this.txtUsuario.TabIndex = 2;
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(166, 118);
+            this.txtContraseña.Location = new System.Drawing.Point(154, 108);
             this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.PasswordChar = '▒';
             this.txtContraseña.Size = new System.Drawing.Size(148, 20);
             this.txtContraseña.TabIndex = 3;
             // 
             // cmdIN
             // 
             this.cmdIN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdIN.Location = new System.Drawing.Point(268, 189);
+            this.cmdIN.Location = new System.Drawing.Point(226, 214);
             this.cmdIN.Name = "cmdIN";
             this.cmdIN.Size = new System.Drawing.Size(120, 60);
             this.cmdIN.TabIndex = 4;
             this.cmdIN.Text = ":: INGRESAR ::";
             this.cmdIN.UseVisualStyleBackColor = true;
+            this.cmdIN.Click += new System.EventHandler(this.cmdIN_Click);
             // 
             // cmdOUT
             // 
             this.cmdOUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdOUT.Location = new System.Drawing.Point(392, 189);
+            this.cmdOUT.Location = new System.Drawing.Point(350, 214);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(120, 60);
             this.cmdOUT.TabIndex = 5;
@@ -89,11 +94,36 @@
             this.cmdOUT.UseVisualStyleBackColor = true;
             this.cmdOUT.Click += new System.EventHandler(this.cmdOUT_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::SADI.Properties.Resources.login_user;
+            this.pictureBox1.Location = new System.Drawing.Point(330, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(130, 126);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(40, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(402, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "INGRESE USUARIO Y CONTRASEÑA DEL SISTEMA";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 261);
+            this.ClientSize = new System.Drawing.Size(482, 286);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.cmdIN);
             this.Controls.Add(this.txtContraseña);
@@ -105,6 +135,7 @@
             this.Name = "Login";
             this.ShowIcon = false;
             this.Text = ":: INGRESE AL SISTEMA ::";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,5 +149,7 @@
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Button cmdIN;
         private System.Windows.Forms.Button cmdOUT;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -33,7 +33,6 @@
             // 
             // usuariosControl1
             // 
-            this.usuariosControl1.Constraseña = null;
             this.usuariosControl1.Location = new System.Drawing.Point(12, 3);
             this.usuariosControl1.Materno = null;
             this.usuariosControl1.Name = "usuariosControl1";

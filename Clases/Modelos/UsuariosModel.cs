@@ -24,14 +24,14 @@ namespace SADI.Clases.Modelos {
 		private string _contraseña;
 		private bool _estatus;
 		private int _id;
-		private JerarquiasModel _jerarquia;
+		private JerarquiasModel _jerarquia = new JerarquiasModel();
 		private string _materno;
 		private string _nombre;
 		private string _paterno;
-		private UnidadesAdmvasModel _unidadAdmva;
-		private FondosModel _fondo;
-		private SubFondosModel _subfondo;
-        private SeccionesModel _seccion;
+		private UnidadesAdmvasModel _unidadAdmva = new UnidadesAdmvasModel();
+		private FondosModel _fondo = new FondosModel();
+		private SubFondosModel _subfondo = new SubFondosModel();
+        private SeccionesModel _seccion = new SeccionesModel();
         private string _email;
 		private string _usuario;
 
@@ -54,7 +54,6 @@ namespace SADI.Clases.Modelos {
 		~UsuariosModel(){
 
 		}
-		
 
 		/// <summary>
 		/// Acceder a la Propiedad Contraseña

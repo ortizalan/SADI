@@ -49,7 +49,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"opc", "3"));// Opción para actualizar dentro del procedimiento
                         lista.Add(new Parametros(@"id", u.Id.ToString()));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
                         lista.Add(new Parametros(@"usr", u.Usuario));// Nombre de Usuario
-                        lista.Add(new Parametros(@"pwd", u.Contraseña));// Contraseña del Usuario
+                        lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));// Contraseña del Usuario
                         lista.Add(new Parametros(@"nom", u.Nombre));// Nombre del Usuario
                         lista.Add(new Parametros(@"pat", u.Paterno));// Apellido Paterno del Usuario
                         lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
@@ -190,7 +190,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"opc", "2"));// Opción para Ingresar Registro dentro del procedimiento
                         lista.Add(new Parametros(@"id", u.Id.ToString()));
                         lista.Add(new Parametros(@"usr", u.Usuario));
-                        lista.Add(new Parametros(@"pwd", u.Contraseña));
+                        lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));
                         lista.Add(new Parametros(@"nom", u.Nombre));
                         lista.Add(new Parametros(@"pat", u.Paterno));
                         lista.Add(new Parametros(@"mat", (!string.IsNullOrEmpty(u.Materno) ? u.Materno : string.Empty)));// Validar que la variable materno no sea nula
@@ -223,6 +223,134 @@ namespace SADI.Clases.Controladores {
             else
             { return false; }// No es del mismo tipo
 		}
+        /// <summary>
+        /// Mëtodo para la Validación de Usuario registrado en el Sistema
+        /// </summary>
+        /// <param name="o">Objeto del tipo UsuariosModel</param>
+        /// <returns>Boleano</returns>
+        public bool validarUsuario(object o)
+        {
+            if (o.GetType() == typeof(UsuariosModel))// Avlidar que el Objeto sea del tipo UsuariosModel
+            {
+                var u = (UsuariosModel)o;// Castear el Objeto al Tipo UsuariosModel
+
+                if (Abrir())// Intentar abrir la conexión
+                {
+                    // Intento Exitoso
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Arreglo del Tipo Parámetros
+                        lista.Add(new Parametros(@"opc","1"));// OPcion 1 dentro del procedimiento
+                        lista.Add(new Parametros(@"usr", u.Usuario)); // Enviar el usuario
+                        lista.Add(new Parametros(@"pwd", u.Contraseña));// Enviar la Contraseña
+
+                        string proce = "sp_usuarios_seleccion";// Nombre del Procedimiento
+
+                        if (ConsultarProcedimiento(proce, lista))
+                        { return true; }// Si esxiste el Usuario
+                        else
+                        { return false; }// NO existe el Usuario
+                    }
+                    catch (Exception e)// Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Atrapar el error
+                        return false; // indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else
+                { return false; }// No se pudo Abrir la conexión, consultar Error
+            }
+            else
+            { return false; }// No son del mismo tipo
+        }
+        /// <summary>
+        /// Validar Constrasela del Usuario
+        /// </summary>
+        /// <param name="o">Objeto del Tipo UsuariosModel</param>
+        /// <returns>Boleano</returns>
+        public bool validarContraseña(object o)
+        {
+            if(o.GetType() == typeof(UsuariosModel))// Validar que el objeto sea del tipo UsuariosModel
+            {
+                var u = (UsuariosModel)o; // Castear el Modelo a la Variable
+
+                if(Abrir())// Intentar abrir la conexión
+                {
+                    // Intento exitoso
+                   try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Crear una lista de parámetros
+                        lista.Add(new Parametros(@"opc","2"));// Indicarle la opción al procedimiento
+                        lista.Add(new Parametros(@"usr", u.Usuario));// Enviar el Usuario
+                        lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));// Enviar la Constraseña
+
+                        string proce = "sp_usuarios_seleccion";// Indicar el Procedimiento
+
+                        if(ConsultarProcedimiento(proce,lista))// Intentar realizar la consulta
+                        { return true; }// Consulta Exitosa
+                        else
+                        { return false; }// Consulta NO Exitosa
+
+                    }
+                    catch(Exception e)// Atrapar el error
+                    {
+                        Error = e.Message.ToString(); // Guardar el Error
+                        return false; // Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cerrar la conexión
+                }
+                else// No se pudo establecer la conexión
+                {
+                    return false; // Consultar Error
+                }
+            }
+            else// No es del mismo tipo
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Validar Obtener el Id y Estatus del Usuario
+        /// </summary>
+        /// <param name="o">Objeto del tipo UsuariosModel</param>
+        /// <returns>Boleano</returns>
+        public bool obtenerId_Estatus(object o)
+        {
+            if(o.GetType() == typeof(UsuariosModel))// Validar que el Objeto sea del Modelo Correcto
+            {
+                var u = (UsuariosModel)o;// Casteo del Modelo Usuario a la variable "u"
+
+                if(Abrir())// Intentar Abrir la Coexión
+                {
+                    // Intento Exitoso
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();// Lista de Parámetros
+                        lista.Add(new Parametros(@"opc","3"));// Indicarle la Opción al Procedimiento
+                        lista.Add(new Parametros(@"usr",u.Usuario));// Enviar el Usuario
+                        lista.Add(new Parametros(@"pwd",Seguridad.Encriptar(u.Contraseña)));// Enviar la contraseña
+
+                        string proce = "sp_usuarios_seleccion";
+
+                        if(ConsultarProcedimiento(proce,lista))// Intentar Cosnultar el Procedimiento
+                        { return true; }// Intento Exitoso
+                        else
+                        { return false; }// Intento NO Exitoso
+                    }
+                    catch(Exception e)// Atrapar el error
+                    {
+                        Error = e.Message.ToString(); // Guardar el Error
+                        return false;// Indicar que existe el error
+                    }
+                    finally { Cerrar(); }// Cwerrar Conexión
+                }
+                else
+                { return false; }// Intento NO Exitoso, ver Error
+            }
+            else
+            { return false; }// No es del mismo tipo que el modelo
+        }
 
         public bool PruebaTablaTemp()
         {

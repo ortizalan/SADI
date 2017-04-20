@@ -19,7 +19,7 @@ namespace SADI.Clases.Modelos {
 	/// </summary>
 	public class SeccionesModel {
 
-		private int _id;
+		private string _id;
 		private string _seccion;
         /// <summary>
         /// Construcrtor de la Clase que no recibe parámetros
@@ -33,11 +33,13 @@ namespace SADI.Clases.Modelos {
 		/// </summary>
 		/// <param name="id"></param>
 		/// <param name="secc"></param>
-		public SeccionesModel(int id, string secc){
+		public SeccionesModel(string id, string secc){
             this.Id = id;
             this.Seccion = secc;
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~SeccionesModel(){
 
 		}
@@ -45,7 +47,7 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Acceder a la Propiedad Id
 		/// </summary>
-		public int Id{
+		public string Id{
             get { return _id; }
             set { _id = value; }
 		}

@@ -149,7 +149,7 @@ namespace SADI.UserControls
         /// <summary>
         /// Acceder a la Propiedad Contraseña
         /// </summary>
-        public string Constraseña
+        public string Contraseña
         {
             get { return _contraseña; }
             set
@@ -335,7 +335,7 @@ namespace SADI.UserControls
         {
             if (!string.IsNullOrEmpty(txtContraseña.Text))
             {
-                this.Constraseña = txtContraseña.Text;
+                this.Contraseña = txtContraseña.Text;
             }
         }
         // Si cambia el valor en el control

@@ -21,6 +21,7 @@ namespace SADI.Clases
         private static string _compname = Dns.GetHostName();// Propiedad del Nombre del Equipo
         private static WindowsIdentity _winUser = WindowsIdentity.GetCurrent();// Obtener los datos de Sesión de Windows
         private static string _userdomain = _winUser.Name;// Usuario de Dominio
+        private static int _idusuario;// Id del usuario del sistema SADI
            
         private static string _dominio = IPGlobalProperties.GetIPGlobalProperties().DomainName;// Nombre del Dominio
         private static IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// Obtener la Información del Host del Dominio
@@ -85,6 +86,14 @@ namespace SADI.Clases
 
             return bar;
 
+        }
+        /// <summary>
+        /// Identificador del Usuario del SIstema SADI
+        /// </summary>
+        public static int IdUsuario
+        {
+            get { return _idusuario; }
+            set { _idusuario = value; }
         }
     }
 

@@ -155,10 +155,10 @@
     <Compile Include="Clases\Modelos\ValoresDoctalesModel.cs" />
     <Compile Include="Clases\Parametros.cs" />
     <Compile Include="Clases\Utilerias.cs" />
-    <Compile Include="Inicio.cs">
+    <Compile Include="Vistas\Home\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Inicio.Designer.cs">
+    <Compile Include="Vistas\Home\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -168,6 +168,12 @@
     </Compile>
     <Compile Include="UserControls\UsuariosControl.Designer.cs">
       <DependentUpon>UsuariosControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Home\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Home\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Usuarios\AgregarUsuarios.cs">
       <SubType>Form</SubType>
@@ -181,7 +187,7 @@
     <Compile Include="Vistas\Usuarios\modificarUsuariocs.Designer.cs">
       <DependentUpon>modificarUsuariocs.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Inicio.resx">
+    <EmbeddedResource Include="Vistas\Home\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -196,6 +202,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\UsuariosControl.resx">
       <DependentUpon>UsuariosControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Home\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Usuarios\AgregarUsuarios.resx">
       <DependentUpon>AgregarUsuarios.cs</DependentUpon>
@@ -257,6 +266,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,12 +15,12 @@ namespace SADI.Vistas.Usuarios
 {
     public partial class AgregarUsuarios : Form
     {
-        UsuariosModel ModelUsr = new UsuariosModel();// Instancia del Modelo de Usuario
-        UsuariosController CtrllUsr = new UsuariosController(); // Instancia del Controlador Usuario
-        JerarquiasController CtrllJerarquia = new JerarquiasController(); // Instancia del controlador Jerarquías
-        SubFondosController CtrllSubF = new SubFondosController(); // Instancia del Cntrolador SubFondos
-        UnidadesAdmvasController CtrllUniAdm = new UnidadesAdmvasController(); // Instancia del Controlador UnidadAdmva
-        SeccionesController CtrllSeccion = new SeccionesController();// Instancia del Controlador Secciones
+        UsuariosModel um = new UsuariosModel();// Instancia del Modelo de Usuario
+        UsuariosController uc = new UsuariosController(); // Instancia del Controlador Usuario
+        JerarquiasController jc = new JerarquiasController(); // Instancia del controlador Jerarquías
+        SubFondosController sfc = new SubFondosController(); // Instancia del Cntrolador SubFondos
+        UnidadesAdmvasController uac = new UnidadesAdmvasController(); // Instancia del Controlador UnidadAdmva
+        SeccionesController sc = new SeccionesController();// Instancia del Controlador Secciones
 
         /// <summary>
         /// Constructor de la Forma
@@ -32,7 +32,7 @@ namespace SADI.Vistas.Usuarios
 
         private void AgregarUsuarios_Load(object sender, EventArgs e)
         {
-            this.LLenasCombos();// LLenar los combos
+            this.LLenarCombos();// LLenar los combos
         }
         /// <summary>
         /// Salir de la Forma
@@ -50,13 +50,13 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable Jerarquias()
         {
-            if(CtrllJerarquia.ConsultarRegistros())
+            if(jc.ConsultarRegistros())
             {
-                return CtrllJerarquia.Tabla;
+                return jc.Tabla;
             }
             else
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + CtrllJerarquia.Error,"..:: error en base de datos ::..".ToUpper() ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + jc.Error,"..:: error en base de datos ::..".ToUpper() ,MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -66,13 +66,13 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable SubFondo()
         {
-            if(CtrllSubF.ConsultarRegistros())
+            if(sfc.ConsultarRegistros())
             {
-                return CtrllSubF.Tabla;
+                return sfc.Tabla;
             }
             else
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + CtrllSubF.Error, "..:: error en base de datos ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + sfc.Error, "..:: error en base de datos ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -82,13 +82,13 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable UnidadAdmva()
         {
-            if(CtrllUniAdm.ConsultarRegistros())
+            if(uac.ConsultarRegistros())
             {
-                return CtrllUniAdm.Tabla;
+                return uac.Tabla;
             }
             else
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + CtrllUniAdm.Error, "..:: error en base de datos ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + uac.Error, "..:: error en base de datos ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -98,13 +98,13 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable Secciones()
         {
-            if(CtrllSeccion.ConsultarRegistros())
+            if(sc.ConsultarRegistros())
             {
-                return CtrllSeccion.Tabla;
+                return sc.Tabla;
             }
             else
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + CtrllSeccion.Error, "..:: error en base de datos ::..".ToUpper()
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + sc.Error, "..:: error en base de datos ::..".ToUpper()
                     ,MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return null;
             }
@@ -112,7 +112,7 @@ namespace SADI.Vistas.Usuarios
         /// <summary>
         /// Método para el Llenado de los COmbos
         /// </summary>
-        private void LLenasCombos()
+        private void LLenarCombos()
         {
             usuariosControl1.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
             usuariosControl1.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
@@ -120,28 +120,72 @@ namespace SADI.Vistas.Usuarios
             usuariosControl1.Seccion = this.Secciones(); // Llenar el combo Secciones en el control
         }
 
+        private void LlenarObjetoUsuario()
+        {
+            usuariosControl1.CargaDeDatosControl();
+            um.Nombre = usuariosControl1.Nombre;
+            um.Paterno = usuariosControl1.Paterno;
+            um.Materno = usuariosControl1.Materno;
+            um.Usuario = usuariosControl1.Usuario;
+            um.Contraseña = Seguridad.Encriptar(usuariosControl1.Contraseña);
+            um.Email = usuariosControl1.Email;
+            um.Jerarquia.Id = usuariosControl1.IdJerarquia;
+            um.Fondo.Id = 63;
+            um.SubFondo.Id = usuariosControl1.IdSubFondo;
+            um.UnidadAdmva.Id = usuariosControl1.IdUnidadAdmva;
+            um.Seccion.Id = usuariosControl1.IdSeccion;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if(usuariosControl1.ValidarControl())
             {
-                // Probando el cifrado de la contraseña
-                string cifrado = Seguridad.Encriptar(usuariosControl1.Constraseña);
-                MessageBox.Show("el mensaje cifrado es :".ToUpper() + "\n" + cifrado +
-                    "\n\n" + "y descifrado es :" + "\n" + Seguridad.Desencriptar(cifrado));
+                #region pruebas
+                //// Probando el cifrado de la contraseña
+                //string cifrado = Seguridad.Encriptar(usuariosControl1.Constraseña);
+                //MessageBox.Show("el mensaje cifrado es :".ToUpper() + "\n" + cifrado +
+                //    "\n\n" + "y descifrado es :" + "\n" + Seguridad.Desencriptar(cifrado));
 
-                usuariosControl1.CargaDeDatosControl();
-                MessageBox.Show("datos en el control :".ToUpper() + "\n\n" +
-                    "nombre :" + usuariosControl1.Nombre + "\n" +
-                    "paterno :" + usuariosControl1.Paterno + "\n" +
-                    "materno :" + usuariosControl1.Materno + "\n" +
-                    "usuario :" + usuariosControl1.Usuario + "\n" +
-                    "email :" + usuariosControl1.Email + "\n" +
-                    "Estatus :" + usuariosControl1.Estatus + "\n" +
-                    "jerarquia :" + usuariosControl1.IdJerarquia.ToString() + "\n" +
-                    "subfondo :" + usuariosControl1.IdSubFondo.ToString() + "\n" +
-                    "Unidad Administrativa:" + usuariosControl1.IdUnidadAdmva.ToString() + "\n" +
-                    "Sección :" + usuariosControl1.IdSeccion.ToString());
+                //usuariosControl1.CargaDeDatosControl();
+                //MessageBox.Show("datos en el control :".ToUpper() + "\n\n" +
+                //    "nombre :" + usuariosControl1.Nombre + "\n" +
+                //    "paterno :" + usuariosControl1.Paterno + "\n" +
+                //    "materno :" + usuariosControl1.Materno + "\n" +
+                //    "usuario :" + usuariosControl1.Usuario + "\n" +
+                //    "email :" + usuariosControl1.Email + "\n" +
+                //    "Estatus :" + usuariosControl1.Estatus + "\n" +
+                //    "jerarquia :" + usuariosControl1.IdJerarquia.ToString() + "\n" +
+                //    "subfondo :" + usuariosControl1.IdSubFondo.ToString() + "\n" +
+                //    "Unidad Administrativa:" + usuariosControl1.IdUnidadAdmva.ToString() + "\n" +
+                //    "Sección :" + usuariosControl1.IdSeccion.ToString());
+                #endregion
+
+                this.LlenarObjetoUsuario();
+
+                if(uc.IngresarRegisto(um))
+                {
+                    DialogResult r;
+                   r= MessageBox.Show("se ingresó el registro correctamente,".ToUpper() + 
+                        "\n" + "¿desea ingresar otro usuario?".ToUpper(),
+                        "..:: mensaja desde agreagar usuario ::.." ,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(r == DialogResult.Yes)
+                    {
+                        usuariosControl1.LimpiarControl();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ocurrió el siguiente error :".ToUpper() +
+                        "\n" + uc.Error,"..:: mensaje desde agregar usuario ::..".ToUpper(),
+                        MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
             }
         }
+
     }
 }

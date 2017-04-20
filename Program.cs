@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using SADI.Vistas.Home;
 
 namespace SADI
 {
@@ -17,7 +17,15 @@ namespace SADI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Inicio());
+
+            //Inicio inicio = new Inicio();
+            //Login logon = new Login();
+            //DialogResult result = logon.ShowDialog();
+
+            //if (result == DialogResult.OK)
+            //{
+                Application.Run(new Inicio());
+            //}
         }
     }
 }

@@ -58,7 +58,7 @@
             // 
             // usuariosControl1
             // 
-            this.usuariosControl1.Constraseña = null;
+            this.usuariosControl1.Contraseña = null;
             this.usuariosControl1.Email = null;
             this.usuariosControl1.Estatus = false;
             this.usuariosControl1.IdJerarquia = 0;
