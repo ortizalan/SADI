@@ -105,6 +105,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"subf", string.Empty));
                         lista.Add(new Parametros(@"unidad", string.Empty));
                         lista.Add(new Parametros(@"jera", string.Empty));
+                        lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", string.Empty));
 
                         string proce = "sp_usuarios_crud";// Nombre del procedimiento
@@ -151,6 +152,7 @@ namespace SADI.Clases.Controladores {
                     lista.Add(new Parametros(@"subf", string.Empty));
                     lista.Add(new Parametros(@"unidad", string.Empty));
                     lista.Add(new Parametros(@"jera", string.Empty));
+                    lista.Add(new Parametros(@"email", string.Empty));//Si cuenta con Dirección email, si no campo vació
                     lista.Add(new Parametros(@"est", string.Empty));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
 
                     string proce = "sp_usuarios_crud";

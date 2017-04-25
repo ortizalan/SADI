@@ -40,9 +40,9 @@ namespace SADI.Vistas.Home
                 {
                     if(uc.validarContraseña(um))
                     {
-                        if(uc.obtenerId_Estatus(uc))
+                        if (uc.obtenerId_Estatus(um))
                         {
-                            if((bool)uc.Tabla.Rows[0][1])
+                            if ((bool)uc.Tabla.Rows[0][1])
                             {
                                 Utilerias.IdUsuario = (int)uc.Tabla.Rows[0][0];
                                 this.DialogResult = DialogResult.OK;
@@ -51,10 +51,22 @@ namespace SADI.Vistas.Home
                             {
                                 MessageBox.Show("usuario desactivado.".ToUpper(),
                                     "..:: mensaje del sistema ::..".ToUpper(),
-                                    MessageBoxButtons.OK,MessageBoxIcon.Information);
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
+                        else
+                        {
+                            MessageBox.Show("Ocurrió el siguiente error :" +
+                                "\n" + uc.Error, "..:: mensaje desde el login del sistema ::..".ToUpper(),
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió el siguiente error :" +
+                        "\n" + uc.Error,"..:: mensaje desde el login del sistema ::..".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -66,11 +78,11 @@ namespace SADI.Vistas.Home
         {
             if(!string.IsNullOrEmpty(txtUsuario.Text))// Qué no esté vacío el campo de usuario
             {
-                if(txtUsuario.Text.Length > 6)// Usuario no puede ser menor a 6 caracteres
+                if(txtUsuario.Text.Length >= 6)// Usuario no puede ser menor a 6 caracteres
                 {
-                    if(string.IsNullOrEmpty(txtContraseña.Text))//Que no esté vacío el campo de contraseña
+                    if(!string.IsNullOrEmpty(txtContraseña.Text))//Que no esté vacío el campo de contraseña
                     {
-                        if(txtContraseña.Text.Length > 6)// si contraseña es menor a 6 Caracteres
+                        if(txtContraseña.Text.Length >= 6)// si contraseña es menor a 6 Caracteres
                         {
                             return true;
                         }

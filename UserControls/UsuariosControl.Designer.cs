@@ -30,6 +30,8 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.cboJerarquia = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.chkEstatus = new System.Windows.Forms.CheckBox();
@@ -44,16 +46,14 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cboSeccion = new System.Windows.Forms.ComboBox();
             this.cboUnidadAdmva = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cboSubFondo = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cboSeccion = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -92,6 +92,23 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "DATOS DEL SISTEMA :";
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(112, 82);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(136, 20);
+            this.txtEmail.TabIndex = 2;
+            this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave_1);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 85);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(45, 13);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "EMAIL :";
             // 
             // cboJerarquia
             // 
@@ -226,10 +243,30 @@
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(311, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(383, 206);
+            this.groupBox3.Size = new System.Drawing.Size(510, 206);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DATOS ADMINISTRATIVOS :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(47, 138);
+            this.label12.Name = "label12";
+            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label12.Size = new System.Drawing.Size(60, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "SECCIÓN :";
+            // 
+            // cboSeccion
+            // 
+            this.cboSeccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSeccion.FormattingEnabled = true;
+            this.cboSeccion.Location = new System.Drawing.Point(130, 135);
+            this.cboSeccion.Name = "cboSeccion";
+            this.cboSeccion.Size = new System.Drawing.Size(367, 21);
+            this.cboSeccion.TabIndex = 5;
+            this.cboSeccion.SelectedIndexChanged += new System.EventHandler(this.cboSeccion_SelectedIndexChanged);
             // 
             // cboUnidadAdmva
             // 
@@ -237,7 +274,7 @@
             this.cboUnidadAdmva.FormattingEnabled = true;
             this.cboUnidadAdmva.Location = new System.Drawing.Point(130, 100);
             this.cboUnidadAdmva.Name = "cboUnidadAdmva";
-            this.cboUnidadAdmva.Size = new System.Drawing.Size(238, 21);
+            this.cboUnidadAdmva.Size = new System.Drawing.Size(367, 21);
             this.cboUnidadAdmva.TabIndex = 1;
             this.cboUnidadAdmva.SelectedIndexChanged += new System.EventHandler(this.cboUnidadAdmva_SelectedIndexChanged);
             // 
@@ -257,7 +294,7 @@
             this.cboSubFondo.FormattingEnabled = true;
             this.cboSubFondo.Location = new System.Drawing.Point(130, 63);
             this.cboSubFondo.Name = "cboSubFondo";
-            this.cboSubFondo.Size = new System.Drawing.Size(238, 21);
+            this.cboSubFondo.Size = new System.Drawing.Size(367, 21);
             this.cboSubFondo.TabIndex = 0;
             this.cboSubFondo.SelectedIndexChanged += new System.EventHandler(this.cboSubFondo_SelectedIndexChanged);
             // 
@@ -289,43 +326,6 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "FONDO :";
             // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(112, 82);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(136, 20);
-            this.txtEmail.TabIndex = 2;
-            this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave_1);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 85);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(45, 13);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "EMAIL :";
-            // 
-            // cboSeccion
-            // 
-            this.cboSeccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSeccion.FormattingEnabled = true;
-            this.cboSeccion.Location = new System.Drawing.Point(130, 135);
-            this.cboSeccion.Name = "cboSeccion";
-            this.cboSeccion.Size = new System.Drawing.Size(238, 21);
-            this.cboSeccion.TabIndex = 5;
-            this.cboSeccion.SelectedIndexChanged += new System.EventHandler(this.cboSeccion_SelectedIndexChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(47, 138);
-            this.label12.Name = "label12";
-            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label12.Size = new System.Drawing.Size(60, 13);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "SECCIÓN :";
-            // 
             // UsuariosControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,7 +333,8 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "UsuariosControl";
-            this.Size = new System.Drawing.Size(718, 344);
+            this.Size = new System.Drawing.Size(831, 344);
+            this.Load += new System.EventHandler(this.UsuariosControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

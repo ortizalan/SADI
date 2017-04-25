@@ -37,7 +37,7 @@
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAgregar.Location = new System.Drawing.Point(459, 268);
+            this.btnAgregar.Location = new System.Drawing.Point(574, 284);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(125, 57);
             this.btnAgregar.TabIndex = 3;
@@ -48,7 +48,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(584, 268);
+            this.btnSalir.Location = new System.Drawing.Point(699, 284);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(125, 57);
             this.btnSalir.TabIndex = 0;
@@ -71,7 +71,7 @@
             this.usuariosControl1.Nombre = null;
             this.usuariosControl1.Opcion = 0;
             this.usuariosControl1.Paterno = null;
-            this.usuariosControl1.Size = new System.Drawing.Size(718, 336);
+            this.usuariosControl1.Size = new System.Drawing.Size(822, 341);
             this.usuariosControl1.TabIndex = 4;
             this.usuariosControl1.Usuario = null;
             // 
@@ -81,15 +81,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAgregar;
-            this.ClientSize = new System.Drawing.Size(722, 337);
+            this.ClientSize = new System.Drawing.Size(837, 353);
+            this.ControlBox = false;
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.usuariosControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AgregarUsuarios";
             this.ShowIcon = false;
-            this.Text = "AgregarUsuarios";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+            this.Text = "Agregar Usuarios";
             this.Load += new System.EventHandler(this.AgregarUsuarios_Load);
             this.ResumeLayout(false);
 

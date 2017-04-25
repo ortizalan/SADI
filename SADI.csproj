@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Oxygen-Icons.org-Oxygen-Apps-system-file-manager.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Diagram, Version=17.2.0.0, Culture=neutral, PublicKeyToken=dfdba7ce0555ea8b, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.Diagram.17.02.0.0\lib\net40\Aspose.Diagram.dll</HintPath>
@@ -124,8 +127,12 @@
     <Compile Include="Clases\Controladores\ClasificacionesController.cs" />
     <Compile Include="Clases\Controladores\ContenidoCajasController.cs" />
     <Compile Include="Clases\Controladores\DigitalizacionesController.cs" />
+    <Compile Include="Clases\Controladores\EstantesController.cs" />
+    <Compile Include="Clases\Controladores\FilasController.cs" />
     <Compile Include="Clases\Controladores\FondosController.cs" />
     <Compile Include="Clases\Controladores\JerarquiasController.cs" />
+    <Compile Include="Clases\Controladores\LadosController.cs" />
+    <Compile Include="Clases\Controladores\NivelesController.cs" />
     <Compile Include="Clases\Controladores\RegistrosController.cs" />
     <Compile Include="Clases\Controladores\SeccionesController.cs" />
     <Compile Include="Clases\Controladores\SeriesController.cs" />
@@ -141,13 +148,19 @@
     <Compile Include="Clases\Modelos\ClasificacionesModel.cs" />
     <Compile Include="Clases\Modelos\ContenidoCajasModel.cs" />
     <Compile Include="Clases\Modelos\DigitalizacionesModel.cs" />
+    <Compile Include="Clases\Modelos\EstantesModel.cs" />
+    <Compile Include="Clases\Modelos\FilasModel.cs" />
     <Compile Include="Clases\Modelos\FondosModel.cs" />
     <Compile Include="Clases\Modelos\JerarquiasModel.cs" />
+    <Compile Include="Clases\Modelos\LadosModel.cs" />
     <Compile Include="Clases\Modelos\MovimientosModel.cs" />
+    <Compile Include="Clases\Modelos\NivelesModel.cs" />
+    <Compile Include="Clases\Modelos\PosicionesModel.cs" />
     <Compile Include="Clases\Modelos\RegistrosModel.cs" />
     <Compile Include="Clases\Modelos\SeccionesModel.cs" />
     <Compile Include="Clases\Modelos\SeriesModel.cs" />
     <Compile Include="Clases\Modelos\SubFondosModel.cs" />
+    <Compile Include="Clases\Modelos\SubNivelesModel.cs" />
     <Compile Include="Clases\Modelos\TransferenciasModel.cs" />
     <Compile Include="Clases\Modelos\UnidadesAdmvasModel.cs" />
     <Compile Include="Clases\Modelos\UsuariosModel.cs" />
@@ -155,6 +168,11 @@
     <Compile Include="Clases\Modelos\ValoresDoctalesModel.cs" />
     <Compile Include="Clases\Parametros.cs" />
     <Compile Include="Clases\Utilerias.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Home\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +199,12 @@
     <Compile Include="Vistas\Usuarios\AgregarUsuarios.Designer.cs">
       <DependentUpon>AgregarUsuarios.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Usuarios\listaUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Usuarios\listaUsuarios.Designer.cs">
+      <DependentUpon>listaUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Usuarios\modificarUsuariocs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,14 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="UserControls\UsuariosControl.resx">
       <DependentUpon>UsuariosControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Usuarios\AgregarUsuarios.resx">
       <DependentUpon>AgregarUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Usuarios\listaUsuarios.resx">
+      <DependentUpon>listaUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Usuarios\modificarUsuariocs.resx">
       <DependentUpon>modificarUsuariocs.cs</DependentUpon>
@@ -269,6 +291,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\login_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Files-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add-File-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File-Edit-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File-Block-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\men1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user2-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user2-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user2-search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arrow-Shuffle-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder-Archive-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Oxygen-Icons.org-Oxygen-Apps-system-file-manager.ico" />
+    <None Include="Resources\Box-withFolders-icon.png" />
+    <None Include="Resources\Maps-Worldwide-Location-icon.png" />
+    <Content Include="Treetog-Junior-Document-archive.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

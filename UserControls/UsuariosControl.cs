@@ -52,9 +52,9 @@ namespace SADI.UserControls
         public int Opcion
         {
             get { return _oopcion; }
-            set { _oopcion = value; }
+            set { _oopcion = value; if (value == 1) { chkEstatus.Checked = true; } }
         }
-        /// <summary>
+        /// <summary> 
         /// Asignar los Valores de Jerarquia
         /// </summary>
         public DataTable Jerarquia
@@ -564,7 +564,19 @@ namespace SADI.UserControls
                 return false;
             }
         }
-
-       
+        /// <summary>
+        /// Eventos a Cargar el Control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UsuariosControl_Load(object sender, EventArgs e)
+        {
+            switch(_oopcion)
+            {
+                case 1:
+                    this.chkEstatus.Checked = true;
+                    break;
+            }
+        }
     }
 }

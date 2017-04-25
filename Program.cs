@@ -18,14 +18,14 @@ namespace SADI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Inicio inicio = new Inicio();
-            //Login logon = new Login();
-            //DialogResult result = logon.ShowDialog();
+            Inicio inicio = new Inicio();
+            Login logon = new Login();
+            DialogResult result = logon.ShowDialog();
 
-            //if (result == DialogResult.OK)
-            //{
+            if (result == DialogResult.OK)
+            {
                 Application.Run(new Inicio());
-            //}
+            }
         }
     }
 }

@@ -33,6 +33,7 @@ namespace SADI.Vistas.Usuarios
         private void AgregarUsuarios_Load(object sender, EventArgs e)
         {
             this.LLenarCombos();// LLenar los combos
+            usuariosControl1.Opcion = 1;
         }
         /// <summary>
         /// Salir de la Forma
@@ -127,7 +128,7 @@ namespace SADI.Vistas.Usuarios
             um.Paterno = usuariosControl1.Paterno;
             um.Materno = usuariosControl1.Materno;
             um.Usuario = usuariosControl1.Usuario;
-            um.Contraseña = Seguridad.Encriptar(usuariosControl1.Contraseña);
+            um.Contraseña = usuariosControl1.Contraseña;
             um.Email = usuariosControl1.Email;
             um.Jerarquia.Id = usuariosControl1.IdJerarquia;
             um.Fondo.Id = 63;
