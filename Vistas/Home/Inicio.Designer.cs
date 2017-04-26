@@ -41,6 +41,9 @@
             this.ImprimirInventarioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.pRÉSTAMOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lugaresDisponiblesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignarLugarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buscarCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pRÉSTAMOSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +55,6 @@
             this.seccionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clasificaciónDoctalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lugaresDisponiblesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignarLugarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geoLocalizacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@
             this.ladosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subnivelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pocisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AgregarFilaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +167,24 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(142, 20);
             this.toolStripMenuItem1.Text = "GEOLOCALIZACIÓN";
             // 
+            // lugaresDisponiblesToolStripMenuItem
+            // 
+            this.lugaresDisponiblesToolStripMenuItem.Name = "lugaresDisponiblesToolStripMenuItem";
+            this.lugaresDisponiblesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.lugaresDisponiblesToolStripMenuItem.Text = "Lugares Disponibles";
+            // 
+            // asignarLugarToolStripMenuItem
+            // 
+            this.asignarLugarToolStripMenuItem.Name = "asignarLugarToolStripMenuItem";
+            this.asignarLugarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.asignarLugarToolStripMenuItem.Text = "Asignar Lugar";
+            // 
+            // buscarCajaToolStripMenuItem
+            // 
+            this.buscarCajaToolStripMenuItem.Name = "buscarCajaToolStripMenuItem";
+            this.buscarCajaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.buscarCajaToolStripMenuItem.Text = "Buscar Caja";
+            // 
             // pRÉSTAMOSToolStripMenuItem1
             // 
             this.pRÉSTAMOSToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -251,18 +270,6 @@
             this.clasificaciónDoctalToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.clasificaciónDoctalToolStripMenuItem.Text = "Clasificación Doctal.";
             // 
-            // lugaresDisponiblesToolStripMenuItem
-            // 
-            this.lugaresDisponiblesToolStripMenuItem.Name = "lugaresDisponiblesToolStripMenuItem";
-            this.lugaresDisponiblesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.lugaresDisponiblesToolStripMenuItem.Text = "Lugares Disponibles";
-            // 
-            // asignarLugarToolStripMenuItem
-            // 
-            this.asignarLugarToolStripMenuItem.Name = "asignarLugarToolStripMenuItem";
-            this.asignarLugarToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.asignarLugarToolStripMenuItem.Text = "Asignar Lugar";
-            // 
             // geoLocalizacionToolStripMenuItem
             // 
             this.geoLocalizacionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -278,6 +285,8 @@
             // 
             // filasToolStripMenuItem
             // 
+            this.filasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AgregarFilaMenu});
             this.filasToolStripMenuItem.Name = "filasToolStripMenuItem";
             this.filasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.filasToolStripMenuItem.Text = "Filas";
@@ -312,11 +321,12 @@
             this.pocisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pocisionToolStripMenuItem.Text = "Posicion";
             // 
-            // buscarCajaToolStripMenuItem
+            // AgregarFilaMenu
             // 
-            this.buscarCajaToolStripMenuItem.Name = "buscarCajaToolStripMenuItem";
-            this.buscarCajaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.buscarCajaToolStripMenuItem.Text = "Buscar Caja";
+            this.AgregarFilaMenu.Name = "AgregarFilaMenu";
+            this.AgregarFilaMenu.Size = new System.Drawing.Size(152, 22);
+            this.AgregarFilaMenu.Text = "Agregar";
+            this.AgregarFilaMenu.Click += new System.EventHandler(this.AgregarFilaMenu_Click);
             // 
             // Inicio
             // 
@@ -374,5 +384,6 @@
         private System.Windows.Forms.ToolStripMenuItem ladosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem subnivelesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pocisionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AgregarFilaMenu;
     }
 }

@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class FilasModel
+    /// <summary>
+    /// Clase del Modelo Filas
+    /// </summary>
+    public class FilasModel
     {
         private int _id; // Propiedad de Identificador
         private string _fila;// Descripción de la Fila
         private byte[] _imagen;// Imagen de la fila
-        private Stream ms; // Propiedad para barrer la imagen
-
+        Stream ms;
 
         /// <summary>
         /// Destructor de la Clase
@@ -43,15 +45,16 @@ namespace SADI.Clases.Modelos
         {
             get
             {
-                byte[] _foto = new byte[(int)ms.Length];
-                ms.Position = 0;
-                ms.Read(_foto, 0, (int)ms.Length);
-                return _foto;
+                _imagen = new byte[(int)ms.Length];
+                //ms.Position = 0;
+                //ms.Read(_imagen, 0, (int)ms.Length);
+                return _imagen;
             }
             set
             {
-                ms = new MemoryStream(value.Length);
-                ms.Write(value, 0, value.Length);
+                _imagen = value;
+                //ms = new MemoryStream(_imagen.Length);
+                //ms.Write(value, 0, _imagen.Length);
             }
         }
     }

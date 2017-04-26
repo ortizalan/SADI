@@ -48,7 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Oxygen-Icons.org-Oxygen-Apps-system-file-manager.ico</ApplicationIcon>
+    <ApplicationIcon>Treetog-Junior-Document-archive.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Diagram, Version=17.2.0.0, Culture=neutral, PublicKeyToken=dfdba7ce0555ea8b, processorArchitecture=MSIL">
@@ -133,10 +136,12 @@
     <Compile Include="Clases\Controladores\JerarquiasController.cs" />
     <Compile Include="Clases\Controladores\LadosController.cs" />
     <Compile Include="Clases\Controladores\NivelesController.cs" />
+    <Compile Include="Clases\Controladores\PosicionesController.cs" />
     <Compile Include="Clases\Controladores\RegistrosController.cs" />
     <Compile Include="Clases\Controladores\SeccionesController.cs" />
     <Compile Include="Clases\Controladores\SeriesController.cs" />
     <Compile Include="Clases\Controladores\SubFondosController.cs" />
+    <Compile Include="Clases\Controladores\SubNivelesController.cs" />
     <Compile Include="Clases\Controladores\TransferenciasController.cs" />
     <Compile Include="Clases\Controladores\UnidadesAdmvasController.cs" />
     <Compile Include="Clases\Controladores\UsuariosController.cs" />
@@ -172,6 +177,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CatalogosGeoLocalizaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CatalogosGeoLocalizaControl.Designer.cs">
+      <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasAdd.Designer.cs">
+      <DependentUpon>FilasAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Home\Inicio.cs">
       <SubType>Form</SubType>
@@ -211,6 +228,12 @@
     <Compile Include="Vistas\Usuarios\modificarUsuariocs.Designer.cs">
       <DependentUpon>modificarUsuariocs.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\CatalogosGeoLocalizaControl.resx">
+      <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Filas\FilasAdd.resx">
+      <DependentUpon>FilasAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Home\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
     </EmbeddedResource>
@@ -331,6 +354,7 @@
     <None Include="Resources\Maps-Worldwide-Location-icon.png" />
     <Content Include="Treetog-Junior-Document-archive.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

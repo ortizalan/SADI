@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
 using SADI.Vistas.Usuarios;
+using SADI.Vistas.Filas;
 using SADI.Clases;
 
 using DatosBD;
@@ -84,6 +85,13 @@ namespace SADI
             AgregarUsuarios AddUsr = new AgregarUsuarios();
             AddUsr.MdiParent = this;
             AddUsr.Show();
+        }
+
+        private void AgregarFilaMenu_Click(object sender, EventArgs e)
+        {
+            FilasAdd filafrm = new FilasAdd();
+            filafrm.MdiParent = this;
+            filafrm.Show();
         }
     }
 }

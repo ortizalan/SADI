@@ -8,6 +8,9 @@ using SADI.Clases.Modelos;
 
 namespace SADI.Clases.Controladores
 {
+    /// <summary>
+    /// Objeto Controlador del Modelo Lados
+    /// </summary>
     class LadosController : Metodos
     {
         /// <summary>

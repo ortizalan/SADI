@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class PosicionesModel : FilasModel
+    public class PosicionesModel : FilasModel
     {
         private string _posicion;// Propiedad de la descripcion de la posición
         private LadosModel _lado = new LadosModel();// Propiedad de la identificación del lado

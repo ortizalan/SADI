@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class SubNivelesModel:FilasModel
+    public class SubNivelesModel : FilasModel
     {
         private string _subnivel;//Propiedad de la descripción del SubNivel
         /// <summary>

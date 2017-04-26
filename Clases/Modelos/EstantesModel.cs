@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class EstantesModel : FilasModel
+    public class EstantesModel : FilasModel
     {
         private string _estante;// Descripcion del Estante
         /// <summary>

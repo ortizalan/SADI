@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class NivelesModel:FilasModel
+    public class NivelesModel:FilasModel
     {
         private string _nivel;// Propiedad de la descripción del nivel
         /// <summary>

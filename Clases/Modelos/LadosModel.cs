@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class LadosModel:FilasModel
+    public class LadosModel:FilasModel
     {
         private string _lado; //Propiedad de la descripción del Lado
         /// <summary>
