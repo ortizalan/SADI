@@ -178,5 +178,32 @@ namespace SADI.Clases.Controladores
             else//No son del mismo tipo
             { return false; }
         }
+
+        public bool ObtenerUltimoId()
+        {
+            if(Abrir())//Intentar Abrir la Conexión
+            {
+                //Intento Exisoto
+                try
+                {
+                    string sente = "select id from Filas order by Id desc";
+
+                    if(ConsultarSentenciaSQL(sente))//Intentar consulta por SentenciaSQL
+                    { return true; }//Consulta Exitosa
+                    else
+                    { return false; }//Consulta NO Exitosa,Consultar Error
+                }
+                catch(Exception e)// Atrapar el Error
+                {
+                    Error = e.Message.ToString();//Guardar el Error
+                    return false;// Indicar que existe error
+                }
+                finally { Cerrar(); }//Cerrar la Conexión
+            }
+            else//Intento NO Exitoso, Consultar Error
+            {
+                return false;
+            }
+        }
     }
 }

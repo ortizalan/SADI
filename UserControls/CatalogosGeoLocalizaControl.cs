@@ -82,8 +82,20 @@ namespace SADI.UserControls
         /// </summary>
         public byte[] Imagen
         {
-            get { return _imagen; }
-            set { _imagen = value; }
+            get
+            {
+                _imagen = new byte[(int)ms.Length];
+                ms.Position = 0;
+                ms.Read(_imagen, 0, (int)ms.Length);
+                return _imagen;
+            }
+            set
+            {
+                _imagen = value;
+                ms = new MemoryStream(_imagen.Length);
+                ms.Write(_imagen, 0, _imagen.Length);
+                ImagenPb.Image = Image.FromStream(ms);
+            }
         }
         /// <summary>
         /// Acceso a la Porpiedad Tabla Lados
@@ -125,8 +137,8 @@ namespace SADI.UserControls
         /// <param name="e"></param>
         private void CatalogosGeoLocalizaControl_Load(object sender, EventArgs e)
         {
-            toolTip.AutoPopDelay = 3000;
-            toolTip.InitialDelay = 1000;
+            toolTip.AutoPopDelay = 1000;
+            toolTip.InitialDelay = 800;
             toolTip.ReshowDelay = 500;
             toolTip.ShowAlways = true;
 
@@ -136,20 +148,30 @@ namespace SADI.UserControls
             {
                 case 1://Filas
                     lblDescripcion.Text = "Fila :";
+                    gpoBoxSel.Enabled = false;
+                    gpoBoxSel.Visible = false;
                     break;
                 case 2:// Estantes
                     lblDescripcion.Text = "Estante :";
+                    gpoBoxSel.Enabled = false;
+                    gpoBoxSel.Visible = false;
                     break;
-                case 3:
+                case 3:// Niveles
                     lblDescripcion.Text = "Nivel :";
+                    gpoBoxSel.Enabled = false;
+                    gpoBoxSel.Visible = false;
                     break;
-                case 4:
+                case 4:// Lados
                     lblDescripcion.Text = "Lado :";
+                    gpoBoxSel.Enabled = false;
+                    gpoBoxSel.Visible = false;
                     break;
-                case 5:
+                case 5://SubNiveles
                     lblDescripcion.Text = "SubNivel :";
+                    gpoBoxSel.Enabled = false;
+                    gpoBoxSel.Visible = false;
                     break;
-                case 6:
+                case 6:// Posiciones
                     lblDescripcion.Text = "Posición ;";
                     gpoBoxSel.Enabled = true;
                     gpoBoxSel.Visible = true;
@@ -203,9 +225,149 @@ namespace SADI.UserControls
         /// <param name="e"></param>
         private void cboSubNiveles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cboSubNiveles.SelectedValue.ToString() != "System.Data.DataRowView")
+            if (cboSubNiveles.SelectedValue.ToString() != "System.Data.DataRowView")
             {
                 SubNivel.Id = (int)cboSubNiveles.SelectedValue;
+            }
+        }
+        /// <summary>
+        /// Validar que los valores de los controles sean válidos
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public bool ValidarControl()
+        {
+            switch (_opc)
+            {
+                case 1:// Filas
+                case 2:// Estantes
+                case 3:// Niveles
+                case 4://Lados
+                case 5:// Subniveles
+                    if (!string.IsNullOrEmpty(txtId.Text))// Que no esté vacío el campo del ID
+                    {
+                        if (!string.IsNullOrEmpty(txtDescripcion.Text))// Que no esté vacío el campo de la Descripción
+                        {
+                            if (this.Imagen.Length != 0)
+                            {
+                                return true;
+                            }
+                            else// Es igual a cero
+                            {
+                                MessageBox.Show("no deje vacío el campo de la imagen.".ToUpper(),
+                                    ":: mensaje desde el control geolocalización ::".ToUpper(),
+                                    MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                                ImagenPb.Focus();
+                                return false;
+                            }
+                        }
+                        else// Está Vacío
+                        {
+                            MessageBox.Show("no deje vacío el campo descripción.".ToUpper(),
+                                ":: mensaje desde el control geolocalización ::".ToUpper(),
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtDescripcion.Focus();
+                            return false;
+                        }
+                    }
+                    else//Está Vacío el Campo
+                    {
+                        MessageBox.Show("no debe dejar vacío el campo id.".ToUpper(), ":: mensaje desde el contro catgeolocalización ::".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtId.Focus();
+                        return false;
+                    }
+
+                case 6:
+                    if (!string.IsNullOrEmpty(txtId.Text))// Que no esté vacío el campo del ID
+                    {
+                        if (!string.IsNullOrEmpty(txtDescripcion.Text))// Que no esté vacío el campo de la Descripción
+                        {
+                            if (this.Imagen.Length != 0)// Que no esté vacío el campo de imagen
+                            {
+                                if(cboLados.SelectedValue.ToString() != "System.Data.DataRowView")// Si esta Seleccionado un valor
+                                {
+                                    if(cboSubNiveles.SelectedValue.ToString() != "System.Data.DataRowView")// Si esta Seleccionado un valor
+                                    {
+                                        return true;
+                                    }
+                                    else// No hay Valor Seleccionado
+                                    {
+                                        MessageBox.Show("seleccione un valor de subniveles".ToUpper(),
+                                            ":: mensaje desde el control geolocalización ::".ToUpper(),
+                                            MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                                        cboSubNiveles.Focus();
+                                        return false;
+                                    }
+                                }
+                                else// No Hay Valor Seleccionado
+                                {
+                                    MessageBox.Show("seleccione un valor de lados".ToUpper(),
+                                            ":: mensaje desde el control geolocalización ::".ToUpper(),
+                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    cboLados.Focus();
+                                    return false;
+                                }
+                            }
+                            else// Es igual a cero
+                            {
+                                MessageBox.Show("no deje vacío el campo de la imagen.".ToUpper(),
+                                    ":: mensaje desde el control geolocalización ::".ToUpper(),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                ImagenPb.Focus();
+                                return false;
+                            }
+                        }
+                        else// Está Vacío
+                        {
+                            MessageBox.Show("no deje vacío el campo descripción.".ToUpper(),
+                                ":: mensaje desde el control geolocalización ::".ToUpper(),
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            txtDescripcion.Focus();
+                            return false;
+                        }
+                    }
+                    else//Está Vacío el Campo
+                    {
+                        MessageBox.Show("no debe dejar vacío el campo id.".ToUpper(), ":: mensaje desde el contro catgeolocalización ::".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtId.Focus();
+                        return false;
+                    }
+
+                default:
+                    return false;
+
+            }
+        }
+
+        public void CargarDatosControl()
+        {
+
+        }
+        /// <summary>
+        /// Cargar el Control
+        /// </summary>
+        public void ReLoad()
+        {
+            object ob = string.Empty;
+            EventArgs ev = null;
+
+            this.CatalogosGeoLocalizaControl_Load(ob, ev);
+        }
+        /// <summary>
+        /// Validar que Sólamente se ingresen números en el campo ID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("ingrese sólo números.".ToUpper(),
+                    ":: mensaje desde el control geolocalización ::".ToUpper(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Handled = true;
+                return;
             }
         }
     }

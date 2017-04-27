@@ -45,7 +45,7 @@ namespace SADI.Clases.Modelos
         {
             get
             {
-                _imagen = new byte[(int)ms.Length];
+                //_imagen = new byte[(int)ms.Length];
                 //ms.Position = 0;
                 //ms.Read(_imagen, 0, (int)ms.Length);
                 return _imagen;

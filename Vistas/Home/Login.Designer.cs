@@ -76,7 +76,7 @@
             // cmdIN
             // 
             this.cmdIN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdIN.Location = new System.Drawing.Point(226, 214);
+            this.cmdIN.Location = new System.Drawing.Point(227, 214);
             this.cmdIN.Name = "cmdIN";
             this.cmdIN.Size = new System.Drawing.Size(120, 60);
             this.cmdIN.TabIndex = 4;
@@ -87,6 +87,7 @@
             // cmdOUT
             // 
             this.cmdOUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdOUT.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdOUT.Location = new System.Drawing.Point(350, 214);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(120, 60);
@@ -120,8 +121,10 @@
             // 
             // Login
             // 
+            this.AcceptButton = this.cmdIN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cmdOUT;
             this.ClientSize = new System.Drawing.Size(482, 286);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
