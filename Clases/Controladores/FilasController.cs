@@ -185,7 +185,8 @@ namespace SADI.Clases.Controladores
             {
                 //Intento Exisoto
                 try
-                {
+                { //Como grillan mi Lic, saludo desde aqui
+                  // Lic. Vargas, puro Espartano!!!!
                     string sente = "select id from Filas order by Id desc";
 
                     if(ConsultarSentenciaSQL(sente))//Intentar consulta por SentenciaSQL
