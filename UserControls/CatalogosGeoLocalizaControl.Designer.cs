@@ -90,6 +90,7 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(140, 20);
             this.txtDescripcion.TabIndex = 2;
+            this.txtDescripcion.Leave += new System.EventHandler(this.txtDescripcion_Leave);
             // 
             // ImagenPb
             // 

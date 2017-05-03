@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SADI.Clases.Modelos;
+using System.Drawing.Imaging;
 
 namespace SADI.UserControls
 {
@@ -24,9 +25,10 @@ namespace SADI.UserControls
         private int _opc;// Opción para saber de que manera se ejecutará el control (Diseño)
         private int _id;// Propiedad del Identificador del Registro
         private string _descripcion;// Descripción del Registro
-        private byte[] _imagen;//Imagen del registro
+        private Image _imagen;//Imagen del registro
         private DataTable _tlados = new DataTable();
         private DataTable _tsubniveles = new DataTable();
+        private ImageFormat _formato;//Formato ó Extensión de la imagen
         #endregion
 
         public CatalogosGeoLocalizaControl()
@@ -80,21 +82,25 @@ namespace SADI.UserControls
         /// <summary>
         /// Acceso a la Propiedad Imagen
         /// </summary>
-        public byte[] Imagen
+        public Image Imagen
         {
             get
             {
-                _imagen = new byte[(int)ms.Length];
-                ms.Position = 0;
-                ms.Read(_imagen, 0, (int)ms.Length);
+                //if (ms.Length > 0)
+                //{
+                //    _imagen = new byte[(int)ms.Length];
+                //    ms.Position = 0;
+                //    ms.Read(_imagen, 0, (int)ms.Length);
+                //}
                 return _imagen;
             }
             set
             {
                 _imagen = value;
-                ms = new MemoryStream(_imagen.Length);
-                ms.Write(_imagen, 0, _imagen.Length);
-                ImagenPb.Image = Image.FromStream(ms);
+                ImagenPb.Image = _imagen;
+                //ms = new MemoryStream(_imagen.Length);
+                //ms.Write(_imagen, 0, _imagen.Length);
+                //ImagenPb.Image = Image.FromStream(ms);
             }
         }
         /// <summary>
@@ -129,6 +135,14 @@ namespace SADI.UserControls
                 }
             }
         }
+        /// <summary>
+        /// Acceder a la Propiedad del Formato de la Imagen
+        /// </summary>
+        public ImageFormat Formato
+        {
+            get { return _formato; }
+            set { _formato = value; }
+        }
         #endregion
         /// <summary>
         /// Cuando Carga el Control
@@ -137,8 +151,8 @@ namespace SADI.UserControls
         /// <param name="e"></param>
         private void CatalogosGeoLocalizaControl_Load(object sender, EventArgs e)
         {
-            toolTip.AutoPopDelay = 1000;
-            toolTip.InitialDelay = 800;
+            toolTip.AutoPopDelay = 5000;
+            toolTip.InitialDelay = 1000;
             toolTip.ReshowDelay = 500;
             toolTip.ShowAlways = true;
 
@@ -176,7 +190,10 @@ namespace SADI.UserControls
                     gpoBoxSel.Enabled = true;
                     gpoBoxSel.Visible = true;
                     break;
+
             }
+
+            this.CargarDatosControl();
         }
         /// <summary>
         /// Cargar Imagen Nueva
@@ -190,11 +207,13 @@ namespace SADI.UserControls
             if (of.ShowDialog() == DialogResult.OK)
             {
                 this.ImagenPb.Image = new Bitmap(of.FileName);
+                this.Imagen = ImagenPb.Image;
+                this.Formato = this.obtenerExtensionImagen(Path.GetExtension(of.FileName));
             }
-            if (ImagenPb.Image != null)
-            {
-                Imagen = this.Imagen2Byte(ImagenPb.Image);
-            }
+            //if (ImagenPb.Image != null)
+            //{
+            //    Imagen = this.Imagen2Byte(ImagenPb.Image);
+            //}
         }
         /// <summary>
         /// Convertir Imagen a Arreglos de bytes
@@ -247,7 +266,7 @@ namespace SADI.UserControls
                     {
                         if (!string.IsNullOrEmpty(txtDescripcion.Text))// Que no esté vacío el campo de la Descripción
                         {
-                            if (this.Imagen.Length != 0)
+                            if (this.Imagen != null)
                             {
                                 return true;
                             }
@@ -255,7 +274,7 @@ namespace SADI.UserControls
                             {
                                 MessageBox.Show("no deje vacío el campo de la imagen.".ToUpper(),
                                     ":: mensaje desde el control geolocalización ::".ToUpper(),
-                                    MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 ImagenPb.Focus();
                                 return false;
                             }
@@ -282,11 +301,11 @@ namespace SADI.UserControls
                     {
                         if (!string.IsNullOrEmpty(txtDescripcion.Text))// Que no esté vacío el campo de la Descripción
                         {
-                            if (this.Imagen.Length != 0)// Que no esté vacío el campo de imagen
+                            if (this.Imagen != null)// Que no esté vacío el campo de imagen
                             {
-                                if(cboLados.SelectedValue.ToString() != "System.Data.DataRowView")// Si esta Seleccionado un valor
+                                if (cboLados.SelectedValue.ToString() != "System.Data.DataRowView")// Si esta Seleccionado un valor
                                 {
-                                    if(cboSubNiveles.SelectedValue.ToString() != "System.Data.DataRowView")// Si esta Seleccionado un valor
+                                    if (cboSubNiveles.SelectedValue.ToString() != "System.Data.DataRowView")// Si esta Seleccionado un valor
                                     {
                                         return true;
                                     }
@@ -294,7 +313,7 @@ namespace SADI.UserControls
                                     {
                                         MessageBox.Show("seleccione un valor de subniveles".ToUpper(),
                                             ":: mensaje desde el control geolocalización ::".ToUpper(),
-                                            MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                         cboSubNiveles.Focus();
                                         return false;
                                     }
@@ -339,10 +358,22 @@ namespace SADI.UserControls
 
             }
         }
-
-        public void CargarDatosControl()
+        /// <summary>
+        /// Cargar los Datos del Control
+        /// </summary>
+        private void CargarDatosControl()
         {
-
+            txtId.Text = Id.ToString();
+            txtDescripcion.Text = Descripcion;
+            //if (Imagen.Length > 0)
+            //{
+            //    ImagenPb.Image = (Imagen.Length > 0 ? Image.FromStream(ms) : null);
+            //}
+            if (_opc == 6)
+            {
+                cboLados.SelectedIndex = 0;
+                cboSubNiveles.SelectedIndex = 0;
+            }
         }
         /// <summary>
         /// Cargar el Control
@@ -361,7 +392,7 @@ namespace SADI.UserControls
         /// <param name="e"></param>
         private void txtId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
                 MessageBox.Show("ingrese sólo números.".ToUpper(),
                     ":: mensaje desde el control geolocalización ::".ToUpper(),
@@ -369,6 +400,56 @@ namespace SADI.UserControls
                 e.Handled = true;
                 return;
             }
+        }
+        /// <summary>
+        /// Método para Limpiar los Elementos del Control
+        /// </summary>
+        public void LimpiarControl()
+        {
+            //Limpiar los campos
+            this.txtId.Text = string.Empty;
+            this.txtDescripcion.Text = string.Empty;
+            this.ImagenPb.Image = null;
+
+            if (_opc == 6)// Limpiar los combos
+            {
+                cboLados.SelectedIndex = 0;
+                cboSubNiveles.SelectedIndex = 0;
+            }
+        }
+        //Al dejar el Control Descripción
+        private void txtDescripcion_Leave(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                Descripcion = txtDescripcion.Text;
+            }
+        }
+        // Obtener la Extensión de la Imagen
+        private ImageFormat obtenerExtensionImagen(string ext)
+        {
+            ImageFormat extension;
+
+            switch(ext)
+            {
+                case ".jpeg":
+                case ".jpg":
+                    return extension = ImageFormat.Jpeg;
+                case ".png":
+                    return extension = ImageFormat.Png;
+                case ".ico":
+                case ".icon":
+                    return extension = ImageFormat.Icon;
+                case ".gif":
+                    return extension = ImageFormat.Gif;
+                case ".bmp":
+                    return extension = ImageFormat.Bmp;
+                default:
+                    return extension = ImageFormat.Jpeg;
+
+            }
+
+            //return extension;
         }
     }
 }

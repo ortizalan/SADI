@@ -93,5 +93,19 @@ namespace SADI
             filafrm.MdiParent = this;
             filafrm.Show();
         }
+        //Mostrar la Lista de Filas para ver Detalles
+        private void filasMostrarMenu_Click(object sender, EventArgs e)
+        {
+            FilasList listaF = new FilasList(1);
+            listaF.MdiParent = this;
+            listaF.Show();
+        }
+        // Mostrar la Lista de Filas para Seleccionar para Editar
+        private void filasEditarMenu_Click(object sender, EventArgs e)
+        {
+            FilasList listaF = new FilasList(2);
+            listaF.MdiParent = this;
+            listaF.Show();
+        }
     }
 }

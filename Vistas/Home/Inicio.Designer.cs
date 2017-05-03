@@ -57,12 +57,14 @@
             this.clasificaciónDoctalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.geoLocalizacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AgregarFilaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.filasMostrarMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.estantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nivelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ladosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subnivelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pocisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AgregarFilaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.filasEditarMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -286,10 +288,26 @@
             // filasToolStripMenuItem
             // 
             this.filasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AgregarFilaMenu});
+            this.AgregarFilaMenu,
+            this.filasMostrarMenu,
+            this.filasEditarMenu});
             this.filasToolStripMenuItem.Name = "filasToolStripMenuItem";
             this.filasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.filasToolStripMenuItem.Text = "Filas";
+            // 
+            // AgregarFilaMenu
+            // 
+            this.AgregarFilaMenu.Name = "AgregarFilaMenu";
+            this.AgregarFilaMenu.Size = new System.Drawing.Size(152, 22);
+            this.AgregarFilaMenu.Text = "Agregar";
+            this.AgregarFilaMenu.Click += new System.EventHandler(this.AgregarFilaMenu_Click);
+            // 
+            // filasMostrarMenu
+            // 
+            this.filasMostrarMenu.Name = "filasMostrarMenu";
+            this.filasMostrarMenu.Size = new System.Drawing.Size(152, 22);
+            this.filasMostrarMenu.Text = "Mostrar";
+            this.filasMostrarMenu.Click += new System.EventHandler(this.filasMostrarMenu_Click);
             // 
             // estantesToolStripMenuItem
             // 
@@ -321,12 +339,12 @@
             this.pocisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pocisionToolStripMenuItem.Text = "Posicion";
             // 
-            // AgregarFilaMenu
+            // filasEditarMenu
             // 
-            this.AgregarFilaMenu.Name = "AgregarFilaMenu";
-            this.AgregarFilaMenu.Size = new System.Drawing.Size(152, 22);
-            this.AgregarFilaMenu.Text = "Agregar";
-            this.AgregarFilaMenu.Click += new System.EventHandler(this.AgregarFilaMenu_Click);
+            this.filasEditarMenu.Name = "filasEditarMenu";
+            this.filasEditarMenu.Size = new System.Drawing.Size(152, 22);
+            this.filasEditarMenu.Text = "Editar";
+            this.filasEditarMenu.Click += new System.EventHandler(this.filasEditarMenu_Click);
             // 
             // Inicio
             // 
@@ -385,5 +403,7 @@
         private System.Windows.Forms.ToolStripMenuItem subnivelesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pocisionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AgregarFilaMenu;
+        private System.Windows.Forms.ToolStripMenuItem filasMostrarMenu;
+        private System.Windows.Forms.ToolStripMenuItem filasEditarMenu;
     }
 }

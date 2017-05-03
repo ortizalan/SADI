@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace SADI.Clases.Modelos
 {
@@ -14,7 +16,9 @@ namespace SADI.Clases.Modelos
     {
         private int _id; // Propiedad de Identificador
         private string _fila;// Descripción de la Fila
-        private byte[] _imagen;// Imagen de la fila
+        private Byte[] _imagen;// Imagen de la fila
+        private Image _foto;//Propiedad de la Imagen
+        private ImageFormat _formato;// Propiedad del Formato de la Foto
         Stream ms;
 
         /// <summary>
@@ -41,7 +45,7 @@ namespace SADI.Clases.Modelos
         /// <summary>
         /// Acceder a la Propiedad Imagen del Objeto
         /// </summary>
-        public byte[] Imagen
+        public Byte[] Imagen
         {
             get
             {
@@ -56,6 +60,22 @@ namespace SADI.Clases.Modelos
                 //ms = new MemoryStream(_imagen.Length);
                 //ms.Write(value, 0, _imagen.Length);
             }
+        }
+        /// <summary>
+        /// Acceder a la Foto del Objeto
+        /// </summary>
+        public Image Foto
+        {
+            get { return _foto; }
+            set { _foto = value; }
+        }
+        /// <summary>
+        /// Acceder a la propiedad Formato
+        /// </summary>
+        public ImageFormat Formato
+        {
+            get { return _formato; }
+            set { _formato = value; }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
-
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace SADI.Clases
 {
@@ -22,7 +24,7 @@ namespace SADI.Clases
         private static WindowsIdentity _winUser = WindowsIdentity.GetCurrent();// Obtener los datos de Sesión de Windows
         private static string _userdomain = _winUser.Name;// Usuario de Dominio
         private static int _idusuario;// Id del usuario del sistema SADI
-           
+
         private static string _dominio = IPGlobalProperties.GetIPGlobalProperties().DomainName;// Nombre del Dominio
         private static IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());// Obtener la Información del Host del Dominio
         /// <summary>
@@ -94,6 +96,57 @@ namespace SADI.Clases
         {
             get { return _idusuario; }
             set { _idusuario = value; }
+        }
+        /// <summary>
+        /// Función que convierte Bytes a String
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string BytesToStringConverted(byte[] bytes)
+        {
+            using (var stream = new MemoryStream(bytes))
+            {
+                using (var streamReader = new StreamReader(stream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
+        }
+        /// <summary>
+        /// Imagen a String Base 64
+        /// </summary>
+        /// <param name="imagen">Archivo de Imagen</param>
+        /// <param name="format">Formato JPG, BMP, PNG, etc</param>
+        /// <returns>String</returns>
+        public static string ImageToBase64(Image imagen, ImageFormat format)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+
+                //Convertir Imagen a arreglo de Bytes
+                imagen.Save(ms, format);
+                byte[] imagenBytes = ms.ToArray();
+
+                //Convertir los bytes a Base 64 String
+                string base64string = Convert.ToBase64String(imagenBytes);
+                return base64string;
+            }
+        }
+        /// <summary>
+        /// Función para Convertir una Cadena a Imagen
+        /// </summary>
+        /// <param name="base46string">Imagen convertida en Cadena</param>
+        /// <returns>Image</returns>
+        public static Image Base64toImagen(string base46string)
+        {
+            //Convertir String Base 64 a Bytes
+            byte[] ImagenBytes = Convert.FromBase64String(base46string);
+            //Convertir Byte a Imagen
+            using (var ms = new MemoryStream(ImagenBytes, 0, ImagenBytes.Length))
+            {
+                Image imagen = Image.FromStream(ms, true);
+                return imagen;
+            }
         }
     }
 

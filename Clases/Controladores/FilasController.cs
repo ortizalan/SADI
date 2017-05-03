@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SADI.Clases;
 using SADI.Clases.Modelos;
+using System.Drawing.Imaging;
 
 namespace SADI.Clases.Controladores
 {
@@ -30,7 +31,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc","3"));// Opción para el procedimiento
                         lista.Add(new Parametros(@"id", f.Id.ToString()));// Identificador del Registro
                         lista.Add(new Parametros(@"fila", f.Fila));// Descripción de la Fila
-                        lista.Add(new Parametros(@"img", f.Imagen.ToString()));// Imagen de la Fila
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(f.Foto,f.Formato)));// Imagen de la Fila
 
                         string proce = "sp_filas_crud";// Nombre del procedimineto
 
@@ -154,8 +155,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc", "2"));// Opción para el procedimiento
                         lista.Add(new Parametros(@"id", f.Id.ToString()));// Identificador del Registro
                         lista.Add(new Parametros(@"fila", f.Fila));// Descripción de la Fila
-                        lista.Add(new Parametros(@"img", f.Imagen.ToString()));// Imagen de la Fila
-
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(f.Foto,f.Formato)));// Imagen de la Fila
                         string proce = "sp_filas_crud";// Nombre del procedimineto
 
                         if (EjecutarProcedimiento(proce, lista))// Ejecutar el procedimiento
@@ -178,15 +178,17 @@ namespace SADI.Clases.Controladores
             else//No son del mismo tipo
             { return false; }
         }
-
+        /// <summary>
+        /// Obtener el Último ID del Modelo Vistas
+        /// </summary>
+        /// <returns>Boleano</returns>
         public bool ObtenerUltimoId()
         {
             if(Abrir())//Intentar Abrir la Conexión
             {
                 //Intento Exisoto
                 try
-                { //Como grillan mi Lic, saludo desde aqui
-                  // Lic. Vargas, puro Espartano!!!!
+                { 
                     string sente = "select id from Filas order by Id desc";
 
                     if(ConsultarSentenciaSQL(sente))//Intentar consulta por SentenciaSQL

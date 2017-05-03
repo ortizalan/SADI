@@ -190,6 +190,24 @@
     <Compile Include="Vistas\Filas\FilasAdd.Designer.cs">
       <DependentUpon>FilasAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Filas\FilasDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasDetails.Designer.cs">
+      <DependentUpon>FilasDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasEdit.Designer.cs">
+      <DependentUpon>FilasEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Filas\FilasList.Designer.cs">
+      <DependentUpon>FilasList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Home\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +251,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Filas\FilasAdd.resx">
       <DependentUpon>FilasAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Filas\FilasDetails.resx">
+      <DependentUpon>FilasDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Filas\FilasEdit.resx">
+      <DependentUpon>FilasEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Filas\FilasList.resx">
+      <DependentUpon>FilasList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Home\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
