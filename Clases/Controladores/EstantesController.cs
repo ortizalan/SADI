@@ -31,7 +31,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc", "3"));//Indicarle la Opción al Procedimiento
                         lista.Add(new Parametros(@"id", e.Id.ToString()));// Identificador del Estante
                         lista.Add(new Parametros(@"estante", e.Estante));// Descripción del Estante
-                        lista.Add(new Parametros(@"img", e.Imagen.ToString()));// Imagen del Estante
+                        lista.Add(new Parametros(@"img",Utilerias.ImageToBase64(e.Foto,e.Formato)));// Imagen del Estante
 
                         string proce = "sp_estantes_crud";// Nombre del Procedimiento
 
@@ -155,7 +155,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc", "2"));//Indicarle la Opción al Procedimiento
                         lista.Add(new Parametros(@"id", e.Id.ToString()));// Identificador del Estante
                         lista.Add(new Parametros(@"estante", e.Estante));// Descripción del Estante
-                        lista.Add(new Parametros(@"img", e.Imagen.ToString()));// Imagen del Estante
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(e.Foto,e.Formato)));// Imagen del Estante
 
                         string proce = "sp_estantes_crud";// Nombre del Procedimiento
 
@@ -177,6 +177,40 @@ namespace SADI.Clases.Controladores
             }
             else// No son del Mismo Tipo
             { return false; }
+        }
+        /// <summary>
+        /// Función para Consultar Último Id Ingresado
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public bool ObtenerUltimoId()
+        {
+            if(Abrir())//Intentar Abrir la Conexion
+            {
+                //Intento Exitoso
+                try
+                {
+                    string sente = "select id from Estantes order By ID Desc";// Indicar la Sentencia SQL
+
+                    if(ConsultarSentenciaSQL(sente))//Consultar la Sentencia
+                    {
+                        return true;// COnsulta Exitosa
+                    }
+                    else
+                    {
+                        return false;// COnsulta no Exitosa, Consultar Error
+                    }
+                }
+                catch(Exception e)//Atrapar el Error
+                {
+                    Error = e.Message.ToString();//Guardar el Error
+                    return false;// Indicar que existe el error
+                }
+                finally { Cerrar(); }//Cerrar la conexión
+            }
+            else// Intento Fallido, COnsulte Error
+            {
+                return false;
+            }
         }
     }
 }

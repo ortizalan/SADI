@@ -39,19 +39,21 @@ namespace SADI.Vistas.Filas
                 MessageBox.Show("error : " + fc.Error);
             }
         }
-
+        //Método para llenar el Objeto
         private void LlenarObjeto()
         {
-            if (fc.Tabla.Rows.Count > 0)
+            if (fc.Tabla.Rows.Count > 0)// Si existen registros
             {
-                fm.Id = (int)fc.Tabla.Rows[0][0];
-                fm.Fila = fc.Tabla.Rows[0][1].ToString();
-                fm.Foto = Utilerias.Base64toImagen(fc.Tabla.Rows[0][2].ToString());
-                this.LlenarControl();
+                fm.Id = (int)fc.Tabla.Rows[0][0];//
+                fm.Fila = fc.Tabla.Rows[0][1].ToString();//
+                fm.Foto = Utilerias.Base64toImagen(fc.Tabla.Rows[0][2].ToString());//
+                this.LlenarControl();// Llenar el Control
             }
             else
             {
-                MessageBox.Show("quiubo, no hay ni madre");
+                MessageBox.Show("no hay registros.".ToUpper(),":: mensaje desde destalle fila ::".ToUpper(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
         }
 

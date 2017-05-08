@@ -1,6 +1,6 @@
-﻿namespace SADI.Vistas.Filas
+﻿namespace SADI.Vistas.Estantes
 {
-    partial class FilasList
+    partial class EstantesList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,50 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvFilas = new System.Windows.Forms.DataGridView();
+            this.dgvEstantes = new System.Windows.Forms.DataGridView();
             this.cmdOUT = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstantes)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvFilas
+            // dgvEstantes
             // 
-            this.dgvFilas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFilas.Location = new System.Drawing.Point(0, -2);
-            this.dgvFilas.Name = "dgvFilas";
-            this.dgvFilas.Size = new System.Drawing.Size(660, 316);
-            this.dgvFilas.TabIndex = 0;
-            this.dgvFilas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvFilas_KeyDown);
+            this.dgvEstantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEstantes.Location = new System.Drawing.Point(-1, -1);
+            this.dgvEstantes.Name = "dgvEstantes";
+            this.dgvEstantes.Size = new System.Drawing.Size(600, 316);
+            this.dgvEstantes.TabIndex = 0;
+            this.dgvEstantes.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvEstantes_KeyDown);
             // 
             // cmdOUT
             // 
-            this.cmdOUT.Location = new System.Drawing.Point(528, 331);
+            this.cmdOUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdOUT.Location = new System.Drawing.Point(467, 338);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(121, 50);
-            this.cmdOUT.TabIndex = 1;
+            this.cmdOUT.TabIndex = 2;
             this.cmdOUT.Text = ":: SALIR ::";
             this.cmdOUT.UseVisualStyleBackColor = true;
             this.cmdOUT.Click += new System.EventHandler(this.cmdOUT_Click);
             // 
-            // FilasList
+            // EstantesList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 400);
+            this.ClientSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.cmdOUT);
-            this.Controls.Add(this.dgvFilas);
+            this.Controls.Add(this.dgvEstantes);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(1, 1);
-            this.Name = "FilasList";
-            this.Text = "listaFilas";
-            this.Load += new System.EventHandler(this.listaFilas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilas)).EndInit();
+            this.Name = "EstantesList";
+            this.Text = "EstantesList";
+            this.Load += new System.EventHandler(this.EstantesList_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstantes)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvFilas;
+        private System.Windows.Forms.DataGridView dgvEstantes;
         private System.Windows.Forms.Button cmdOUT;
     }
 }

@@ -59,12 +59,18 @@
             this.filasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AgregarFilaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.filasMostrarMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.filasEditarMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.estantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarEstanteMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.mostrarEstanteMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarEstanteMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.nivelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarNivelesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.mostrarNivelesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarNivelesMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ladosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subnivelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pocisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filasEditarMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -298,28 +304,85 @@
             // AgregarFilaMenu
             // 
             this.AgregarFilaMenu.Name = "AgregarFilaMenu";
-            this.AgregarFilaMenu.Size = new System.Drawing.Size(152, 22);
+            this.AgregarFilaMenu.Size = new System.Drawing.Size(116, 22);
             this.AgregarFilaMenu.Text = "Agregar";
             this.AgregarFilaMenu.Click += new System.EventHandler(this.AgregarFilaMenu_Click);
             // 
             // filasMostrarMenu
             // 
             this.filasMostrarMenu.Name = "filasMostrarMenu";
-            this.filasMostrarMenu.Size = new System.Drawing.Size(152, 22);
+            this.filasMostrarMenu.Size = new System.Drawing.Size(116, 22);
             this.filasMostrarMenu.Text = "Mostrar";
             this.filasMostrarMenu.Click += new System.EventHandler(this.filasMostrarMenu_Click);
             // 
+            // filasEditarMenu
+            // 
+            this.filasEditarMenu.Name = "filasEditarMenu";
+            this.filasEditarMenu.Size = new System.Drawing.Size(116, 22);
+            this.filasEditarMenu.Text = "Editar";
+            this.filasEditarMenu.Click += new System.EventHandler(this.filasEditarMenu_Click);
+            // 
             // estantesToolStripMenuItem
             // 
+            this.estantesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarEstanteMenu,
+            this.mostrarEstanteMenu,
+            this.editarEstanteMenu});
             this.estantesToolStripMenuItem.Name = "estantesToolStripMenuItem";
             this.estantesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.estantesToolStripMenuItem.Text = "Estantes";
             // 
+            // agregarEstanteMenu
+            // 
+            this.agregarEstanteMenu.Name = "agregarEstanteMenu";
+            this.agregarEstanteMenu.Size = new System.Drawing.Size(116, 22);
+            this.agregarEstanteMenu.Text = "Agregar";
+            this.agregarEstanteMenu.Click += new System.EventHandler(this.agregarEstanteMenu_Click);
+            // 
+            // mostrarEstanteMenu
+            // 
+            this.mostrarEstanteMenu.Name = "mostrarEstanteMenu";
+            this.mostrarEstanteMenu.Size = new System.Drawing.Size(116, 22);
+            this.mostrarEstanteMenu.Text = "Mostrar";
+            this.mostrarEstanteMenu.Click += new System.EventHandler(this.mostrarEstanteMenu_Click);
+            // 
+            // editarEstanteMenu
+            // 
+            this.editarEstanteMenu.Name = "editarEstanteMenu";
+            this.editarEstanteMenu.Size = new System.Drawing.Size(116, 22);
+            this.editarEstanteMenu.Text = "Editar";
+            this.editarEstanteMenu.Click += new System.EventHandler(this.editarEstanteMenu_Click);
+            // 
             // nivelesToolStripMenuItem
             // 
+            this.nivelesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarNivelesMenu,
+            this.mostrarNivelesMenu,
+            this.editarNivelesMenu});
             this.nivelesToolStripMenuItem.Name = "nivelesToolStripMenuItem";
             this.nivelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nivelesToolStripMenuItem.Text = "Niveles";
+            // 
+            // agregarNivelesMenu
+            // 
+            this.agregarNivelesMenu.Name = "agregarNivelesMenu";
+            this.agregarNivelesMenu.Size = new System.Drawing.Size(152, 22);
+            this.agregarNivelesMenu.Text = "Agregar";
+            this.agregarNivelesMenu.Click += new System.EventHandler(this.agregarNivelesMenu_Click);
+            // 
+            // mostrarNivelesMenu
+            // 
+            this.mostrarNivelesMenu.Name = "mostrarNivelesMenu";
+            this.mostrarNivelesMenu.Size = new System.Drawing.Size(152, 22);
+            this.mostrarNivelesMenu.Text = "Mostrar";
+            this.mostrarNivelesMenu.Click += new System.EventHandler(this.mostrarNivelesMenu_Click);
+            // 
+            // editarNivelesMenu
+            // 
+            this.editarNivelesMenu.Name = "editarNivelesMenu";
+            this.editarNivelesMenu.Size = new System.Drawing.Size(152, 22);
+            this.editarNivelesMenu.Text = "Editar";
+            this.editarNivelesMenu.Click += new System.EventHandler(this.editarNivelesMenu_Click);
             // 
             // ladosToolStripMenuItem
             // 
@@ -338,13 +401,6 @@
             this.pocisionToolStripMenuItem.Name = "pocisionToolStripMenuItem";
             this.pocisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pocisionToolStripMenuItem.Text = "Posicion";
-            // 
-            // filasEditarMenu
-            // 
-            this.filasEditarMenu.Name = "filasEditarMenu";
-            this.filasEditarMenu.Size = new System.Drawing.Size(152, 22);
-            this.filasEditarMenu.Text = "Editar";
-            this.filasEditarMenu.Click += new System.EventHandler(this.filasEditarMenu_Click);
             // 
             // Inicio
             // 
@@ -405,5 +461,11 @@
         private System.Windows.Forms.ToolStripMenuItem AgregarFilaMenu;
         private System.Windows.Forms.ToolStripMenuItem filasMostrarMenu;
         private System.Windows.Forms.ToolStripMenuItem filasEditarMenu;
+        private System.Windows.Forms.ToolStripMenuItem agregarEstanteMenu;
+        private System.Windows.Forms.ToolStripMenuItem mostrarEstanteMenu;
+        private System.Windows.Forms.ToolStripMenuItem editarEstanteMenu;
+        private System.Windows.Forms.ToolStripMenuItem agregarNivelesMenu;
+        private System.Windows.Forms.ToolStripMenuItem mostrarNivelesMenu;
+        private System.Windows.Forms.ToolStripMenuItem editarNivelesMenu;
     }
 }

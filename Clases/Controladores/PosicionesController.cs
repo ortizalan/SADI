@@ -36,7 +36,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"posicion", p.Posicion));//Descripción del Registro
                         lista.Add(new Parametros(@"lado", p.Lado.Id.ToString()));// Identificador del Lado del Registro
                         lista.Add(new Parametros(@"subnivel", p.SubNivel.Id.ToString()));// Identificador del SubNivel del Registro
-                        lista.Add(new Parametros(@"img", p.Imagen.ToString()));// Imagen del Registro
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(p.Foto,p.Formato)));// Imagen del Registro
 
                         string proce = "sp_posiciones.crud";//Nombre del Procedimiento
 
@@ -163,7 +163,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"posicion", p.Posicion));//Descripción del Registro
                         lista.Add(new Parametros(@"lado", p.Lado.Id.ToString()));// Identificador del Lado del Registro
                         lista.Add(new Parametros(@"subnivel", p.SubNivel.Id.ToString()));// Identificador del SubNivel del Registro
-                        lista.Add(new Parametros(@"img", p.Imagen.ToString()));// Imagen del Registro
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(p.Foto,p.Formato)));// Imagen del Registro
 
                         string proce = "sp_posiciones.crud";//Nombre del Procedimiento
 

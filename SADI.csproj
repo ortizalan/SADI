@@ -184,6 +184,30 @@
     <Compile Include="UserControls\CatalogosGeoLocalizaControl.Designer.cs">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Estantes\EstanteAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstanteAdd.Designer.cs">
+      <DependentUpon>EstanteAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstanteEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstanteEdit.Designer.cs">
+      <DependentUpon>EstanteEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstantesDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstantesDetails.Designer.cs">
+      <DependentUpon>EstantesDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstantesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Estantes\EstantesList.Designer.cs">
+      <DependentUpon>EstantesList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Filas\FilasAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +252,30 @@
     <Compile Include="Vistas\Home\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Niveles\NivelAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelAdd.Designer.cs">
+      <DependentUpon>NivelAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelDetails.Designer.cs">
+      <DependentUpon>NivelDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelEdit.Designer.cs">
+      <DependentUpon>NivelEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Niveles\NivelList.Designer.cs">
+      <DependentUpon>NivelList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Usuarios\AgregarUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +296,18 @@
     </Compile>
     <EmbeddedResource Include="UserControls\CatalogosGeoLocalizaControl.resx">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Estantes\EstanteAdd.resx">
+      <DependentUpon>EstanteAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Estantes\EstanteEdit.resx">
+      <DependentUpon>EstanteEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Estantes\EstantesDetails.resx">
+      <DependentUpon>EstantesDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Estantes\EstantesList.resx">
+      <DependentUpon>EstantesList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Filas\FilasAdd.resx">
       <DependentUpon>FilasAdd.cs</DependentUpon>
@@ -274,6 +334,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Home\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Niveles\NivelAdd.resx">
+      <DependentUpon>NivelAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Niveles\NivelDetails.resx">
+      <DependentUpon>NivelDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Niveles\NivelEdit.resx">
+      <DependentUpon>NivelEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Niveles\NivelList.resx">
+      <DependentUpon>NivelList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Usuarios\AgregarUsuarios.resx">
       <DependentUpon>AgregarUsuarios.cs</DependentUpon>

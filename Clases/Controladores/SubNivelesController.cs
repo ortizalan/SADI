@@ -32,7 +32,7 @@ namespace SADI.Clases.Controladores
                     lista.Add(new Parametros(@"opc", "3"));// Indicarle la opción al Procedimiento
                     lista.Add(new Parametros(@"id", sn.Id.ToString()));// Identificador del Registro del Modelo
                     lista.Add(new Parametros(@"subnivel", sn.SubNivel));//Descripción del Registro del Modelo
-                    lista.Add(new Parametros(@"img", sn.Imagen.ToString()));// Imagen del registro del Modelo
+                    lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(sn.Foto,sn.Formato)));// Imagen del registro del Modelo
 
                     string proce = "sp_subniveles_crud";// Nobre del Procedimiento
 
@@ -126,7 +126,7 @@ namespace SADI.Clases.Controladores
                     lista.Add(new Parametros(@"opc", "2"));// Indicarle la opción al Procedimiento
                     lista.Add(new Parametros(@"id", sn.Id.ToString()));// Identificador del Registro del Modelo
                     lista.Add(new Parametros(@"subnivel", sn.SubNivel));//Descripción del Registro del Modelo
-                    lista.Add(new Parametros(@"img", sn.Imagen.ToString()));// Imagen del registro del Modelo
+                    lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(sn.Foto,sn.Formato)));// Imagen del registro del Modelo
 
                     string proce = "sp_subniveles_crud";// Nobre del Procedimiento
 

@@ -16,10 +16,9 @@ namespace SADI.Clases.Modelos
     {
         private int _id; // Propiedad de Identificador
         private string _fila;// Descripción de la Fila
-        private Byte[] _imagen;// Imagen de la fila
+        //private Byte[] _imagen;// Imagen de la fila
         private Image _foto;//Propiedad de la Imagen
         private ImageFormat _formato;// Propiedad del Formato de la Foto
-        Stream ms;
 
         /// <summary>
         /// Destructor de la Clase
@@ -45,22 +44,22 @@ namespace SADI.Clases.Modelos
         /// <summary>
         /// Acceder a la Propiedad Imagen del Objeto
         /// </summary>
-        public Byte[] Imagen
-        {
-            get
-            {
-                //_imagen = new byte[(int)ms.Length];
-                //ms.Position = 0;
-                //ms.Read(_imagen, 0, (int)ms.Length);
-                return _imagen;
-            }
-            set
-            {
-                _imagen = value;
-                //ms = new MemoryStream(_imagen.Length);
-                //ms.Write(value, 0, _imagen.Length);
-            }
-        }
+        //public Byte[] Imagen
+        //{
+        //    get
+        //    {
+        //        //_imagen = new byte[(int)ms.Length];
+        //        //ms.Position = 0;
+        //        //ms.Read(_imagen, 0, (int)ms.Length);
+        //        return _imagen;
+        //    }
+        //    set
+        //    {
+        //        _imagen = value;
+        //        //ms = new MemoryStream(_imagen.Length);
+        //        //ms.Write(value, 0, _imagen.Length);
+        //    }
+        //}
         /// <summary>
         /// Acceder a la Foto del Objeto
         /// </summary>

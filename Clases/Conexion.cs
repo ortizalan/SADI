@@ -42,12 +42,11 @@ namespace SADI.Clases
         {
 
         }
-
         /// <summary>
         /// Método Público para Establecer la Conexión a la Base de Datos
         /// </summary>
         /// <returns>valor Boleano</returns>
-        public bool Abrir()
+        protected bool Abrir()
         {
             if (Connection.State == ConnectionState.Closed)// Verificar que la conexión esté cerrada
             {
@@ -65,7 +64,6 @@ namespace SADI.Clases
             else
             { return false; }// No está cerrada la conexión 
         }
-
         /// <summary>
         /// Acceder de manera interna al Adaptador
         /// </summary>
@@ -74,11 +72,10 @@ namespace SADI.Clases
             get { return _adapter; }
             set { _adapter = value; }
         }
-
         /// <summary>
         /// Método Público para Cerrar la Coenxión de la Base de Datos
         /// </summary>
-        public bool Cerrar()
+        protected bool Cerrar()
         {
             if (Connection.State == ConnectionState.Open)
             {
@@ -96,7 +93,6 @@ namespace SADI.Clases
             else
             { return false; }
         }
-
         /// <summary>
         /// Acceder de manera interna al comando
         /// </summary>

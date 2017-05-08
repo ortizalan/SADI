@@ -32,7 +32,7 @@ namespace SADI.Clases.Controladores
                     lista.Add(new Parametros(@"opc", "3"));// Indicarle la opción al procedimiento
                     lista.Add(new Parametros(@"id", l.Id.ToString()));// Identificador del Registro
                     lista.Add(new Parametros(@"lado",l.Lado)); // Descripción del Lado del Modelo
-                    lista.Add(new Parametros(@"img", l.Imagen.ToString()));// Imagen del Lado del Modelo
+                    lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(l.Foto,l.Formato)));// Imagen del Lado del Modelo
 
                     string proce = "sp_lados_crud";// Nombre del Procedimiento
 
@@ -129,7 +129,7 @@ namespace SADI.Clases.Controladores
                     lista.Add(new Parametros(@"opc", "2"));// Indicarle la opción al procedimiento
                     lista.Add(new Parametros(@"id", l.Id.ToString()));// Identificador del Registro
                     lista.Add(new Parametros(@"lado", l.Lado)); // Descripción del Lado del Modelo
-                    lista.Add(new Parametros(@"img", l.Imagen.ToString()));// Imagen del Lado del Modelo
+                    lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(l.Foto,l.Formato)));// Imagen del Lado del Modelo
 
                     string proce = "sp_lados_crud";// Nombre del Procedimiento
 

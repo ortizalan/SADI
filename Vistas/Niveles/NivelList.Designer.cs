@@ -1,6 +1,6 @@
-﻿namespace SADI.Vistas.Filas
+﻿namespace SADI.Vistas.Niveles
 {
-    partial class FilasList
+    partial class NivelList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,50 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvFilas = new System.Windows.Forms.DataGridView();
+            this.dgvNiveles = new System.Windows.Forms.DataGridView();
             this.cmdOUT = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNiveles)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvFilas
+            // dgvNiveles
             // 
-            this.dgvFilas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFilas.Location = new System.Drawing.Point(0, -2);
-            this.dgvFilas.Name = "dgvFilas";
-            this.dgvFilas.Size = new System.Drawing.Size(660, 316);
-            this.dgvFilas.TabIndex = 0;
-            this.dgvFilas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvFilas_KeyDown);
+            this.dgvNiveles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNiveles.Location = new System.Drawing.Point(0, 1);
+            this.dgvNiveles.Name = "dgvNiveles";
+            this.dgvNiveles.Size = new System.Drawing.Size(583, 269);
+            this.dgvNiveles.TabIndex = 0;
+            this.dgvNiveles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvNiveles_KeyDown);
             // 
             // cmdOUT
             // 
-            this.cmdOUT.Location = new System.Drawing.Point(528, 331);
+            this.cmdOUT.Location = new System.Drawing.Point(460, 290);
             this.cmdOUT.Name = "cmdOUT";
-            this.cmdOUT.Size = new System.Drawing.Size(121, 50);
+            this.cmdOUT.Size = new System.Drawing.Size(112, 59);
             this.cmdOUT.TabIndex = 1;
             this.cmdOUT.Text = ":: SALIR ::";
             this.cmdOUT.UseVisualStyleBackColor = true;
             this.cmdOUT.Click += new System.EventHandler(this.cmdOUT_Click);
             // 
-            // FilasList
+            // NivelList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 400);
+            this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.cmdOUT);
-            this.Controls.Add(this.dgvFilas);
+            this.Controls.Add(this.dgvNiveles);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(1, 1);
-            this.Name = "FilasList";
-            this.Text = "listaFilas";
-            this.Load += new System.EventHandler(this.listaFilas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFilas)).EndInit();
+            this.Name = "NivelList";
+            this.Text = "NivelList";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNiveles)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvFilas;
+        private System.Windows.Forms.DataGridView dgvNiveles;
         private System.Windows.Forms.Button cmdOUT;
     }
 }

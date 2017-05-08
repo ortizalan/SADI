@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
 using SADI.Vistas.Usuarios;
 using SADI.Vistas.Filas;
+using SADI.Vistas.Estantes;
+using SADI.Vistas.Niveles;
 using SADI.Clases;
-
-using DatosBD;
 
 
 namespace SADI
@@ -106,6 +99,48 @@ namespace SADI
             FilasList listaF = new FilasList(2);
             listaF.MdiParent = this;
             listaF.Show();
+        }
+        //Agregar un Estante
+        private void agregarEstanteMenu_Click(object sender, EventArgs e)
+        {
+            EstanteAdd estantafrm = new EstanteAdd();
+            estantafrm.MdiParent = this;
+            estantafrm.Show();
+        }
+        //Mostrar listado de Estantes
+        private void mostrarEstanteMenu_Click(object sender, EventArgs e)
+        {
+            EstantesList listaEst = new EstantesList(1);
+            listaEst.MdiParent = this;
+            listaEst.Show();
+        }
+        //Mostrar listado de los Estantes, para Edición
+        private void editarEstanteMenu_Click(object sender, EventArgs e)
+        {
+            EstantesList listaEst = new EstantesList(2);
+            listaEst.MdiParent = this;
+            listaEst.Show();
+        }
+        //Botón Agregar Registro
+        private void agregarNivelesMenu_Click(object sender, EventArgs e)
+        {
+            NivelAdd nivel = new NivelAdd();// Instancias la Forma
+            nivel.MdiParent = this;//Asignar la Forma Padre 
+            nivel.Show(); //Mostrar la Forma
+        }
+        //Listado para ver detalles del registro
+        private void mostrarNivelesMenu_Click(object sender, EventArgs e)
+        {
+            NivelList nivel = new NivelList(1);//Instanciar la forma
+            nivel.MdiParent = this;// Indicarle la Forma Padre
+            nivel.Show();//MOstrar la Forma
+        }
+        //Listado para Editar el Registro
+        private void editarNivelesMenu_Click(object sender, EventArgs e)
+        {
+            NivelList nivel = new NivelList(2);//Instanciar la Forma
+            nivel.MdiParent = this;// Indicarle la Forma Padre
+            nivel.Show();//Mostrar la Forma
         }
     }
 }

@@ -20,11 +20,11 @@ namespace SADI.Clases.Controladores
         /// <returns>Boleano</returns>
         public override bool ActualizarRegistro(object o)
         {
-            if(o.GetType() == typeof(NivelesModel))// Validar que el Objeto sea del Tipo NivelesModelo
+            if (o.GetType() == typeof(NivelesModel))// Validar que el Objeto sea del Tipo NivelesModelo
             {
                 var n = (NivelesModel)o; // Castear la variabe "n" al tipo NivelesModel
 
-                if(Abrir())// Intentar Abrir la Conexión
+                if (Abrir())// Intentar Abrir la Conexión
                 {
                     // Intento Exitoso
 
@@ -34,17 +34,17 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc", "3"));
                         lista.Add(new Parametros(@"id", n.Id.ToString()));// Identificador del Nivel
                         lista.Add(new Parametros(@"nivel", n.Nivel));//Descripción del Nivel
-                        lista.Add(new Parametros(@"img", n.Imagen.ToString()));// Imagen del Nivel
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(n.Foto, n.Formato)));// Imagen del Nivel
 
                         string proce = "sp_niveles_crud";// Indicar el Nombre del Procedimiento
 
-                        if(EjecutarProcedimiento(proce, lista))//Ejecutar el Procedimiento
+                        if (EjecutarProcedimiento(proce, lista))//Ejecutar el Procedimiento
                         { return true; }// Ejecución Exitosa
                         else
                         { return false; }// Ejecución NO Exitosa, COnsultar Error
 
                     }
-                    catch(Exception e)// Atrapar el Error
+                    catch (Exception e)// Atrapar el Error
                     {
                         Error = e.Message.ToString();// Guardar el Error
                         return false;//Indicar que existe el error
@@ -158,7 +158,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"opc", "2"));
                         lista.Add(new Parametros(@"id", n.Id.ToString()));// Identificador del Nivel
                         lista.Add(new Parametros(@"nivel", n.Nivel));//Descripción del Nivel
-                        lista.Add(new Parametros(@"img", n.Imagen.ToString()));// Imagen del Nivel
+                        lista.Add(new Parametros(@"img", Utilerias.ImageToBase64(n.Foto, n.Formato)));// Imagen del Nivel
 
                         string proce = "sp_niveles_crud";// Indicar el Nombre del Procedimiento
 
@@ -180,6 +180,36 @@ namespace SADI.Clases.Controladores
             }
             else// Noson del mismo tipo
             { return false; }
+        }
+        /// <summary>
+        /// Consultar Sentencia SQL
+        /// </summary>
+        /// <returns></returns>
+        public bool ObtenerUltimoId()
+        {
+            if (Abrir())//Intentar Abrir la Conexión
+            {
+                //Intento Exitoso
+                try
+                {
+                    string sente = "select top 1 Id from Niveles order by Id desc";//Sentencia SQL
+
+                    if (ConsultarSentenciaSQL(sente))//Consultar la Sentencia SQL
+                    { return true; }// Consulta Exitosa
+                    else
+                    { return false; }//COnsulta NO Exitosa, Consultar Error
+                }
+                catch(Exception e)//Capturar el Error
+                {
+                    Error = e.Message.ToString();//Guardar el Error
+                    return false;//Indicar que existe el error
+                }
+                finally { Cerrar(); }//Cerrar la conexión
+            }
+            else//Intento NO Exitoso, Consultar Error
+            {
+                return false;
+            }
         }
     }
 }
