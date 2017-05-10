@@ -142,5 +142,6 @@ namespace SADI
             nivel.MdiParent = this;// Indicarle la Forma Padre
             nivel.Show();//Mostrar la Forma
         }
+
     }
 }
