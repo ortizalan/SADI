@@ -31,7 +31,7 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Identificador de la Sección
 		/// </summary>
-		private SeccionesModel _seccion;
+		private SeccionesModel _seccion = new SeccionesModel();
 		/// <summary>
 		/// Descripción de la Serie
 		/// </summary>

@@ -10,63 +10,114 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
-
-
 using SADI.Clases;
-namespace SADI.Clases.Controladores {
-	/// <summary>
-	/// Controlador para el Modelo Series
-	/// </summary>
-	public class SeriesController : Metodos {
+using SADI.Clases.Modelos;
 
-		public SeriesController(){
 
-		}
+namespace SADI.Clases.Controladores
+{
+    /// <summary>
+    /// Controlador para el Modelo Series
+    /// </summary>
+    public class SeriesController : Metodos
+    {
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
+		public SeriesController()
+        {
 
-		~SeriesController(){
+        }
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
+		~SeriesController()
+        {
 
-		}
+        }
 
-		/// <summary>
-		/// Método Para Actualizar los Registros
-		/// </summary>
-		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
-		public override bool ActualizarRegistro(Object o){
+        /// <summary>
+        /// Método Para Actualizar los Registros
+        /// </summary>
+        /// <returns>Boleano</returns>
+        /// <param name="o">Objeto del Tipo class</param>
+        public override bool ActualizarRegistro(Object o)
+        {
 
-			return false;
-		}
+            return false;
+        }
 
-		/// <summary>
-		/// Método Para Consultar un Registro
-		/// </summary>
-		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
-		public override bool ConsultarRegistro(Object o){
+        /// <summary>
+        /// Método Para Consultar un Registro
+        /// </summary>
+        /// <returns>Boleano</returns>
+        /// <param name="o">Objeto del Tipo class</param>
+        public override bool ConsultarRegistro(Object o)
+        {
 
-			return false;
-		}
+            return false;
+        }
 
-		/// <summary>
-		/// Método para Consultar Todos los Registros
-		/// </summary>
-		/// <returns>Boleano</returns>
-		public override bool ConsultarRegistros(){
+        /// <summary>
+        /// Método para Consultar Todos los Registros
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public override bool ConsultarRegistros()
+        {
 
-			return false;
-		}
+            return false;
+        }
 
-		/// <summary>
-		/// Método para Ingresar un Registro
-		/// </summary>
-		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo Class</param>
-		public override bool IngresarRegisto(Object o){
+        /// <summary>
+        /// Método para Ingresar un Registro
+        /// </summary>
+        /// <returns>Boleano</returns>
+        /// <param name="o">Objeto del Tipo Class</param>
+        public override bool IngresarRegisto(Object o)
+        {
 
-			return false;
-		}
+            return false;
+        }
+        /// <summary>
+        /// Función para Consultar Las Series Relacionadas a una Sección
+        /// </summary>
+        /// <param name="o">Objeto del Tipo SeriesModel</param>
+        /// <returns>Boleano</returns>
+        public bool ConsultarSeriesPorSeccion(Object o)
+        {
+            if (o.GetType() == typeof(SeriesModel))//Verificar si el Objeto es del tipo SeriesModel
+            {
+                //Si es del mismo tipo
 
-	}//end SeriesController
+                var s = (SeriesModel)o;//Castear la variable "s" al tipo del Modelo
+
+                if (Abrir())//Intentar abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        //Sentencia SQL
+                        string sente = "select * from Series where seccion = '" + s.Seccion.Id + "' order by Serie";
+
+                        if (ConsultarSentenciaSQL(sente))//Realizar la consulta por medio de Sentica
+                        { return true; }//Consulta Exitosa
+                        else
+                        { return false; }//Consulta NO Exitosa, Consultar Error
+                    }
+                    catch (Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la Conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                { return false; }
+            }
+            else//No son del mismo tipo
+            { return false; }
+        }
+
+    }//end SeriesController
 
 }//end namespace Controladores

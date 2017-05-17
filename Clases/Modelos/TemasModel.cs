@@ -12,8 +12,8 @@ namespace SADI.Clases.Modelos
     class TemasModel
     {
         private int _id;//identificador del tema
-        private SeccionesModel _seccion;// Identificador de la Sección
-        private SeriesModel _series;// Identificador de la Serie
+        private SeccionesModel _seccion = new SeccionesModel();// Identificador de la Sección
+        private SeriesModel _series = new SeriesModel();// Identificador de la Serie
         private string _tema;// Descripción del Tema
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SADI.Clases.Modelos
         public SeccionesModel Seccion
         {
             get { return _seccion; }
-            set { _seccion = new SeccionesModel(); _seccion = value; }
+            set { _seccion = value; }
         }
         /// <summary>
         /// Acceder al Identificador de la Serie
@@ -35,7 +35,7 @@ namespace SADI.Clases.Modelos
         public SeriesModel Serie
         {
             get { return _series; }
-            set { _series = new SeriesModel(); _series = value; }
+            set { _series = value; }
         }
         /// <summary>
         /// Acceder a la Propiedad Descriptiva del Tema

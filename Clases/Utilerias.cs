@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace SADI.Clases
 {
@@ -143,6 +144,25 @@ namespace SADI.Clases
                 Image imagen = Image.FromStream(ms, true);
                 return imagen;
             }
+        }
+        /// <summary>
+        /// Función para darle un Cierto Formato al DataGrid
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        /// <returns>DataGridView</returns>
+        public static DataGridView PropiedadesDataGridView(DataGridView dgv)
+        {
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            //dgv.ReadOnly = true;
+            dgv.RowHeadersVisible = false;
+
+            return dgv;
         }
     }
 

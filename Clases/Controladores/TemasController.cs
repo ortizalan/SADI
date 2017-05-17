@@ -205,5 +205,47 @@ namespace SADI.Clases.Controladores
                 return false;
             }
         }
+        /// <summary>
+        /// Realizar la Consulta del Tema por Serie y Sección
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public bool ConsultarTemaXSerieSeccion(object o)
+        {
+            if (o.GetType() == typeof(TemasModel))//Verificar que el Objeto sea del Mismo tipo de TemasModel
+            {
+                //SI es del mismo tipo
+                var t = (TemasModel)o;//Castear la variable "t" al tipo TemasModel
+
+                if(Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        string sente = "select * from temas where IdSerie = " + t.Serie.Id + " and Seccion = '" + t.Seccion.Id + "' order by IdTema";
+
+                        if(ConsultarSentenciaSQL(sente))
+                        { return true; }
+                        else
+                        { return false; }
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la Coneión
+                }
+                else//Intento NO Exitoso, Cosultar Error
+                {
+                    return false;
+                }
+            }
+            else//No son del mismo tipo
+            {
+                Error = "no es el objeto del tipo TemasModel.".ToUpper();
+                return false;
+            }
+        }
     }
 }

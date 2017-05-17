@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Conexion.cs" />
+    <Compile Include="Clases\Controladores\AtributosController.cs" />
     <Compile Include="Clases\Controladores\BitacoraController.cs" />
     <Compile Include="Clases\Controladores\CajasController.cs" />
     <Compile Include="Clases\Controladores\ClasificacionesController.cs" />
@@ -142,12 +143,14 @@
     <Compile Include="Clases\Controladores\SeriesController.cs" />
     <Compile Include="Clases\Controladores\SubFondosController.cs" />
     <Compile Include="Clases\Controladores\SubNivelesController.cs" />
+    <Compile Include="Clases\Controladores\TemasController.cs" />
     <Compile Include="Clases\Controladores\TransferenciasController.cs" />
     <Compile Include="Clases\Controladores\UnidadesAdmvasController.cs" />
     <Compile Include="Clases\Controladores\UsuariosController.cs" />
     <Compile Include="Clases\Controladores\ValoracionDoctalController.cs" />
     <Compile Include="Clases\Controladores\ValoresDoctalesController.cs" />
     <Compile Include="Clases\Metodos.cs" />
+    <Compile Include="Clases\Modelos\AtributosModel.cs" />
     <Compile Include="Clases\Modelos\BitacoraModel.cs" />
     <Compile Include="Clases\Modelos\CajasModel.cs" />
     <Compile Include="Clases\Modelos\ClasificacionesModel.cs" />
@@ -166,6 +169,7 @@
     <Compile Include="Clases\Modelos\SeriesModel.cs" />
     <Compile Include="Clases\Modelos\SubFondosModel.cs" />
     <Compile Include="Clases\Modelos\SubNivelesModel.cs" />
+    <Compile Include="Clases\Modelos\TemasModel.cs" />
     <Compile Include="Clases\Modelos\TransferenciasModel.cs" />
     <Compile Include="Clases\Modelos\UnidadesAdmvasModel.cs" />
     <Compile Include="Clases\Modelos\UsuariosModel.cs" />
@@ -183,6 +187,12 @@
     </Compile>
     <Compile Include="UserControls\CatalogosGeoLocalizaControl.Designer.cs">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Atributos\AtributosAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Atributos\AtributosAdd.Designer.cs">
+      <DependentUpon>AtributosAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Estantes\EstanteAdd.cs">
       <SubType>Form</SubType>
@@ -276,6 +286,12 @@
     <Compile Include="Vistas\Niveles\NivelList.Designer.cs">
       <DependentUpon>NivelList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Temas\TemasAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Temas\TemasAdd.Designer.cs">
+      <DependentUpon>TemasAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Usuarios\AgregarUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,6 +312,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\CatalogosGeoLocalizaControl.resx">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Atributos\AtributosAdd.resx">
+      <DependentUpon>AtributosAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Estantes\EstanteAdd.resx">
       <DependentUpon>EstanteAdd.cs</DependentUpon>
@@ -346,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Niveles\NivelList.resx">
       <DependentUpon>NivelList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Temas\TemasAdd.resx">
+      <DependentUpon>TemasAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Usuarios\AgregarUsuarios.resx">
       <DependentUpon>AgregarUsuarios.cs</DependentUpon>
