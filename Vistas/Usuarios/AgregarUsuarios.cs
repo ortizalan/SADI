@@ -51,13 +51,13 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable Jerarquias()
         {
-            if(jc.ConsultarRegistros())
+            if (jc.ConsultarRegistros())
             {
                 return jc.Tabla;
             }
             else
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + jc.Error,"..:: error en base de datos ::..".ToUpper() ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + jc.Error, "..:: error en base de datos ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -67,7 +67,7 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable SubFondo()
         {
-            if(sfc.ConsultarRegistros())
+            if (sfc.ConsultarRegistros())
             {
                 return sfc.Tabla;
             }
@@ -83,7 +83,7 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable UnidadAdmva()
         {
-            if(uac.ConsultarRegistros())
+            if (uac.ConsultarRegistros())
             {
                 return uac.Tabla;
             }
@@ -99,14 +99,14 @@ namespace SADI.Vistas.Usuarios
         /// <returns>DataTable</returns>
         private DataTable Secciones()
         {
-            if(sc.ConsultarRegistros())
+            if (sc.ConsultarRegistros())
             {
                 return sc.Tabla;
             }
             else
             {
                 MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + sc.Error, "..:: error en base de datos ::..".ToUpper()
-                    ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -116,9 +116,6 @@ namespace SADI.Vistas.Usuarios
         private void LLenarCombos()
         {
             usuariosControl1.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
-            usuariosControl1.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
-            usuariosControl1.UnidadAdmva = this.UnidadAdmva();// Llenar el combo de UnidadesAdmvas en el Control
-            usuariosControl1.Seccion = this.Secciones(); // Llenar el combo Secciones en el control
         }
 
         private void LlenarObjetoUsuario()
@@ -132,14 +129,11 @@ namespace SADI.Vistas.Usuarios
             um.Email = usuariosControl1.Email;
             um.Jerarquia.Id = usuariosControl1.IdJerarquia;
             um.Fondo.Id = 63;
-            um.SubFondo.Id = usuariosControl1.IdSubFondo;
-            um.UnidadAdmva.Id = usuariosControl1.IdUnidadAdmva;
-            um.Seccion.Id = usuariosControl1.IdSeccion;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(usuariosControl1.ValidarControl())
+            if (usuariosControl1.ValidarControl())
             {
                 #region pruebas
                 //// Probando el cifrado de la contraseña
@@ -163,14 +157,14 @@ namespace SADI.Vistas.Usuarios
 
                 this.LlenarObjetoUsuario();
 
-                if(uc.IngresarRegisto(um))
+                if (uc.IngresarRegisto(um))
                 {
                     DialogResult r;
-                   r= MessageBox.Show("se ingresó el registro correctamente,".ToUpper() + 
-                        "\n" + "¿desea ingresar otro usuario?".ToUpper(),
-                        "..:: mensaja desde agreagar usuario ::.." ,
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if(r == DialogResult.Yes)
+                    r = MessageBox.Show("se ingresó el registro correctamente,".ToUpper() +
+                         "\n" + "¿desea ingresar otro usuario?".ToUpper(),
+                         "..:: mensaja desde agreagar usuario ::..",
+                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
                     {
                         usuariosControl1.LimpiarControl();
                     }
@@ -182,8 +176,8 @@ namespace SADI.Vistas.Usuarios
                 else
                 {
                     MessageBox.Show("ocurrió el siguiente error :".ToUpper() +
-                        "\n" + uc.Error,"..:: mensaje desde agregar usuario ::..".ToUpper(),
-                        MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        "\n" + uc.Error, "..:: mensaje desde agregar usuario ::..".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

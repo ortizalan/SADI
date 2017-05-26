@@ -34,6 +34,8 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.cmdOUT = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmdIN = new System.Windows.Forms.Button();
+            this.cmdADDTema = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSecciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemas)).BeginInit();
@@ -62,7 +64,7 @@
             this.dgvTemas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTemas.Location = new System.Drawing.Point(837, 58);
             this.dgvTemas.Name = "dgvTemas";
-            this.dgvTemas.Size = new System.Drawing.Size(349, 436);
+            this.dgvTemas.Size = new System.Drawing.Size(349, 404);
             this.dgvTemas.TabIndex = 2;
             // 
             // lblUsuario
@@ -96,12 +98,38 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "SECCIONES :";
             // 
+            // cmdIN
+            // 
+            this.cmdIN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdIN.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdIN.Location = new System.Drawing.Point(910, 500);
+            this.cmdIN.Name = "cmdIN";
+            this.cmdIN.Size = new System.Drawing.Size(153, 57);
+            this.cmdIN.TabIndex = 6;
+            this.cmdIN.Text = ":: INGRESAR ::";
+            this.cmdIN.UseVisualStyleBackColor = true;
+            this.cmdIN.Click += new System.EventHandler(this.cmdIN_Click);
+            // 
+            // cmdADDTema
+            // 
+            this.cmdADDTema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdADDTema.Location = new System.Drawing.Point(1039, 465);
+            this.cmdADDTema.Name = "cmdADDTema";
+            this.cmdADDTema.Size = new System.Drawing.Size(146, 30);
+            this.cmdADDTema.TabIndex = 7;
+            this.cmdADDTema.Text = ":: AGREGAR TEMA ::";
+            this.cmdADDTema.UseVisualStyleBackColor = true;
+            this.cmdADDTema.Click += new System.EventHandler(this.cmdADDTema_Click);
+            // 
             // AtributosAdd
             // 
+            this.AcceptButton = this.cmdIN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdOUT;
             this.ClientSize = new System.Drawing.Size(1198, 569);
+            this.Controls.Add(this.cmdADDTema);
+            this.Controls.Add(this.cmdIN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.lblUsuario);
@@ -127,5 +155,7 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button cmdOUT;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button cmdIN;
+        private System.Windows.Forms.Button cmdADDTema;
     }
 }

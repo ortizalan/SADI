@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SADI.Clases;
 using SADI.Clases.Modelos;
 using SADI.Clases.Controladores;
+using SADI.Vistas.Atributos;
 
 namespace SADI.Vistas.Temas
 {
@@ -21,6 +22,9 @@ namespace SADI.Vistas.Temas
         SeccionesController secc = new SeccionesController();//Controlador Secciones
         SeriesModel serm = new SeriesModel();//Modelo de Secciones
         SeriesController serc = new SeriesController();//Controlador de Secciones
+        AtributosAdd formad = new AtributosAdd();//Forma Atributosdd
+        public delegate void LLenarTemas(int serie, string seccion);//Delegado
+        public event LLenarTemas PasarTema;//Evento
 
         //Constructor de la Clase
         public TemasAdd()
@@ -37,13 +41,13 @@ namespace SADI.Vistas.Temas
         public TemasAdd(string sec, int ser)
         {
             InitializeComponent();
-
-            secm.Id = sec;
+            serm.Seccion.Id = sec;
             serm.Id = ser;
 
             LLenarComboSecciones();
             cboSecciones.SelectedValue = sec;
-            LLenarComboSeries(secm);
+            LLenarComboSeries(serm);
+            //cboSeries.SelectedValue = ser;
 
         }
         /// <summary>
@@ -88,9 +92,13 @@ namespace SADI.Vistas.Temas
                 if (serc.Tabla.Rows.Count > 0)//Verificar que la consulta cuente con Registros
                 {
                     //Si cuenta con registro
+                    object sender = string.Empty;
+                    EventArgs ev = null;
                     cboSeries.DataSource = serc.Tabla;
                     cboSeries.ValueMember = serc.Tabla.Columns[0].ColumnName;
                     cboSeries.DisplayMember = serc.Tabla.Columns[2].ColumnName;
+                    if (serm.Id > 0) { cboSeries.SelectedValue = serm.Id; }//Si mandamos el valor desde otra forma
+                    cboSeries_SelectedIndexChanged(sender, ev);
                 }
                 else//NO cuenta con registros
                 {
@@ -118,6 +126,10 @@ namespace SADI.Vistas.Temas
 
         private void cmdOUT_Click(object sender, EventArgs e)
         {
+            //AtributosAdd fa = (AtributosAdd)Application.OpenForms["AtributosAdd"];
+            //fa.Delegado.Invoke(serm.Id, serm.Seccion.Id);
+            if (serm.Id > 0 && !string.IsNullOrEmpty(serm.Seccion.Id))
+            { PasarTema(serm.Id, serm.Seccion.Id); }
             Close();
         }
         /// <summary>
@@ -127,7 +139,7 @@ namespace SADI.Vistas.Temas
         /// <param name="e"></param>
         private void cmdIN_Click(object sender, EventArgs e)
         {
-            if(ValidarControles())//Validar los Controles de la Forma
+            if (ValidarControles())//Validar los Controles de la Forma
             {
                 LLenarObjetoTema();
                 IngresarTema();
@@ -178,35 +190,40 @@ namespace SADI.Vistas.Temas
         /// </summary>
         private void LLenarObjetoTema()
         {
-            tm.Seccion.Id = cboSecciones.SelectedValue.ToString();
-            tm.Serie.Id = (int)cboSeries.SelectedValue;
-            tm.Tema = txtTema.Text;
+            tm.Seccion.Id = cboSecciones.SelectedValue.ToString();//Agregarle el Valor de la Sección al Objeto
+            tm.Serie.Id = (int)cboSeries.SelectedValue;//Agregar el valor de la Serie al Objeto
+            tm.Tema = txtTema.Text;// Igualar Objetos
         }
         /// <summary>
         /// Ingresar el Registro a la base de datos
         /// </summary>
         private void IngresarTema()
         {
-            if(tc.IngresarRegisto(tm))//Intentar el Ingreso del Registro
+            if (tc.IngresarRegisto(tm))//Intentar el Ingreso del Registro
             {
                 //Se ingresó Correctamente..
+                cboSecciones.SelectedValue = tm.Seccion.Id;//Indicarle los valores seleccionados a los combos
+                cboSeries.SelectedValue = tm.Serie.Id;// -----
+                LLenarGridTemas();//LLenar el grid de Temas
+
                 DialogResult r;
                 r = MessageBox.Show("se ingresó el registro exitosamente,".ToUpper() + "\n" + "¿desea agregar otro registro?".ToUpper(),
-                    ":: mensaje desde agregar tema ::".ToUpper(),MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                if(r == DialogResult.Yes)//Si la respuesta es si
+                    ":: mensaje desde agregar tema ::".ToUpper(), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)//Si la respuesta es si
                 {
-                    LimpiarControles();
+                    LimpiarControles();// Método para limpiar los controles de la Instancia TemasAdd
                 }
                 else//Si la respuesta es NO
                 {
-                    Close();
+                    EventArgs ev = null;//Instancia del Argumentos del Evento
+                    cmdOUT_Click(this, ev);//Ejecutar el Evento
                 }
             }
             else//Ingreso NO Exitoso
             {
                 MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + tc.Error, ":: mensaje desde agregar tema ::".ToUpper(),
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
+                Close();// Cerrar la Forma
             }
         }
         /// <summary>
@@ -214,18 +231,89 @@ namespace SADI.Vistas.Temas
         /// </summary>
         private void LimpiarControles()
         {
-            if (!string.IsNullOrEmpty(tm.Seccion.Id) && tm.Serie.Id > 0)
+            if (!string.IsNullOrEmpty(tm.Seccion.Id) && tm.Serie.Id > 0)//Si contienen valores el Objeto Tema
             {
-                cboSecciones.SelectedValue = tm.Seccion.Id;
-                cboSeries.SelectedValue = tm.Serie.Id;
-                txtTema.Text = string.Empty;
+                txtTema.Text = string.Empty;//Limpiar el campo Tema
+                txtTema.Focus();//Dejar el campo Tema seleccionado
             }
             else//Están vacios los campos 
             {
-                LLenarComboSecciones();
-                cboSeries.DataSource = null;
-                txtTema.Text = string.Empty;
+                LLenarComboSecciones();//LLenado del combo Secciones
+                cboSeries.DataSource = null;//Limpiar el combgo Series
+                txtTema.Text = string.Empty;// Limpiar el campo Tema
             }
         }
+        /// <summary>
+        /// LLenado del Grid Temas
+        /// </summary>
+        private void LLenarGridTemas()
+        {
+            if (tc.ConsultarTemaXSerieSeccion(tm))//Intentar Consulta de Tema por Seccion y Serie
+            {
+                int idx = 0;// Variabla para identificar el índice a seleccionar
+                if (tc.Tabla.Rows.Count > 0)
+                {
+                    dgvTemas.DataSource = tc.Tabla;//Indicarle la fuente de datos al Grid
+                    dgvTemas = Utilerias.PropiedadesDataGridView(dgvTemas);//Pre formato establecido en las clases
+                    dgvTemas.Columns[0].Visible = false;//Ocultar la identificación
+                    dgvTemas.Columns[1].Width = 50;// Ancho de la columna
+                    dgvTemas.Columns[2].Width = 50;// ----
+                    dgvTemas.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;//------
+                    idx = dgvTemas.Rows.Count - 1;// Indice
+                    dgvTemas.Rows[idx].Selected = true;//Seleccionar el último registro
+
+                }
+                else
+                {
+                    dgvTemas.DataSource = null;// LImpiar el control DataGridView
+                }
+            }
+            else//Intento NO Exitoso
+            {
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + tc.Error,
+                    ":: mensaje desde agregar tema ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();// Cerrar la forma
+            }
+        }
+        /// <summary>
+        /// Método para la validación del cambio de slección del Combo Temas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                tm.Seccion.Id = serm.Seccion.Id;
+                tm.Serie.Id = (int)cboSeries.SelectedValue;
+                if (!string.IsNullOrEmpty(tm.Seccion.Id) && tm.Serie.Id > 0)//Verificar que no estén vacion los identificadores
+                {
+                    LLenarGridTemas();
+                }
+                else//Estan Vacíos los identificadores de Seccion y Serie
+                {
+                    dgvTemas.DataSource = null;//Limpi<r el Grid Temas
+                }
+            }
+        }
+    
+        private void TemasAdd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //PasarTema(serm.Id, serm.Seccion.Id);
+
+            //AtributosAdd fa = (AtributosAdd)Application.OpenForms["AtributosAdd"];
+            //fa.Delegado.Invoke(serm.Id, serm.Seccion.Id);
+
+            //foreach(Form f in Application.OpenForms)
+            //{
+            //    if(f.GetType() == typeof(Atributos.AtributosAdd))
+            //    {
+            //        Form fm = (Atributos.AtributosAdd)f;
+
+            //    }
+            //}
+
+        }
+
     }
 }

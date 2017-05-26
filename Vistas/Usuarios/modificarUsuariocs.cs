@@ -33,7 +33,7 @@ namespace SADI.Vistas.Usuarios
             }
             if (CtrllSubF.ConsultarRegistros())
             {
-                usuariosControl1.SubFondo = CtrllSubF.Tabla;
+
             }
             else
             {

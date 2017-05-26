@@ -58,11 +58,10 @@ namespace SADI
                     um.Paterno = (string)uc.Tabla.Rows[0][4];
                     um.Materno = (string)uc.Tabla.Rows[0][5];
                     um.Fondo.Id = (int)uc.Tabla.Rows[0][6];
-                    um.SubFondo.Id = (int)uc.Tabla.Rows[0][7];
-                    um.UnidadAdmva.Id = (int)uc.Tabla.Rows[0][8];
-                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][9];
-                    um.Email = (string)uc.Tabla.Rows[0][10];
-                    um.Estatus = (bool)uc.Tabla.Rows[0][11];
+                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][7];
+                    um.Email = (string)uc.Tabla.Rows[0][8];
+                    um.Estatus = (bool)uc.Tabla.Rows[0][9];
+                    um.Atributos = (bool)uc.Tabla.Rows[0][10];
                 }
             }
             else// No se pudo realizar la COnsulta

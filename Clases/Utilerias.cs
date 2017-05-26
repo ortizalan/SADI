@@ -159,7 +159,7 @@ namespace SADI.Clases
             dgv.AllowUserToResizeRows = false;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.MultiSelect = false;
-            //dgv.ReadOnly = true;
+            dgv.ReadOnly = true;
             dgv.RowHeadersVisible = false;
 
             return dgv;

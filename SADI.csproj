@@ -194,6 +194,18 @@
     <Compile Include="Vistas\Atributos\AtributosAdd.Designer.cs">
       <DependentUpon>AtributosAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Atributos\AtributosList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Atributos\AtributosList.Designer.cs">
+      <DependentUpon>AtributosList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Atributos\Presumir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Atributos\Presumir.Designer.cs">
+      <DependentUpon>Presumir.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Estantes\EstanteAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Atributos\AtributosAdd.resx">
       <DependentUpon>AtributosAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Atributos\Presumir.resx">
+      <DependentUpon>Presumir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Estantes\EstanteAdd.resx">
       <DependentUpon>EstanteAdd.cs</DependentUpon>

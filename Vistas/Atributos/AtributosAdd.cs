@@ -10,9 +10,12 @@ using System.Windows.Forms;
 using SADI.Clases;
 using SADI.Clases.Modelos;
 using SADI.Clases.Controladores;
+using SADI.Vistas.Temas;
 
 namespace SADI.Vistas.Atributos
 {
+    //public delegate void delegado(int v1, string v2);//Declaración del Delegado
+    //public delegado Delegado; //Instancia del Delegado
 
     public partial class AtributosAdd : Form
     {
@@ -33,6 +36,19 @@ namespace SADI.Vistas.Atributos
         public AtributosAdd()
         {
             InitializeComponent();
+            cmdADDTema.Enabled = false;
+            cmdADDTema.Visible = false;
+            //Delegado = new delegado(EnvioValorTemaXSerie);//Asignación del Método al Delegado
+            dgvSeries.DataBindings.CollectionChanged += new CollectionChangeEventHandler(Rows_CollectionChanged);
+        }
+
+        private void Rows_CollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
+            if(dgvSeries.Rows.Count == 0)
+            {
+                dgvTemas.DataSource = null;
+                dgvTemas.Columns.Clear();
+            }
         }
         /// <summary>
         /// Contructor de la Clase
@@ -41,6 +57,8 @@ namespace SADI.Vistas.Atributos
         public AtributosAdd(int idUsr)
         {
             InitializeComponent();
+            cmdADDTema.Enabled = false;
+            cmdADDTema.Visible = false;
             um.Id = idUsr;
             if (uc.ConsultarRegistro(um))//Intentar la consulta del Registro del Usuario
             { LLenarObjetoUsuario(); }//Intento Exitoso
@@ -131,6 +149,7 @@ namespace SADI.Vistas.Atributos
         /// </summary>
         private void cmdOUT_Click(object sender, EventArgs e)
         {
+            
             Close();
         }
         /// <summary>
@@ -174,7 +193,7 @@ namespace SADI.Vistas.Atributos
             dgvSeries.Columns[0].Visible = false;
             dgvSeries.Columns[1].Width = 50;
             dgvSeries.Columns[2].Width = 267;
-            dgvSeries.Columns[3].Width = 48;
+            dgvSeries.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         /// <summary>
         /// Método para Agregar Cpumna con Valores de CheckBoc
@@ -205,6 +224,8 @@ namespace SADI.Vistas.Atributos
                 chk.Value = chk.FalseValue;//CAmbiar el Valor a Falso
                 dgvSeries.DataSource = null;
                 dgvSeries.Columns.Clear();
+                dgvTemas.DataSource = null;
+                dgvTemas.Columns.Clear();
             }
         }
         /// <summary>
@@ -213,7 +234,7 @@ namespace SADI.Vistas.Atributos
         private void dgvSeries_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewCheckBoxCell chkSer = (DataGridViewCheckBoxCell)dgvSeries.SelectedRows[0].Cells[e.ColumnIndex];
-            if(chkSer.Value == chkSer.FalseValue || chkSer.Value == null)
+            if (chkSer.Value == chkSer.FalseValue || chkSer.Value == null)
             {
                 chkSer.Value = chkSer.TrueValue;//Cambiar el Valor a Verdadero
                 EnvioValorTemaXSerie((int)dgvSeries.SelectedRows[0].Cells["idSerie"].Value,
@@ -236,17 +257,41 @@ namespace SADI.Vistas.Atributos
             tm.Serie.Id = value1;//Indicar la Serie
             tm.Seccion.Id = value2;//Indicar la Sección
 
-            if(tc.ConsultarTemaXSerieSeccion(tm))//Intentar la Consulta
+            if (tc.ConsultarTemaXSerieSeccion(tm))//Intentar la Consulta
             {
                 //Intento Exitoso
-                if(tc.Tabla.Rows.Count > 0)//Ver que existan registros
+                if (tc.Tabla.Rows.Count > 0)//Ver que existan registros
                 {
                     LLenarGridTemas();
+                    cmdADDTema.Enabled = true;
+                    cmdADDTema.Visible = true;
                 }
                 else// NO existen registros
                 {
-                    MessageBox.Show("no existen registros para esa sección y serie".ToUpper(), ":: mensaje desde ingresar atributos ::".ToUpper(),
-                        MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    if (!cmdADDTema.Enabled)
+                    {
+                        DialogResult r;
+                        r = MessageBox.Show("no existen registros para esa sección y serie".ToUpper() + "\n" +
+                            "¿desea ingresar un tema a la serie?".ToUpper(),
+                            ":: mensaje desde ingresar atributos ::".ToUpper(),
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (r == DialogResult.Yes)
+                        {
+                            if (cmdADDTema.Enabled == false)
+                            {
+                                cmdADDTema.Enabled = true;
+                                cmdADDTema.Visible = true;
+                                EventArgs ev = null;
+                                cmdADDTema_Click(this, ev);
+                            }
+
+                            //this.Enabled = false;
+                        }
+                        else
+                        {
+                            Close();
+                        }
+                    }
                 }
             }
             else//Intento NO Exitoso, Consultar Error
@@ -264,6 +309,12 @@ namespace SADI.Vistas.Atributos
             dgvTemas.DataSource = tc.Tabla;
             dgvTemas = Utilerias.PropiedadesDataGridView(dgvTemas);
             AgregarColumnaValidarGridTemas();
+            dgvTemas.Columns[0].Visible = false;
+            dgvTemas.Columns[1].Width = 50;
+            dgvTemas.Columns[1].HeaderText = "Id Serie";
+            dgvTemas.Columns[2].Width = 50;
+            dgvTemas.Columns[3].Width = 210;
+            dgvTemas.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         /// <summary>
         /// Método para Ingresar una Columna
@@ -277,6 +328,47 @@ namespace SADI.Vistas.Atributos
             dgvcolt.Name = "Sel";
             dgvcolt.HeaderText = "Selección";
             dgvTemas.Columns.Insert(4, dgvcolt);
+        }
+        //Botón para ingresar los atributos del Usuario
+        //Si no es administrador, debe de Tener Atributos Designados
+        private void cmdIN_Click(object sender, EventArgs e)
+        {
+            LLenarTablaAtribuciones();
+        }
+        /// <summary>
+        /// Validar las selecciones de los Grids de los Atributos
+        /// y agregarlos a la tabla
+        /// </summary>
+        private void LLenarTablaAtribuciones()
+        {
+            foreach (DataGridViewRow rsecc in dgvSecciones.Rows)
+            {
+                if (rsecc.Cells["Sel"].Value != null)// Validar que contenga valor la celda
+                {
+                    if ((bool)rsecc.Cells["Sel"].Value)//
+                    {
+                        foreach (DataGridViewRow rser in dgvSeries.Rows)
+                        {
+                            if (rser.Cells["Sel"].Value != null)//Validar que contenga Valor la Celda
+                            {
+                                if ((bool)rser.Cells["Sel"].Value)
+                                {
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Agregar Tema 
+        /// </summary>
+        private void cmdADDTema_Click(object sender, EventArgs e)
+        {
+            TemasAdd tForm = new TemasAdd(tm.Seccion.Id, tm.Serie.Id);
+            tForm.PasarTema += new TemasAdd.LLenarTemas(EnvioValorTemaXSerie);
+            tForm.Show();
         }
     }
 }

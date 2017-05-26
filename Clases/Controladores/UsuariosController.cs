@@ -54,8 +54,6 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"pat", u.Paterno));// Apellido Paterno del Usuario
                         lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
                         lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));// Fondo al que pertence el Usuario
-                        lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));// SubFondo al que pertenece el Usuario
-                        lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));// Unidad Administrativa a la que Pertenece el Usuario
                         lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario
                         lista.Add(new Parametros(@"email",(!string.IsNullOrEmpty(u.Email)?u.Email:string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
@@ -102,11 +100,10 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"pat", string.Empty));
                         lista.Add(new Parametros(@"mat", string.Empty));
                         lista.Add(new Parametros(@"fondo", string.Empty));
-                        lista.Add(new Parametros(@"subf", string.Empty));
-                        lista.Add(new Parametros(@"unidad", string.Empty));
                         lista.Add(new Parametros(@"jera", string.Empty));
                         lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", string.Empty));
+                        lista.Add(new Parametros(@"atr", string.Empty));
 
                         string proce = "sp_usuarios_crud";// Nombre del procedimiento
 
@@ -197,11 +194,10 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"pat", u.Paterno));
                         lista.Add(new Parametros(@"mat", (!string.IsNullOrEmpty(u.Materno) ? u.Materno : string.Empty)));// Validar que la variable materno no sea nula
                         lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));
-                        lista.Add(new Parametros(@"subf", u.SubFondo.Id.ToString()));
-                        lista.Add(new Parametros(@"unidad", u.UnidadAdmva.Id.ToString()));
                         lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
                         lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", "1"));// Si se vá a ingresar, siempre será activo
+                        lista.Add(new Parametros(@"atr", (u.Atributos ? "1" : "0")));
 
                         string proce = "sp_usuarios_crud";
 

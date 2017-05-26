@@ -46,14 +46,9 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cboSeccion = new System.Windows.Forms.ComboBox();
-            this.cboUnidadAdmva = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cboSubFondo = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.chkAtributos = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -233,79 +228,14 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.cboSeccion);
-            this.groupBox3.Controls.Add(this.cboUnidadAdmva);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.cboSubFondo);
-            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(311, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(510, 206);
+            this.groupBox3.Size = new System.Drawing.Size(277, 75);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DATOS ADMINISTRATIVOS :";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(47, 138);
-            this.label12.Name = "label12";
-            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label12.Size = new System.Drawing.Size(60, 13);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "SECCIÓN :";
-            // 
-            // cboSeccion
-            // 
-            this.cboSeccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSeccion.FormattingEnabled = true;
-            this.cboSeccion.Location = new System.Drawing.Point(130, 135);
-            this.cboSeccion.Name = "cboSeccion";
-            this.cboSeccion.Size = new System.Drawing.Size(367, 21);
-            this.cboSeccion.TabIndex = 5;
-            this.cboSeccion.SelectedIndexChanged += new System.EventHandler(this.cboSeccion_SelectedIndexChanged);
-            // 
-            // cboUnidadAdmva
-            // 
-            this.cboUnidadAdmva.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboUnidadAdmva.FormattingEnabled = true;
-            this.cboUnidadAdmva.Location = new System.Drawing.Point(130, 100);
-            this.cboUnidadAdmva.Name = "cboUnidadAdmva";
-            this.cboUnidadAdmva.Size = new System.Drawing.Size(367, 21);
-            this.cboUnidadAdmva.TabIndex = 1;
-            this.cboUnidadAdmva.SelectedIndexChanged += new System.EventHandler(this.cboUnidadAdmva_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 95);
-            this.label10.Name = "label10";
-            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label10.Size = new System.Drawing.Size(104, 26);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "UNIDAD\r\n: ADMINISTRATIVA";
-            // 
-            // cboSubFondo
-            // 
-            this.cboSubFondo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSubFondo.FormattingEnabled = true;
-            this.cboSubFondo.Location = new System.Drawing.Point(130, 63);
-            this.cboSubFondo.Name = "cboSubFondo";
-            this.cboSubFondo.Size = new System.Drawing.Size(367, 21);
-            this.cboSubFondo.TabIndex = 0;
-            this.cboSubFondo.SelectedIndexChanged += new System.EventHandler(this.cboSubFondo_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(34, 70);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "SUBFONDO :";
             // 
             // label8
             // 
@@ -326,14 +256,27 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "FONDO :";
             // 
+            // chkAtributos
+            // 
+            this.chkAtributos.AutoSize = true;
+            this.chkAtributos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAtributos.Location = new System.Drawing.Point(433, 174);
+            this.chkAtributos.Name = "chkAtributos";
+            this.chkAtributos.Size = new System.Drawing.Size(155, 21);
+            this.chkAtributos.TabIndex = 2;
+            this.chkAtributos.Text = "Agregar Atributos";
+            this.chkAtributos.UseVisualStyleBackColor = true;
+            this.chkAtributos.CheckedChanged += new System.EventHandler(this.chkAtributos_CheckedChanged);
+            // 
             // UsuariosControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkAtributos);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "UsuariosControl";
-            this.Size = new System.Drawing.Size(831, 344);
+            this.Size = new System.Drawing.Size(602, 344);
             this.Load += new System.EventHandler(this.UsuariosControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -342,6 +285,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -363,15 +307,10 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox cboUnidadAdmva;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox cboSubFondo;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cboSeccion;
+        private System.Windows.Forms.CheckBox chkAtributos;
     }
 }

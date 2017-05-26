@@ -44,9 +44,9 @@
             // 
             this.cboSecciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSecciones.FormattingEnabled = true;
-            this.cboSecciones.Location = new System.Drawing.Point(178, 56);
+            this.cboSecciones.Location = new System.Drawing.Point(149, 56);
             this.cboSecciones.Name = "cboSecciones";
-            this.cboSecciones.Size = new System.Drawing.Size(268, 21);
+            this.cboSecciones.Size = new System.Drawing.Size(378, 21);
             this.cboSecciones.TabIndex = 0;
             this.cboSecciones.SelectedIndexChanged += new System.EventHandler(this.cboSecciones_SelectedIndexChanged);
             // 
@@ -54,15 +54,16 @@
             // 
             this.cboSeries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSeries.FormattingEnabled = true;
-            this.cboSeries.Location = new System.Drawing.Point(178, 100);
+            this.cboSeries.Location = new System.Drawing.Point(149, 100);
             this.cboSeries.Name = "cboSeries";
-            this.cboSeries.Size = new System.Drawing.Size(268, 21);
+            this.cboSeries.Size = new System.Drawing.Size(378, 21);
             this.cboSeries.TabIndex = 1;
+            this.cboSeries.SelectedIndexChanged += new System.EventHandler(this.cboSeries_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 59);
+            this.label1.Location = new System.Drawing.Point(30, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 13);
             this.label1.TabIndex = 2;
@@ -71,7 +72,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(69, 108);
+            this.label2.Location = new System.Drawing.Point(45, 103);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 3;
@@ -80,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 149);
+            this.label3.Location = new System.Drawing.Point(22, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 13);
             this.label3.TabIndex = 4;
@@ -89,22 +90,23 @@
             // txtTema
             // 
             this.txtTema.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtTema.Location = new System.Drawing.Point(178, 146);
+            this.txtTema.Location = new System.Drawing.Point(149, 146);
             this.txtTema.Name = "txtTema";
-            this.txtTema.Size = new System.Drawing.Size(268, 20);
+            this.txtTema.Size = new System.Drawing.Size(378, 20);
             this.txtTema.TabIndex = 5;
             // 
             // dgvTemas
             // 
             this.dgvTemas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTemas.Location = new System.Drawing.Point(489, 12);
+            this.dgvTemas.Location = new System.Drawing.Point(542, 12);
             this.dgvTemas.Name = "dgvTemas";
-            this.dgvTemas.Size = new System.Drawing.Size(379, 213);
+            this.dgvTemas.Size = new System.Drawing.Size(411, 213);
             this.dgvTemas.TabIndex = 6;
             // 
             // cmdIN
             // 
-            this.cmdIN.Location = new System.Drawing.Point(580, 238);
+            this.cmdIN.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdIN.Location = new System.Drawing.Point(667, 237);
             this.cmdIN.Name = "cmdIN";
             this.cmdIN.Size = new System.Drawing.Size(142, 59);
             this.cmdIN.TabIndex = 7;
@@ -114,7 +116,8 @@
             // 
             // cmdOUT
             // 
-            this.cmdOUT.Location = new System.Drawing.Point(724, 238);
+            this.cmdOUT.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdOUT.Location = new System.Drawing.Point(809, 237);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(142, 59);
             this.cmdOUT.TabIndex = 8;
@@ -124,9 +127,11 @@
             // 
             // TemasAdd
             // 
+            this.AcceptButton = this.cmdIN;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 316);
+            this.CancelButton = this.cmdOUT;
+            this.ClientSize = new System.Drawing.Size(965, 304);
             this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.cmdIN);
             this.Controls.Add(this.dgvTemas);
@@ -139,6 +144,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TemasAdd";
             this.Text = "TemasAdd";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TemasAdd_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

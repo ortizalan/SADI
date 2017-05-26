@@ -19,14 +19,14 @@ namespace SADI.Clases.Controladores
             {
                 //SI son del mismo tipo
                 var a = (AtributosModel)o;//Castear la Variable "a" al tipo AccesibilidadModel
-                if(Abrir())//Intentar Abrir la Conexión
+                if (Abrir())//Intentar Abrir la Conexión
                 {
                     //Intento Exitoso
                     List<Parametros> lista = new List<Parametros>();
                     lista.Add(new Parametros(@"opc", "3"));//Indicarle una Opción al Procedimiento
                     lista.Add(new Parametros(@"id", a.Id.ToString()));//Identificador del Registro
                     lista.Add(new Parametros(@"usuario", a.Usuario.Id.ToString()));//Identificador del Usuario
-                    lista.Add(new Parametros(@"serie",a.Serie.Id.ToString()));//Identificador de la Serie
+                    lista.Add(new Parametros(@"serie", a.Serie.Id.ToString()));//Identificador de la Serie
                     lista.Add(new Parametros(@"seccion", a.Seccion.Id));//Identificador de la Sección
                     lista.Add(new Parametros(@"tema", a.Temas.Id.ToString()));//Identificador del Tema
 
@@ -86,7 +86,7 @@ namespace SADI.Clases.Controladores
         /// <returns>Boleano</returns>
         public override bool ConsultarRegistros()
         {
-            if(Abrir())//Intentar Abrir la Conexión
+            if (Abrir())//Intentar Abrir la Conexión
             {
                 //Intento Exitoso
                 List<Parametros> lista = new List<Parametros>();

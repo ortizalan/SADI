@@ -21,19 +21,17 @@ namespace SADI.Clases.Modelos {
 	public class UsuariosModel {
 
 		
-		private string _contraseña;
-		private bool _estatus;
-		private int _id;
+		private string _contraseña;//Contraseña del Usuario
+		private bool _estatus;// Estatus del Usuario
+		private int _id;// Identificador del Usuario
 		private JerarquiasModel _jerarquia = new JerarquiasModel();
+        private FondosModel _fondo = new FondosModel();
 		private string _materno;
 		private string _nombre;
 		private string _paterno;
-		private UnidadesAdmvasModel _unidadAdmva = new UnidadesAdmvasModel();
-		private FondosModel _fondo = new FondosModel();
-		private SubFondosModel _subfondo = new SubFondosModel();
-        private SeccionesModel _seccion = new SeccionesModel();
         private string _email;
 		private string _usuario;
+        private bool _atributos;
 
 		/// <summary>
 		/// Constructor de la Clase
@@ -70,7 +68,6 @@ namespace SADI.Clases.Modelos {
 			get { return _estatus; }
             set { _estatus = value; }
 		}
-
 		/// <summary>
 		/// Acceder a la identificación del Usuario
 		/// </summary>
@@ -78,7 +75,6 @@ namespace SADI.Clases.Modelos {
 			get { return _id; }
             set { _id = value; }
 		}
-
 		/// <summary>
 		/// Acceder a la Propiedad Jerarquia
 		/// </summary>
@@ -86,7 +82,6 @@ namespace SADI.Clases.Modelos {
 			get { return _jerarquia; }
 			set { _jerarquia = value; }
 		}
-
 		/// <summary>
 		/// Acceder a la Propiedad Apellido Materno
 		/// </summary>
@@ -94,7 +89,6 @@ namespace SADI.Clases.Modelos {
 			get { return _materno; }
 			set { _materno = value; }
 		}
-
 		/// <summary>
 		/// Acceder a la Propiedad Nombre del Usuario
 		/// </summary>
@@ -102,7 +96,6 @@ namespace SADI.Clases.Modelos {
 			get { return _nombre; }
             set { _nombre = value; }
 		}
-
 		/// <summary>
 		/// Acceder a la Propiedad Apellido Paterno
 		/// </summary>
@@ -110,15 +103,6 @@ namespace SADI.Clases.Modelos {
 			get { return _paterno; }
             set { _paterno = value; }
 		}
-
-		/// <summary>
-		/// Acceder a la Propiedad Unidad Administrativa
-		/// </summary>
-		public UnidadesAdmvasModel UnidadAdmva{
-			get { return _unidadAdmva; }
-			set { _unidadAdmva = value; }
-		}
-
 		/// <summary>
 		/// Acceder a la propiedad Usuario
 		/// </summary>
@@ -135,14 +119,6 @@ namespace SADI.Clases.Modelos {
             set { _fondo = value; }
         }
         /// <summary>
-        /// Acceso a la Propiedad SubFondo
-        /// </summary>
-        public SubFondosModel SubFondo
-        {
-            get { return _subfondo; }
-            set { _subfondo = value; }
-        }
-        /// <summary>
         /// Acceso a la Propiedad Email
         /// </summary>
         public string Email
@@ -151,13 +127,14 @@ namespace SADI.Clases.Modelos {
             set { _email = value; }
         }
         /// <summary>
-        /// Acceso a la Propiedad Sección
+        /// Acceso ala Propiedad Atributos
         /// </summary>
-        public SeccionesModel Seccion
+        public bool Atributos
         {
-            get { return _seccion; }
-            set { _seccion = value; }
+            get { return _atributos; }
+            set { _atributos = value; }
         }
+        
 	}//end UsuariosModel
 
 }//end namespace Modelos
