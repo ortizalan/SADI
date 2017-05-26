@@ -23,8 +23,8 @@ namespace SADI.Vistas.Temas
         SeriesModel serm = new SeriesModel();//Modelo de Secciones
         SeriesController serc = new SeriesController();//Controlador de Secciones
         AtributosAdd formad = new AtributosAdd();//Forma Atributosdd
-        public delegate void LLenarTemas(int serie, string seccion);//Delegado
-        public event LLenarTemas PasarTema;//Evento
+        public delegate void LLenarTemas(int serie, string seccion);//Delegado de la Forma
+        public event LLenarTemas PasarTema;//Evento Asignado al Delegao
 
         //Constructor de la Clase
         public TemasAdd()
@@ -41,12 +41,12 @@ namespace SADI.Vistas.Temas
         public TemasAdd(string sec, int ser)
         {
             InitializeComponent();
-            serm.Seccion.Id = sec;
-            serm.Id = ser;
+            serm.Seccion.Id = sec;// Asignar la Identificación de la Sección al Objeto
+            serm.Id = ser;// Asignar la Identificación del Servicio al Objeto
 
-            LLenarComboSecciones();
-            cboSecciones.SelectedValue = sec;
-            LLenarComboSeries(serm);
+            LLenarComboSecciones();// Método para el Llenado del Combo Secciones
+            cboSecciones.SelectedValue = sec;// Valor Seleccionado de las Secciones
+            LLenarComboSeries(serm);// Método para el llenado Combo Series
             //cboSeries.SelectedValue = ser;
 
         }
@@ -129,8 +129,8 @@ namespace SADI.Vistas.Temas
             //AtributosAdd fa = (AtributosAdd)Application.OpenForms["AtributosAdd"];
             //fa.Delegado.Invoke(serm.Id, serm.Seccion.Id);
             if (serm.Id > 0 && !string.IsNullOrEmpty(serm.Seccion.Id))
-            { PasarTema(serm.Id, serm.Seccion.Id); }
-            Close();
+            { PasarTema(serm.Id, serm.Seccion.Id); }//Evento Asignado al Delegado
+            Close();// Cerrar la forma
         }
         /// <summary>
         /// Método para Ingresar un Nuevo Tema
@@ -216,7 +216,7 @@ namespace SADI.Vistas.Temas
                 else//Si la respuesta es NO
                 {
                     EventArgs ev = null;//Instancia del Argumentos del Evento
-                    cmdOUT_Click(this, ev);//Ejecutar el Evento
+                    cmdOUT_Click(this, ev);//Ejecutar el Evento del Botón :: SALIR ::
                 }
             }
             else//Ingreso NO Exitoso

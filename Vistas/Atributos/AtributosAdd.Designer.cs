@@ -106,7 +106,7 @@
             this.cmdIN.Name = "cmdIN";
             this.cmdIN.Size = new System.Drawing.Size(153, 57);
             this.cmdIN.TabIndex = 6;
-            this.cmdIN.Text = ":: INGRESAR ::";
+            this.cmdIN.Text = ":: ASIGNAR ::";
             this.cmdIN.UseVisualStyleBackColor = true;
             this.cmdIN.Click += new System.EventHandler(this.cmdIN_Click);
             // 
@@ -115,7 +115,7 @@
             this.cmdADDTema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdADDTema.Location = new System.Drawing.Point(1039, 465);
             this.cmdADDTema.Name = "cmdADDTema";
-            this.cmdADDTema.Size = new System.Drawing.Size(146, 30);
+            this.cmdADDTema.Size = new System.Drawing.Size(146, 29);
             this.cmdADDTema.TabIndex = 7;
             this.cmdADDTema.Text = ":: AGREGAR TEMA ::";
             this.cmdADDTema.UseVisualStyleBackColor = true;
