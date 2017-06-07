@@ -36,6 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmdIN = new System.Windows.Forms.Button();
             this.cmdADDTema = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSecciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTemas)).BeginInit();
@@ -48,6 +50,7 @@
             this.dgvSecciones.Name = "dgvSecciones";
             this.dgvSecciones.Size = new System.Drawing.Size(429, 436);
             this.dgvSecciones.TabIndex = 0;
+            this.dgvSecciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSecciones_CellClick);
             this.dgvSecciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSecciones_CellContentClick);
             // 
             // dgvSeries
@@ -57,6 +60,7 @@
             this.dgvSeries.Name = "dgvSeries";
             this.dgvSeries.Size = new System.Drawing.Size(384, 436);
             this.dgvSeries.TabIndex = 1;
+            this.dgvSeries.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeries_CellClick);
             this.dgvSeries.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeries_CellContentClick);
             // 
             // dgvTemas
@@ -66,6 +70,7 @@
             this.dgvTemas.Name = "dgvTemas";
             this.dgvTemas.Size = new System.Drawing.Size(349, 404);
             this.dgvTemas.TabIndex = 2;
+            this.dgvTemas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTemas_CellContentClick);
             // 
             // lblUsuario
             // 
@@ -121,6 +126,24 @@
             this.cmdADDTema.UseVisualStyleBackColor = true;
             this.cmdADDTema.Click += new System.EventHandler(this.cmdADDTema_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(611, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "SERIES :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(989, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "TEMAS :";
+            // 
             // AtributosAdd
             // 
             this.AcceptButton = this.cmdIN;
@@ -128,6 +151,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdOUT;
             this.ClientSize = new System.Drawing.Size(1198, 569);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cmdADDTema);
             this.Controls.Add(this.cmdIN);
             this.Controls.Add(this.label1);
@@ -157,5 +182,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button cmdIN;
         private System.Windows.Forms.Button cmdADDTema;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

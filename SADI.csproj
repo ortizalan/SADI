@@ -149,6 +149,7 @@
     <Compile Include="Clases\Controladores\UsuariosController.cs" />
     <Compile Include="Clases\Controladores\ValoracionDoctalController.cs" />
     <Compile Include="Clases\Controladores\ValoresDoctalesController.cs" />
+    <Compile Include="Clases\EventsArgs\TablaEventArgs.cs" />
     <Compile Include="Clases\Metodos.cs" />
     <Compile Include="Clases\Modelos\AtributosModel.cs" />
     <Compile Include="Clases\Modelos\BitacoraModel.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Clases\Modelos\ValoracionDoctalModel.cs" />
     <Compile Include="Clases\Modelos\ValoresDoctalesModel.cs" />
     <Compile Include="Clases\Parametros.cs" />
+    <Compile Include="Clases\EventsArgs\TemasSeriesEventArgs.cs" />
     <Compile Include="Clases\Utilerias.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
