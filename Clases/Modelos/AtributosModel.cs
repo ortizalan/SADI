@@ -9,10 +9,10 @@ namespace SADI.Clases.Modelos
     class AtributosModel
     {
         private int _id;//Propiedad de la Identificación de la Accesibilidad
-        private UsuariosModel _usuario;//Identificador del Usuario
-        private SeriesModel _serie;//Identificador de la Serie
-        private SeccionesModel _seccion;//Identificador de la Sección
-        private TemasModel _tema;//Identificador del Tema
+        private UsuariosModel _usuario = new UsuariosModel();//Identificador del Usuario
+        private SeriesModel _serie = new SeriesModel();//Identificador de la Serie
+        private SeccionesModel _seccion = new SeccionesModel();//Identificador de la Sección
+        private TemasModel _tema = new TemasModel();//Identificador del Tema
 
         /// <summary>
         /// Acceso al Identificador de la Accesibilidad
@@ -25,7 +25,7 @@ namespace SADI.Clases.Modelos
         public UsuariosModel Usuario
         {
             get { return _usuario; }
-            set { _usuario = new UsuariosModel();_usuario = value; }
+            set { _usuario = value; }
         }
         /// <summary>
         /// Acceder al Identificador de la Serie
@@ -33,7 +33,7 @@ namespace SADI.Clases.Modelos
         public SeriesModel Serie
         {
             get { return _serie; }
-            set { _serie = new SeriesModel(); _serie = value; }
+            set { _serie = value; }
         }
         /// <summary>
         /// Acceder al Identificador de la Sección
@@ -41,7 +41,7 @@ namespace SADI.Clases.Modelos
         public SeccionesModel Seccion
         {
             get { return _seccion; }
-            set { _seccion = new SeccionesModel(); _seccion = value; }
+            set { _seccion = value; }
         }
         /// <summary>
         /// Acceder al Identificador del Tema
@@ -49,7 +49,7 @@ namespace SADI.Clases.Modelos
         public TemasModel Temas
         {
             get { return _tema; }
-            set { _tema = new TemasModel(); _tema = value; }
+            set { _tema = value; }
         }
     }
 }

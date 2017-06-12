@@ -20,6 +20,7 @@ namespace SADI.Vistas.Atributos
     {
         AtributosModel amdl = new AtributosModel();//Instancia del Modelo Atribuciones
         AtributosController actr = new AtributosController();// Instancia del Controlador Atribuciones
+        object val;
 
         /// <summary>
         /// Propiedades y Atributos de la Forma
@@ -53,8 +54,9 @@ namespace SADI.Vistas.Atributos
         /// Contructor de la Clase
         /// </summary>
         /// <param name="idUsr">Id de Usuario</param>
-        public AtributosAdd(int idUsr)
+        public AtributosAdd(int idUsr,object sender)
         {
+            val = sender;
             InitializeComponent();
             cmdADDTema.Enabled = false;//Inhabilitar el botón Tema
             cmdADDTema.Visible = false;// Ocultar el Botón Tema
@@ -198,7 +200,7 @@ namespace SADI.Vistas.Atributos
                 {
                     Seccion = (string)dgvSecciones.SelectedRows[0].Cells["Id"].Value,
                     SelSeccion = true,
-                    Serie = (int)dgvSecciones.SelectedRows[0].Cells["IdSerie"].Value,
+                    Serie = (int)dgvSeries.SelectedRows[0].Cells["IdSerie"].Value,
                     SelSerie = true,
                     Tema = (int)dgvTemas.SelectedRows[0].Cells["IdTema"].Value,
                     SelTema = true
@@ -229,43 +231,6 @@ namespace SADI.Vistas.Atributos
         /// </summary>
         private void BorrarRenglonTablaAtribuciones(object sernder, TemasSeriesEventArgs e)
         {
-            #region Prueba
-            //if(!string.IsNullOrEmpty(e.IdSeccion))
-            //{
-
-            //}
-            ////Validar qu es lo que se vá a realizar
-            //else if (e.IdSerie > 0 && e.IdTema > 0)//Si la Serie y el Tema tienen identificador
-            //{
-            //    if (!(bool)dgvTemas.SelectedRows[0].Cells["Sel"].Value)// Verificar que se haya deseleccionado el valor de la casilla
-            //    {
-            //        ///Buscar Resultados con los Datos del Evento
-            //        DataRow[] rchng = TAtrTemp.Select("Seccion = '" + e.IdSeccion + "' AND Serie = " + e.IdSerie.ToString() +
-            //            " AND Tema = " + e.IdTema.ToString() + "");
-            //        foreach (var row in rchng)// Barrer los resultados (si existen)
-            //        {
-            //            row["IdTema"] = 0;// Poner en Cero el Tema
-            //        }
-
-            //        TAtrTemp.AcceptChanges();//Aplicar los cambios a la Tala
-            //    }
-            //}
-            //else if (e.IdSerie > 0 && e.IdTema == 0)//Si la serie tiene el identificador y el tema no
-            //{
-            //    if (!(bool)dgvSeries.SelectedRows[0].Cells["Sel"].Value)// Validar que haya sido deseleccionada la opción serie
-            //    {
-            //        ///Buscar Resultados con los Datos del Evento
-            //        DataRow[] rser = TAtrTemp.Select("Seccion = " + e.IdSeccion + " AND Serie = " + e.IdSerie.ToString() + "");
-            //        foreach (var rs in rser)// Barrer los resultados (si existen)
-            //        {
-            //            rs.Delete();//Eliminar los Renglores
-            //        }
-
-            //        TAtrTemp.AcceptChanges();// Aplicar los Cambios a la Tabla
-            //    }
-            //}
-            #endregion
-
             ///<summary>
             ///Evaluar la Opción para elimiar el registro
             /// </summary>
@@ -278,8 +243,8 @@ namespace SADI.Vistas.Atributos
                         foreach (var rs in sec)
                         {
                             rs.Delete();
+                            TAtrTemp.AcceptChanges();
                         }
-                        TAtrTemp.AcceptChanges();
                     }
                     break;
                 case 2://Eliminar los registros de la Serie
@@ -289,8 +254,8 @@ namespace SADI.Vistas.Atributos
                         foreach (var rs in ser)
                         {
                             rs.Delete();
+                            TAtrTemp.AcceptChanges();
                         }
-                        TAtrTemp.AcceptChanges();
                     }
                     break;
                 case 3:
@@ -301,8 +266,9 @@ namespace SADI.Vistas.Atributos
                         foreach (var rs in tem)
                         {
                             rs["Tema"] = 0;
+                            TAtrTemp.AcceptChanges();
                         }
-                        TAtrTemp.AcceptChanges();
+                        
                     }
                     break;
                 default:
@@ -319,9 +285,9 @@ namespace SADI.Vistas.Atributos
         //Si no es administrador, debe de Tener Atributos Designados
         private void cmdIN_Click(object sender, EventArgs e)
         {
-            //GuardarAtribuciones();
-            Presumir fp = new Presumir(TAtrTemp);
-            fp.ShowDialog();
+            GuardarAtribuciones();
+            //Presumir fp = new Presumir(TAtrTemp);
+            //fp.ShowDialog();
 
         }
 
@@ -385,7 +351,7 @@ namespace SADI.Vistas.Atributos
                 {
                     dgvSeries.Rows[c].Selected = true;//Cambiar de Selección de Renglón
                     r.Cells["Sel"].Value = true;//Seleccionar la Serie
-                    DataGridViewCellEventArgs ce = null;
+                    DataGridViewCellEventArgs ce = null;//Evento de Selección de Celda del GridView
                     TablaEventArgs et = new TablaEventArgs//Nueva instancia de Argumentos de Eventos de la Tabla
                     {
                         Seccion = (string)dgvSecciones.SelectedRows[0].Cells["Id"].Value,//Valor del Indetificador de la Sección
@@ -455,14 +421,6 @@ namespace SADI.Vistas.Atributos
             dgvCol.HeaderText = "Selección";
             dgvCol.ReadOnly = false;
             dgvSecciones.Columns.Insert(2, dgvCol);
-            //DataGridViewColumn col = new DataGridViewColumn();
-            //col..
-            //col.Name = "Sel";
-            //dgvSecciones.Columns.Insert(2, col);
-            //foreach(DataRow row in dgvSecciones.Rows)
-            //{
-            //    row["Sel"] = false;
-            //}
         }
         /// <summary>
         /// Método para Agregar Cpumna con Valores de CheckBoc
@@ -576,7 +534,7 @@ namespace SADI.Vistas.Atributos
                     if (dgvTemas.Rows.Count > 0)// Verificar que tenga Valores el Grid Temas
                     {
                         if (e.SelTema)//Si seleccionaro el Tema
-                        {
+                        {///Indicar de dónde viene
                             foreach (DataRow r0 in TAtrTemp.Rows)//Barrer la tabla
                             {
                                 if ((string)r0["Seccion"] == e.Seccion &&
@@ -605,9 +563,19 @@ namespace SADI.Vistas.Atributos
                     }
                     else// NO tiene valores el Grid Temas
                     {
+                        //Verificar si no se nos pasa un valor en tabla
+                        tm.Seccion.Id = e.Seccion;
+                        tm.Serie.Id = e.Serie;
+                        if (tc.ConsultarTemaXSerieSeccion(tm))
+                        {
+                            if(tc.Tabla.Rows.Count > 0)
+                            {
+                                e.Tema = (int)tc.Tabla.Rows[0]["IdTema"];
+                            }
+                        }
                         expresion = "Seccion = " + "'" + e.Seccion + "'" + " AND ";
                         expresion += "Serie = " + e.Serie + " AND ";
-                        expresion += "Tema = 0";
+                        expresion += "Tema = " + e.Tema + "";
                     }
 
                     if (valida)//Ver si no se modificó el mismo registro
@@ -736,7 +704,9 @@ namespace SADI.Vistas.Atributos
                             }
                             else
                             {
-                                Close();
+                                //Que no venga de Usuarios para cerrar
+                                if(val == null)
+                                { Close(); }
                             }
                         }
                     }

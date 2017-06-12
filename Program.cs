@@ -28,8 +28,8 @@ namespace SADI
             //    Application.Run(new Inicio());
             //}
 
-            Application.Run(new AtributosAdd(4));
-
+            //Application.Run(new AtributosAdd(4));
+            Application.Run(new Inicio());
             //Application.Run(new Vistas.Temas.TemasAdd());
         }
     }

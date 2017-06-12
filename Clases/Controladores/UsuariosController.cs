@@ -146,8 +146,6 @@ namespace SADI.Clases.Controladores {
                     lista.Add(new Parametros(@"pat", string.Empty));
                     lista.Add(new Parametros(@"mat", string.Empty));
                     lista.Add(new Parametros(@"fondo", string.Empty));
-                    lista.Add(new Parametros(@"subf", string.Empty));
-                    lista.Add(new Parametros(@"unidad", string.Empty));
                     lista.Add(new Parametros(@"jera", string.Empty));
                     lista.Add(new Parametros(@"email", string.Empty));//Si cuenta con Dirección email, si no campo vació
                     lista.Add(new Parametros(@"est", string.Empty));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
@@ -348,6 +346,40 @@ namespace SADI.Clases.Controladores {
             }
             else
             { return false; }// No es del mismo tipo que el modelo
+        }
+        /// <summary>
+        /// Obtener el Último Registro Ingresado 
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public bool ObtenerUltimoUsuarioIngresado()
+        {
+            //Intentar Abrir la Conexión 
+            if(Abrir())
+            {
+                try
+                {
+                    string proce = "sp_usuarios_seleccion";//Nombre del procedimiento
+                    List<Parametros> lista = new List<Parametros>();//Lista de parámetros
+                    lista.Add(new Parametros(@"opc", "4"));
+                    lista.Add(new Parametros(@"usr", string.Empty));
+                    lista.Add(new Parametros(@"pwd", string.Empty));
+                    //Intentar la Consulta
+                    if(ConsultarProcedimiento(proce, lista))
+                    { return true; }//Intento Exitoso
+                    else//Intento NO Exitoso, Consultar Error
+                    { return false; }
+                }
+                catch(Exception e)//Atrapar el error
+                {
+                    Error = e.Message.ToString();//Guardar el Error
+                    return false;//Indicar que existe el Error
+                }
+                finally { Cerrar(); }//Cerrar la Conexión
+            }
+            else//Intento NO Exitoso, Consultar Error
+            {
+                return false;
+            }
         }
 
         public bool PruebaTablaTemp()

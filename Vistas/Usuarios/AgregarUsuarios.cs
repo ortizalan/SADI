@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SADI.Clases.Modelos;
 using SADI.Clases.Controladores;
 using SADI.Clases;
+using SADI.Vistas.Atributos;
 
 namespace SADI.Vistas.Usuarios
 {
@@ -130,35 +131,23 @@ namespace SADI.Vistas.Usuarios
             um.Jerarquia.Id = usuariosControl1.IdJerarquia;
             um.Fondo.Id = 63;
         }
-
+        /// <summary>
+        /// Agregar el Usuario a la Lista
+        /// </summary>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            //Asegurar que los parámetros estén correctos
             if (usuariosControl1.ValidarControl())
             {
-                #region pruebas
-                //// Probando el cifrado de la contraseña
-                //string cifrado = Seguridad.Encriptar(usuariosControl1.Constraseña);
-                //MessageBox.Show("el mensaje cifrado es :".ToUpper() + "\n" + cifrado +
-                //    "\n\n" + "y descifrado es :" + "\n" + Seguridad.Desencriptar(cifrado));
+                //LLenar el Objeto Usuario
+                 this.LlenarObjetoUsuario();
 
-                //usuariosControl1.CargaDeDatosControl();
-                //MessageBox.Show("datos en el control :".ToUpper() + "\n\n" +
-                //    "nombre :" + usuariosControl1.Nombre + "\n" +
-                //    "paterno :" + usuariosControl1.Paterno + "\n" +
-                //    "materno :" + usuariosControl1.Materno + "\n" +
-                //    "usuario :" + usuariosControl1.Usuario + "\n" +
-                //    "email :" + usuariosControl1.Email + "\n" +
-                //    "Estatus :" + usuariosControl1.Estatus + "\n" +
-                //    "jerarquia :" + usuariosControl1.IdJerarquia.ToString() + "\n" +
-                //    "subfondo :" + usuariosControl1.IdSubFondo.ToString() + "\n" +
-                //    "Unidad Administrativa:" + usuariosControl1.IdUnidadAdmva.ToString() + "\n" +
-                //    "Sección :" + usuariosControl1.IdSeccion.ToString());
-                #endregion
-
-                this.LlenarObjetoUsuario();
-
-                if (uc.IngresarRegisto(um))
+                if (uc.IngresarRegisto(um))//Ingresar el Usuario
                 {
+                    um.Id = ObtenerRegistroUsuarioIngresado();//Obtener su ID
+                    if(um.Id == 0) { Close(); }//Si existió Error, Cerrar la Forma
+                    AtributosAdd fat = new AtributosAdd(um.Id, this.Text.ToString());//Instancia de la Forma Agregar Atributos
+                    fat.ShowDialog();//Mostrar la Forma
                     DialogResult r;
                     r = MessageBox.Show("se ingresó el registro correctamente,".ToUpper() +
                          "\n" + "¿desea ingresar otro usuario?".ToUpper(),
@@ -181,6 +170,25 @@ namespace SADI.Vistas.Usuarios
                 }
             }
         }
-
+        /// <summary>
+        /// Función para Obtener el Último Registro Ingresado
+        /// </summary>
+        /// <returns></returns>
+        private int ObtenerRegistroUsuarioIngresado()
+        {
+            //Intentar la Consulta del Último Registro Ingresado
+            if(uc.ObtenerUltimoUsuarioIngresado())
+            {
+                //Intento Exitoso
+                return (int)uc.Tabla.Rows[0][0];
+            }
+            else//Intento No Existoso
+            {
+                MessageBox.Show("ocurrió el sieguiente error :".ToUpper() + "\n" +
+                    uc.Error,":: mensaje desde el controlador de usuarios ::".ToUpper(),
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);// Error
+                return 0;
+            }
+        }
     }
 }

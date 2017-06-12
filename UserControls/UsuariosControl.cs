@@ -238,7 +238,7 @@ namespace SADI.UserControls
             }
             else
             {
-                MessageBox.Show("No deje vaío el campo nombre.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No deje vacío el campo nombre.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNombre.Focus();
                 return false;
             }
@@ -352,7 +352,7 @@ namespace SADI.UserControls
             object o = string.Empty;
             EventArgs e = null;
 
-            if (_opcion == 0)
+            if (_opcion != 0)
             {
                 switch (_opcion)
                 {
@@ -378,7 +378,7 @@ namespace SADI.UserControls
                             }
                             else
                             {
-                                MessageBox.Show("noexiste infromación de jerarquías.".ToUpper(),
+                                MessageBox.Show("no existe información de jerarquías.".ToUpper(),
                                     ":: mensaje desde el control usuarios ::".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return false;
                             }
