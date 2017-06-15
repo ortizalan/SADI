@@ -754,7 +754,7 @@ namespace SADI.Vistas.Atributos
 
                 foreach (DataRow rc in valida.Rows)
                 {
-                    if (!(bool)rc["val"])
+                    if ((bool)rc["val"] == false)
                     {
                         MessageBox.Show("ocurrió el sieguiente error :".ToUpper() + "\n" + (string)rc["msg"],
                             ":: mensaje desde agregar atributos ::".ToUpper(), MessageBoxButtons.OK,
@@ -793,7 +793,10 @@ namespace SADI.Vistas.Atributos
                 }
             }
         }
-
+        /// <summary>
+        /// Validar Cuando se seleccione un renglón de el GridSecciones
+        /// que los temas estén seleccionados
+        /// </summary>
         private void dgvSecciones_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != 0)

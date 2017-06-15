@@ -26,6 +26,7 @@ namespace SADI.Clases.Modelos {
 		private int _id;// Identificador del Usuario
 		private JerarquiasModel _jerarquia = new JerarquiasModel();
         private FondosModel _fondo = new FondosModel();
+        private SubFondosModel _subfondo = new SubFondosModel();
 		private string _materno;
 		private string _nombre;
 		private string _paterno;
@@ -117,6 +118,14 @@ namespace SADI.Clases.Modelos {
         {
             get { return _fondo; }
             set { _fondo = value; }
+        }
+        /// <summary>
+        /// Acceso a la Propiedad SubFondo
+        /// </summary>
+        public SubFondosModel SubFondo
+        {
+            get { return _subfondo; }
+            set { _subfondo = value; }
         }
         /// <summary>
         /// Acceso a la Propiedad Email

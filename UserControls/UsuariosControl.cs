@@ -20,6 +20,7 @@ namespace SADI.UserControls
         #region Propiedades
         private int _opcion; //Opcion para Validar Las Operaciones a Realizar con el Control
         private DataTable _jerarquias;// Tabla para llenar el Combo Jerarquías
+        private DataTable _subfondos;// Tabla para llenar el Combo SubFondos
         private string _nombre;// Propiedad para el nombre del Usuario
         private string _paterno;// Propiedad para el Apellido Paterno del Usuario
         private string _materno;// Propiedad para el Apellido Materno del Usuario
@@ -28,7 +29,7 @@ namespace SADI.UserControls
         private string _usuario;// Propiedad del Usuario
         private string _contraseña;// Propiedad Contraseña
         private int _idJerarquia;// Identificador de la Jerarquia
-        private bool _atributos;// Identificar si se van a agregar atributos al usuario
+        private int _idSubFondo;// Identificador del SubFondo
         #endregion
         /// <summary>
         /// Constructor del Control
@@ -58,6 +59,17 @@ namespace SADI.UserControls
             {
                 _jerarquias = value;
                 this.LLenarJerarquias();
+            }
+        }
+        /// <summary>
+        /// Asignar lod Valores a SubFondos
+        /// </summary>
+        public DataTable SubFondo
+        {
+            set
+            {
+                _subfondos = value;
+                this.LLenarSubfondos();
             }
         }
         /// <summary>
@@ -152,12 +164,15 @@ namespace SADI.UserControls
             get { return _idJerarquia; }
             set { _idJerarquia = value; }
         }
-
-        public bool Atributos
+        /// <summary>
+        /// Identificador del SubFondo
+        /// </summary>
+        public int IdSubFondo
         {
-            get { return _atributos; }
-            set { _atributos = value; chkAtributos.Checked = value; }
+            get { return _idSubFondo; }
+            set { _idSubFondo = value; }
         }
+
         #endregion
         /// <summary>
         /// Validar el Control Para su Utilización en la Base de Datos
@@ -177,7 +192,7 @@ namespace SADI.UserControls
                             {
                                 if (txtContraseña.Text.Length >= 6)// Validar que la contraseña no sea menor a 6 caracteres
                                 {
-                                    if(!string.IsNullOrEmpty(txtEmail.Text))// Validar que no esté vació el campo del correo electrónico
+                                    if (!string.IsNullOrEmpty(txtEmail.Text))// Validar que no esté vació el campo del correo electrónico
                                     {
                                         if (Utilerias.ValidarEmail(txtEmail.Text))// Validar que sea válida la dirección de correo electrónico
                                         {
@@ -197,7 +212,7 @@ namespace SADI.UserControls
                                         txtEmail.Focus();
                                         return false;
                                     }
-                                    
+
                                 }
                                 else
                                 {
@@ -303,6 +318,19 @@ namespace SADI.UserControls
                 }
             }
         }
+        //Método para llenar el combo SubFondo
+        private void LLenarSubfondos()
+        {
+            if (_subfondos != null)
+            {
+                if (_subfondos.Rows.Count > 0)
+                {
+                    cboSubFondo.DataSource = _subfondos;
+                    cboSubFondo.ValueMember = _subfondos.Columns[0].ColumnName;
+                    cboSubFondo.DisplayMember = _subfondos.Columns[2].ColumnName;
+                }
+            }
+        }
         /// <summary>
         /// Método para Limpiar el Control Usuario
         /// </summary>
@@ -324,6 +352,20 @@ namespace SADI.UserControls
                 chkEstatus.Enabled = true;
                 chkEstatus.Checked = false;
             }
+            if (_jerarquias.Rows.Count > 0)// Que no esté vacía la tabla
+            {
+                if (cboJerarquia.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    cboJerarquia.SelectedIndex = 0;//Seleccionar el primero registro
+                }
+            }
+            if (_subfondos.Rows.Count > 0)//Que no esté vacía la tabla
+            {
+                if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    cboSubFondo.SelectedIndex = 0;//Seleccionar el primero registro
+                }
+            }
         }
         //Cambio de Valor Seleccionado en ComboBox Jerarquias
         private void cboJerarquia_SelectedIndexChanged(object sender, EventArgs e)
@@ -331,6 +373,14 @@ namespace SADI.UserControls
             if (cboJerarquia.SelectedValue.ToString() != "System.Data.DataRowView")
             {
                 _idJerarquia = (int)cboJerarquia.SelectedValue;
+            }
+        }
+        //Cambio de Valor Seleccionado en Combobox Subfondos
+        private void cboSubFondo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idSubFondo = (int)cboSubFondo.SelectedValue;
             }
         }
         // Cambio de valor CheckBox Estatus
@@ -363,7 +413,7 @@ namespace SADI.UserControls
                     case 2:// Modificar Usuario
                         if (_idJerarquia != 0)// Verificar que tenga valores asignado el usuario
                         {
-                            if (_jerarquias.Rows.Count > 0 )// Verificar que exista información para cargar a los combos
+                            if (_jerarquias.Rows.Count > 0)// Verificar que exista información para cargar a los combos
                             {
                                 txtNombre.Text = _nombre;// Asignar el Nombre
                                 txtPaterno.Text = _paterno;// Asignar el Apellido Paterno
@@ -373,7 +423,6 @@ namespace SADI.UserControls
                                 txtEmail.Text = _email;// Asignar el correo electrónico
                                 chkEstatus.Checked = _estatus;// Asignar Estatus
                                 cboJerarquia.SelectedValue = _idJerarquia;// Indicarle la Jerarquía
-                                chkAtributos.Checked = _atributos;
                                 return true;
                             }
                             else
@@ -391,9 +440,9 @@ namespace SADI.UserControls
                         }
 
                     case 3:// Mostrar Detalles del Usuario
-                        if (_idJerarquia != 0 )// Verificar que tenga valores asignado el usuario
+                        if (_idJerarquia != 0)// Verificar que tenga valores asignado el usuario
                         {
-                            if (_jerarquias.Rows.Count > 0 )// Verificar que exista información para cargar a los combos
+                            if (_jerarquias.Rows.Count > 0)// Verificar que exista información para cargar a los combos
                             {
                                 txtNombre.Text = _nombre;// Asignar el Nombre
                                 txtNombre.Enabled = false;// Deshabilitar el control
@@ -411,8 +460,7 @@ namespace SADI.UserControls
                                 chkEstatus.Enabled = false;//Deshabilitar el control
                                 cboJerarquia.SelectedValue = _idJerarquia;// Indicarle la Jerarquía
                                 cboJerarquia.Enabled = false;// Inhabilitar Combo
-                                chkAtributos.Checked = _atributos;// 
-                                chkAtributos.Enabled = false;//
+                                
                                 return true;
                             }
 
@@ -447,28 +495,14 @@ namespace SADI.UserControls
         /// <param name="e"></param>
         private void UsuariosControl_Load(object sender, EventArgs e)
         {
-            switch(_opcion)
+            switch (_opcion)
             {
                 case 1:
                     this.chkEstatus.Checked = true;
                     break;
             }
         }
-        /// <summary>
-        /// Cambiar el estatus de Agregar Atributos
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void chkAtributos_CheckedChanged(object sender, EventArgs e)
-        {
-            if(chkAtributos.Checked)
-            {
-                _atributos = true;
-            }
-            else
-            {
-                _atributos = false;
-            }
-        }
+
     }
 }
+

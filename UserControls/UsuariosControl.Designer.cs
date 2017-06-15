@@ -48,7 +48,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.chkAtributos = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cboSubFondo = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -228,11 +229,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cboSubFondo);
+            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(311, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(277, 75);
+            this.groupBox3.Size = new System.Drawing.Size(363, 145);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DATOS ADMINISTRATIVOS :";
@@ -256,27 +259,32 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "FONDO :";
             // 
-            // chkAtributos
+            // label9
             // 
-            this.chkAtributos.AutoSize = true;
-            this.chkAtributos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAtributos.Location = new System.Drawing.Point(433, 174);
-            this.chkAtributos.Name = "chkAtributos";
-            this.chkAtributos.Size = new System.Drawing.Size(155, 21);
-            this.chkAtributos.TabIndex = 2;
-            this.chkAtributos.Text = "Agregar Atributos";
-            this.chkAtributos.UseVisualStyleBackColor = true;
-            this.chkAtributos.CheckedChanged += new System.EventHandler(this.chkAtributos_CheckedChanged);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(0, 88);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "SUBFONDO :";
+            // 
+            // cboSubFondo
+            // 
+            this.cboSubFondo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSubFondo.FormattingEnabled = true;
+            this.cboSubFondo.Location = new System.Drawing.Point(79, 85);
+            this.cboSubFondo.Name = "cboSubFondo";
+            this.cboSubFondo.Size = new System.Drawing.Size(269, 21);
+            this.cboSubFondo.TabIndex = 3;
             // 
             // UsuariosControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.chkAtributos);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "UsuariosControl";
-            this.Size = new System.Drawing.Size(602, 344);
+            this.Size = new System.Drawing.Size(687, 344);
             this.Load += new System.EventHandler(this.UsuariosControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -285,7 +293,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -311,6 +318,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox chkAtributos;
+        private System.Windows.Forms.ComboBox cboSubFondo;
+        private System.Windows.Forms.Label label9;
     }
 }

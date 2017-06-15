@@ -54,6 +54,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"pat", u.Paterno));// Apellido Paterno del Usuario
                         lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
                         lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));// Fondo al que pertence el Usuario
+                        lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));
                         lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario
                         lista.Add(new Parametros(@"email",(!string.IsNullOrEmpty(u.Email)?u.Email:string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
@@ -100,6 +101,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"pat", string.Empty));
                         lista.Add(new Parametros(@"mat", string.Empty));
                         lista.Add(new Parametros(@"fondo", string.Empty));
+                        lista.Add(new Parametros(@"subfondo", string.Empty));
                         lista.Add(new Parametros(@"jera", string.Empty));
                         lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", string.Empty));
@@ -146,6 +148,7 @@ namespace SADI.Clases.Controladores {
                     lista.Add(new Parametros(@"pat", string.Empty));
                     lista.Add(new Parametros(@"mat", string.Empty));
                     lista.Add(new Parametros(@"fondo", string.Empty));
+                    lista.Add(new Parametros(@"subfondo", string.Empty));
                     lista.Add(new Parametros(@"jera", string.Empty));
                     lista.Add(new Parametros(@"email", string.Empty));//Si cuenta con Dirección email, si no campo vació
                     lista.Add(new Parametros(@"est", string.Empty));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
@@ -192,6 +195,7 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"pat", u.Paterno));
                         lista.Add(new Parametros(@"mat", (!string.IsNullOrEmpty(u.Materno) ? u.Materno : string.Empty)));// Validar que la variable materno no sea nula
                         lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));
+                        lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));
                         lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
                         lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
                         lista.Add(new Parametros(@"est", "1"));// Si se vá a ingresar, siempre será activo

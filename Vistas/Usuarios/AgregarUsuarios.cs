@@ -34,7 +34,7 @@ namespace SADI.Vistas.Usuarios
         private void AgregarUsuarios_Load(object sender, EventArgs e)
         {
             this.LLenarCombos();// LLenar los combos
-            usuariosControl1.Opcion = 1;
+            usrCtrl.Opcion = 1;
         }
         /// <summary>
         /// Salir de la Forma
@@ -116,19 +116,23 @@ namespace SADI.Vistas.Usuarios
         /// </summary>
         private void LLenarCombos()
         {
-            usuariosControl1.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
+            usrCtrl.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
+            usrCtrl.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
         }
-
+        /// <summary>
+        /// Método para el LLenado del Objeto Usuario
+        /// </summary>
         private void LlenarObjetoUsuario()
         {
-            usuariosControl1.CargaDeDatosControl();
-            um.Nombre = usuariosControl1.Nombre;
-            um.Paterno = usuariosControl1.Paterno;
-            um.Materno = usuariosControl1.Materno;
-            um.Usuario = usuariosControl1.Usuario;
-            um.Contraseña = usuariosControl1.Contraseña;
-            um.Email = usuariosControl1.Email;
-            um.Jerarquia.Id = usuariosControl1.IdJerarquia;
+            usrCtrl.CargaDeDatosControl();
+            um.Nombre = usrCtrl.Nombre;
+            um.Paterno = usrCtrl.Paterno;
+            um.Materno = usrCtrl.Materno;
+            um.Usuario = usrCtrl.Usuario;
+            um.Contraseña = usrCtrl.Contraseña;
+            um.Email = usrCtrl.Email;
+            um.Jerarquia.Id = usrCtrl.IdJerarquia;
+            um.SubFondo.Id = usrCtrl.IdSubFondo;
             um.Fondo.Id = 63;
         }
         /// <summary>
@@ -137,7 +141,7 @@ namespace SADI.Vistas.Usuarios
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             //Asegurar que los parámetros estén correctos
-            if (usuariosControl1.ValidarControl())
+            if (usrCtrl.ValidarControl())
             {
                 //LLenar el Objeto Usuario
                  this.LlenarObjetoUsuario();
@@ -155,7 +159,7 @@ namespace SADI.Vistas.Usuarios
                          MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (r == DialogResult.Yes)
                     {
-                        usuariosControl1.LimpiarControl();
+                        usrCtrl.LimpiarControl();
                     }
                     else
                     {

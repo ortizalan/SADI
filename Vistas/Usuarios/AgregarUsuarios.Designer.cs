@@ -30,14 +30,14 @@
         {
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.usuariosControl1 = new SADI.UserControls.UsuariosControl();
+            this.usrCtrl = new SADI.UserControls.UsuariosControl();
             this.SuspendLayout();
             // 
             // btnAgregar
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAgregar.Location = new System.Drawing.Point(379, 284);
+            this.btnAgregar.Location = new System.Drawing.Point(453, 284);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(125, 57);
             this.btnAgregar.TabIndex = 3;
@@ -48,7 +48,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(504, 284);
+            this.btnSalir.Location = new System.Drawing.Point(578, 284);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(125, 57);
             this.btnSalir.TabIndex = 0;
@@ -56,22 +56,22 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // usuariosControl1
+            // usrCtrl
             // 
-            this.usuariosControl1.Atributos = false;
-            this.usuariosControl1.Contraseña = null;
-            this.usuariosControl1.Email = null;
-            this.usuariosControl1.Estatus = false;
-            this.usuariosControl1.IdJerarquia = 0;
-            this.usuariosControl1.Location = new System.Drawing.Point(2, 7);
-            this.usuariosControl1.Materno = null;
-            this.usuariosControl1.Name = "usuariosControl1";
-            this.usuariosControl1.Nombre = null;
-            this.usuariosControl1.Opcion = 0;
-            this.usuariosControl1.Paterno = null;
-            this.usuariosControl1.Size = new System.Drawing.Size(594, 341);
-            this.usuariosControl1.TabIndex = 4;
-            this.usuariosControl1.Usuario = null;
+            this.usrCtrl.Contraseña = null;
+            this.usrCtrl.Email = null;
+            this.usrCtrl.Estatus = false;
+            this.usrCtrl.IdJerarquia = 0;
+            this.usrCtrl.IdSubFondo = 0;
+            this.usrCtrl.Location = new System.Drawing.Point(15, 4);
+            this.usrCtrl.Materno = null;
+            this.usrCtrl.Name = "usrCtrl";
+            this.usrCtrl.Nombre = null;
+            this.usrCtrl.Opcion = 0;
+            this.usrCtrl.Paterno = null;
+            this.usrCtrl.Size = new System.Drawing.Size(687, 344);
+            this.usrCtrl.TabIndex = 4;
+            this.usrCtrl.Usuario = null;
             // 
             // AgregarUsuarios
             // 
@@ -79,11 +79,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAgregar;
-            this.ClientSize = new System.Drawing.Size(642, 353);
+            this.ClientSize = new System.Drawing.Size(716, 353);
             this.ControlBox = false;
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.usuariosControl1);
+            this.Controls.Add(this.usrCtrl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -101,6 +101,6 @@
 
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnSalir;
-        private UserControls.UsuariosControl usuariosControl1;
+        private UserControls.UsuariosControl usrCtrl;
     }
 }

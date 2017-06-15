@@ -300,6 +300,12 @@
     <Compile Include="Vistas\Niveles\NivelList.Designer.cs">
       <DependentUpon>NivelList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\SerieDocumental\SerieDocumentalAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\SerieDocumental\SerieDocumentalAdd.Designer.cs">
+      <DependentUpon>SerieDocumentalAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Temas\TemasAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Niveles\NivelList.resx">
       <DependentUpon>NivelList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\SerieDocumental\SerieDocumentalAdd.resx">
+      <DependentUpon>SerieDocumentalAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Temas\TemasAdd.resx">
       <DependentUpon>TemasAdd.cs</DependentUpon>
