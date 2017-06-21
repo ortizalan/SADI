@@ -75,7 +75,6 @@ namespace SADI.Clases.Controladores
         /// <param name="o">Objeto del Tipo Class</param>
         public override bool IngresarRegisto(Object o)
         {
-
             return false;
         }
         /// <summary>
@@ -117,52 +116,48 @@ namespace SADI.Clases.Controladores
             else//No son del mismo tipo
             { return false; }
         }
-
-        public bool ConsultarSeriexSeccionUsuario(List<Series> lista, SeriesModel sm)
+        /// <summary>
+        /// Consultar las Series Asignadas al Usuario por su Sección
+        /// </summary>
+        /// <param name="o">Objeto del Tipo AtributosModel</param>
+        /// <returns>Boleano</returns>
+        public bool ConsultarSeriexSeccionUsuario(Object o)
         {
-            if(lista.Count > 0)//Verificar que tenga parámetros
+            if(o.GetType() == typeof(AtributosModel))//Validar que el Objeto sea del Modelo Series
             {
-                string sente = "select * from series where seccion = '" + sm.Seccion.Id + "' and IdSerie in (";//Primer parte de la sentencia
-                int y = lista.Count - 1;//Número de elementos de la lista
-                int x = 0;//Contador
-                foreach(Series s in lista)//Barrer la lista de series
+                //Si son del mismo tipo
+                var am = (AtributosModel)o;
+                try
                 {
-                    if(x == y)//Ver si es el último elemento en la lista
+                    if (Abrir())//Intentar Abrir la Conexión
                     {
-                        sente += s.Serie + ")";//final de la sentencia
-                    }
-                    else//no es el úlitmo elemento en la lista
-                    {
-                        sente += s.Serie + ",";//Constinuidad de la Sentencia
-                    }
+                        string proce = "sp_combos_usuarios_atributos";// Nombre del Procedimiento
+                        List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "2"));//Indicarle la opción a ejecutar
+                        lista.Add(new Parametros(@"usr", am.Usuario.Id.ToString()));//Identificador del Usuario
+                        lista.Add(new Parametros(@"sec", am.Seccion.Id));//Identificador de la Sección
+                        lista.Add(new Parametros(@"ser", string.Empty));//Vacío
 
-                    x += 1;//aumentar el contador
-                }
-
-                if(Abrir())//Intentar Abrir la Conexión
-                {
-                    try
-                    {
-                        if(ConsultarSentenciaSQL(sente))//Intentar consultar la sentencia
-                        { return true; }//intento exitoso
-                        else//Intento No Exitoso, Consultar Error
+                        if (ConsultarProcedimiento(proce, lista))//Intentar Ejecutar el Procedimiento
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, Consultar Error
                         { return false; }
                     }
-                    catch(Exception e)//Atrapar el Error
+                    else//Intento NO Exitoso, Consultar Error
                     {
-                        Error = e.Message.ToString();//Guardar el Error
-                        return false;//Indicar que existe un error
+                        return false;
                     }
-                    finally { Cerrar(); }//Cerrar Conexión
                 }
-                else//Intento NO Exitoso, Consultar Error
+                catch(Exception e)//Atrapar el Error
                 {
-                    return false;
+                    Error = e.Message.ToString();//Guardar el Error
+                    return false;//Indicar que existe el Error
                 }
+                finally { Cerrar(); }//Cerrar la Conexión
             }
-            else//No existen 
+            else//No son del mismo tipo, COnsultar Error
             {
-                Error = "No Existen Elementos en la Lista Series.";//Error 
+                Error = "el objeto enviado a la función, no es del modelo de series.";
                 return false;
             }
         }

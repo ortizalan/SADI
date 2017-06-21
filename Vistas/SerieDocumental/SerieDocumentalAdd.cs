@@ -54,93 +54,46 @@ namespace SADI.Vistas.SerieDocumental
         /// </summary>
         private void LLenarComboSecciones()
         {
-            DataTable dt = new DataTable();// Nueva DataTable
-            dt = ObtenerSeccionesUsuario();//Asignarle los resultados
-
-            if (dt.Rows.Count > 0)//Verificar que existan registros
+            if(secc.ConsultarSeccionesXusuario(am))//Intentar la Consulta
             {
-                // Si existen registros
-
-                List<Secciones> secciones = new List<Secciones>();//Nueva Lista de Secciones
-
-                foreach(DataRow r in dt.Rows)//BArrer la tabla por los registros
+                //Consulta Exitosa
+                if(secc.Tabla.Rows.Count > 0)//Verificar que existen registros
                 {
-                    secciones.Add(new Secciones((string)r[0]));//Agregar las Secciones a la Lista
+                    //Si existen Registros
+                    cboSeccion.DataSource = secc.Tabla;//Indicarle la Fuente de la Información
+                    cboSeccion.ValueMember = secc.Tabla.Columns[0].ColumnName;//Indice
+                    cboSeccion.DisplayMember = secc.Tabla.Columns[1].ColumnName;//Valor
                 }
-
-                if (secc.ConsultarSeccionesXusuario(secciones))//Intentar la consulta 
-                {
-                    if (secc.Tabla.Rows.Count > 0)//Intento exitoso
-                    {
-                        cboSeccion.DataSource = secc.Tabla;//Fuente de la Información del Combo
-                        cboSeccion.ValueMember = secc.Tabla.Columns[0].ColumnName;// Valor de la Información
-                        cboSeccion.DisplayMember = secc.Tabla.Columns[1].ColumnName;// Información a Mostrar
-                    }
-                }
-                else//Intento NO exitoso
-                {
-                    MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + secc.Error.ToUpper(),
-                        ":: mensaje desde nueva serie documental ::".ToUpper(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                
             }
-            else
+            else//Consulta no Exitosa
             {
-                MessageBox.Show("no existen registros que coincidan.".ToUpper(),
-                    ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
+                    ":: mensaje desde nueva serie documental ::",
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+           
         }
         /// <summary>
         /// Método para el LLenado del Combo Series
         /// </summary>
         private void LLenarComboSeries()
         {
-            DataTable dtseries = ObtenerSeriexSeccionUsuario();//Obtener las Series del Usuario por Sección
-            
-            if(dtseries.Rows.Count > 0)
+           if(serc.ConsultarSeriexSeccionUsuario(am))//Intentar la Consulta
             {
-                List<Series> listseries = new List<Series>();//Nueva lista de series
-
-                foreach(DataRow rs in dtseries.Rows)
+                //Intento Exitoso
+                if(serc.Tabla.Rows.Count > 0)//Verificar que existan registros
                 {
-                    listseries.Add(new Series((int)rs[0]));//Agregar Serie a la Lista
-                }
-
-                //serm.Seccion.Id = am.Seccion.Id;//Asignar el Identificador de la Sección al modelo serie
-
-                if(serc.ConsultarSeriexSeccionUsuario(listseries,serm))//Intentar la Consulta
-                {
-                    //Intento Exitoso
-                    if(serc.Tabla.Rows.Count > 0)//Verificar que existan registros
-                    {
-                        //Existen registros
-                        cboSeries.DataSource = serc.Tabla;
-                        cboSeries.ValueMember = serc.Tabla.Columns[0].ColumnName;
-                        cboSeries.DisplayMember = serc.Tabla.Columns[2].ColumnName;
-
-                    }
-                    else//NO existen registros
-                    {
-                        MessageBox.Show("no hay registros con la selección configurada.".ToUpper(),
-                            ":: mensaje desde nueva serie documental ::".ToUpper(),
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
-                        ":: mensaje desde la nueva serie documental ::".ToUpper(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cboSeries.DataSource = serc.Tabla;//Indicarle la fuente de la información
+                    cboSeries.ValueMember = serc.Tabla.Columns[0].ColumnName;
+                    cboSeries.DisplayMember = serc.Tabla.Columns[2].ColumnName;
                 }
             }
-            else
+           else//Intento NO Exitoso
             {
-                MessageBox.Show("no existen registros que coincidan.".ToUpper(),
-                    ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
+                    ":: mensaje desde nueva serie documental ::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -227,8 +180,7 @@ namespace SADI.Vistas.SerieDocumental
         {
             if (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
             {
-                serm.Seccion.Id = (string)cboSeccion.SelectedValue;//Agregar la Identificación de la Sección al Objeto
-                am.Seccion.Id = serm.Seccion.Id;
+                am.Seccion.Id = (string)cboSeccion.SelectedValue;//Agregar la Identificación de la Sección al Objeto
                 LLenarComboSeries();//Realizar el LLenado del Combo Series
             }
         }
@@ -267,57 +219,6 @@ namespace SADI.Vistas.SerieDocumental
         private void CargaDeCombos()
         {
             
-        }
-        /// <summary>
-        /// Obtener las Secciones Autorizadas para el Usuario
-        /// </summary>
-        private DataTable ObtenerSeccionesUsuario()
-        {
-            //DataTable dtSecc = new DataTable();
-            if (ac.ConsultarAtributosSeccionesxUsuario(am))
-            {
-                if(ac.Tabla.Rows.Count > 0)
-                {
-                    return ac.Tabla;
-                }
-                else
-                {
-                    MessageBox.Show("la consulta no arroja ningún registro.".ToUpper(),
-                        ":: mensaje desde nueva seie documental ::".ToUpper(),
-                        MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                    return null;
-                }
-            }
-            else//Intento NO Existoso, COnsultar Error
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + ac.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-
-        }
-        /// <summary>
-        /// Obtener las Series por Sección y Usuario
-        /// </summary>
-        /// <returns></returns>
-        private DataTable ObtenerSeriexSeccionUsuario()
-        {
-            if(ac.ConsultarAtributosSeriesxSeccionUsuario(am))//Intentar la Consulta
-            {
-                //Intento Exitoso
-                if(ac.Tabla.Rows.Count > 0)//Verificar que existen registro
-                { return ac.Tabla; }//Enviar la tabla
-                else//no tiene registros
-                { return null; }
-            }
-            else//Intento NO Exitoso, Consultar Error
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + ac.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::",
-                    MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return null;
-            }
         }
 
         #endregion

@@ -192,55 +192,44 @@ namespace SADI.Clases.Controladores {
         /// <summary>
         /// Función para la Selección de Secciones Aprobadas para el Usuario
         /// </summary>
-        /// <param name="lista">Lista de Secciones</param>
+        /// <param name="o">Objeto del Tipo AtributosModel</param>
         /// <returns>Boleano</returns>
-        public bool ConsultarSeccionesXusuario(List<Secciones> lista)
+        public bool ConsultarSeccionesXusuario(Object o)
         {
-            if(lista.Count > 0)//Verificar que contenga elementos la Lista
+            if(o.GetType() == typeof(AtributosModel))//Verificar que el Objeto sea del tipo Modelo Atributos
             {
-                string sente = "select * from Secciones where Id in (";//Sentencia SQL
-                int y = lista.Count - 1;//Total de Registros
-                int x = 0;//Contador de los registros
-                foreach (Secciones s in lista)//Barrer la lista de Secciones
-                {
-                    if (x == y)//Es el último registro???
-                    {
-                        sente += "'" + s.Seccion + "')";
-                    }
-                    else//Insertar registro
-                    {
-                        sente += "'" + s.Seccion + "',";
-                    }
+                //Son del mismo tipo
+                var am = (AtributosModel)o;//Castear la variable "am" al tipo Modelo Atributos
 
-                    x += 1;//Incrementar en 1 el contador
-                }
-
-                if (Abrir())//Intentar Abrir la COnexión
+                if(Abrir())//Intentar Abrir la Conexión
                 {
+                    //Intento Exitoso
                     try
                     {
-                        //Intentar la Cosulta de la Sentencia
-                        if(ConsultarSentenciaSQL(sente))
-                        { return true; }//Consulta Exitosa
-                        else//Consulta NO Exitosa, Consultar Error
-                        { return false; }
+                        string proce = "sp_combos_usuarios_atributos";//Nombre del procedimiento
+                        List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "1"));//Indicarle la Opción al procedimiento
+                        lista.Add(new Parametros(@"usr", am.Usuario.Id.ToString()));//Identificador del usuario
+                        lista.Add(new Parametros(@"sec", string.Empty));//Identificador de la Sección
+                        lista.Add(new Parametros(@"ser", string.Empty));//Vacío
+
+                        if (ConsultarProcedimiento(proce, lista))//Intentar la Consulta del Procedimiento
+                        { return true; }//Intento Exisoto
+                        else { return false; }//Intento NO Exitoso, Consultar Error
                     }
                     catch(Exception e)//Atrapar el Error
                     {
                         Error = e.Message.ToString();//Guardar el Error
-                        return false;//Indicar que existe el Error
+                        return false;//Indicar que existe el error
                     }
-                    finally { Cerrar(); }//Cerrar la coneción
-
+                    finally { Cerrar(); }//Cerrar la Conexión
                 }
-                else//Conexion NO Exitosa, Consultar Error
-                {
-                    return false;
-                }
+                else//Intento NO Exitoso, Consultar Error
+                { return false; }
             }
-            else
+            else//No son del mismo tipo
             {
-                Error = "No Existen Elementos en Lista de Secciones.";
+                Error = "el objeto enviado a la función, no es del modelo atributos";
                 return false;
             }
         }

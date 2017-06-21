@@ -178,8 +178,6 @@
     <Compile Include="Clases\Modelos\ValoresDoctalesModel.cs" />
     <Compile Include="Clases\Parametros.cs" />
     <Compile Include="Clases\EventsArgs\TemasSeriesEventArgs.cs" />
-    <Compile Include="Clases\Secciones.cs" />
-    <Compile Include="Clases\Series.cs" />
     <Compile Include="Clases\Utilerias.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

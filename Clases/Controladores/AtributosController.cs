@@ -177,7 +177,7 @@ namespace SADI.Clases.Controladores
                     else//Intento NO Existoso, Consultar Error
                     { return false; }
                 }
-                catch(Exception e)//Atrapar el Error
+                catch (Exception e)//Atrapar el Error
                 {
                     Error = e.Message.ToString();//Guardar el Error
                     return false;//Indicar que existe el error
@@ -192,98 +192,5 @@ namespace SADI.Clases.Controladores
         /// </summary>
         /// <param name="o">Objeto del tipo Atributos</param>
         /// <returns>Boleano</returns>
-        public bool ConsultarAtributosSeccionesxUsuario(object o)
-        {
-            if (o.GetType() == typeof(AtributosModel))//Verificar que el objeto sea del tipo
-            {
-                //si es del mismo tipo
-                var a = (AtributosModel)o;//Casteo de Variables
-                
-                if(Abrir())//Intentar la Conexión
-                {
-                    //Intento Exitoso
-                    try
-                    {
-                        List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
-                        lista.Add(new Parametros(@"opc", "1"));//Opción a Ejecutar
-                        lista.Add(new Parametros(@"usr", a.Usuario.Id.ToString()));//Identificador del Usuario
-                        lista.Add(new Parametros(@"sec", string.Empty));//Parámetro Vacío
-                        lista.Add(new Parametros(@"ser", string.Empty));//Parámetro Vacío
-
-                        string proce = "sp_atributos_seleccion";//Nombre dle Procedimiento
-
-                        if(ConsultarProcedimiento(proce,lista))//Intentar la Cosulta
-                        { return true; }//Intento Exitoso
-                        else
-                        { return false; }//Intento NO Exitoso
-                    }
-                    catch(Exception e)//Atrapar el Error
-                    {
-                        Error = e.Message.ToString();//Guardar el Error
-                        return false;//Indicar que existe el Error
-                    }
-                    finally { Cerrar(); }//Cerrar la conexión
-                }
-                else//Intento NO Exitoso, Consultar Error
-                {
-                    return false;//Indicar que existe el error
-                }
-
-            }
-            else//No es el Objeto del mismo tipo
-            {
-                Error = "el objeto no es del tipo atributosmodel.";
-                return false;
-            }
-        }
-        /// <summary>
-        /// Consultar en los Atributos las Series por Seecion y Usuario
-        /// </summary>
-        /// <param name="o">Objeto del Tipo AtributosModel</param>
-        /// <returns>Boleano</returns>
-        public bool ConsultarAtributosSeriesxSeccionUsuario(object o)
-        {
-            if(o.GetType() == typeof(AtributosModel))//Verificar que el Objeto sea del Tipo AtributosModel
-            {
-                var a = (AtributosModel)o;//Castear la variable "a" al tipo AtributosModel
-
-                if(Abrir())//Intentar Abrir la Conexión
-                {
-                    //Intento Exitoso
-                    try
-                    {
-                        string proce = "sp_atributos_seleccion";//Idicar el nombre del procedimiento
-
-                        List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
-                        lista.Add(new Parametros(@"opc", "2"));//Indicar la opción a ejecutar en el procedimiento
-                        lista.Add(new Parametros(@"usr", a.Usuario.Id.ToString()));//Indicar el Usuario
-                        lista.Add(new Parametros(@"sec", a.Seccion.Id));
-                        lista.Add(new Parametros(@"ser", string.Empty));
-
-                        if(ConsultarProcedimiento(proce,lista))//Intentar Consultar el Procedimiento
-                        { return true; }//Consulta Exitosa
-                        else//Consulta NO Exitosa, Consultar Error
-                        { return false; }
-                    }
-                    catch(Exception e)//Atrapar el Error
-                    {
-                        Error = e.Message.ToString();//Guardar el Error
-                        return false;//Indicar que existe el error
-                    }
-                    finally { Cerrar(); }//Cerrar la conexión
-                }
-                else//Intento NO Existoso, Consultar Error
-                {
-                    return false;
-                }
-
-
-            }
-            else// No son del mismo tipo
-            {
-                Error = "el objeto no es del mismo tipo del modelo atributos.";
-                return false;
-            }
-        }
     }
 }
