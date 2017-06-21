@@ -13,7 +13,6 @@ using System.IO;
 using SADI.Clases.Modelos;
 
 
-
 using SADI.Clases;
 namespace SADI.Clases.Controladores {
 	public class SeccionesController : Metodos {
@@ -188,6 +187,62 @@ namespace SADI.Clases.Controladores {
             }
             else
             { return false; }// No es del tipo SeccionesModel
+        }
+
+        /// <summary>
+        /// Función para la Selección de Secciones Aprobadas para el Usuario
+        /// </summary>
+        /// <param name="lista">Lista de Secciones</param>
+        /// <returns>Boleano</returns>
+        public bool ConsultarSeccionesXusuario(List<Secciones> lista)
+        {
+            if(lista.Count > 0)//Verificar que contenga elementos la Lista
+            {
+                string sente = "select * from Secciones where Id in (";//Sentencia SQL
+                int y = lista.Count - 1;//Total de Registros
+                int x = 0;//Contador de los registros
+                foreach (Secciones s in lista)//Barrer la lista de Secciones
+                {
+                    if (x == y)//Es el último registro???
+                    {
+                        sente += "'" + s.Seccion + "')";
+                    }
+                    else//Insertar registro
+                    {
+                        sente += "'" + s.Seccion + "',";
+                    }
+
+                    x += 1;//Incrementar en 1 el contador
+                }
+
+                if (Abrir())//Intentar Abrir la COnexión
+                {
+                    try
+                    {
+                        //Intentar la Cosulta de la Sentencia
+                        if(ConsultarSentenciaSQL(sente))
+                        { return true; }//Consulta Exitosa
+                        else//Consulta NO Exitosa, Consultar Error
+                        { return false; }
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el Error
+                    }
+                    finally { Cerrar(); }//Cerrar la coneción
+
+                }
+                else//Conexion NO Exitosa, Consultar Error
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Error = "No Existen Elementos en Lista de Secciones.";
+                return false;
+            }
         }
 
 	}//end SeccionesController

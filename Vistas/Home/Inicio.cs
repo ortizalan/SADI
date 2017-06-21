@@ -6,6 +6,7 @@ using SADI.Vistas.Usuarios;
 using SADI.Vistas.Filas;
 using SADI.Vistas.Estantes;
 using SADI.Vistas.Niveles;
+using SADI.Vistas.SerieDocumental;
 using SADI.Clases;
 
 
@@ -142,5 +143,13 @@ namespace SADI
             nivel.Show();//Mostrar la Forma
         }
 
+        private void GenerarNvaSerieMenu_Click(object sender, EventArgs e)
+        {
+            //Usuario temporal, es para pruebas
+            um.Id = 15;
+            SerieDocumentalAdd nsd = new SerieDocumentalAdd(um);
+            nsd.MdiParent = this;
+            nsd.Show();
+        }
     }
 }

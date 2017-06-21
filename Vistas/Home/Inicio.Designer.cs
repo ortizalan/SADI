@@ -106,6 +106,7 @@
             this.GenerarNvaSerieMenu.Name = "GenerarNvaSerieMenu";
             this.GenerarNvaSerieMenu.Size = new System.Drawing.Size(180, 22);
             this.GenerarNvaSerieMenu.Text = "Generar Nueva Serie";
+            this.GenerarNvaSerieMenu.Click += new System.EventHandler(this.GenerarNvaSerieMenu_Click);
             // 
             // EditarSerieMenu
             // 
@@ -298,7 +299,7 @@
             this.filasMostrarMenu,
             this.filasEditarMenu});
             this.filasToolStripMenuItem.Name = "filasToolStripMenuItem";
-            this.filasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filasToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.filasToolStripMenuItem.Text = "Filas";
             // 
             // AgregarFilaMenu
@@ -329,7 +330,7 @@
             this.mostrarEstanteMenu,
             this.editarEstanteMenu});
             this.estantesToolStripMenuItem.Name = "estantesToolStripMenuItem";
-            this.estantesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.estantesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.estantesToolStripMenuItem.Text = "Estantes";
             // 
             // agregarEstanteMenu
@@ -360,46 +361,46 @@
             this.mostrarNivelesMenu,
             this.editarNivelesMenu});
             this.nivelesToolStripMenuItem.Name = "nivelesToolStripMenuItem";
-            this.nivelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nivelesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.nivelesToolStripMenuItem.Text = "Niveles";
             // 
             // agregarNivelesMenu
             // 
             this.agregarNivelesMenu.Name = "agregarNivelesMenu";
-            this.agregarNivelesMenu.Size = new System.Drawing.Size(152, 22);
+            this.agregarNivelesMenu.Size = new System.Drawing.Size(116, 22);
             this.agregarNivelesMenu.Text = "Agregar";
             this.agregarNivelesMenu.Click += new System.EventHandler(this.agregarNivelesMenu_Click);
             // 
             // mostrarNivelesMenu
             // 
             this.mostrarNivelesMenu.Name = "mostrarNivelesMenu";
-            this.mostrarNivelesMenu.Size = new System.Drawing.Size(152, 22);
+            this.mostrarNivelesMenu.Size = new System.Drawing.Size(116, 22);
             this.mostrarNivelesMenu.Text = "Mostrar";
             this.mostrarNivelesMenu.Click += new System.EventHandler(this.mostrarNivelesMenu_Click);
             // 
             // editarNivelesMenu
             // 
             this.editarNivelesMenu.Name = "editarNivelesMenu";
-            this.editarNivelesMenu.Size = new System.Drawing.Size(152, 22);
+            this.editarNivelesMenu.Size = new System.Drawing.Size(116, 22);
             this.editarNivelesMenu.Text = "Editar";
             this.editarNivelesMenu.Click += new System.EventHandler(this.editarNivelesMenu_Click);
             // 
             // ladosToolStripMenuItem
             // 
             this.ladosToolStripMenuItem.Name = "ladosToolStripMenuItem";
-            this.ladosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ladosToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.ladosToolStripMenuItem.Text = "Lados";
             // 
             // subnivelesToolStripMenuItem
             // 
             this.subnivelesToolStripMenuItem.Name = "subnivelesToolStripMenuItem";
-            this.subnivelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.subnivelesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.subnivelesToolStripMenuItem.Text = "Subniveles";
             // 
             // pocisionToolStripMenuItem
             // 
             this.pocisionToolStripMenuItem.Name = "pocisionToolStripMenuItem";
-            this.pocisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pocisionToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.pocisionToolStripMenuItem.Text = "Posicion";
             // 
             // Inicio

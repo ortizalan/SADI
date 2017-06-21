@@ -187,5 +187,54 @@ namespace SADI.Clases.Controladores
             else//No son del Mismo Tipo
             { return false; }
         }
+        /// <summary>
+        /// Consultar en los Atributos las Secciones Dadas de ALta el Usuario
+        /// </summary>
+        /// <param name="o">Objeto del tipo Atributos</param>
+        /// <returns>Boleano</returns>
+        public bool ConsultarAtributosSeccionesxUsuario(object o)
+        {
+            if (o.GetType() == typeof(AtributosModel))//Verificar que el objeto sea del tipo
+            {
+                //si es del mismo tipo
+                var a = (AtributosModel)o;//Casteo de Variables
+                
+                if(Abrir())//Intentar la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "1"));//Opción a Ejecutar
+                        lista.Add(new Parametros(@"usr", a.Usuario.Id.ToString()));//Identificador del Usuario
+                        lista.Add(new Parametros(@"sec", string.Empty));//Parámetro Vacío
+                        lista.Add(new Parametros(@"ser", string.Empty));//Parámetro Vacío
+
+                        string proce = "sp_atributos_seleccion";//Nombre dle Procedimiento
+
+                        if(ConsultarProcedimiento(proce,lista))//Intentar la Cosulta
+                        { return true; }//Intento Exitoso
+                        else
+                        { return false; }//Intento NO Exitoso
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el Error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;//Indicar que existe el error
+                }
+
+            }
+            else//No es el Objeto del mismo tipo
+            {
+                Error = "el objeto no es del tipo atributosmodel.";
+                return false;
+            }
+        }
     }
 }

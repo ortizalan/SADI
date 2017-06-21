@@ -41,15 +41,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cboValorDoctal = new System.Windows.Forms.ComboBox();
-            this.cboClasificacion = new System.Windows.Forms.ComboBox();
+            this.cboClasificaciones = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNombreExp = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtDescExpe = new System.Windows.Forms.TextBox();
             this.gpoCveSevi = new System.Windows.Forms.GroupBox();
-            this.chkTieneSevi = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.txtCveSevi = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.chkTieneSevi = new System.Windows.Forms.CheckBox();
             this.txtOtraInfo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.chkStatus = new System.Windows.Forms.CheckBox();
@@ -104,6 +104,7 @@
             this.cboTema.Name = "cboTema";
             this.cboTema.Size = new System.Drawing.Size(383, 21);
             this.cboTema.TabIndex = 5;
+            this.cboTema.SelectedIndexChanged += new System.EventHandler(this.cboTema_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -124,6 +125,7 @@
             this.cboSeries.Name = "cboSeries";
             this.cboSeries.Size = new System.Drawing.Size(383, 21);
             this.cboSeries.TabIndex = 3;
+            this.cboSeries.SelectedIndexChanged += new System.EventHandler(this.cboSeries_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -144,6 +146,7 @@
             this.cboSeccion.Name = "cboSeccion";
             this.cboSeccion.Size = new System.Drawing.Size(383, 21);
             this.cboSeccion.TabIndex = 1;
+            this.cboSeccion.SelectedIndexChanged += new System.EventHandler(this.cboSeccion_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -160,7 +163,7 @@
             this.gpoDetallesDoc.Controls.Add(this.label6);
             this.gpoDetallesDoc.Controls.Add(this.label5);
             this.gpoDetallesDoc.Controls.Add(this.cboValorDoctal);
-            this.gpoDetallesDoc.Controls.Add(this.cboClasificacion);
+            this.gpoDetallesDoc.Controls.Add(this.cboClasificaciones);
             this.gpoDetallesDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpoDetallesDoc.Location = new System.Drawing.Point(525, 41);
             this.gpoDetallesDoc.Name = "gpoDetallesDoc";
@@ -201,13 +204,13 @@
             // 
             // cboClasificacion
             // 
-            this.cboClasificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboClasificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboClasificacion.FormattingEnabled = true;
-            this.cboClasificacion.Location = new System.Drawing.Point(112, 63);
-            this.cboClasificacion.Name = "cboClasificacion";
-            this.cboClasificacion.Size = new System.Drawing.Size(193, 21);
-            this.cboClasificacion.TabIndex = 0;
+            this.cboClasificaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboClasificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboClasificaciones.FormattingEnabled = true;
+            this.cboClasificaciones.Location = new System.Drawing.Point(112, 63);
+            this.cboClasificaciones.Name = "cboClasificacion";
+            this.cboClasificaciones.Size = new System.Drawing.Size(193, 21);
+            this.cboClasificaciones.TabIndex = 0;
             // 
             // label7
             // 
@@ -261,16 +264,14 @@
             this.gpoCveSevi.TabStop = false;
             this.gpoCveSevi.Text = "Clave SEVI";
             // 
-            // chkTieneSevi
+            // txtCveSevi
             // 
-            this.chkTieneSevi.AutoSize = true;
-            this.chkTieneSevi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkTieneSevi.Location = new System.Drawing.Point(14, 35);
-            this.chkTieneSevi.Name = "chkTieneSevi";
-            this.chkTieneSevi.Size = new System.Drawing.Size(166, 17);
-            this.chkTieneSevi.TabIndex = 0;
-            this.chkTieneSevi.Text = "Cuenta con Clave SEVI?";
-            this.chkTieneSevi.UseVisualStyleBackColor = true;
+            this.txtCveSevi.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCveSevi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCveSevi.Location = new System.Drawing.Point(99, 65);
+            this.txtCveSevi.Name = "txtCveSevi";
+            this.txtCveSevi.Size = new System.Drawing.Size(213, 20);
+            this.txtCveSevi.TabIndex = 7;
             // 
             // label9
             // 
@@ -282,14 +283,16 @@
             this.label9.TabIndex = 3;
             this.label9.Text = "Clave SEVI :";
             // 
-            // txtCveSevi
+            // chkTieneSevi
             // 
-            this.txtCveSevi.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtCveSevi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCveSevi.Location = new System.Drawing.Point(99, 65);
-            this.txtCveSevi.Name = "txtCveSevi";
-            this.txtCveSevi.Size = new System.Drawing.Size(213, 20);
-            this.txtCveSevi.TabIndex = 7;
+            this.chkTieneSevi.AutoSize = true;
+            this.chkTieneSevi.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTieneSevi.Location = new System.Drawing.Point(14, 35);
+            this.chkTieneSevi.Name = "chkTieneSevi";
+            this.chkTieneSevi.Size = new System.Drawing.Size(166, 17);
+            this.chkTieneSevi.TabIndex = 0;
+            this.chkTieneSevi.Text = "Cuenta con Clave SEVI?";
+            this.chkTieneSevi.UseVisualStyleBackColor = true;
             // 
             // txtOtraInfo
             // 
@@ -378,7 +381,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cboValorDoctal;
-        private System.Windows.Forms.ComboBox cboClasificacion;
+        private System.Windows.Forms.ComboBox cboClasificaciones;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtNombreExp;
         private System.Windows.Forms.Label label8;
