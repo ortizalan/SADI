@@ -31,7 +31,8 @@ namespace SADI
         }
         private void Inicio_Load(object sender, EventArgs e)
         {
-            um.Id = Utilerias.IdUsuario;
+            //um.Id = Utilerias.IdUsuario;
+            um.Id = 1;
             this.llenarObjetoUsuario();
             this.Text = "..:: Sistame de Adminitración Arcivística ISSSTESON ::..";
             this.Text += "\t" + "Usuario :" + um.Nombre + " " + um.Paterno + " " + um.Materno;
@@ -59,10 +60,11 @@ namespace SADI
                     um.Paterno = (string)uc.Tabla.Rows[0][4];
                     um.Materno = (string)uc.Tabla.Rows[0][5];
                     um.Fondo.Id = (int)uc.Tabla.Rows[0][6];
-                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][7];
-                    um.Email = (string)uc.Tabla.Rows[0][8];
-                    um.Estatus = (bool)uc.Tabla.Rows[0][9];
-                    um.Atributos = (bool)uc.Tabla.Rows[0][10];
+                    um.SubFondo.Id = (int)uc.Tabla.Rows[0][7];
+                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][8];
+                    um.Email = (string)uc.Tabla.Rows[0][9];
+                    um.Estatus = (bool)uc.Tabla.Rows[0][10];
+                    um.Atributos = (bool)uc.Tabla.Rows[0][11];
                 }
             }
             else// No se pudo realizar la COnsulta
@@ -146,7 +148,7 @@ namespace SADI
         private void GenerarNvaSerieMenu_Click(object sender, EventArgs e)
         {
             //Usuario temporal, es para pruebas
-            um.Id = 15;
+           
             SerieDocumentalAdd nsd = new SerieDocumentalAdd(um);
             nsd.MdiParent = this;
             nsd.Show();

@@ -44,6 +44,8 @@ namespace SADI.Vistas.SerieDocumental
             InitializeComponent();
             am.Usuario.Id = u.Id;
             LLenarComboSecciones();
+            LLenarComboClasificacion();
+            LLenarComboValorDoctal();
         }
 
         #region LLenado de Combos
@@ -63,7 +65,7 @@ namespace SADI.Vistas.SerieDocumental
 
                 foreach(DataRow r in dt.Rows)//BArrer la tabla por los registros
                 {
-                    secciones.Add(new Secciones((string)r[0]));
+                    secciones.Add(new Secciones((string)r[0]));//Agregar las Secciones a la Lista
                 }
 
                 if (secc.ConsultarSeccionesXusuario(secciones))//Intentar la consulta 
@@ -95,21 +97,50 @@ namespace SADI.Vistas.SerieDocumental
         /// </summary>
         private void LLenarComboSeries()
         {
-            if (serc.ConsultarSeriesPorSeccion(serm))//Intentar realizar la consulta, por Sección
+            DataTable dtseries = ObtenerSeriexSeccionUsuario();//Obtener las Series del Usuario por Sección
+            
+            if(dtseries.Rows.Count > 0)
             {
-                //Consulta Exitosa
-                if (serc.Tabla.Rows.Count > 0)//Si no está vacía la tabla
+                List<Series> listseries = new List<Series>();//Nueva lista de series
+
+                foreach(DataRow rs in dtseries.Rows)
                 {
-                    cboSeries.DataSource = serc.Tabla;//Fuente de datos del combo
-                    cboSeries.ValueMember = serc.Tabla.Columns[0].ColumnName;//Valor de la Información
-                    cboSeries.DisplayMember = serc.Tabla.Columns[2].ColumnName;//Descripción de la Informanción
+                    listseries.Add(new Series((int)rs[0]));//Agregar Serie a la Lista
+                }
+
+                //serm.Seccion.Id = am.Seccion.Id;//Asignar el Identificador de la Sección al modelo serie
+
+                if(serc.ConsultarSeriexSeccionUsuario(listseries,serm))//Intentar la Consulta
+                {
+                    //Intento Exitoso
+                    if(serc.Tabla.Rows.Count > 0)//Verificar que existan registros
+                    {
+                        //Existen registros
+                        cboSeries.DataSource = serc.Tabla;
+                        cboSeries.ValueMember = serc.Tabla.Columns[0].ColumnName;
+                        cboSeries.DisplayMember = serc.Tabla.Columns[2].ColumnName;
+
+                    }
+                    else//NO existen registros
+                    {
+                        MessageBox.Show("no hay registros con la selección configurada.".ToUpper(),
+                            ":: mensaje desde nueva serie documental ::".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
+                        ":: mensaje desde la nueva serie documental ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else//Consulta NO Exitosa
+            else
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
+                MessageBox.Show("no existen registros que coincidan.".ToUpper(),
                     ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
         }
         /// <summary>
@@ -159,7 +190,9 @@ namespace SADI.Vistas.SerieDocumental
                     MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
-
+        /// <summary>
+        /// Método para el LLenado del Combo ValorDoctal
+        /// </summary>
         private void LLenarComboValorDoctal()
         {
             //Intentar consultar registro de valores documentales
@@ -179,21 +212,23 @@ namespace SADI.Vistas.SerieDocumental
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
         #endregion
 
-        #region ComboSelectedIndexChanged
+        #region ComboSelectedValuesChanged
+
 
         /// <summary>
         /// Evento de Cambio de Selección en el Combo Sección
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cboSeccion_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboSeccion_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
             {
                 serm.Seccion.Id = (string)cboSeccion.SelectedValue;//Agregar la Identificación de la Sección al Objeto
+                am.Seccion.Id = serm.Seccion.Id;
                 LLenarComboSeries();//Realizar el LLenado del Combo Series
             }
         }
@@ -202,7 +237,7 @@ namespace SADI.Vistas.SerieDocumental
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboSeries_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView")//Verificar que exista valor seleccionado
             {
@@ -211,6 +246,7 @@ namespace SADI.Vistas.SerieDocumental
                 LLenarComboTemas();//LLenar el combo Temas
             }
         }
+
         /// <summary>
         /// Evento de Cambio de Selección en el Combo Temas
         /// </summary>
@@ -261,7 +297,35 @@ namespace SADI.Vistas.SerieDocumental
             }
 
         }
+        /// <summary>
+        /// Obtener las Series por Sección y Usuario
+        /// </summary>
+        /// <returns></returns>
+        private DataTable ObtenerSeriexSeccionUsuario()
+        {
+            if(ac.ConsultarAtributosSeriesxSeccionUsuario(am))//Intentar la Consulta
+            {
+                //Intento Exitoso
+                if(ac.Tabla.Rows.Count > 0)//Verificar que existen registro
+                { return ac.Tabla; }//Enviar la tabla
+                else//no tiene registros
+                { return null; }
+            }
+            else//Intento NO Exitoso, Consultar Error
+            {
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + ac.Error.ToUpper(),
+                    ":: mensaje desde nueva serie documental ::",
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return null;
+            }
+        }
 
         #endregion
+
+        private void cmdOUT_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+        
     }
 }

@@ -92,7 +92,7 @@ namespace SADI.Clases.Controladores {
                     try
                     {
                         List<Parametros> lista = new List<Parametros>();// Crear lista de parámetros
-                        lista.Add(new Parametros(@"opc", "4"));// Enviar opción a Procedimiento
+                        lista.Add(new Parametros(@"opc", "3"));// Enviar opción a Procedimiento
                         lista.Add(new Parametros(@"id", c.Id.ToString()));// Identificador de la Clasificación
                         lista.Add(new Parametros(@"clasi", c.Clasificacion));// Descripción de la Clasificación
 
@@ -134,7 +134,7 @@ namespace SADI.Clases.Controladores {
                     try
                     {
                         List<Parametros> lista = new List<Parametros>();// Crear lista de parámetros
-                        lista.Add(new Parametros(@"opc", "4"));// Enviar opción a Procedimiento
+                        lista.Add(new Parametros(@"opc", "2"));// Enviar opción a Procedimiento
                         lista.Add(new Parametros(@"id", c.Id.ToString()));// Identificador de la Clasificación
                         lista.Add(new Parametros(@"clasi", c.Clasificacion));// Descripción de la Clasificación
 
@@ -171,7 +171,7 @@ namespace SADI.Clases.Controladores {
                     try
                     {
                         List<Parametros> lista = new List<Parametros>();// Crear lista de parámetros
-                        lista.Add(new Parametros(@"opc", "4"));// Enviar opción a Procedimiento
+                        lista.Add(new Parametros(@"opc", "1"));// Enviar opción a Procedimiento
                         lista.Add(new Parametros(@"id", string.Empty));// Vacío
                         lista.Add(new Parametros(@"clasi", string.Empty));// Vacío
 

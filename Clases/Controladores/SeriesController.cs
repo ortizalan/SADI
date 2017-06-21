@@ -118,6 +118,55 @@ namespace SADI.Clases.Controladores
             { return false; }
         }
 
+        public bool ConsultarSeriexSeccionUsuario(List<Series> lista, SeriesModel sm)
+        {
+            if(lista.Count > 0)//Verificar que tenga parámetros
+            {
+                string sente = "select * from series where seccion = '" + sm.Seccion.Id + "' and IdSerie in (";//Primer parte de la sentencia
+                int y = lista.Count - 1;//Número de elementos de la lista
+                int x = 0;//Contador
+                foreach(Series s in lista)//Barrer la lista de series
+                {
+                    if(x == y)//Ver si es el último elemento en la lista
+                    {
+                        sente += s.Serie + ")";//final de la sentencia
+                    }
+                    else//no es el úlitmo elemento en la lista
+                    {
+                        sente += s.Serie + ",";//Constinuidad de la Sentencia
+                    }
+
+                    x += 1;//aumentar el contador
+                }
+
+                if(Abrir())//Intentar Abrir la Conexión
+                {
+                    try
+                    {
+                        if(ConsultarSentenciaSQL(sente))//Intentar consultar la sentencia
+                        { return true; }//intento exitoso
+                        else//Intento No Exitoso, Consultar Error
+                        { return false; }
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe un error
+                    }
+                    finally { Cerrar(); }//Cerrar Conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;
+                }
+            }
+            else//No existen 
+            {
+                Error = "No Existen Elementos en la Lista Series.";//Error 
+                return false;
+            }
+        }
+
     }//end SeriesController
 
 }//end namespace Controladores

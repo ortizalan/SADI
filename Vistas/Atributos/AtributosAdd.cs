@@ -54,7 +54,7 @@ namespace SADI.Vistas.Atributos
         /// Contructor de la Clase
         /// </summary>
         /// <param name="idUsr">Id de Usuario</param>
-        public AtributosAdd(int idUsr,object sender)
+        public AtributosAdd(int idUsr, object sender)
         {
             val = sender;
             InitializeComponent();
@@ -155,35 +155,40 @@ namespace SADI.Vistas.Atributos
             }
             else//No es enviado desde ese método
             {
-                DataGridViewCheckBoxCell chkSer = (DataGridViewCheckBoxCell)dgvSeries.SelectedRows[0].Cells[e.ColumnIndex];
-                if (chkSer.Value == chkSer.FalseValue || chkSer.Value == null)
+                try
                 {
-                    chkSer.Value = chkSer.TrueValue;//Cambiar el Valor a Verdadero
-                    TablaEventArgs et = new TablaEventArgs
+                    DataGridViewCheckBoxCell chkSer = (DataGridViewCheckBoxCell)dgvSeries.SelectedRows[0].Cells[e.ColumnIndex];
+
+                    if (chkSer.Value == chkSer.FalseValue || chkSer.Value == null)
                     {
-                        Seccion = (string)dgvSecciones.SelectedRows[0].Cells["Id"].Value,
-                        SelSeccion = true,
-                        Serie = (int)dgvSeries.SelectedRows[0].Cells["IdSerie"].Value,
-                        SelSerie = true
-                    };
-                    LLenarTablaAtribuciones("SeriesChk", et);//LLenar Tabla Temporal
-                    EnvioValorTemaXSerie((int)dgvSeries.SelectedRows[0].Cells["idSerie"].Value,
-                        (string)dgvSeries.SelectedRows[0].Cells["Seccion"].Value);
-                }
-                else
-                {
-                    chkSer.Value = chkSer.FalseValue;//Cambiar del Valor a Falso
-                    dgvTemas.DataSource = null;
-                    dgvTemas.Columns.Clear();
-                    object send = this;
-                    TemasSeriesEventArgs ev = new TemasSeriesEventArgs
+                        chkSer.Value = chkSer.TrueValue;//Cambiar el Valor a Verdadero
+                        TablaEventArgs et = new TablaEventArgs
+                        {
+                            Seccion = (string)dgvSecciones.SelectedRows[0].Cells["Id"].Value,
+                            SelSeccion = true,
+                            Serie = (int)dgvSeries.SelectedRows[0].Cells["IdSerie"].Value,
+                            SelSerie = true
+                        };
+                        LLenarTablaAtribuciones("SeriesChk", et);//LLenar Tabla Temporal
+                        EnvioValorTemaXSerie((int)dgvSeries.SelectedRows[0].Cells["idSerie"].Value,
+                            (string)dgvSeries.SelectedRows[0].Cells["Seccion"].Value);
+                    }
+                    else
                     {
-                        IdSeccion = (string)dgvSecciones.SelectedRows[0].Cells["Id"].Value,
-                        IdSerie = (int)dgvSeries.SelectedRows[0].Cells["IdSerie"].Value,
-                        Opcion = 2
-                    };
-                    BorrarRenglonTablaAtribuciones(send, ev);
+                        chkSer.Value = chkSer.FalseValue;//Cambiar del Valor a Falso
+                        dgvTemas.DataSource = null;
+                        dgvTemas.Columns.Clear();
+                        object send = this;
+                        TemasSeriesEventArgs ev = new TemasSeriesEventArgs
+                        {
+                            IdSeccion = (string)dgvSecciones.SelectedRows[0].Cells["Id"].Value,
+                            IdSerie = (int)dgvSeries.SelectedRows[0].Cells["IdSerie"].Value,
+                            Opcion = 2
+                        };
+                        BorrarRenglonTablaAtribuciones(send, ev);
+                    }
                 }
+                catch (Exception ex) { ex.Message.ToString(); }
             }
         }
 
@@ -268,7 +273,7 @@ namespace SADI.Vistas.Atributos
                             rs["Tema"] = 0;
                             TAtrTemp.AcceptChanges();
                         }
-                        
+
                     }
                     break;
                 default:
@@ -398,7 +403,7 @@ namespace SADI.Vistas.Atributos
                         Tema = (int)dgvTemas.SelectedRows[0].Cells["IdTema"].Value,//Valor del Identificador del Tema
                         SelTema = true//Indicar Selección de Tema
                     };
-                    LLenarTablaAtribuciones(null,et);//LLenar Tabla Atribuciones
+                    LLenarTablaAtribuciones(null, et);//LLenar Tabla Atribuciones
                     c2 += 1;// Incrementar el Índice 
                 }
             }
@@ -568,7 +573,7 @@ namespace SADI.Vistas.Atributos
                         tm.Serie.Id = e.Serie;
                         if (tc.ConsultarTemaXSerieSeccion(tm))
                         {
-                            if(tc.Tabla.Rows.Count > 0)
+                            if (tc.Tabla.Rows.Count > 0)
                             {
                                 e.Tema = (int)tc.Tabla.Rows[0]["IdTema"];
                             }
@@ -705,7 +710,7 @@ namespace SADI.Vistas.Atributos
                             else
                             {
                                 //Que no venga de Usuarios para cerrar
-                                if(val == null)
+                                if (val == null)
                                 { Close(); }
                             }
                         }

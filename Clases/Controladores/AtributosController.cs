@@ -236,5 +236,54 @@ namespace SADI.Clases.Controladores
                 return false;
             }
         }
+        /// <summary>
+        /// Consultar en los Atributos las Series por Seecion y Usuario
+        /// </summary>
+        /// <param name="o">Objeto del Tipo AtributosModel</param>
+        /// <returns>Boleano</returns>
+        public bool ConsultarAtributosSeriesxSeccionUsuario(object o)
+        {
+            if(o.GetType() == typeof(AtributosModel))//Verificar que el Objeto sea del Tipo AtributosModel
+            {
+                var a = (AtributosModel)o;//Castear la variable "a" al tipo AtributosModel
+
+                if(Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        string proce = "sp_atributos_seleccion";//Idicar el nombre del procedimiento
+
+                        List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                        lista.Add(new Parametros(@"opc", "2"));//Indicar la opción a ejecutar en el procedimiento
+                        lista.Add(new Parametros(@"usr", a.Usuario.Id.ToString()));//Indicar el Usuario
+                        lista.Add(new Parametros(@"sec", a.Seccion.Id));
+                        lista.Add(new Parametros(@"ser", string.Empty));
+
+                        if(ConsultarProcedimiento(proce,lista))//Intentar Consultar el Procedimiento
+                        { return true; }//Consulta Exitosa
+                        else//Consulta NO Exitosa, Consultar Error
+                        { return false; }
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Existoso, Consultar Error
+                {
+                    return false;
+                }
+
+
+            }
+            else// No son del mismo tipo
+            {
+                Error = "el objeto no es del mismo tipo del modelo atributos.";
+                return false;
+            }
+        }
     }
 }

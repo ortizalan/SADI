@@ -46,10 +46,10 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cboSubFondo = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cboSubFondo = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -240,6 +240,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DATOS ADMINISTRATIVOS :";
             // 
+            // cboSubFondo
+            // 
+            this.cboSubFondo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSubFondo.FormattingEnabled = true;
+            this.cboSubFondo.Location = new System.Drawing.Point(79, 85);
+            this.cboSubFondo.Name = "cboSubFondo";
+            this.cboSubFondo.Size = new System.Drawing.Size(269, 21);
+            this.cboSubFondo.TabIndex = 3;
+            this.cboSubFondo.SelectedIndexChanged += new System.EventHandler(this.cboSubFondo_SelectedIndexChanged_1);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(0, 88);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(73, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "SUBFONDO :";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -258,24 +277,6 @@
             this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "FONDO :";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(0, 88);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "SUBFONDO :";
-            // 
-            // cboSubFondo
-            // 
-            this.cboSubFondo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSubFondo.FormattingEnabled = true;
-            this.cboSubFondo.Location = new System.Drawing.Point(79, 85);
-            this.cboSubFondo.Name = "cboSubFondo";
-            this.cboSubFondo.Size = new System.Drawing.Size(269, 21);
-            this.cboSubFondo.TabIndex = 3;
             // 
             // UsuariosControl
             // 

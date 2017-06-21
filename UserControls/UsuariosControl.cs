@@ -375,13 +375,10 @@ namespace SADI.UserControls
                 _idJerarquia = (int)cboJerarquia.SelectedValue;
             }
         }
-        //Cambio de Valor Seleccionado en Combobox Subfondos
+       
         private void cboSubFondo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
-            {
-                _idSubFondo = (int)cboSubFondo.SelectedValue;
-            }
+           
         }
         // Cambio de valor CheckBox Estatus
         private void chkEstatus_CheckedChanged(object sender, EventArgs e)
@@ -502,7 +499,14 @@ namespace SADI.UserControls
                     break;
             }
         }
-
+        //Cambio de Valor Seleccionado en Combobox Subfondos
+        private void cboSubFondo_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idSubFondo = (int)cboSubFondo.SelectedValue;
+            }
+        }
     }
 }
 

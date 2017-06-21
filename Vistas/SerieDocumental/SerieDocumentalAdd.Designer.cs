@@ -54,6 +54,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.chkStatus = new System.Windows.Forms.CheckBox();
             this.gpoSerieDoctal = new System.Windows.Forms.GroupBox();
+            this.cmdOUT = new System.Windows.Forms.Button();
             this.gpoCrearSerieDoctal.SuspendLayout();
             this.gpoDetallesDoc.SuspendLayout();
             this.gpoCveSevi.SuspendLayout();
@@ -125,7 +126,7 @@
             this.cboSeries.Name = "cboSeries";
             this.cboSeries.Size = new System.Drawing.Size(383, 21);
             this.cboSeries.TabIndex = 3;
-            this.cboSeries.SelectedIndexChanged += new System.EventHandler(this.cboSeries_SelectedIndexChanged);
+            this.cboSeries.SelectedValueChanged += new System.EventHandler(this.cboSeries_SelectedValueChanged);
             // 
             // label2
             // 
@@ -146,7 +147,7 @@
             this.cboSeccion.Name = "cboSeccion";
             this.cboSeccion.Size = new System.Drawing.Size(383, 21);
             this.cboSeccion.TabIndex = 1;
-            this.cboSeccion.SelectedIndexChanged += new System.EventHandler(this.cboSeccion_SelectedIndexChanged);
+            this.cboSeccion.SelectedValueChanged += new System.EventHandler(this.cboSeccion_SelectedValueChanged);
             // 
             // label1
             // 
@@ -202,13 +203,13 @@
             this.cboValorDoctal.Size = new System.Drawing.Size(193, 21);
             this.cboValorDoctal.TabIndex = 1;
             // 
-            // cboClasificacion
+            // cboClasificaciones
             // 
             this.cboClasificaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboClasificaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboClasificaciones.FormattingEnabled = true;
             this.cboClasificaciones.Location = new System.Drawing.Point(112, 63);
-            this.cboClasificaciones.Name = "cboClasificacion";
+            this.cboClasificaciones.Name = "cboClasificaciones";
             this.cboClasificaciones.Size = new System.Drawing.Size(193, 21);
             this.cboClasificaciones.TabIndex = 0;
             // 
@@ -336,11 +337,22 @@
             this.gpoSerieDoctal.TabStop = false;
             this.gpoSerieDoctal.Text = "Serie Documental";
             // 
+            // cmdOUT
+            // 
+            this.cmdOUT.Location = new System.Drawing.Point(727, 502);
+            this.cmdOUT.Name = "cmdOUT";
+            this.cmdOUT.Size = new System.Drawing.Size(122, 42);
+            this.cmdOUT.TabIndex = 11;
+            this.cmdOUT.Text = ":: SALIR ::";
+            this.cmdOUT.UseVisualStyleBackColor = true;
+            this.cmdOUT.Click += new System.EventHandler(this.cmdOUT_Click);
+            // 
             // SerieDocumentalAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 527);
+            this.ClientSize = new System.Drawing.Size(877, 556);
+            this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.gpoSerieDoctal);
             this.Controls.Add(this.chkStatus);
             this.Controls.Add(this.txtOtraInfo);
@@ -394,5 +406,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chkStatus;
         private System.Windows.Forms.GroupBox gpoSerieDoctal;
+        private System.Windows.Forms.Button cmdOUT;
     }
 }
