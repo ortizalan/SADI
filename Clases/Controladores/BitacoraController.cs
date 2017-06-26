@@ -88,7 +88,7 @@ namespace SADI.Clases.Controladores
                         List<Parametros> lista = new List<Parametros>();// Crear una Arreglo de Parámetros
                         lista.Add(new Parametros(@"opc", "2"));// Enviar la opción al procedimiento
                         lista.Add(new Parametros(@"id", b.Id.ToString()));// La identificación del registro
-                        lista.Add(new Parametros(@"seriedoc", b.SerieDoctal.Id.ToString()));// Serie Documental del Movimiento
+                        lista.Add(new Parametros(@"seriedoc", b.Registro.SerieDoctal));// Serie Documental del Movimiento
                         lista.Add(new Parametros(@"fecha", b.Fecha.ToString("yyyy-MM-dd")));// Fecha del Movimiento
                         lista.Add(new Parametros(@"mov", b.Movimiento.Id.ToString()));// Tipo del Moviemiento
                         lista.Add(new Parametros(@"usr", b.Usuario.Id.ToString()));// Identificador del Usuario
@@ -135,7 +135,7 @@ namespace SADI.Clases.Controladores
                         List<Parametros> lista = new List<Parametros>();// Crear una Arreglo de Parámetros
                         lista.Add(new Parametros(@"opc", "3"));// Enviar la opción al procedimiento
                         lista.Add(new Parametros(@"id", b.Id.ToString()));// La identificación del registro
-                        lista.Add(new Parametros(@"seriedoc", b.SerieDoctal.Id.ToString()));// Serie Documental del Movimiento
+                        lista.Add(new Parametros(@"seriedoc", b.Registro.SerieDoctal));// Serie Documental del Movimiento
                         lista.Add(new Parametros(@"fecha", b.Fecha.ToString("yyyy-MM-dd")));// Fecha del Movimiento
                         lista.Add(new Parametros(@"mov", b.Movimiento.Id.ToString()));// Tipo del Moviemiento
                         lista.Add(new Parametros(@"usr", b.Usuario.Id.ToString()));// Identificador del Usuario

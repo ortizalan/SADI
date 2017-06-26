@@ -21,21 +21,21 @@ namespace SADI.Clases.Modelos {
 	public class RegistrosModel {
 
 		/// <summary>
-		/// Identificador del Registro
-		/// </summary>
-		private int _id;
-		/// <summary>
 		/// Serie Documental de los Documentos
 		/// </summary>
 		private string _seriedoctal;
-		/// <summary>
-		/// Fondo del Documento
-		/// </summary>
-		private FondosModel _fondo;
+        /// <summary>
+        /// Tema de la Serie Documental
+        /// </summary>
+        private TemasModel _tema = new TemasModel();
+        /// <summary>
+        /// Fondo del Documento
+        /// </summary>
+        private FondosModel _fondo = new FondosModel();
 		/// <summary>
 		/// SubFondo del Documento
 		/// </summary>
-		private SubFondosModel _subfondo;
+		private SubFondosModel _subfondo = new SubFondosModel();
 		/// <summary>
 		/// Fecha de Apertura de la Serie Documental
 		/// </summary>
@@ -43,7 +43,7 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Fecha del cierre de la Serie Documental
 		/// </summary>
-		private DateTime _fechacierre;
+		private DateTime? _fechacierre;
 		/// <summary>
 		/// Propiedad que contiene el nombre del expediente
 		/// </summary>
@@ -63,15 +63,11 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Propiedad con la identificación del Valor Documental del Expediente
 		/// </summary>
-		private ValoresDoctalesModel _valordoctal;
+		private ValoresDoctalesModel _valordoctal = new ValoresDoctalesModel();
 		/// <summary>
 		/// Propiedad con la Clasificación del Expedente
 		/// </summary>
-		private ClasificacionesModel _clasificacion;
-		/// <summary>
-		/// Propiedad con la Valoración Documental del Expediente
-		/// </summary>
-		private ValoracionDoctalModel _valoraciondoctal;
+		private ClasificacionesModel _clasificacion = new ClasificacionesModel();
 		/// <summary>
 		/// Propiedad con Otra Información acerca del expediente
 		/// </summary>
@@ -92,124 +88,115 @@ namespace SADI.Clases.Modelos {
 
 		}
 
-		/// <summary>
-		/// Acceder a la Propiedad de Identificador
-		/// </summary>
-		public int Id{
-			get;
-			set;
-		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Serie Documental
 		/// </summary>
 		public string SerieDoctal{
-			get;
-			set;
+			get { return _seriedoctal; }
+            set { _seriedoctal = value; }
 		}
+
+        /// <summary>
+        /// Acceder a la Propiedad Tema de la Serie Documental
+        /// </summary>
+        public TemasModel Tema
+        { get { return _tema; }set { _tema = value; } }
 
 		/// <summary>
 		/// Acceder a la Propiedad Fondo
 		/// </summary>
 		public FondosModel Fondo{
-			get;
-			set;
+            get { return _fondo; }
+            set { _fondo = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad SubFondo
 		/// </summary>
 		public SubFondosModel SubFondo{
-			get;
-			set;
+            get { return _subfondo; }
+            set { _subfondo = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Fecha de Inicio
 		/// </summary>
 		public DateTime FechaInicio{
-			get;
-			set;
+            get { return _fechainicio; }
+            set { _fechainicio = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Fecha de Cierre
 		/// </summary>
-		public DateTime FechaCierre{
-			get;
-			set;
+		public DateTime? FechaCierre{
+            get { return _fechacierre; }
+            set { _fechacierre = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Nombre de Expediente
 		/// </summary>
 		public string NombreExp{
-			get;
-			set;
+            get { return _nombreexp; }
+            set { _nombreexp = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Descripción
 		/// </summary>
 		public string Descripcion{
-			get;
-			set;
+			get { return _descripcion; }
+            set { _descripcion = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la propiedad Número de Hojas
 		/// </summary>
 		public int NumHojas{
-			get;
-			set;
+            get { return _numhojas; }
+            set { _numhojas = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Clave Sevi
 		/// </summary>
 		public string CveSevi{
-			get;
-			set;
+            get { return _cvesevi; }
+            set { _cvesevi = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Valor Documental
 		/// </summary>
 		public ValoresDoctalesModel ValorDoctal{
-			get;
-			set;
+            get { return _valordoctal; }
+            set { _valordoctal = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Clasificación
 		/// </summary>
 		public ClasificacionesModel Clasificacion{
-			get;
-			set;
-		}
-
-		/// <summary>
-		/// Acceder a la Propiedad Valoracion Documental
-		/// </summary>
-		public ValoracionDoctalModel ValoracionDoctal{
-			get;
-			set;
+            get { return _clasificacion; }
+            set { _clasificacion = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Otra Información
 		/// </summary>
 		public string OtraInfo{
-			get;
-			set;
+            get { return _otrainfo; }
+            set { _otrainfo = value; }
 		}
 
 		/// <summary>
 		/// Acceder a la Propiedad Estatus
 		/// </summary>
 		public bool Estatus{
-			get;
-			set;
+            get { return _estatus; }
+            set { _estatus = value; }
 		}
 
 	}//end RegistrosModel

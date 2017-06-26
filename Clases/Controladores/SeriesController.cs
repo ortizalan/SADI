@@ -13,7 +13,6 @@ using System.IO;
 using SADI.Clases;
 using SADI.Clases.Modelos;
 
-
 namespace SADI.Clases.Controladores
 {
     /// <summary>
@@ -42,9 +41,46 @@ namespace SADI.Clases.Controladores
         /// <returns>Boleano</returns>
         /// <param name="o">Objeto del Tipo class</param>
         public override bool ActualizarRegistro(Object o)
-        {
+        { 
+            if(o.GetType() == typeof(SeriesModel))//Varificar que el objeto sea del tipo Modelo Series
+            {
+                //Si son del mismo tipo
+                var s = (SeriesModel)o;// Castear la variable "s" al tipo SeriesModel
 
-            return false;
+                string proce = "sp_series_crud";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "3"));//Opción a Ejecutar en el Procedimiento
+                lista.Add(new Parametros(@"id", s.Id.ToString()));//Identificador de la Serie
+                lista.Add(new Parametros(@"sec", s.Seccion.Id));//Identificador de la Sección
+                lista.Add(new Parametros(@"serie", s.Serie));//Descripción de la Serie
+
+                if(Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        if(EjecutarProcedimiento(proce,lista))//Intentar ejecutar el procedimiento
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, Consultar Error
+                        { return false; }
+                    }
+                    catch(Exception e)//Atrapar Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;
+                }
+            }
+            else//No son del mismo tipo
+            {
+                Error = "ol objeto no es del tipo SeriesModel.";
+                return false;
+            }
         }
 
         /// <summary>
@@ -55,7 +91,45 @@ namespace SADI.Clases.Controladores
         public override bool ConsultarRegistro(Object o)
         {
 
-            return false;
+            if (o.GetType() == typeof(SeriesModel))//Varificar que el objeto sea del tipo Modelo Series
+            {
+                //Si son del mismo tipo
+                var s = (SeriesModel)o;// Castear la variable "s" al tipo SeriesModel
+
+                string proce = "sp_series_crud";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "4"));//Opción a Ejecutar en el Procedimiento
+                lista.Add(new Parametros(@"id", s.Id.ToString()));//Identificador de la Serie
+                lista.Add(new Parametros(@"sec", s.Seccion.Id));//Identificador de la Sección
+                lista.Add(new Parametros(@"serie", string.Empty));//Vacío
+
+                if (Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        if (EjecutarProcedimiento(proce, lista))//Intentar ejecutar el procedimiento
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, Consultar Error
+                        { return false; }
+                    }
+                    catch (Exception e)//Atrapar Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;
+                }
+            }
+            else//No son del mismo tipo
+            {
+                Error = "ol objeto no es del tipo SeriesModel.";
+                return false;
+            }
         }
 
         /// <summary>
@@ -65,7 +139,34 @@ namespace SADI.Clases.Controladores
         public override bool ConsultarRegistros()
         {
 
-            return false;
+                string proce = "sp_series_crud";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "1"));//Opción a Ejecutar en el Procedimiento
+                lista.Add(new Parametros(@"id", string.Empty));//Identificador de la Serie
+                lista.Add(new Parametros(@"sec", string.Empty));//Identificador de la Sección
+                lista.Add(new Parametros(@"serie", string.Empty));//Descripción de la Serie
+
+                if (Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        if (EjecutarProcedimiento(proce, lista))//Intentar ejecutar el procedimiento
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, Consultar Error
+                        { return false; }
+                    }
+                    catch (Exception e)//Atrapar Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;
+                }
         }
 
         /// <summary>
@@ -75,7 +176,45 @@ namespace SADI.Clases.Controladores
         /// <param name="o">Objeto del Tipo Class</param>
         public override bool IngresarRegisto(Object o)
         {
-            return false;
+            if (o.GetType() == typeof(SeriesModel))//Varificar que el objeto sea del tipo Modelo Series
+            {
+                //Si son del mismo tipo
+                var s = (SeriesModel)o;// Castear la variable "s" al tipo SeriesModel
+
+                string proce = "sp_series_crud";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "2"));//Opción a Ejecutar en el Procedimiento
+                lista.Add(new Parametros(@"id", s.Id.ToString()));//Identificador de la Serie
+                lista.Add(new Parametros(@"sec", s.Seccion.Id));//Identificador de la Sección
+                lista.Add(new Parametros(@"serie", s.Serie));//Descripción de la Serie
+
+                if (Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        if (EjecutarProcedimiento(proce, lista))//Intentar ejecutar el procedimiento
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, Consultar Error
+                        { return false; }
+                    }
+                    catch (Exception e)//Atrapar Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;
+                }
+            }
+            else//No son del mismo tipo
+            {
+                Error = "ol objeto no es del tipo SeriesModel.";
+                return false;
+            }
         }
         /// <summary>
         /// Función para Consultar Las Series Relacionadas a una Sección

@@ -27,7 +27,7 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Propiedad de identificación de la serie documental
 		/// </summary>
-		private RegistrosModel _seriedocal;
+		private RegistrosModel _registro = new RegistrosModel();
 		/// <summary>
 		/// Propiedad de la Fecha del Movimiento
 		/// </summary>
@@ -35,11 +35,11 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Propiedad de identificación del movimiento realizado
 		/// </summary>
-		private MovimientosModel _movimiento;
+		private MovimientosModel _movimiento = new MovimientosModel();
 		/// <summary>
 		/// Propiedad del Usuario que realizò el movieminto
 		/// </summary>
-		private UsuariosModel _usuario;
+		private UsuariosModel _usuario = new UsuariosModel();
 		/// <summary>
 		/// Propiedad del Nombre de la Computadora desde dónde se realizó el movimiento
 		/// </summary>
@@ -70,11 +70,11 @@ namespace SADI.Clases.Modelos {
         /// <param name="usr">Usuario que realizó el Movimiento</param>
         /// <param name="comp">Computadora desde dónde se realizó el movimiento</param>
         /// <param name="idcomp">identificador de la computadora desde dónde se realizó el movimiento</param>
-        public BitacoraModel(int id, RegistrosModel seriedoc, DateTime fec, MovimientosModel mov,
+        public BitacoraModel(int id, RegistrosModel registro, DateTime fec, MovimientosModel mov,
             UsuariosModel usr, string comp, string idcomp)
         {
             this.Id = id;
-            this.SerieDoctal = seriedoc;
+            this.Registro = registro;
             this.Fecha = fec;
             this.Movimiento = mov;
             this.Usuario = usr;
@@ -92,9 +92,9 @@ namespace SADI.Clases.Modelos {
         /// <summary>
         /// Acceso a la Propiedad SerieDoctal
         /// </summary>
-		public RegistrosModel SerieDoctal{
-            get { return _seriedocal; }
-            set { _seriedocal = value; }
+		public RegistrosModel Registro{
+            get { return _registro; }
+            set { _registro = value; }
 		}
 
 		/// <summary>

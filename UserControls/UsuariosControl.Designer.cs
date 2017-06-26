@@ -46,6 +46,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cboUnidadAdmva = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.cboSubFondo = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -114,7 +116,7 @@
             this.cboJerarquia.Name = "cboJerarquia";
             this.cboJerarquia.Size = new System.Drawing.Size(188, 21);
             this.cboJerarquia.TabIndex = 3;
-            this.cboJerarquia.SelectedIndexChanged += new System.EventHandler(this.cboJerarquia_SelectedIndexChanged);
+            this.cboJerarquia.SelectedValueChanged += new System.EventHandler(this.cboJerarquia_SelectedValueChanged);
             // 
             // label6
             // 
@@ -229,16 +231,37 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cboUnidadAdmva);
+            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.cboSubFondo);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(311, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(363, 145);
+            this.groupBox3.Size = new System.Drawing.Size(387, 156);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DATOS ADMINISTRATIVOS :";
+            // 
+            // cboUnidadAdmva
+            // 
+            this.cboUnidadAdmva.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboUnidadAdmva.FormattingEnabled = true;
+            this.cboUnidadAdmva.Location = new System.Drawing.Point(110, 123);
+            this.cboUnidadAdmva.Name = "cboUnidadAdmva";
+            this.cboUnidadAdmva.Size = new System.Drawing.Size(269, 21);
+            this.cboUnidadAdmva.TabIndex = 1;
+            this.cboUnidadAdmva.SelectedValueChanged += new System.EventHandler(this.cboUnidadAdmva_SelectedValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(0, 119);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 26);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "       UNIDAD\r\nADMINISTRATIVA :";
             // 
             // cboSubFondo
             // 
@@ -246,9 +269,9 @@
             this.cboSubFondo.FormattingEnabled = true;
             this.cboSubFondo.Location = new System.Drawing.Point(79, 85);
             this.cboSubFondo.Name = "cboSubFondo";
-            this.cboSubFondo.Size = new System.Drawing.Size(269, 21);
-            this.cboSubFondo.TabIndex = 3;
-            this.cboSubFondo.SelectedIndexChanged += new System.EventHandler(this.cboSubFondo_SelectedIndexChanged_1);
+            this.cboSubFondo.Size = new System.Drawing.Size(302, 21);
+            this.cboSubFondo.TabIndex = 0;
+            this.cboSubFondo.SelectedValueChanged += new System.EventHandler(this.cboSubFondo_SelectedValueChanged);
             // 
             // label9
             // 
@@ -285,7 +308,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "UsuariosControl";
-            this.Size = new System.Drawing.Size(687, 344);
+            this.Size = new System.Drawing.Size(712, 344);
             this.Load += new System.EventHandler(this.UsuariosControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -321,5 +344,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cboSubFondo;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cboUnidadAdmva;
+        private System.Windows.Forms.Label label10;
     }
 }

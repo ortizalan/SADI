@@ -208,25 +208,30 @@ namespace SADI.Clases.Controladores
         /// <summary>
         /// Realizar la Consulta del Tema por Serie y Sección
         /// </summary>
-        /// <param name="o"></param>
-        /// <returns></returns>
+        /// <param name="o">Objeto del Tipo AtributosModel</param>
+        /// <returns>Boleano</returns>
         public bool ConsultarTemaXSerieSeccion(object o)
         {
-            if (o.GetType() == typeof(TemasModel))//Verificar que el Objeto sea del Mismo tipo de TemasModel
+            if (o.GetType() == typeof(AtributosModel))//Verificar que el Objeto sea del Mismo tipo de TemasModel
             {
                 //SI es del mismo tipo
-                var t = (TemasModel)o;//Castear la variable "t" al tipo TemasModel
+                var t = (AtributosModel)o;//Castear la variable "t" al tipo TemasModel
+
+                string proce = "sp_combos_usuarios_atributos";//Nombre del procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "3"));//OPción a ejecutar dentro del procedimiento
+                lista.Add(new Parametros(@"usr", t.Usuario.Id.ToString()));//Identificador del Usuario
+                lista.Add(new Parametros(@"sec", t.Seccion.Id));//Identificador de la Sección
+                lista.Add(new Parametros(@"ser", t.Serie.Id.ToString()));//Identificador de la serie
 
                 if(Abrir())//Intentar Abrir la Conexión
                 {
                     //Intento Exitoso
                     try
                     {
-                        string sente = "select * from temas where IdSerie = " + t.Serie.Id + " and Seccion = '" + t.Seccion.Id + "' order by IdTema";
-
-                        if(ConsultarSentenciaSQL(sente))
-                        { return true; }
-                        else
+                        if(ConsultarProcedimiento(proce,lista))//Intentar la Consulta
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, COnsultar Error
                         { return false; }
                     }
                     catch(Exception e)//Atrapar el Error

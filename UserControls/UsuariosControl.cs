@@ -21,6 +21,7 @@ namespace SADI.UserControls
         private int _opcion; //Opcion para Validar Las Operaciones a Realizar con el Control
         private DataTable _jerarquias;// Tabla para llenar el Combo Jerarquías
         private DataTable _subfondos;// Tabla para llenar el Combo SubFondos
+        private DataTable _unidadadmva;//Tabla para llenar el Combo UnidadAdmva
         private string _nombre;// Propiedad para el nombre del Usuario
         private string _paterno;// Propiedad para el Apellido Paterno del Usuario
         private string _materno;// Propiedad para el Apellido Materno del Usuario
@@ -30,6 +31,7 @@ namespace SADI.UserControls
         private string _contraseña;// Propiedad Contraseña
         private int _idJerarquia;// Identificador de la Jerarquia
         private int _idSubFondo;// Identificador del SubFondo
+        private int _idUnidadAdmva;//Identificador de la Unidad Administrativa
         #endregion
         /// <summary>
         /// Constructor del Control
@@ -71,6 +73,13 @@ namespace SADI.UserControls
                 _subfondos = value;
                 this.LLenarSubfondos();
             }
+        }
+        /// <summary>
+        /// Asignar valores a Unidades Administrativas
+        /// </summary>
+        public DataTable UnidadAdmva
+        {
+            set { _unidadadmva = value; this.LLenarUnidadesAdmvas(); }
         }
         /// <summary>
         /// Acceder a la Propiedad Nombre
@@ -171,6 +180,14 @@ namespace SADI.UserControls
         {
             get { return _idSubFondo; }
             set { _idSubFondo = value; }
+        }
+        /// <summary>
+        /// Identificador de la Unidad Administrativa
+        /// </summary>
+        public int IdUnidadAdministrativa
+        {
+            get { return _idUnidadAdmva; }
+            set { _idUnidadAdmva = value; }
         }
 
         #endregion
@@ -331,6 +348,19 @@ namespace SADI.UserControls
                 }
             }
         }
+        //Método para llenar el combo AunidadesAdmvas
+        private void LLenarUnidadesAdmvas()
+        {
+            if(_unidadadmva != null)
+            {
+                if(_subfondos.Rows.Count > 0)
+                {
+                    cboUnidadAdmva.DataSource = _unidadadmva;
+                    cboUnidadAdmva.ValueMember = _unidadadmva.Columns[0].ColumnName;
+                    cboUnidadAdmva.DisplayMember = _unidadadmva.Columns[1].ColumnName;
+                }
+            }
+        }
         /// <summary>
         /// Método para Limpiar el Control Usuario
         /// </summary>
@@ -366,19 +396,6 @@ namespace SADI.UserControls
                     cboSubFondo.SelectedIndex = 0;//Seleccionar el primero registro
                 }
             }
-        }
-        //Cambio de Valor Seleccionado en ComboBox Jerarquias
-        private void cboJerarquia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cboJerarquia.SelectedValue.ToString() != "System.Data.DataRowView")
-            {
-                _idJerarquia = (int)cboJerarquia.SelectedValue;
-            }
-        }
-       
-        private void cboSubFondo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
         }
         // Cambio de valor CheckBox Estatus
         private void chkEstatus_CheckedChanged(object sender, EventArgs e)
@@ -499,12 +516,28 @@ namespace SADI.UserControls
                     break;
             }
         }
+        //Cambio de Valor Seleccionado en Combo Jerarquía
+        private void cboJerarquia_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (cboJerarquia.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idJerarquia = (int)cboJerarquia.SelectedValue;
+            }
+        }
         //Cambio de Valor Seleccionado en Combobox Subfondos
-        private void cboSubFondo_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void cboSubFondo_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
             {
                 _idSubFondo = (int)cboSubFondo.SelectedValue;
+            }
+        }
+        //CAmbio de Valor Seleccionado en Combo Unidades Administrativas
+        private void cboUnidadAdmva_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cboUnidadAdmva.SelectedValue.ToString() != "System.Data.DataRowView")
+            {
+                _idUnidadAdmva = (int)cboUnidadAdmva.SelectedValue;
             }
         }
     }

@@ -9,7 +9,7 @@ namespace SADI.Clases.Modelos
     /// <summary>
     /// Modelo de Temas de las Series
     /// </summary>
-    class TemasModel
+    public class TemasModel
     {
         private int _id;//identificador del tema
         private SeccionesModel _seccion = new SeccionesModel();// Identificador de la Sección

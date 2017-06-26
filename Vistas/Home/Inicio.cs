@@ -32,7 +32,7 @@ namespace SADI
         private void Inicio_Load(object sender, EventArgs e)
         {
             //um.Id = Utilerias.IdUsuario;
-            um.Id = 1;
+            um.Id = 5;
             this.llenarObjetoUsuario();
             this.Text = "..:: Sistame de Adminitración Arcivística ISSSTESON ::..";
             this.Text += "\t" + "Usuario :" + um.Nombre + " " + um.Paterno + " " + um.Materno;
@@ -61,10 +61,11 @@ namespace SADI
                     um.Materno = (string)uc.Tabla.Rows[0][5];
                     um.Fondo.Id = (int)uc.Tabla.Rows[0][6];
                     um.SubFondo.Id = (int)uc.Tabla.Rows[0][7];
-                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][8];
-                    um.Email = (string)uc.Tabla.Rows[0][9];
-                    um.Estatus = (bool)uc.Tabla.Rows[0][10];
-                    um.Atributos = (bool)uc.Tabla.Rows[0][11];
+                    um.UnidadAdmva.Id = (int)uc.Tabla.Rows[0][8];
+                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][9];
+                    um.Email = (string)uc.Tabla.Rows[0][10];
+                    um.Estatus = (bool)uc.Tabla.Rows[0][11];
+                    um.Atributos = (bool)uc.Tabla.Rows[0][12];
                 }
             }
             else// No se pudo realizar la COnsulta

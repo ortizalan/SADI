@@ -52,6 +52,7 @@ namespace SADI.Clases.Controladores {
                         List<Parametros> lista = new List<Parametros>();
                         lista.Add(new Parametros(@"opc", "4")); // Indicarle la Opción a ejecutar al Procedimiento
                         lista.Add(new Parametros(@"seriedoc", r.SerieDoctal)); // Indicarle el Idetificador del registro
+                        lista.Add(new Parametros(@"tema", string.Empty));//Vacío
                         lista.Add(new Parametros(@"fondo", string.Empty)); // Vacío
                         lista.Add(new Parametros(@"subfondo", string.Empty));// Vacío
                         lista.Add(new Parametros(@"fecini", string.Empty));// Vacío
@@ -62,7 +63,6 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"cvesevi", string.Empty)); // Vacío
                         lista.Add(new Parametros(@"valordoc", string.Empty)); // Vacío
                         lista.Add(new Parametros(@"clasi", string.Empty));// Vacío
-                        lista.Add(new Parametros(@"valora", string.Empty));// Vacío
                         lista.Add(new Parametros(@"otrainfo", string.Empty));// Vacío
                         lista.Add(new Parametros(@"esta", string.Empty));// Vacio
 
@@ -105,17 +105,17 @@ namespace SADI.Clases.Controladores {
                         List<Parametros> lista = new List<Parametros>();// Crear una lista de Parámetros
                         lista.Add(new Parametros(@"opc", "3")); // Indicarle la Opción a ejecutar al Procedimiento
                         lista.Add(new Parametros(@"seriedoc", r.SerieDoctal)); // Indicarle el Idetificador del registro
+                        lista.Add(new Parametros(@"tema", r.Tema.Id.ToString()));//Identificador del tema de la Serie Documental
                         lista.Add(new Parametros(@"fondo", r.Fondo.Id.ToString())); // Indicarle la Identificación del Fondo
                         lista.Add(new Parametros(@"subfondo", r.SubFondo.Id.ToString()));// Indicarle la Identificación del Subfondo
                         lista.Add(new Parametros(@"fecini", r.FechaInicio.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Inicio del Expediente
-                        lista.Add(new Parametros(@"fecfin", r.FechaCierre.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Cierre del Expediente
+                        lista.Add(new Parametros(@"fecfin", (r.FechaCierre != null ? r.FechaCierre.Value.ToString("yyyy-MM-dd"):null)));// Indicarle la Fecha de Cierre del Expediente
                         lista.Add(new Parametros(@"nomexp", r.NombreExp));// Indcar el Nombre del Expediente
                         lista.Add(new Parametros(@"desc", r.Descripcion));// Indicar la Descripción del Expediente
                         lista.Add(new Parametros(@"numhojas", r.NumHojas.ToString())); // Indicar el Número de Hojas del Expediente
                         lista.Add(new Parametros(@"cvesevi", r.CveSevi)); // Indicar la Clave SEVI
                         lista.Add(new Parametros(@"valordoc", r.ValorDoctal.Id.ToString())); // Señalar el identificador del Valor Documental
                         lista.Add(new Parametros(@"clasi", r.Clasificacion.Id.ToString()));// Señalar la Identificación de la Clasificación del Expediente
-                        lista.Add(new Parametros(@"valora", r.ValoracionDoctal.Id.ToString()));// Señalar la Identificación de la Valoración Documental
                         lista.Add(new Parametros(@"otrainfo", r.OtraInfo));// Indicarle Otra Información sobre el Expediente
                         lista.Add(new Parametros(@"esta", (r.Estatus== true?"1":"0")));// Indicar si está activo o no el Expediente (cierre o no)
 
@@ -161,14 +161,13 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"fondo", r.Fondo.Id.ToString())); // Indicarle la Identificación del Fondo
                         lista.Add(new Parametros(@"subfondo", r.SubFondo.Id.ToString()));// Indicarle la Identificación del Subfondo
                         lista.Add(new Parametros(@"fecini", r.FechaInicio.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Inicio del Expediente
-                        lista.Add(new Parametros(@"fecfin", r.FechaCierre.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Cierre del Expediente
+                        lista.Add(new Parametros(@"fecfin", (r.FechaCierre!= null ? r.FechaCierre.Value.ToString("yyyy-MM-dd"):null)));// Indicarle la Fecha de Cierre del Expediente
                         lista.Add(new Parametros(@"nomexp", r.NombreExp));// Indcar el Nombre del Expediente
                         lista.Add(new Parametros(@"desc", r.Descripcion));// Indicar la Descripción del Expediente
                         lista.Add(new Parametros(@"numhojas", r.NumHojas.ToString())); // Indicar el Número de Hojas del Expediente
                         lista.Add(new Parametros(@"cvesevi", r.CveSevi)); // Indicar la Clave SEVI
                         lista.Add(new Parametros(@"valordoc", r.ValorDoctal.Id.ToString())); // Señalar el identificador del Valor Documental
                         lista.Add(new Parametros(@"clasi", r.Clasificacion.Id.ToString()));// Señalar la Identificación de la Clasificación del Expediente
-                        lista.Add(new Parametros(@"valora", r.ValoracionDoctal.Id.ToString()));// Señalar la Identificación de la Valoración Documental
                         lista.Add(new Parametros(@"otrainfo", r.OtraInfo));// Indicarle Otra Información sobre el Expediente
                         lista.Add(new Parametros(@"esta", (r.Estatus == true ? "1" : "0")));// Indicar si está activo o no el Expediente (cierre o no)
 
@@ -206,17 +205,17 @@ namespace SADI.Clases.Controladores {
                     List<Parametros> lista = new List<Parametros>();
                     lista.Add(new Parametros(@"opc", "1")); // Indicarle la Opción a ejecutar al Procedimiento
                     lista.Add(new Parametros(@"seriedoc", string.Empty)); // Vacío
+                    lista.Add(new Parametros(@"tema", string.Empty));//Vacío
                     lista.Add(new Parametros(@"fondo", string.Empty)); // Vacío
                     lista.Add(new Parametros(@"subfondo", string.Empty));// Vacío
                     lista.Add(new Parametros(@"fecini", string.Empty));// Vacío
-                    lista.Add(new Parametros(@"fecfin", string.Empty));// Vacio
+                    lista.Add(new Parametros(@"fecfin", null));// Vacio
                     lista.Add(new Parametros(@"nomexp", string.Empty));// Vacío
                     lista.Add(new Parametros(@"desc", string.Empty));// Vacío
                     lista.Add(new Parametros(@"numhojas", string.Empty)); // Vacío
                     lista.Add(new Parametros(@"cvesevi", string.Empty)); // Vacío
                     lista.Add(new Parametros(@"valordoc", string.Empty)); // Vacío
                     lista.Add(new Parametros(@"clasi", string.Empty));// Vacío
-                    lista.Add(new Parametros(@"valora", string.Empty));// Vacío
                     lista.Add(new Parametros(@"otrainfo", string.Empty));// Vacío
                     lista.Add(new Parametros(@"esta", string.Empty));// Vacio
 

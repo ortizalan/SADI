@@ -45,7 +45,6 @@ namespace SADI.Vistas.Usuarios
         {
             this.Close();
         }
-
         /// <summary>
         /// Función para LLenar el Combo Jerarquías
         /// </summary>
@@ -118,6 +117,7 @@ namespace SADI.Vistas.Usuarios
         {
             usrCtrl.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
             usrCtrl.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
+            usrCtrl.UnidadAdmva = this.UnidadAdmva();//LLenar el combo Unidad Administrativa en el Control
         }
         /// <summary>
         /// Método para el LLenado del Objeto Usuario
@@ -133,6 +133,7 @@ namespace SADI.Vistas.Usuarios
             um.Email = usrCtrl.Email;
             um.Jerarquia.Id = usrCtrl.IdJerarquia;
             um.SubFondo.Id = usrCtrl.IdSubFondo;
+            um.UnidadAdmva.Id = usrCtrl.IdUnidadAdministrativa;
             um.Fondo.Id = 63;
         }
         /// <summary>
