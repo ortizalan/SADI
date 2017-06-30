@@ -66,10 +66,27 @@
       <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CRVsPackageLib, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Design, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.TemplateEngine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.Data.AdoDotNetInterop, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Enterprise.Viewing.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.VSDesigner, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DatosBD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DatosBD\DatosBD\bin\Debug\DatosBD.dll</HintPath>
     </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="FluentAssertions, Version=4.19.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.19.0\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -109,6 +126,8 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -149,6 +168,7 @@
     <Compile Include="Clases\Controladores\UsuariosController.cs" />
     <Compile Include="Clases\Controladores\ValoracionDoctalController.cs" />
     <Compile Include="Clases\Controladores\ValoresDoctalesController.cs" />
+    <Compile Include="Clases\EventsArgs\SerieControlEventArgs.cs" />
     <Compile Include="Clases\EventsArgs\TablaEventArgs.cs" />
     <Compile Include="Clases\Metodos.cs" />
     <Compile Include="Clases\Modelos\AtributosModel.cs" />
@@ -179,10 +199,27 @@
     <Compile Include="Clases\Parametros.cs" />
     <Compile Include="Clases\EventsArgs\TemasSeriesEventArgs.cs" />
     <Compile Include="Clases\Utilerias.cs" />
+    <Compile Include="DataSets\Catalogos\DSCatalogos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSCatalogos.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Catalogos\SeccionesReporte.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SeccionesReporte.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesView.Designer.cs">
+      <DependentUpon>ReportesView.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CatalogosGeoLocalizaControl.cs">
       <SubType>UserControl</SubType>
@@ -336,6 +373,13 @@
     <Compile Include="Vistas\Usuarios\modificarUsuariocs.Designer.cs">
       <DependentUpon>modificarUsuariocs.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reportes\Catalogos\SeccionesReporte.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SeccionesReporte.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesView.resx">
+      <DependentUpon>ReportesView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CatalogosGeoLocalizaControl.resx">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -413,6 +457,17 @@
     <EmbeddedResource Include="Vistas\Usuarios\modificarUsuariocs.resx">
       <DependentUpon>modificarUsuariocs.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataSets\Catalogos\DSCatalogos.xsc">
+      <DependentUpon>DSCatalogos.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\Catalogos\DSCatalogos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSCatalogos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\Catalogos\DSCatalogos.xss">
+      <DependentUpon>DSCatalogos.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -511,6 +566,9 @@
     <Content Include="Treetog-Junior-Document-archive.ico" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

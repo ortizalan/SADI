@@ -47,6 +47,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.chkTieneSevi = new System.Windows.Forms.CheckBox();
             this.gpoSerieDoctal = new System.Windows.Forms.GroupBox();
+            this.lblSerieDoctal = new System.Windows.Forms.Label();
             this.chkStatus = new System.Windows.Forms.CheckBox();
             this.txtOtraInfo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,10 +56,9 @@
             this.txtNombreExp = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.txtConsecutivo = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.lblSerieDoctal = new System.Windows.Forms.Label();
+            this.txtConsecutivo = new System.Windows.Forms.TextBox();
+            this.chkConsecutivo = new System.Windows.Forms.CheckBox();
             this.gpoCrearSerieDoctal.SuspendLayout();
             this.gpoDetallesDoc.SuspendLayout();
             this.gpoCveSevi.SuspendLayout();
@@ -101,6 +101,7 @@
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(119, 23);
             this.dtpFecha.TabIndex = 6;
+            this.dtpFecha.ValueChanged += new System.EventHandler(this.dtpFecha_ValueChanged);
             // 
             // cboTema
             // 
@@ -111,7 +112,7 @@
             this.cboTema.Name = "cboTema";
             this.cboTema.Size = new System.Drawing.Size(442, 21);
             this.cboTema.TabIndex = 5;
-            this.cboTema.SelectedIndexChanged += new System.EventHandler(this.cboTema_SelectedIndexChanged);
+            this.cboTema.SelectedValueChanged += new System.EventHandler(this.cboTema_SelectedValueChanged);
             // 
             // label3
             // 
@@ -132,7 +133,7 @@
             this.cboSeries.Name = "cboSeries";
             this.cboSeries.Size = new System.Drawing.Size(442, 21);
             this.cboSeries.TabIndex = 3;
-            this.cboSeries.SelectedIndexChanged += new System.EventHandler(this.cboSeries_SelectedIndexChanged);
+            this.cboSeries.SelectedValueChanged += new System.EventHandler(this.cboSeries_SelectedValueChanged);
             // 
             // label2
             // 
@@ -208,7 +209,7 @@
             this.cboValorDoctal.Name = "cboValorDoctal";
             this.cboValorDoctal.Size = new System.Drawing.Size(193, 21);
             this.cboValorDoctal.TabIndex = 1;
-            this.cboValorDoctal.SelectedIndexChanged += new System.EventHandler(this.cboValorDoctal_SelectedIndexChanged);
+            this.cboValorDoctal.SelectedValueChanged += new System.EventHandler(this.cboValorDoctal_SelectedValueChanged);
             // 
             // cboClasificaciones
             // 
@@ -219,7 +220,7 @@
             this.cboClasificaciones.Name = "cboClasificaciones";
             this.cboClasificaciones.Size = new System.Drawing.Size(193, 21);
             this.cboClasificaciones.TabIndex = 0;
-            this.cboClasificaciones.SelectedIndexChanged += new System.EventHandler(this.cboClasificaciones_SelectedIndexChanged);
+            this.cboClasificaciones.SelectedValueChanged += new System.EventHandler(this.cboClasificaciones_SelectedValueChanged);
             // 
             // gpoCveSevi
             // 
@@ -275,6 +276,17 @@
             this.gpoSerieDoctal.TabIndex = 11;
             this.gpoSerieDoctal.TabStop = false;
             this.gpoSerieDoctal.Text = "Serie Documental";
+            // 
+            // lblSerieDoctal
+            // 
+            this.lblSerieDoctal.AutoSize = true;
+            this.lblSerieDoctal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSerieDoctal.ForeColor = System.Drawing.Color.Maroon;
+            this.lblSerieDoctal.Location = new System.Drawing.Point(6, 28);
+            this.lblSerieDoctal.Name = "lblSerieDoctal";
+            this.lblSerieDoctal.Size = new System.Drawing.Size(19, 20);
+            this.lblSerieDoctal.TabIndex = 4;
+            this.lblSerieDoctal.Text = "::";
             // 
             // chkStatus
             // 
@@ -351,7 +363,7 @@
             // 
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtConsecutivo);
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.chkConsecutivo);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(554, 266);
             this.groupBox1.Name = "groupBox1";
@@ -359,26 +371,6 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consecutivo";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(14, 23);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(153, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Ingresar Consecutivo?";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // txtConsecutivo
-            // 
-            this.txtConsecutivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConsecutivo.Location = new System.Drawing.Point(225, 45);
-            this.txtConsecutivo.Name = "txtConsecutivo";
-            this.txtConsecutivo.Size = new System.Drawing.Size(87, 21);
-            this.txtConsecutivo.TabIndex = 1;
-            this.txtConsecutivo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConsecutivo_KeyPress);
             // 
             // label11
             // 
@@ -390,15 +382,27 @@
             this.label11.TabIndex = 4;
             this.label11.Text = "Número Consecutivo :";
             // 
-            // lblSerieDoctal
+            // txtConsecutivo
             // 
-            this.lblSerieDoctal.AutoSize = true;
-            this.lblSerieDoctal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSerieDoctal.Location = new System.Drawing.Point(83, 33);
-            this.lblSerieDoctal.Name = "lblSerieDoctal";
-            this.lblSerieDoctal.Size = new System.Drawing.Size(15, 15);
-            this.lblSerieDoctal.TabIndex = 4;
-            this.lblSerieDoctal.Text = "::";
+            this.txtConsecutivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConsecutivo.Location = new System.Drawing.Point(225, 45);
+            this.txtConsecutivo.Name = "txtConsecutivo";
+            this.txtConsecutivo.Size = new System.Drawing.Size(87, 21);
+            this.txtConsecutivo.TabIndex = 1;
+            this.txtConsecutivo.TextChanged += new System.EventHandler(this.txtConsecutivo_TextChanged);
+            this.txtConsecutivo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConsecutivo_KeyPress);
+            // 
+            // chkConsecutivo
+            // 
+            this.chkConsecutivo.AutoSize = true;
+            this.chkConsecutivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkConsecutivo.Location = new System.Drawing.Point(14, 23);
+            this.chkConsecutivo.Name = "chkConsecutivo";
+            this.chkConsecutivo.Size = new System.Drawing.Size(153, 17);
+            this.chkConsecutivo.TabIndex = 0;
+            this.chkConsecutivo.Text = "Ingresar Consecutivo?";
+            this.chkConsecutivo.UseVisualStyleBackColor = true;
+            this.chkConsecutivo.CheckedChanged += new System.EventHandler(this.chkConsecutivo_CheckedChanged);
             // 
             // SerieDocumental
             // 
@@ -464,7 +468,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtConsecutivo;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkConsecutivo;
         private System.Windows.Forms.Label lblSerieDoctal;
     }
 }

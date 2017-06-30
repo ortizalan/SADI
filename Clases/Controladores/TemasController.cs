@@ -210,7 +210,7 @@ namespace SADI.Clases.Controladores
         /// </summary>
         /// <param name="o">Objeto del Tipo AtributosModel</param>
         /// <returns>Boleano</returns>
-        public bool ConsultarTemaXSerieSeccion(object o)
+        public bool ConsultarTemaXUsuarioSerieSeccion(object o)
         {
             if (o.GetType() == typeof(AtributosModel))//Verificar que el Objeto sea del Mismo tipo de TemasModel
             {
@@ -235,6 +235,53 @@ namespace SADI.Clases.Controladores
                         { return false; }
                     }
                     catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();// Guardar el error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la Coneión
+                }
+                else//Intento NO Exitoso, Cosultar Error
+                {
+                    return false;
+                }
+            }
+            else//No son del mismo tipo
+            {
+                Error = "no es el objeto del tipo TemasModel.".ToUpper();
+                return false;
+            }
+        }
+        /// <summary>
+        /// Realizar Consulta del Tema por Usuario, Seccion y Serie
+        /// </summary>
+        /// <param name="o">Objeto del tipo TemasModel</param>
+        /// <returns>Boleano</returns>
+        public bool ConsultarTemaXSerieSeccion(object o)
+        {
+            if (o.GetType() == typeof(TemasModel))//Verificar que el Objeto sea del Mismo tipo de TemasModel
+            {
+                //SI es del mismo tipo
+                var t = (TemasModel)o;//Castear la variable "t" al tipo TemasModel
+
+                string proce = "sp_combos_usuarios_atributos";//Nombre del procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "4"));//OPción a ejecutar dentro del procedimiento
+                lista.Add(new Parametros(@"usr", string.Empty));//Identificador del Usuario
+                lista.Add(new Parametros(@"sec", t.Seccion.Id));//Identificador de la Sección
+                lista.Add(new Parametros(@"ser", t.Serie.Id.ToString()));//Identificador de la serie
+
+                if (Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        if (ConsultarProcedimiento(proce, lista))//Intentar la Consulta
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, COnsultar Error
+                        { return false; }
+                    }
+                    catch (Exception e)//Atrapar el Error
                     {
                         Error = e.Message.ToString();// Guardar el error
                         return false;//Indicar que existe el error

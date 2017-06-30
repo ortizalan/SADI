@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SADI.Clases;
+using SADI.Clases.EventsArgs;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
 
@@ -33,10 +34,21 @@ namespace SADI.UserControls
         private bool _ctaSevi;//Valor a la Pregunta si cuenta con clave SEVI
         private bool _status; //Valor al Estaus de la Serie Documental
         private DateTime _fechaSerie;//Propiedad de la Fecha de creación de la Serie
+        private DateTime _fechaCierreSerie;//Propiedad de la fecha del cierre de la propiedad
         private string _nomexpe;//Propiedad el Nombre del Expediente
         private string _descripcion;//Propiedad de la descripción del expediente
         private string _infoadicional;//Propiedad de la Infromación Adicional del Expediente
         private string _seriedoctal;//Propiedad de la SerieDocumental;
+        private string _cvesevi;//Propiedad d ela clave SEVI
+        private string _consecutivo;//Propiedad del Consecutivo de la Serie Documental
+        #endregion
+
+        #region Eventos 
+
+        public event EventHandler cboSeccionCambioValor;//Manejar Evento cboSeccionChangedValue
+        public event EventHandler cboSerieCambioValor;//Manejar Evento dboSeriesChangedValue
+        public event EventHandler CargaDeControl;//Manejar el Evento Load del Control
+
         #endregion
 
         #region Getters & Setters
@@ -54,7 +66,7 @@ namespace SADI.UserControls
         public DataTable SeriesT
         {
             get { return _seriest; }
-            set { _seriest = value; }
+            set { _seriest = value; LLenarComboSeries(); }
         }
         /// <summary>
         /// Tabla con el Registro de los Temas de la Serie
@@ -62,7 +74,7 @@ namespace SADI.UserControls
         public DataTable TemasT
         {
             get { return _temast; }
-            set { _temast = value; }
+            set { _temast = value; LLenarComboTemas(); }
         }
         /// <summary>
         /// Tabla con el Registro de las Clasificaciones
@@ -145,6 +157,14 @@ namespace SADI.UserControls
             set { _fechaSerie = value; }
         }
         /// <summary>
+        /// Acceder a la propiedad Fecha del Cierre de la Serie Documental
+        /// </summary>
+        public DateTime FechaCierreSerie
+        {
+            get { return _fechaCierreSerie; }
+            set { _fechaCierreSerie = value; }
+        }
+        /// <summary>
         /// Acceder a la Propiedad Nombre Expediente
         /// </summary>
         public string NombreExpediente
@@ -174,7 +194,29 @@ namespace SADI.UserControls
         public string NumeroSerieDocumental
         {
             get { return _seriedoctal; }
-            set { _seriedoctal = value; }
+            set { _seriedoctal = value; lblSerieDoctal.Text = _seriedoctal; }
+        }
+        /// <summary>
+        /// Acceder a la ClaveSEVI
+        /// </summary>
+        public string ClaveSEVI
+        {
+            get { return _cvesevi; }
+            set { _cvesevi = value; }
+        }
+        /// <summary>
+        /// Obtener el Identificador del Fondo
+        /// </summary>
+        public int Fondo
+        {
+            get { return _usuario.Fondo.Id; }
+        }
+        /// <summary>
+        /// Obtener el Identificador del SubFondo
+        /// </summary>
+        public int SubFondo
+        {
+            get { return _usuario.SubFondo.Id; }
         }
         #endregion
 
@@ -185,22 +227,18 @@ namespace SADI.UserControls
         {
             InitializeComponent();
         }
-        /// <summary>
-        /// Constructor de la Clase
-        /// </summary>
-        /// <param name="opcion">Opcion 1) Ingresar, 2) Editar, 3) Detalles</param>
-        public SerieDocumental(int opcion, UsuariosModel u)
-        {
-            InitializeComponent();
-            opc = opcion;
-            _usuario = u;
-            cboSeries.Enabled = false;
-            cboSeries.Enabled = false;
-            txtCveSevi.Enabled = false;
-        }
 
         #region Métdos Internos
 
+        /// <summary>
+        /// Carga Inicial de los Combos
+        /// </summary>
+        private void CargaInicial()
+        {
+            LLenarComboSecciones();
+            LLenarComboClasificaciones();
+            LLenarComboValoracionDoctal();
+        }
         /// <summary>
         /// Publicar que Opción se seleccionó
         /// </summary>
@@ -327,10 +365,15 @@ namespace SADI.UserControls
             {
                 MessageBox.Show("ingrese sólo números.".ToUpper(),
                     ":: mensaje desde el control geolocalización ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Handled = true;
                 return;
             }
+            //else
+            //{
+            //    //Consecutivo();
+            //    ActualizarSerieDocumental();
+            //}
         }
         /// <summary>
         /// Método para Ir Actualizando la Serie Documental
@@ -338,40 +381,37 @@ namespace SADI.UserControls
         private void ActualizarSerieDocumental()
         {
             _seriedoctal = (_usuario.Fondo.Id.ToString().Length == 1 ? "0" + _usuario.Fondo.Id.ToString() : _usuario.Fondo.Id.ToString()) + ".";
-            _seriedoctal += (_usuario.SubFondo.Id.ToString().Length == 1?"0" + _usuario.SubFondo.Id.ToString() :_usuario.SubFondo.Id.ToString()) + ".";
-            _seriedoctal += (_usuario.UnidadAdmva.Id.ToString().Length == 1?"0" + _usuario.UnidadAdmva.Id.ToString():_usuario.UnidadAdmva.Id.ToString()) + ".";
+            _seriedoctal += (_usuario.SubFondo.Id.ToString().Length == 1 ? "0" + _usuario.SubFondo.Id.ToString() : _usuario.SubFondo.Id.ToString()) + ".";
+            _seriedoctal += (_usuario.UnidadAdmva.Id.ToString().Length == 1 ? "0" + _usuario.UnidadAdmva.Id.ToString() : _usuario.UnidadAdmva.Id.ToString()) + ".";
             _seriedoctal += (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeccion.SelectedValue.ToString() : "XX") + ".";
-            _seriedoctal += (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeries.SelectedValue.ToString():"XX") + ".";
+            _seriedoctal += (cboSeries.SelectedValue != null ? (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeries.SelectedValue.ToString() : "XX"):"XX" )+ ".";
             _seriedoctal += Consecutivo() + ".";
             _seriedoctal += dtpFecha.Value.Year.ToString();
+            NumeroSerieDocumental = _seriedoctal;
         }
+
+        #endregion
+
+        #region Métodos Públicos
         /// <summary>
-        /// Generar el Consecutivo para la Serie Documental
+        /// Método Público para Cargar los Datos en el Control
         /// </summary>
-        /// <returns>string</returns>
-        private string Consecutivo()
+        public void CargarDatos()
         {
-            if(string.IsNullOrEmpty(txtConsecutivo.Text))
-            {
-                return "0000";
-            }
-            else
-            {
-                switch (txtConsecutivo.Text.Length)
-                {
-                    case 1:
-                        return "000" + txtConsecutivo.Text;
-                    case 2:
-                        return "00" + txtConsecutivo.Text;
-                    case 3:
-                        return "0" + txtConsecutivo.Text;
-                    case 4:
-                        return txtConsecutivo.Text;
-                    default:
-                        return "0000";
-                }
-            }
+            FechaSerie = dtpFecha.Value;
+            FechaCierreSerie = (opc == 1 ? dtpFecha.Value : DateTime.Now);
+            Seccion.Id = (string)cboSeccion.SelectedValue;
+            Serie.Id = (int)cboSeries.SelectedValue;
+            Tema.Id = (cboTema.Enabled ? (cboTema.SelectedValue.ToString() != "System.Data.DataRowView" ? (int)cboTema.SelectedValue : 0) : 0);
+            NumeroSerieDocumental = _seriedoctal;
+            Clasificacion.Id = (int)cboClasificaciones.SelectedValue;
+            ValorDoctal.Id = (int)cboValorDoctal.SelectedValue;
+            NombreExpediente = txtNombreExp.Text;
+            Descripcion = txtDescExpe.Text;
+            InfoAdicional = (!string.IsNullOrEmpty(txtOtraInfo.Text) ? txtOtraInfo.Text : string.Empty);
+            Estatus = chkStatus.Checked;
         }
+
         #endregion
 
         #region CombosValueChanged
@@ -381,25 +421,51 @@ namespace SADI.UserControls
         /// </summary>
         private void cboSeccion_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
+            if (cboSeccionCambioValor != null)
             {
-                Seccion.Id = (string)cboSeccion.SelectedValue;
+                if (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    Seccion.Id = (string)cboSeccion.SelectedValue;
+                    ActualizarSerieDocumental();
+                    cboSeccionCambioValor(this, e);
+                }
+            }
+            else
+            {
+                if (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    Seccion.Id = (string)cboSeccion.SelectedValue;
+                    ActualizarSerieDocumental();
+                }
             }
         }
         /// <summary>
         /// Cambio de Selección del Combo Series
         /// </summary>
-        private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboSeries_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView")
+            if (cboSerieCambioValor != null)//Que el evento público no venga sin argumntos
             {
-                Serie.Id = (int)cboSeries.SelectedValue;
+                if (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    Serie.Id = (int)cboSeries.SelectedValue;
+                    ActualizarSerieDocumental();
+                    cboSerieCambioValor(this, e);//Diparar el Evento
+                }
+            }
+            else
+            {
+                if (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    Serie.Id = (int)cboSeries.SelectedValue;
+                    ActualizarSerieDocumental();
+                }
             }
         }
         /// <summary>
         /// Cambio de Selección del Combo Tema
         /// </summary>
-        private void cboTema_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboTema_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboTema.SelectedValue.ToString() != "System.Data.DataRowView")
             {
@@ -409,7 +475,7 @@ namespace SADI.UserControls
         /// <summary>
         /// Acceder al Objeto ClasificacionModel
         /// </summary>
-        private void cboClasificaciones_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboClasificaciones_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboClasificaciones.SelectedValue.ToString() != "System.Data.DataRowView")
             {
@@ -419,7 +485,7 @@ namespace SADI.UserControls
         /// <summary>
         /// Acceder al Objeto Valores>doctalesModel
         /// </summary>
-        private void cboValorDoctal_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboValorDoctal_SelectedValueChanged(object sender, EventArgs e)
         {
             if (cboValorDoctal.SelectedValue.ToString() != "System.Data.DataRowView")
             {
@@ -433,12 +499,12 @@ namespace SADI.UserControls
         {
             if (chkTieneSevi.Checked)
             {
-                ctaSevi = chkTieneSevi.Checked;
+                CtaSevi = chkTieneSevi.Checked;
                 txtCveSevi.Enabled = true;
             }
             else
             {
-                ctaSevi = chkTieneSevi.Checked;
+                CtaSevi = chkTieneSevi.Checked;
                 txtCveSevi.Enabled = false;
             }
         }
@@ -455,7 +521,54 @@ namespace SADI.UserControls
                 {
                     if (!string.IsNullOrEmpty(NombreExpediente))
                     {
-
+                        if (Clasificacion.Id > 0)
+                        {
+                            if (ValorDoctal.Id > 0)
+                            {
+                                if (!string.IsNullOrEmpty(Descripcion))
+                                {
+                                    if (chkTieneSevi.Checked)
+                                    {
+                                        if (!string.IsNullOrEmpty(ClaveSEVI))
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("debe de ingresar la clave sevi.".ToUpper(),
+                                            ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            return false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return true;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("debe de ingresar una descripción de la serie documental.".ToUpper(),
+                                    ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("debe seleccionar un valor documental de la serie documental.".ToUpper(),
+                                ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("debe seleccionar una clasificación de la serie documental.".ToUpper(),
+                            ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return false;
+                        }
                     }
                     else
                     {
@@ -484,5 +597,82 @@ namespace SADI.UserControls
 
         #endregion
 
+        #region Funciones Privadas
+
+        /// <summary>
+        /// Generar el Consecutivo para la Serie Documental
+        /// </summary>
+        /// <returns>string</returns>
+        private string Consecutivo()
+        {
+            if (string.IsNullOrEmpty(txtConsecutivo.Text))//Si el campo Consecutivo es vacío
+            {
+                return "0000";//Rellenar con el valor de ceros
+            }
+            else
+            {
+                switch (txtConsecutivo.Text.Length)//Si no es vacío, ver el tamaño el consecutivo
+                {
+                    case 1:
+                        return "000" + txtConsecutivo.Text;
+                    case 2:
+                        return "00" + txtConsecutivo.Text;
+                    case 3:
+                        return "0" + txtConsecutivo.Text;
+                    case 4:
+                        return txtConsecutivo.Text;
+                    default:
+                        return "0000";
+                }
+            }
+        }
+        #endregion
+
+        public void SerieDocumental_Load(object sender, SerieControlEventArgs e)
+        {
+            var u = (UsuariosModel)sender;
+            opc = e.Opcion;
+            _usuario = u;
+            cboSeries.Enabled = false;
+            cboSeries.Enabled = false;
+            txtCveSevi.Enabled = false;
+            txtConsecutivo.Enabled = false;
+            switch (opc)//Validar las Opciones enviadas
+            {
+                case 1:
+                    chkStatus.Checked = true;
+                    chkStatus.Enabled = false;
+                    break;
+                default:
+
+                    break;
+            }
+            CargaInicial();
+        }
+
+        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarSerieDocumental();
+        }
+
+        private void chkConsecutivo_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkConsecutivo.Checked)//Verificar si está seleccionado
+            {
+                //Si lo está
+                txtConsecutivo.Enabled = true;
+                txtConsecutivo.Focus();
+            }
+            else//No lo está
+            {
+                txtConsecutivo.Text = string.Empty;
+                txtConsecutivo.Enabled = false;
+            }
+        }
+
+        private void txtConsecutivo_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarSerieDocumental();
+        }
     }
 }

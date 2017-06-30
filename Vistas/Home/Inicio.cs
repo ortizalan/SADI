@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
@@ -8,7 +9,9 @@ using SADI.Vistas.Estantes;
 using SADI.Vistas.Niveles;
 using SADI.Vistas.SerieDocumental;
 using SADI.Clases;
-
+using SADI.Reportes.Catalogos;
+using SADI.Reportes;
+using SADI.DataSets.Catalogos;
 
 namespace SADI
 {
@@ -32,7 +35,7 @@ namespace SADI
         private void Inicio_Load(object sender, EventArgs e)
         {
             //um.Id = Utilerias.IdUsuario;
-            um.Id = 5;
+            um.Id = 7;
             this.llenarObjetoUsuario();
             this.Text = "..:: Sistame de Adminitración Arcivística ISSSTESON ::..";
             this.Text += "\t" + "Usuario :" + um.Nombre + " " + um.Paterno + " " + um.Materno;
@@ -153,6 +156,35 @@ namespace SADI
             SerieDocumentalAdd nsd = new SerieDocumentalAdd(um);
             nsd.MdiParent = this;
             nsd.Show();
+        }
+
+        private void MenuSecciones_Click(object sender, EventArgs e)
+        {
+            ReportesVista RepoView = new ReportesVista();//Instancia de la Forma
+            SeccionesReporte repo = new SeccionesReporte();//Instancia del Reporte
+            DSCatalogos DS = new DSCatalogos();//Instancia del DataSet
+            SeccionesController sc = new SeccionesController();//Instancia del Controlador
+            if(sc.ConsultarRegistros())//Intentamos la COnsulta
+            {
+                //INtento Exitoso
+                foreach(DataRow dtr in sc.Tabla.Rows)//Barremos la Tabla
+                {
+                    DataRow dsr = DS.Secciones.NewRow();//Renglón de la tabla Secciones
+                    dsr[0] = dtr[0];//Identificador
+                    dsr[1] = dtr[1];//Descripcion
+                    DS.Secciones.Rows.Add(dsr);//Agregamos el Renglón a la Tabla
+                }
+
+                repo.SetDataSource(DS);//Indicamos la fuente de datos al reporte
+                RepoView.crViewer.ReportSource = repo;//Indicamos el reporte al Viewer
+                RepoView.MdiParent = this;//Indicamos la forma contenedora
+                RepoView.Show();//Mostramos el Reporte
+            }
+            else//Intento NO Exitoso, Consultar Error
+            {
+
+            }
+
         }
     }
 }

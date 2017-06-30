@@ -71,6 +71,8 @@
             this.ladosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subnivelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pocisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rEPORTESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuSecciones = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,7 +83,8 @@
             this.TransferenciasMenu,
             this.pRÉSTAMOSToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.pRÉSTAMOSToolStripMenuItem1});
+            this.pRÉSTAMOSToolStripMenuItem1,
+            this.rEPORTESToolStripMenuItem});
             this.menuSADI.Location = new System.Drawing.Point(0, 0);
             this.menuSADI.Name = "menuSADI";
             this.menuSADI.Size = new System.Drawing.Size(870, 24);
@@ -403,6 +406,21 @@
             this.pocisionToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.pocisionToolStripMenuItem.Text = "Posicion";
             // 
+            // rEPORTESToolStripMenuItem
+            // 
+            this.rEPORTESToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuSecciones});
+            this.rEPORTESToolStripMenuItem.Name = "rEPORTESToolStripMenuItem";
+            this.rEPORTESToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.rEPORTESToolStripMenuItem.Text = "REPORTES";
+            // 
+            // MenuSecciones
+            // 
+            this.MenuSecciones.Name = "MenuSecciones";
+            this.MenuSecciones.Size = new System.Drawing.Size(152, 22);
+            this.MenuSecciones.Text = "Secciones";
+            this.MenuSecciones.Click += new System.EventHandler(this.MenuSecciones_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -468,5 +486,7 @@
         private System.Windows.Forms.ToolStripMenuItem agregarNivelesMenu;
         private System.Windows.Forms.ToolStripMenuItem mostrarNivelesMenu;
         private System.Windows.Forms.ToolStripMenuItem editarNivelesMenu;
+        private System.Windows.Forms.ToolStripMenuItem rEPORTESToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuSecciones;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SADI.Clases;
+using SADI.Clases.EventsArgs;
 using SADI.Clases.Controladores;
 using SADI.Clases.Modelos;
 
@@ -25,8 +26,9 @@ namespace SADI.Vistas.SerieDocumental
         TemasModel tm = new TemasModel();//Modelo de Temas
         RegistrosModel rm = new RegistrosModel();//Intencia del Modelo Registros
         RegistrosController rc = new RegistrosController();//Instancia del Controlador Registros
-        ClasificacionesController cc = new ClasificacionesController();//
-        ValoresDoctalesController vdc = new ValoresDoctalesController();//
+        ClasificacionesController cc = new ClasificacionesController();//Controlador de las Clasificaciones
+        ValoresDoctalesController vdc = new ValoresDoctalesController();//Controlador de las Valoraciones Documentales
+
 
         /// <summary>
         /// Constructor de la Forma
@@ -42,193 +44,108 @@ namespace SADI.Vistas.SerieDocumental
         public SerieDocumentalAdd(UsuariosModel u)
         {
             InitializeComponent();
-            am.Usuario.Id = u.Id;
-            LLenarComboSecciones();
-            LLenarComboClasificacion();
-            LLenarComboValorDoctal();
-            cboTema.Enabled = false;
+            am.Usuario = u;
+            LLenarControl();
+            SerieControlEventArgs ev = new SerieControlEventArgs { Opcion = 1 };
+            ctrlSerieDocumental.SerieDocumental_Load(u,ev);
+            LLenarControl();
+            ctrlSerieDocumental.cboSeccionCambioValor += new EventHandler(ctrlSerieDocumental_cboSeccionCambioValor);
+            ctrlSerieDocumental.cboSerieCambioValor += new EventHandler(ctrlSerieDocumental_cboSerieCambioValor);
+            ctrlSerieDocumental.CargaDeControl += new EventHandler(ctrlSerieDocumentl_CargaControl);
+
         }
 
-        #region LLenado de Combos
-        /// <summary>
-        /// Método para el Llenado del Combo Secciones
-        /// </summary>
-        private void LLenarComboSecciones()
+        private void ctrlSerieDocumentl_CargaControl(object sender, EventArgs e)
         {
-            if(secc.ConsultarSeccionesXusuario(am))//Intentar la Consulta
-            {
-                //Consulta Exitosa
-                if(secc.Tabla.Rows.Count > 0)//Verificar que existen registros
-                {
-                    //Si existen Registros
-                    cboSeccion.DataSource = secc.Tabla;//Indicarle la Fuente de la Información
-                    cboSeccion.ValueMember = secc.Tabla.Columns[0].ColumnName;//Indice
-                    cboSeccion.DisplayMember = secc.Tabla.Columns[1].ColumnName;//Valor
-                }
-                
-            }
-            else//Consulta no Exitosa
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::",
-                    MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
-           
+            throw new NotImplementedException();
         }
-        /// <summary>
-        /// Método para el LLenado del Combo Series
-        /// </summary>
-        private void LLenarComboSeries()
-        {
-           if(serc.ConsultarSeriexSeccionUsuario(am))//Intentar la Consulta
-            {
-                //Intento Exitoso
-                if(serc.Tabla.Rows.Count > 0)//Verificar que existan registros
-                {
-                    cboSeries.DataSource = serc.Tabla;//Indicarle la fuente de la información
-                    cboSeries.ValueMember = serc.Tabla.Columns[0].ColumnName;
-                    cboSeries.DisplayMember = serc.Tabla.Columns[2].ColumnName;
-                }
-            }
-           else//Intento NO Exitoso
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + serc.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        /// <summary>
-        /// Método para el LLenado del Combo Temas
-        /// </summary>
-        private void LLenarComboTemas()
-        {
-            if (tc.ConsultarTemaXSerieSeccion(am))//Intento de la Consulta de los Temas
-            {
-                //Intento Exitoso
-                if (tc.Tabla.Rows.Count > 0)//Ver si tiene valores la tabla
-                {
-                    cboTema.DataSource = tc.Tabla;//Indicarle la Fuente de datos
-                    cboTema.ValueMember = tc.Tabla.Columns[0].ColumnName;//Valor del registro
-                    cboTema.DisplayMember = tc.Tabla.Columns[3].ColumnName;//Descripción del registro
-                    if ((int)tc.Tabla.Rows[0][0] == 0)//Si el valor es 0
-                    { cboTema.Enabled = false; }//no Habilitar combo
-                    else//No es 0, habilitar combo
-                    { cboTema.Enabled = true; }
-                }
-                else//No tiene registro la tabla
-                {
-                    cboTema.Enabled = false;//No Habilitar COmbo
-                }
 
-            }
-            else//Consulta NO Exitosa
-            {
-                MessageBox.Show("ocurrió el siguiente error: ".ToUpper() + "\n" + tc.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        /// <summary>
-        /// Método para el LLenado del COmbo Clasificaciones
-        /// </summary>
-        private void LLenarComboClasificacion()
+        private void ctrlSerieDocumental_cboSerieCambioValor(object sender, EventArgs e)
         {
-            if(cc.ConsultarRegistros())//Intentar la consulta
+            am.Serie.Id = ctrlSerieDocumental.Serie.Id;
+            if(tc.ConsultarTemaXUsuarioSerieSeccion(am))
             {
-                //Intento Exitoso
-                if(cc.Tabla.Rows.Count > 0)//Verificar que tenga registros
+                if(tc.Tabla.Rows.Count > 0)
                 {
-                    //Si existen registros
-                    cboClasificaciones.DataSource = cc.Tabla;
-                    cboClasificaciones.ValueMember = cc.Tabla.Columns[0].ColumnName;
-                    cboClasificaciones.DisplayMember = cc.Tabla.Columns[1].ColumnName;
-
+                    ctrlSerieDocumental.TemasT = tc.Tabla;
+                }
+                else
+                {
+                    MessageBox.Show("NO Temas Allowed");
                 }
             }
-            else//Consulta NO Exitosa
+        }
+
+        private void ctrlSerieDocumental_cboSeccionCambioValor(object sender, EventArgs e)
+        {
+            am.Seccion.Id = ctrlSerieDocumental.Seccion.Id;
+            if(serc.ConsultarSeriexSeccionUsuario(am))
             {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + cc.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                if(serc.Tabla.Rows.Count > 0)
+                {
+                    ctrlSerieDocumental.SeriesT = serc.Tabla;
+                }
+                else
+                {
+                    MessageBox.Show("NO Hay Registro.");
+                }
             }
         }
+
         /// <summary>
-        /// Método para el LLenado del Combo ValorDoctal
+        /// Método para el LLenado Inicial del COntrol Serie Documental
         /// </summary>
-        private void LLenarComboValorDoctal()
+        private void LLenarControl()
         {
-            //Intentar consultar registro de valores documentales
+            if (secc.ConsultarSeccionesXusuario(am))
+            {
+                if(secc.Tabla.Rows.Count > 0)
+                {
+                    ctrlSerieDocumental.SeccionesT = secc.Tabla;
+                }
+                else
+                {
+                    MessageBox.Show("secciones");
+                }
+            }
+            if(!string.IsNullOrEmpty(ctrlSerieDocumental.Seccion.Id))
+            {
+                am.Seccion.Id = ctrlSerieDocumental.Seccion.Id;
+                if(serc.ConsultarSeriexSeccionUsuario(am))
+                {
+                    if(serc.Tabla.Rows.Count > 0)
+                    {
+                        ctrlSerieDocumental.SeriesT = serc.Tabla;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Series VAcias");
+                    }
+                }
+            }
+            if(cc.ConsultarRegistros())
+            {
+                if(cc.Tabla.Rows.Count > 0)
+                {
+                    ctrlSerieDocumental.ClasificacionesT = cc.Tabla;
+                }
+                else
+                {
+                    MessageBox.Show("clasificaciones");
+                }
+            }
             if(vdc.ConsultarRegistros())
             {
-                if(vdc.Tabla.Rows.Count > 0)//Verificar si existen registros
+                if(vdc.Tabla.Rows.Count > 0)
                 {
-                    cboValorDoctal.DataSource = vdc.Tabla;//Indicarle la fuente de datos
-                    cboValorDoctal.ValueMember = vdc.Tabla.Columns[0].ColumnName;//Valor del Registro
-                    cboValorDoctal.DisplayMember = vdc.Tabla.Columns[1].ColumnName;//Descripción del Registro
+                    ctrlSerieDocumental.ValoracionesDocaltesT = vdc.Tabla;
+                }
+                else
+                {
+                    MessageBox.Show("Valoracion Documental");
                 }
             }
-            else//Intento NO Exitoso
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + vdc.Error.ToUpper(),
-                    ":: mensaje desde nueva serie documental ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
-
-        #endregion
-
-        #region ComboSelectedValuesChanged
-
-        /// <summary>
-        /// Evento de Cambio de Selección en el Combo Sección
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cboSeccion_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView")
-            {
-                am.Seccion.Id = (string)cboSeccion.SelectedValue;//Agregar la Identificación de la Sección al Objeto
-                LLenarComboSeries();//Realizar el LLenado del Combo Series
-            }
-        }
-        /// <summary>
-        /// Evento de Cambio de Selección en el Combbo Series
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cboSeries_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView")//Verificar que exista valor seleccionado
-            {
-                am.Seccion.Id = (string)cboSeccion.SelectedValue;//Cargar la Identificación de la Sección
-                am.Serie.Id = (int)cboSeries.SelectedValue;// CArgar la Identificación de la Serie
-                LLenarComboTemas();//LLenar el combo Temas
-            }
-        }
-        /// <summary>
-        /// Evento de Cambio de Selección en el Combo Temas
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cboTema_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cboTema.SelectedValue.ToString() != "System.Data.DataRowView")//Verificar que tenga valor seleccionado
-            {
-                tm.Id = (int)cboTema.SelectedValue;
-            }
-        }
-
-        #endregion
-
-        #region Métodos Internos
-
-        private void CargaDeCombos()
-        {
-            
-        }
-
-        #endregion
 
         private void cmdOUT_Click(object sender, EventArgs e)
         {

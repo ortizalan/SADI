@@ -658,13 +658,13 @@ namespace SADI.Vistas.Atributos
         /// <param name="value2">Id de la Sección</param>
         private void EnvioValorTemaXSerie(int value1, string value2)
         {
-            //tm.Serie.Id = value1;//Indicar la Serie
-            //tm.Seccion.Id = value2;//Indicar la Sección
+            tm.Serie.Id = value1;//Indicar la Serie
+            tm.Seccion.Id = value2;//Indicar la Sección
 
-            am.Serie.Id = value1;//Indicar la Serie
-            am.Seccion.Id = value2;//Indicar la Sección
+            //am.Serie.Id = value1;//Indicar la Serie
+            //am.Seccion.Id = value2;//Indicar la Sección
 
-            if (tc.ConsultarTemaXSerieSeccion(am))//Intentar la Consulta
+            if (tc.ConsultarTemaXSerieSeccion(tm))//Intentar la Consulta
             {
                 //Intento Exitoso
                 if (tc.Tabla.Rows.Count > 0)//Ver que existan registros
