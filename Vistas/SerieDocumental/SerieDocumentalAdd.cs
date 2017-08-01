@@ -16,6 +16,7 @@ namespace SADI.Vistas.SerieDocumental
 {
     public partial class SerieDocumentalAdd : Form
     {
+        #region Propiedades
         UsuariosModel um = new UsuariosModel();//Instancia de UsuariosModel
         AtributosModel am = new AtributosModel();//Instancia de AtributosModel
         AtributosController ac = new AtributosController();//Instancia de AtribitosController
@@ -28,6 +29,8 @@ namespace SADI.Vistas.SerieDocumental
         RegistrosController rc = new RegistrosController();//Instancia del Controlador Registros
         ClasificacionesController cc = new ClasificacionesController();//Controlador de las Clasificaciones
         ValoresDoctalesController vdc = new ValoresDoctalesController();//Controlador de las Valoraciones Documentales
+
+        #endregion
 
 
         /// <summary>

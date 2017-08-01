@@ -144,11 +144,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Conexion.cs" />
+    <Compile Include="Clases\Controladores\AreasMedicasController.cs" />
     <Compile Include="Clases\Controladores\AtributosController.cs" />
     <Compile Include="Clases\Controladores\BitacoraController.cs" />
     <Compile Include="Clases\Controladores\CajasController.cs" />
     <Compile Include="Clases\Controladores\ClasificacionesController.cs" />
     <Compile Include="Clases\Controladores\ContenidoCajasController.cs" />
+    <Compile Include="Clases\Controladores\DepartamentosController.cs" />
     <Compile Include="Clases\Controladores\DigitalizacionesController.cs" />
     <Compile Include="Clases\Controladores\EstantesController.cs" />
     <Compile Include="Clases\Controladores\FilasController.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Clases\Controladores\RegistrosController.cs" />
     <Compile Include="Clases\Controladores\SeccionesController.cs" />
     <Compile Include="Clases\Controladores\SeriesController.cs" />
+    <Compile Include="Clases\Controladores\SubAreasController.cs" />
     <Compile Include="Clases\Controladores\SubFondosController.cs" />
     <Compile Include="Clases\Controladores\SubNivelesController.cs" />
     <Compile Include="Clases\Controladores\TemasController.cs" />
@@ -171,11 +174,13 @@
     <Compile Include="Clases\EventsArgs\SerieControlEventArgs.cs" />
     <Compile Include="Clases\EventsArgs\TablaEventArgs.cs" />
     <Compile Include="Clases\Metodos.cs" />
+    <Compile Include="Clases\Modelos\AreasMedicasModel.cs" />
     <Compile Include="Clases\Modelos\AtributosModel.cs" />
     <Compile Include="Clases\Modelos\BitacoraModel.cs" />
     <Compile Include="Clases\Modelos\CajasModel.cs" />
     <Compile Include="Clases\Modelos\ClasificacionesModel.cs" />
     <Compile Include="Clases\Modelos\ContenidoCajasModel.cs" />
+    <Compile Include="Clases\Modelos\DepartamentosModel.cs" />
     <Compile Include="Clases\Modelos\DigitalizacionesModel.cs" />
     <Compile Include="Clases\Modelos\EstantesModel.cs" />
     <Compile Include="Clases\Modelos\FilasModel.cs" />
@@ -188,6 +193,8 @@
     <Compile Include="Clases\Modelos\RegistrosModel.cs" />
     <Compile Include="Clases\Modelos\SeccionesModel.cs" />
     <Compile Include="Clases\Modelos\SeriesModel.cs" />
+    <Compile Include="Clases\Modelos\ServiciosModel.cs" />
+    <Compile Include="Clases\Modelos\SubAreasModel.cs" />
     <Compile Include="Clases\Modelos\SubFondosModel.cs" />
     <Compile Include="Clases\Modelos\SubNivelesModel.cs" />
     <Compile Include="Clases\Modelos\TemasModel.cs" />
@@ -349,6 +356,12 @@
     <Compile Include="Vistas\SerieDocumental\SerieDocumentalAdd.Designer.cs">
       <DependentUpon>SerieDocumentalAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Temas\DetalleUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Temas\DetalleUsuario.Designer.cs">
+      <DependentUpon>DetalleUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Temas\TemasAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -444,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\SerieDocumental\SerieDocumentalAdd.resx">
       <DependentUpon>SerieDocumentalAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Temas\DetalleUsuario.resx">
+      <DependentUpon>DetalleUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Temas\TemasAdd.resx">
       <DependentUpon>TemasAdd.cs</DependentUpon>

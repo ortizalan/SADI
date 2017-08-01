@@ -35,7 +35,7 @@ namespace SADI
         private void Inicio_Load(object sender, EventArgs e)
         {
             //um.Id = Utilerias.IdUsuario;
-            um.Id = 7;
+            um.Id = 9;
             this.llenarObjetoUsuario();
             this.Text = "..:: Sistame de Adminitración Arcivística ISSSTESON ::..";
             this.Text += "\t" + "Usuario :" + um.Nombre + " " + um.Paterno + " " + um.Materno;

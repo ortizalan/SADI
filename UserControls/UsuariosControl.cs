@@ -355,9 +355,7 @@ namespace SADI.UserControls
             {
                 if(_subfondos.Rows.Count > 0)
                 {
-                    cboUnidadAdmva.DataSource = _unidadadmva;
-                    cboUnidadAdmva.ValueMember = _unidadadmva.Columns[0].ColumnName;
-                    cboUnidadAdmva.DisplayMember = _unidadadmva.Columns[1].ColumnName;
+                    
                 }
             }
         }
@@ -535,10 +533,7 @@ namespace SADI.UserControls
         //CAmbio de Valor Seleccionado en Combo Unidades Administrativas
         private void cboUnidadAdmva_SelectedValueChanged(object sender, EventArgs e)
         {
-            if(cboUnidadAdmva.SelectedValue.ToString() != "System.Data.DataRowView")
-            {
-                _idUnidadAdmva = (int)cboUnidadAdmva.SelectedValue;
-            }
+            
         }
     }
 }

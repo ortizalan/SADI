@@ -189,7 +189,9 @@ namespace SADI.Clases.Controladores {
                 { return false; }// Intento NO Exitoso, Ver Error
             }
             else
-            { return false; }// No es del tipo RegistroModel
+            {
+                Error = "el objeto no es del tipo registrosmodel";
+                return false; }// No es del tipo RegistroModel
         }
         /// <summary>
         /// Método para Consultar Todos los Registros en RegistrosModel
@@ -235,6 +237,57 @@ namespace SADI.Clases.Controladores {
             }
             else
             { return false; }// Intento NO Exitoso, Ver Error
+        }
+        /// <summary>
+        /// Función para la Consulta del Consecutivo de la Serie Documental
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
+        public bool ConsecutivoRegistroSeries(object o)
+        {
+            if(o.GetType() == typeof(RegistrosModel))//Verificar que el Objeto sea del Tipo RegistrosModel
+            {
+                //SI Son del mismo tipo
+                var r = (RegistrosModel)o;//Castear la variable "r" al tipo RegistroModel
+                string[] codigos = r.SerieDoctal.Split('.');//Separar los códigos que conjuntan la serie documental
+                int c = 0;//Contador
+                string[] code= new string[codigos.Length];//Arreglo para los códigos de la serie documental
+                foreach(string codigo in codigos)//Barrer la serie documental
+                {
+                    code[c] = codigo;//guardar código en arreglo
+                    c += 1;// Aumentar el contador
+                }
+
+                string proce = "";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+
+                if (Abrir())//Intentar abrir la conexión
+                {
+                    try
+                    {
+                        //Intentar consultar el procedimiento
+                        if (ConsultarProcedimiento(proce, lista))
+                        { return true; }//Intento Exitoso
+                        else//Intento NO Exitoso, Consultar Error
+                        { return false; }
+                    }
+                    catch (Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el Error
+                    }
+                    finally { Cerrar(); }//Cerrar la conexión
+                }
+                else//Intento NO Exitoso, consultar Error
+                {
+                    return false;
+                }
+            }
+            else//NO Son del mismo tipo
+            {
+                Error = "el objeto no es del tipo registromodel.";
+                return false;
+            }
         }
 
 	}//end RegistrosController

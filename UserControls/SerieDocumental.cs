@@ -18,6 +18,8 @@ namespace SADI.UserControls
     {
         #region Propiedades
         private int opc;// -- 1) Ingresar -- 2)Editar -- 3)Detalle
+        private RegistrosModel rm = new RegistrosModel();//Instancia del Modelo de Registro
+        private RegistrosController rc = new RegistrosController();//Instancia del Controlador del Registro
         private UsuariosModel _usuario = new UsuariosModel();//Instancia de UsuariosModel
         private AtributosModel _atributos = new AtributosModel();//Instancia de AtributosModel
         private SeriesModel _serie = new SeriesModel();//Modelo de la Serie
@@ -605,26 +607,55 @@ namespace SADI.UserControls
         /// <returns>string</returns>
         private string Consecutivo()
         {
-            if (string.IsNullOrEmpty(txtConsecutivo.Text))//Si el campo Consecutivo es vacío
+            if (chkConsecutivo.Checked)
             {
-                return "0000";//Rellenar con el valor de ceros
+                if (string.IsNullOrEmpty(txtConsecutivo.Text))//Si el campo Consecutivo es vacío
+                {
+                    return "0000";//Rellenar con el valor de ceros
+                }
+                else
+                {
+                    switch (txtConsecutivo.Text.Length)//Si no es vacío, ver el tamaño el consecutivo
+                    {
+                        case 1:
+                            return "000" + txtConsecutivo.Text;
+                        case 2:
+                            return "00" + txtConsecutivo.Text;
+                        case 3:
+                            return "0" + txtConsecutivo.Text;
+                        case 4:
+                            return txtConsecutivo.Text;
+                        default:
+                            return "0000";
+                    }
+                }
             }
             else
             {
-                switch (txtConsecutivo.Text.Length)//Si no es vacío, ver el tamaño el consecutivo
-                {
-                    case 1:
-                        return "000" + txtConsecutivo.Text;
-                    case 2:
-                        return "00" + txtConsecutivo.Text;
-                    case 3:
-                        return "0" + txtConsecutivo.Text;
-                    case 4:
-                        return txtConsecutivo.Text;
-                    default:
-                        return "0000";
-                }
+                return (string.IsNullOrEmpty(GetConsecutivo())?"0000":GetConsecutivo());
             }
+        }
+        /// <summary>
+        /// Obtener el Consecutivo de la Serie Documental
+        /// </summary>
+        /// <returns></returns>
+        public string GetConsecutivo()
+        {
+            rm.SerieDoctal = NumeroSerieDocumental;
+
+            if (rc.ConsecutivoRegistroSeries(rm))//Intentar la Consulta del Procedimiento
+            {
+
+            }
+            else//Intento NO Exitoso
+            {
+                MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" +
+                    rc.Error.ToUpper(), ":: mensaje decontrol serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return null;
+            }
+
+            return string.Empty;
         }
         #endregion
 
