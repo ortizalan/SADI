@@ -162,6 +162,7 @@
     <Compile Include="Clases\Controladores\RegistrosController.cs" />
     <Compile Include="Clases\Controladores\SeccionesController.cs" />
     <Compile Include="Clases\Controladores\SeriesController.cs" />
+    <Compile Include="Clases\Controladores\ServiciosController.cs" />
     <Compile Include="Clases\Controladores\SubAreasController.cs" />
     <Compile Include="Clases\Controladores\SubFondosController.cs" />
     <Compile Include="Clases\Controladores\SubNivelesController.cs" />

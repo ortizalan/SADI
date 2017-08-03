@@ -21,7 +21,10 @@ namespace SADI.UserControls
         private int _opcion; //Opcion para Validar Las Operaciones a Realizar con el Control
         private DataTable _jerarquias;// Tabla para llenar el Combo Jerarquías
         private DataTable _subfondos;// Tabla para llenar el Combo SubFondos
-        private DataTable _unidadadmva;//Tabla para llenar el Combo UnidadAdmva
+        private DataTable _departamentos;//Tabla para llenar combo Departamentos
+        private DataTable _areasmedicas;//Tabla para llenar las Áreas Médicas
+        private DataTable _subareas;// Tabla para llenar las SubÁreas Médicas
+        private DataTable _servicios;//Tabla para llenar los Servicios de las SubAreas
         private string _nombre;// Propiedad para el nombre del Usuario
         private string _paterno;// Propiedad para el Apellido Paterno del Usuario
         private string _materno;// Propiedad para el Apellido Materno del Usuario
@@ -75,12 +78,26 @@ namespace SADI.UserControls
             }
         }
         /// <summary>
-        /// Asignar valores a Unidades Administrativas
+        /// Acceder a los Valores de los Departamentos
         /// </summary>
-        public DataTable UnidadAdmva
-        {
-            set { _unidadadmva = value; this.LLenarUnidadesAdmvas(); }
-        }
+        public DataTable Departamentos
+        { get { return _departamentos; } set { _departamentos = value; } }
+        /// <summary>
+        /// Acceder a los Valores de las Áreas Médicas
+        /// </summary>
+        public DataTable AreasMedicas
+        { get { return _areasmedicas; } set { _areasmedicas = value; } }
+        /// <summary>
+        /// Acceder a los Valores de las SubÁreas Méidcas
+        /// </summary>
+        public DataTable SubAreas
+        { get { return _subareas; } set { _subareas = value; } }
+        /// <summary>
+        /// Acceder a los Valores de los Serevicios de las SubÁreas
+        /// </summary>
+        public DataTable Servicios
+        { get { return _servicios; } set { _servicios = value; } }
+        
         /// <summary>
         /// Acceder a la Propiedad Nombre
         /// </summary>
@@ -351,13 +368,7 @@ namespace SADI.UserControls
         //Método para llenar el combo AunidadesAdmvas
         private void LLenarUnidadesAdmvas()
         {
-            if(_unidadadmva != null)
-            {
-                if(_subfondos.Rows.Count > 0)
-                {
-                    
-                }
-            }
+            
         }
         /// <summary>
         /// Método para Limpiar el Control Usuario
