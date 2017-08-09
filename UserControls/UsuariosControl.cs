@@ -34,8 +34,23 @@ namespace SADI.UserControls
         private string _contraseña;// Propiedad Contraseña
         private int _idJerarquia;// Identificador de la Jerarquia
         private int _idSubFondo;// Identificador del SubFondo
-        private int _idUnidadAdmva;//Identificador de la Unidad Administrativa
+        private int _idDepartamento;//Identificadoe del Departamento
+        private int _idAreaMedica;//Identificador del Área Médica
+        private int _idSubArea;//Identificador de la SubÁrea Médica
+        private int _idServicios;//Identificador del Servicio
+
         #endregion
+
+        #region Eventos Públicos
+
+        public event EventHandler cboSubFondosChange;//Manejador del Evento
+        public event EventHandler cboDepartamentosChange;//Manejador del Evento
+        public event EventHandler cboAreasMedicasChange;//Manejador del Evento
+        public event EventHandler cboSubAreasChange;//Manejador del Evento
+        public event EventHandler cboServiciosChange;//Manejador del Evento
+
+        #endregion
+
         /// <summary>
         /// Constructor del Control
         /// </summary>
@@ -199,14 +214,25 @@ namespace SADI.UserControls
             set { _idSubFondo = value; }
         }
         /// <summary>
-        /// Identificador de la Unidad Administrativa
+        /// Identificador del Departamento
         /// </summary>
-        public int IdUnidadAdministrativa
-        {
-            get { return _idUnidadAdmva; }
-            set { _idUnidadAdmva = value; }
-        }
-
+        public int IdDepartamento
+        { get { return _idDepartamento; } set{ _idDepartamento = value; } }
+        /// <summary>
+        /// Identificador del Area Médica
+        /// </summary>
+        public int IdAreaMedica
+        { get { return _idAreaMedica; } set { _idAreaMedica = value; } }
+        /// <summary>
+        /// Identificador de la SubArea Médica
+        /// </summary>
+        public int IdSubAreaMedica
+        { get { return _idSubArea; } set { _idSubArea = value; } }
+        /// <summary>
+        /// Identificador de los Servicios
+        /// </summary>
+        public int IdServicios
+        { get { return _idServicios; } set { _idServicios = value; } }
         #endregion
         /// <summary>
         /// Validar el Control Para su Utilización en la Base de Datos
@@ -365,11 +391,7 @@ namespace SADI.UserControls
                 }
             }
         }
-        //Método para llenar el combo AunidadesAdmvas
-        private void LLenarUnidadesAdmvas()
-        {
-            
-        }
+       
         /// <summary>
         /// Método para Limpiar el Control Usuario
         /// </summary>
@@ -536,15 +558,97 @@ namespace SADI.UserControls
         //Cambio de Valor Seleccionado en Combobox Subfondos
         private void cboSubFondo_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")
+            if (cboSubFondosChange != null)//Validar que el evento no sea vacío
             {
-                _idSubFondo = (int)cboSubFondo.SelectedValue;
+                if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")//Validar que tenga valor el combo
+                {
+                    _idSubFondo = (int)cboSubFondo.SelectedValue;//Guardar el Identificador
+                    cboSubFondosChange(this, e);//Enviarle los parámetros
+                }
+            }
+            else
+            {
+                if (cboSubFondo.SelectedValue.ToString() != "System.Data.DataRowView")//Validar que tenga valor el combo
+                {
+                    _idSubFondo = (int)cboSubFondo.SelectedValue;//Guardar el Identificador
+                }
             }
         }
-        //CAmbio de Valor Seleccionado en Combo Unidades Administrativas
-        private void cboUnidadAdmva_SelectedValueChanged(object sender, EventArgs e)
+        //Cambio de Valor Seleccionado en Combobox Departamentos
+        private void cboDepartamento_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+            if(cboDepartamentosChange != null)
+            {
+                if(cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idDepartamento = (int)cboDepartamento.SelectedValue;
+                    cboDepartamentosChange(this, e);
+                }
+            }
+            else
+            {
+                if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idDepartamento = (int)cboDepartamento.SelectedValue;
+                }
+            }
+        }
+        //Cambio de Valor Selecionado en Combobox Área Médica
+        private void cboArea_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cboAreasMedicasChange != null)
+            {
+                if(cboArea.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idAreaMedica = (int)cboArea.SelectedValue;
+                    cboAreasMedicasChange(this, e);
+                }
+            }
+            else
+            {
+                if (cboArea.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idAreaMedica = (int)cboArea.SelectedValue;
+                }
+            }
+        }
+        //Cambio de Valor Seleccionado en Combobox SubÁrea Médica
+        private void cboSubArea_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cboAreasMedicasChange != null)
+            {
+                if(cboSubArea.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idSubArea = (int)cboSubArea.SelectedValue;
+                    cboAreasMedicasChange(this, e);
+                }
+            }
+            else
+            {
+                if (cboSubArea.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idSubArea = (int)cboSubArea.SelectedValue;
+                }
+            }
+        }
+        //Cmabio de Valor Seleccionado en el ComboBox Servicios
+        private void cboServicios_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(cboServiciosChange != null)
+            {
+                if(cboServicios.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idServicios = (int)cboServicios.SelectedValue;
+                    cboServiciosChange(this, e);
+                }
+            }
+            else
+            {
+                if (cboServicios.SelectedValue.ToString() != "System.Data.DataRowView")
+                {
+                    _idServicios = (int)cboServicios.SelectedValue;
+                }
+            }
         }
     }
 }

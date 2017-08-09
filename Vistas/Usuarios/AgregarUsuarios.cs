@@ -20,8 +20,15 @@ namespace SADI.Vistas.Usuarios
         UsuariosController uc = new UsuariosController(); // Instancia del Controlador Usuario
         JerarquiasController jc = new JerarquiasController(); // Instancia del controlador Jerarquías
         SubFondosController sfc = new SubFondosController(); // Instancia del Cntrolador SubFondos
-        UnidadesAdmvasController uac = new UnidadesAdmvasController(); // Instancia del Controlador UnidadAdmva
         SeccionesController sc = new SeccionesController();// Instancia del Controlador Secciones
+        DepartamentosController dc = new DepartamentosController();//Instancia del Controlador de Departamentos
+        DepartamentosModel dm = new DepartamentosModel();//Instancia del Modelo de Departamentos
+        AreasMedicasController amc = new AreasMedicasController();//Instancia del Controlador de Áreas Médicas
+        AreasMedicasModel amm = new AreasMedicasModel();//Instancia del Modelo de Áreas Médicas
+        SubAreasController sac = new SubAreasController();// Instancia del Controlador SubÁreas
+        SubAreasModel sam = new SubAreasModel();//Instancia del Modelo SubAreas
+        ServiciosController sec = new ServiciosController();//Instancia del Controlador Servicios
+        ServiciosModel sem = new ServiciosModel();//Instancia del Modelo de Servicios
 
         /// <summary>
         /// Constructor de la Forma
@@ -65,7 +72,7 @@ namespace SADI.Vistas.Usuarios
         /// Función Para llenar el Combo SubFondo
         /// </summary>
         /// <returns>DataTable</returns>
-        private DataTable SubFondo()
+        private DataTable SubFondos()
         {
             if (sfc.ConsultarRegistros())
             {
@@ -77,21 +84,10 @@ namespace SADI.Vistas.Usuarios
                 return null;
             }
         }
-        /// <summary>
-        /// Función para LLenar el Combo Unidad Administrativa
-        /// </summary>
-        /// <returns>DataTable</returns>
-        private DataTable UnidadAdmva()
+      
+        private DataTable Departamentos()
         {
-            if (uac.ConsultarRegistros())
-            {
-                return uac.Tabla;
-            }
-            else
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + uac.Error, "..:: error en base de datos ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
+            return null;
         }
         /// <summary>
         /// Funcion Para LLenar el COmbo Secciones
@@ -116,8 +112,7 @@ namespace SADI.Vistas.Usuarios
         private void LLenarCombos()
         {
             usrCtrl.Jerarquia = this.Jerarquias();// Llenar el combo Jerarquias en el Control
-            usrCtrl.SubFondo = this.SubFondo();// LLenar el combo SubFondo en el Control
-            usrCtrl.UnidadAdmva = this.UnidadAdmva();//LLenar el combo Unidad Administrativa en el Control
+            usrCtrl.SubFondo = this.SubFondos();// LLenar el combo SubFondo en el Control
         }
         /// <summary>
         /// Método para el LLenado del Objeto Usuario
@@ -133,7 +128,6 @@ namespace SADI.Vistas.Usuarios
             um.Email = usrCtrl.Email;
             um.Jerarquia.Id = usrCtrl.IdJerarquia;
             um.SubFondo.Id = usrCtrl.IdSubFondo;
-            um.UnidadAdmva.Id = usrCtrl.IdUnidadAdministrativa;
             um.Fondo.Id = 63;
         }
         /// <summary>
@@ -193,6 +187,103 @@ namespace SADI.Vistas.Usuarios
                     uc.Error,":: mensaje desde el controlador de usuarios ::".ToUpper(),
                     MessageBoxButtons.OK,MessageBoxIcon.Error);// Error
                 return 0;
+            }
+        }
+        /// <summary>
+        /// Cambio de Selección en SubFondos
+        /// </summary>
+        private void usrCtrl_cboSubFondosChange(object sender, EventArgs e)
+        {
+            dm.SubFondo.Id = usrCtrl.IdSubFondo;
+            if(dc.SeleccionarDepartamentoXsubFondo(dm))
+            {
+                usrCtrl.Departamentos = dc.Tabla;
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + dc.Error.ToUpper(),
+                    ":: mensaje desde agregar usuario ::".ToUpper(),
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+        /// <summary>
+        /// Cambio de Selección de Departamento
+        /// </summary>
+        private void usrCtrl_cboDepartamentosChange(object sender, EventArgs e)
+        {
+            dm.SubFondo.Id = usrCtrl.IdSubFondo;
+
+            if(dc.SeleccionarDepartamentoXsubFondo(dm))
+            {
+                usrCtrl.Departamentos = dc.Tabla;
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el sieguente error : " + "\n" + dc.Error.ToUpper(),
+                    ":: mensaje desde agregar usuario ::".ToUpper(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        /// <summary>
+        /// Cambio de Selección de Áreas Médicas 
+        /// </summary>
+        private void usrCtrl_cboAreasMedicasChange(object sender, EventArgs e)
+        {
+            amm.SubFondo.Id = usrCtrl.IdSubFondo;
+            amm.DepartamentoId.Id = usrCtrl.IdDepartamento;
+
+            if(amc.SeleccionarAreaMedicaXdepartamento(amm))
+            {
+                usrCtrl.AreasMedicas = amc.Tabla;
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" + amc.Error.ToUpper(),
+                    ":: mensaje desde agregar usuario ::".ToUpper(),
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
+        }
+        /// <summary>
+        /// Cambio de Selección de SubAreas Médicas
+        /// </summary>
+        private void usrCtrl_cboSubAreasChange(object sender, EventArgs e)
+        {
+            sam.SubFondo.Id = usrCtrl.IdSubFondo;
+            sam.DepartamentoId.Id = usrCtrl.IdDepartamento;
+            sam.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
+            
+            if(sac.SeleccionarSubAreaXSubFondoAreaDepartamentoArea(sam))
+            {
+                usrCtrl.SubAreas = sac.Tabla;
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" + sac.Error.ToUpper(),
+                    ":: mensaje desde agregar usuario  ::".ToUpper(),
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+        /// <summary>
+        /// Cambio de Selección de los Servicios de las SubAreas
+        /// </summary>
+        private void usrCtrl_cboServiciosChange(object sender, EventArgs e)
+        {
+            sem.SubFondo.Id = usrCtrl.IdSubFondo;
+            sem.DepartamentoId.Id = usrCtrl.IdDepartamento;
+            sem.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
+            sem.SubAreaId.Id = usrCtrl.IdSubAreaMedica;
+
+            if(sec.SeleccionarSeccionXSubFondoDeptoAreaSubArea(sem))
+            {
+                usrCtrl.Servicios = sec.Tabla;
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" + sec.Error.ToUpper(),
+                    ":: mensaje desde agregar usuario ::".ToUpper(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

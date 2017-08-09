@@ -264,6 +264,7 @@
             this.cboServicios.Name = "cboServicios";
             this.cboServicios.Size = new System.Drawing.Size(345, 21);
             this.cboServicios.TabIndex = 9;
+            this.cboServicios.SelectedValueChanged += new System.EventHandler(this.cboServicios_SelectedValueChanged);
             // 
             // label14
             // 
@@ -282,6 +283,7 @@
             this.cboSubArea.Name = "cboSubArea";
             this.cboSubArea.Size = new System.Drawing.Size(345, 21);
             this.cboSubArea.TabIndex = 7;
+            this.cboSubArea.SelectedValueChanged += new System.EventHandler(this.cboSubArea_SelectedValueChanged);
             // 
             // label13
             // 
@@ -300,6 +302,7 @@
             this.cboArea.Name = "cboArea";
             this.cboArea.Size = new System.Drawing.Size(345, 21);
             this.cboArea.TabIndex = 5;
+            this.cboArea.SelectedValueChanged += new System.EventHandler(this.cboArea_SelectedValueChanged);
             // 
             // label12
             // 
@@ -318,6 +321,7 @@
             this.cboDepartamento.Name = "cboDepartamento";
             this.cboDepartamento.Size = new System.Drawing.Size(299, 21);
             this.cboDepartamento.TabIndex = 3;
+            this.cboDepartamento.SelectedValueChanged += new System.EventHandler(this.cboDepartamento_SelectedValueChanged);
             // 
             // label10
             // 

@@ -37,7 +37,7 @@
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAgregar.Location = new System.Drawing.Point(453, 284);
+            this.btnAgregar.Location = new System.Drawing.Point(494, 284);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(125, 57);
             this.btnAgregar.TabIndex = 3;
@@ -48,7 +48,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(578, 284);
+            this.btnSalir.Location = new System.Drawing.Point(619, 284);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(125, 57);
             this.btnSalir.TabIndex = 0;
@@ -58,20 +58,33 @@
             // 
             // usrCtrl
             // 
+            this.usrCtrl.AreasMedicas = null;
             this.usrCtrl.Contraseña = null;
+            this.usrCtrl.Departamentos = null;
             this.usrCtrl.Email = null;
             this.usrCtrl.Estatus = false;
+            this.usrCtrl.IdAreaMedica = 0;
+            this.usrCtrl.IdDepartamento = 0;
             this.usrCtrl.IdJerarquia = 0;
+            this.usrCtrl.IdServicios = 0;
+            this.usrCtrl.IdSubAreaMedica = 0;
             this.usrCtrl.IdSubFondo = 0;
-            this.usrCtrl.Location = new System.Drawing.Point(15, 4);
+            this.usrCtrl.Location = new System.Drawing.Point(6, 4);
             this.usrCtrl.Materno = null;
             this.usrCtrl.Name = "usrCtrl";
             this.usrCtrl.Nombre = null;
             this.usrCtrl.Opcion = 0;
             this.usrCtrl.Paterno = null;
-            this.usrCtrl.Size = new System.Drawing.Size(687, 344);
+            this.usrCtrl.Servicios = null;
+            this.usrCtrl.Size = new System.Drawing.Size(746, 344);
+            this.usrCtrl.SubAreas = null;
             this.usrCtrl.TabIndex = 4;
             this.usrCtrl.Usuario = null;
+            this.usrCtrl.cboSubFondosChange += new System.EventHandler(this.usrCtrl_cboSubFondosChange);
+            this.usrCtrl.cboDepartamentosChange += new System.EventHandler(this.usrCtrl_cboDepartamentosChange);
+            this.usrCtrl.cboAreasMedicasChange += new System.EventHandler(this.usrCtrl_cboAreasMedicasChange);
+            this.usrCtrl.cboSubAreasChange += new System.EventHandler(this.usrCtrl_cboSubAreasChange);
+            this.usrCtrl.cboServiciosChange += new System.EventHandler(this.usrCtrl_cboServiciosChange);
             // 
             // AgregarUsuarios
             // 
@@ -79,7 +92,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAgregar;
-            this.ClientSize = new System.Drawing.Size(716, 353);
+            this.ClientSize = new System.Drawing.Size(757, 353);
             this.ControlBox = false;
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAgregar);

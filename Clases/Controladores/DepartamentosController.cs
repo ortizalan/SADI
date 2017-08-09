@@ -48,10 +48,10 @@ namespace SADI.Clases.Controladores
         #region Funciones Propias del Controlador
 
         /// <summary>
-        /// 
+        /// Función para Seleccionar Departamentos por SubFondos
         /// </summary>
-        /// <param name="o"></param>
-        /// <returns></returns>
+        /// <param name="o">Objeto del Tipo DepartamentosModel</param>
+        /// <returns>Boleano</returns>
         public bool SeleccionarDepartamentoXsubFondo(object o)
         {
             if(o.GetType() == typeof(DepartamentosModel))//Verificar si el Objeto es del tipo DepartamentosModel
