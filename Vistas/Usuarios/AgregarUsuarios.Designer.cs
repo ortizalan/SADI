@@ -58,9 +58,7 @@
             // 
             // usrCtrl
             // 
-            this.usrCtrl.AreasMedicas = null;
             this.usrCtrl.Contraseña = null;
-            this.usrCtrl.Departamentos = null;
             this.usrCtrl.Email = null;
             this.usrCtrl.Estatus = false;
             this.usrCtrl.IdAreaMedica = 0;
@@ -75,9 +73,7 @@
             this.usrCtrl.Nombre = null;
             this.usrCtrl.Opcion = 0;
             this.usrCtrl.Paterno = null;
-            this.usrCtrl.Servicios = null;
             this.usrCtrl.Size = new System.Drawing.Size(746, 344);
-            this.usrCtrl.SubAreas = null;
             this.usrCtrl.TabIndex = 4;
             this.usrCtrl.Usuario = null;
             this.usrCtrl.cboSubFondosChange += new System.EventHandler(this.usrCtrl_cboSubFondosChange);

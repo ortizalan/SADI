@@ -96,22 +96,22 @@ namespace SADI.UserControls
         /// Acceder a los Valores de los Departamentos
         /// </summary>
         public DataTable Departamentos
-        { get { return _departamentos; } set { _departamentos = value; } }
+        { set { _departamentos = value; LLenarDepartamentos(); } }
         /// <summary>
         /// Acceder a los Valores de las Áreas Médicas
         /// </summary>
         public DataTable AreasMedicas
-        { get { return _areasmedicas; } set { _areasmedicas = value; } }
+        { set { _areasmedicas = value; LLenarAreasMedicas(); } }
         /// <summary>
         /// Acceder a los Valores de las SubÁreas Méidcas
         /// </summary>
         public DataTable SubAreas
-        { get { return _subareas; } set { _subareas = value; } }
+        { set { _subareas = value; LLenarSubAreaMedica(); } }
         /// <summary>
         /// Acceder a los Valores de los Serevicios de las SubÁreas
         /// </summary>
         public DataTable Servicios
-        { get { return _servicios; } set { _servicios = value; } }
+        { set { _servicios = value; LLenarServicios(); } }
         
         /// <summary>
         /// Acceder a la Propiedad Nombre
@@ -388,6 +388,58 @@ namespace SADI.UserControls
                     cboSubFondo.DataSource = _subfondos;
                     cboSubFondo.ValueMember = _subfondos.Columns[0].ColumnName;
                     cboSubFondo.DisplayMember = _subfondos.Columns[2].ColumnName;
+                }
+            }
+        }
+        //Método para llenar el Combobox de los Departamentos
+        private void LLenarDepartamentos()
+        {
+            if(_departamentos != null)
+            {
+                if(_departamentos.Rows.Count > 0)
+                {
+                    cboDepartamento.DataSource = _departamentos;
+                    cboDepartamento.ValueMember = _departamentos.Columns[0].ColumnName;
+                    cboDepartamento.DisplayMember = _departamentos.Columns[2].ColumnName;
+                }
+            }
+        }
+        //Método para llenar el Combobox de las Áreas Médicas
+        private void LLenarAreasMedicas()
+        {
+            if(_areasmedicas != null)
+            {
+                if(_areasmedicas.Rows.Count > 0)
+                {
+                    cboArea.DataSource = _areasmedicas;
+                    cboArea.ValueMember = _areasmedicas.Columns[0].ColumnName;
+                    cboArea.DisplayMember = _areasmedicas.Columns[3].ColumnName;
+                }
+            }
+        }
+        //Método para llenar el Combobox de las SubÁreas Médicas
+        private void LLenarSubAreaMedica()
+        {
+            if(_subareas != null)
+            {
+                if(_subareas.Rows.Count > 0)
+                {
+                    cboSubArea.DataSource = _subareas;
+                    cboSubArea.ValueMember = _subareas.Columns[0].ColumnName;
+                    cboSubArea.DisplayMember = _subareas.Columns[4].ColumnName;
+                }
+            }
+        }
+        //Método pra llenar el Combobox de los Servicios
+        private void LLenarServicios()
+        {
+            if(_servicios != null)
+            {
+                if(_servicios.Rows.Count > 0)
+                {
+                    cboServicios.DataSource = _servicios;
+                    cboServicios.ValueMember = _servicios.Columns[0].ColumnName;
+                    cboServicios.DisplayMember = _servicios.Columns[5].ColumnName;
                 }
             }
         }

@@ -84,7 +84,6 @@ namespace SADI.Vistas.Usuarios
                 return null;
             }
         }
-      
         private DataTable Departamentos()
         {
             return null;
