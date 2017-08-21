@@ -221,7 +221,7 @@ namespace SADI.UserControls
             get { return _usuario.SubFondo.Id; }
         }
         #endregion
-
+        
         /// <summary>
         /// Constructor de la Clase
         /// </summary>
@@ -344,7 +344,7 @@ namespace SADI.UserControls
             if (TemasT.Rows.Count > 0)//Verificar si cuenta con registros
             {
                 //SI centa con registros
-                if ((int)TemasT.Rows[0][0] == 0) { cboTema.Enabled = true; }//Habilitar el Combo
+                if ((int)TemasT.Rows[0][0] == 0) { cboTema.Enabled = false; }//Habilitar el Combo
                 else { cboTema.Enabled = true; }//Habilitar el Combo
                 cboTema.DataSource = TemasT;//Indicarle las fuente de la Información
                 cboTema.ValueMember = TemasT.Columns[0].ColumnName;//Valor del registro

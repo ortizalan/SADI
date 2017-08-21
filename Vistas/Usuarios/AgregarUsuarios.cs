@@ -210,11 +210,15 @@ namespace SADI.Vistas.Usuarios
         /// </summary>
         private void usrCtrl_cboDepartamentosChange(object sender, EventArgs e)
         {
-            dm.SubFondo.Id = usrCtrl.IdSubFondo;
+            amm.SubFondo.Id = usrCtrl.IdSubFondo;
+            amm.DepartamentoId.Id = usrCtrl.IdDepartamento;
 
-            if(dc.SeleccionarDepartamentoXsubFondo(dm))
+            if(amc.SeleccionarAreaMedicaXdepartamento(amm))
             {
-                usrCtrl.Departamentos = dc.Tabla;
+                usrCtrl.AreasMedicas = amc.Tabla;
+                usrCtrl_cboAreasMedicasChange(sender,e);
+                usrCtrl_cboSubAreasChange(sender, e);
+                usrCtrl_cboServiciosChange(sender, e);
             }
             else
             {
@@ -229,12 +233,15 @@ namespace SADI.Vistas.Usuarios
         /// </summary>
         private void usrCtrl_cboAreasMedicasChange(object sender, EventArgs e)
         {
-            amm.SubFondo.Id = usrCtrl.IdSubFondo;
-            amm.DepartamentoId.Id = usrCtrl.IdDepartamento;
+            sam.SubFondo.Id = usrCtrl.IdSubFondo;
+            sam.DepartamentoId.Id = usrCtrl.IdDepartamento;
+            sam.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
 
-            if(amc.SeleccionarAreaMedicaXdepartamento(amm))
+            if(sac.SeleccionarSubAreaXSubFondoAreaDepartamentoArea(sam))
             {
-                usrCtrl.AreasMedicas = amc.Tabla;
+                usrCtrl.SubAreas = sac.Tabla;
+                usrCtrl_cboSubAreasChange(sender, e);
+                usrCtrl_cboServiciosChange(sender, e);
             }
             else
             {
@@ -249,13 +256,15 @@ namespace SADI.Vistas.Usuarios
         /// </summary>
         private void usrCtrl_cboSubAreasChange(object sender, EventArgs e)
         {
-            sam.SubFondo.Id = usrCtrl.IdSubFondo;
-            sam.DepartamentoId.Id = usrCtrl.IdDepartamento;
-            sam.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
+            sem.SubFondo.Id = usrCtrl.IdSubFondo;
+            sem.DepartamentoId.Id = usrCtrl.IdDepartamento;
+            sem.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
+            sem.SubAreaId.Id = usrCtrl.IdSubAreaMedica;
             
-            if(sac.SeleccionarSubAreaXSubFondoAreaDepartamentoArea(sam))
+            if(sec.SeleccionarSeccionXSubFondoDeptoAreaSubArea(sem))
             {
-                usrCtrl.SubAreas = sac.Tabla;
+                usrCtrl.Servicios = sec.Tabla;
+                usrCtrl_cboServiciosChange(sender, e);
             }
             else
             {
@@ -269,21 +278,7 @@ namespace SADI.Vistas.Usuarios
         /// </summary>
         private void usrCtrl_cboServiciosChange(object sender, EventArgs e)
         {
-            sem.SubFondo.Id = usrCtrl.IdSubFondo;
-            sem.DepartamentoId.Id = usrCtrl.IdDepartamento;
-            sem.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
-            sem.SubAreaId.Id = usrCtrl.IdSubAreaMedica;
-
-            if(sec.SeleccionarSeccionXSubFondoDeptoAreaSubArea(sem))
-            {
-                usrCtrl.Servicios = sec.Tabla;
-            }
-            else
-            {
-                MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" + sec.Error.ToUpper(),
-                    ":: mensaje desde agregar usuario ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            usrCtrl.Servicios = sec.Tabla;
         }
     }
 }
