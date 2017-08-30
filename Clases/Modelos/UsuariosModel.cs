@@ -28,6 +28,10 @@ namespace SADI.Clases.Modelos {
         private FondosModel _fondo = new FondosModel();
         private SubFondosModel _subfondo = new SubFondosModel();
         private UnidadesAdmvasModel _unidadAdmva = new UnidadesAdmvasModel();
+        private DepartamentosModel _departamento = new DepartamentosModel();
+        private AreasMedicasModel _areamedica = new AreasMedicasModel();
+        private SubAreasModel _subarea = new SubAreasModel();
+        private ServiciosModel _servicio = new ServiciosModel();
 		private string _materno;
 		private string _nombre;
 		private string _paterno;
@@ -135,6 +139,26 @@ namespace SADI.Clases.Modelos {
         {
             get { return _unidadAdmva; }set { _unidadAdmva = value; }
         }
+        /// <summary>
+        /// Acceso a la Propiedad Departamento
+        /// </summary>
+        public DepartamentosModel Departamento
+        { get { return _departamento; } set { _departamento = value; } }
+        /// <summary>
+        /// Acceso a la Propiedad Area Médica
+        /// </summary>
+        public AreasMedicasModel AreaMedica
+        { get { return _areamedica; } set { _areamedica = value; } }
+        /// <summary>
+        /// Acceso a la Propiedad SubArea Médica
+        /// </summary>
+        public SubAreasModel SubArea
+        { get { return _subarea; } set { _subarea = value; } }
+        /// <summary>
+        /// Acceso a la Propiedad Servicio
+        /// </summary>
+        public ServiciosModel Servicio
+        { get { return _servicio; } set { _servicio = value; } }
         /// <summary>
         /// Acceso a la Propiedad Email
         /// </summary>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class DepartamentosModel
+    public class DepartamentosModel
     {
         private int _id; //Identificador del Modelo
         private SubFondosModel _subfondo = new SubFondosModel();//Identificador del SubFondo

@@ -128,6 +128,11 @@ namespace SADI.Vistas.Usuarios
             um.Jerarquia.Id = usrCtrl.IdJerarquia;
             um.SubFondo.Id = usrCtrl.IdSubFondo;
             um.Fondo.Id = 63;
+            um.Departamento.Id = usrCtrl.IdDepartamento;
+            um.AreaMedica.Id = usrCtrl.IdAreaMedica;
+            um.SubArea.Id = usrCtrl.IdSubAreaMedica;
+            um.Servicio.Id = usrCtrl.IdServicios;
+            um.Estatus = true;
         }
         /// <summary>
         /// Agregar el Usuario a la Lista
@@ -194,7 +199,10 @@ namespace SADI.Vistas.Usuarios
         private void usrCtrl_cboSubFondosChange(object sender, EventArgs e)
         {
             dm.SubFondo.Id = usrCtrl.IdSubFondo;
-            if(dc.SeleccionarDepartamentoXsubFondo(dm))
+
+            lblSubFondo.Text = dm.SubFondo.Id.ToString();
+
+            if (dc.SeleccionarDepartamentoXsubFondo(dm))
             {
                 usrCtrl.Departamentos = dc.Tabla;
             }
@@ -212,7 +220,8 @@ namespace SADI.Vistas.Usuarios
         {
             amm.SubFondo.Id = usrCtrl.IdSubFondo;
             amm.DepartamentoId.Id = usrCtrl.IdDepartamento;
-
+            lblSubFondo.Text = amm.SubFondo.Id.ToString();
+            lblDepartamento.Text = amm.DepartamentoId.Id.ToString();
             if(amc.SeleccionarAreaMedicaXdepartamento(amm))
             {
                 usrCtrl.AreasMedicas = amc.Tabla;
@@ -237,6 +246,10 @@ namespace SADI.Vistas.Usuarios
             sam.DepartamentoId.Id = usrCtrl.IdDepartamento;
             sam.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
 
+            lblSubFondo.Text = sam.SubFondo.Id.ToString();
+            lblDepartamento.Text = sam.DepartamentoId.Id.ToString();
+            lblAreaMedica.Text = sam.AreaMedicaId.Id.ToString();
+
             if(sac.SeleccionarSubAreaXSubFondoAreaDepartamentoArea(sam))
             {
                 usrCtrl.SubAreas = sac.Tabla;
@@ -260,7 +273,12 @@ namespace SADI.Vistas.Usuarios
             sem.DepartamentoId.Id = usrCtrl.IdDepartamento;
             sem.AreaMedicaId.Id = usrCtrl.IdAreaMedica;
             sem.SubAreaId.Id = usrCtrl.IdSubAreaMedica;
-            
+
+            lblSubFondo.Text = sem.SubFondo.Id.ToString();
+            lblDepartamento.Text = sem.DepartamentoId.Id.ToString();
+            lblAreaMedica.Text = sem.AreaMedicaId.Id.ToString();
+            lblSubArea.Text = sem.SubAreaId.Id.ToString();
+
             if(sec.SeleccionarSeccionXSubFondoDeptoAreaSubArea(sem))
             {
                 usrCtrl.Servicios = sec.Tabla;

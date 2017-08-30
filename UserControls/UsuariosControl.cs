@@ -256,7 +256,25 @@ namespace SADI.UserControls
                                     {
                                         if (Utilerias.ValidarEmail(txtEmail.Text))// Validar que sea válida la dirección de correo electrónico
                                         {
-                                            return true;// Todos los campos validos
+                                            if(_idSubFondo >0)//Validar que esté seleccionado algún subfondo
+                                            {
+                                                if(_idDepartamento > 0)//Validar que esté seleccionado algún departamento
+                                                {
+                                                    return true;
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("selecciones un departamento.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                    cboDepartamento.SelectedIndex = 0;
+                                                    return false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("selecciones un sunfondo.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                cboSubFondo.SelectedIndex = 0;
+                                                return false;
+                                            }
                                         }
                                         else
                                         {
@@ -669,17 +687,23 @@ namespace SADI.UserControls
         {
             if (cboDepartamentosChange != null)
             {
-                if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
+                if (cboDepartamento.SelectedValue != null)
                 {
-                    _idDepartamento = (int)cboDepartamento.SelectedValue;
-                    cboDepartamentosChange(this, e);
+                    if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
+                    {
+                        _idDepartamento = (int)cboDepartamento.SelectedValue;
+                        cboDepartamentosChange(this, e);
+                    }
                 }
             }
             else
             {
-                if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
+                if (cboDepartamento.SelectedValue != null)
                 {
-                    _idDepartamento = (int)cboDepartamento.SelectedValue;
+                    if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
+                    {
+                        _idDepartamento = (int)cboDepartamento.SelectedValue;
+                    }
                 }
             }
         }

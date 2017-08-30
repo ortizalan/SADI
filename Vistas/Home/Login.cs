@@ -21,11 +21,14 @@ namespace SADI.Vistas.Home
         UsuariosController uc = new UsuariosController();
         UsuariosModel um = new UsuariosModel();
 
+        /// <summary>
+        /// Constructor de la Clase
+        /// </summary>
         public Login()
         {
             InitializeComponent();
         }
-
+        //Salir del Sistema
         private void cmdOUT_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -42,7 +45,7 @@ namespace SADI.Vistas.Home
                     {
                         if (uc.obtenerId_Estatus(um))
                         {
-                            if ((bool)uc.Tabla.Rows[0][1])
+                            if ((bool)uc.Tabla.Rows[0][14])
                             {
                                 Utilerias.IdUsuario = (int)uc.Tabla.Rows[0][0];
                                 this.DialogResult = DialogResult.OK;

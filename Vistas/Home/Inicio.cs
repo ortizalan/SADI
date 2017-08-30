@@ -31,6 +31,7 @@ namespace SADI
         public Inicio(UsuariosModel u)
         {
             InitializeComponent();
+            um = u;
         }
         private void Inicio_Load(object sender, EventArgs e)
         {
@@ -58,17 +59,21 @@ namespace SADI
             {
                 if (uc.Tabla.Rows.Count > 0)// SI trae el registro
                 {
+                    um.Id = (int)uc.Tabla.Rows[0][0];
                     um.Usuario = (string)uc.Tabla.Rows[0][1];
+                    um.Contraseña = (string)uc.Tabla.Rows[0][2];
                     um.Nombre = (string)uc.Tabla.Rows[0][3];
                     um.Paterno = (string)uc.Tabla.Rows[0][4];
                     um.Materno = (string)uc.Tabla.Rows[0][5];
                     um.Fondo.Id = (int)uc.Tabla.Rows[0][6];
                     um.SubFondo.Id = (int)uc.Tabla.Rows[0][7];
-                    um.UnidadAdmva.Id = (int)uc.Tabla.Rows[0][8];
-                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][9];
-                    um.Email = (string)uc.Tabla.Rows[0][10];
-                    um.Estatus = (bool)uc.Tabla.Rows[0][11];
-                    um.Atributos = (bool)uc.Tabla.Rows[0][12];
+                    um.Departamento.Id = (int)uc.Tabla.Rows[0][8];
+                    um.AreaMedica.Id = (int)uc.Tabla.Rows[0][9];
+                    um.SubArea.Id = (int)uc.Tabla.Rows[0][10];
+                    um.Servicio.Id = (int)uc.Tabla.Rows[0][11];
+                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][12];
+                    um.Email = (string)uc.Tabla.Rows[0][13];
+                    um.Estatus = (bool)uc.Tabla.Rows[0][14];
                 }
             }
             else// No se pudo realizar la COnsulta

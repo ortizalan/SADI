@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class ServiciosModel : SubAreasModel
+    public class ServiciosModel : SubAreasModel
     {
         private SubAreasModel _subarea = new SubAreasModel();//Propiedad de SubAreasModel
         private string _servicio;//Descripción del registro del modelo

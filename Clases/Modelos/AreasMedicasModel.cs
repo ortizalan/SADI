@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    class AreasMedicasModel : DepartamentosModel
+    public class AreasMedicasModel : DepartamentosModel
     {
         private DepartamentosModel _departamento = new DepartamentosModel();//Propiedad del DepartamentoModel
         private string _areamedica;// Descripción del Registro del Modelo
