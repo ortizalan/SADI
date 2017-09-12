@@ -51,7 +51,7 @@ namespace SADI.Vistas.SerieDocumental
             LLenarControl();
             SerieControlEventArgs ev = new SerieControlEventArgs { Opcion = 1 };
             ctrlSerieDocumental.SerieDocumental_Load(u,ev);
-            LLenarControl();
+            //LLenarControl();
             ctrlSerieDocumental.cboSeccionCambioValor += new EventHandler(ctrlSerieDocumental_cboSeccionCambioValor);
             ctrlSerieDocumental.cboSerieCambioValor += new EventHandler(ctrlSerieDocumental_cboSerieCambioValor);
             ctrlSerieDocumental.CargaDeControl += new EventHandler(ctrlSerieDocumentl_CargaControl);
@@ -102,15 +102,24 @@ namespace SADI.Vistas.SerieDocumental
         {
             if (secc.ConsultarSeccionesXusuario(am))
             {
-                if(secc.Tabla.Rows.Count > 0)
+                if (secc.Tabla.Rows.Count > 0)
                 {
                     ctrlSerieDocumental.SeccionesT = secc.Tabla;
                 }
                 else
                 {
-                    MessageBox.Show("secciones");
+                    MessageBox.Show("no existen registros para la búsqueda de series.".ToUpper(),":: mesnaje desde la consulta de serie ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + secc.Error,
+                    ":: mensae desde la consulta de la serie ::".ToUpper(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+            /////
             if(!string.IsNullOrEmpty(ctrlSerieDocumental.Seccion.Id))
             {
                 am.Seccion.Id = ctrlSerieDocumental.Seccion.Id;

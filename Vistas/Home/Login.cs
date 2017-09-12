@@ -45,7 +45,7 @@ namespace SADI.Vistas.Home
                     {
                         if (uc.obtenerId_Estatus(um))
                         {
-                            if ((bool)uc.Tabla.Rows[0][14])
+                            if ((bool)uc.Tabla.Rows[0][1])
                             {
                                 Utilerias.IdUsuario = (int)uc.Tabla.Rows[0][0];
                                 this.DialogResult = DialogResult.OK;

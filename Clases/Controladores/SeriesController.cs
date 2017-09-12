@@ -229,15 +229,19 @@ namespace SADI.Clases.Controladores
 
                 var s = (SeriesModel)o;//Castear la variable "s" al tipo del Modelo
 
+                string proce = "sp_combos_usuarios_atributos";//NOmbre del procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista de parámetros
+                lista.Add(new Parametros(@"opc", "4"));//Opción a Ejecutar en el procedimiento
+                lista.Add(new Parametros(@"usr", string.Empty));//Vacío
+                lista.Add(new Parametros(@"sec", s.Seccion.Id));//Indicarle la Sección 
+                lista.Add(new Parametros(@"ser", string.Empty));//Vacío
+
                 if (Abrir())//Intentar abrir la Conexión
                 {
                     //Intento Exitoso
                     try
                     {
-                        //Sentencia SQL
-                        string sente = "select * from Series where seccion = '" + s.Seccion.Id + "' order by Serie";
-
-                        if (ConsultarSentenciaSQL(sente))//Realizar la consulta por medio de Sentica
+                        if (ConsultarProcedimiento(proce,lista))//Realizar la consulta por medio de Sentica
                         { return true; }//Consulta Exitosa
                         else
                         { return false; }//Consulta NO Exitosa, Consultar Error

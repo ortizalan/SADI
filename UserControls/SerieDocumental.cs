@@ -45,7 +45,7 @@ namespace SADI.UserControls
         private string _consecutivo;//Propiedad del Consecutivo de la Serie Documental
         #endregion
 
-        #region Eventos 
+        #region Eventos Públicos
 
         public event EventHandler cboSeccionCambioValor;//Manejar Evento cboSeccionChangedValue
         public event EventHandler cboSerieCambioValor;//Manejar Evento dboSeriesChangedValue
@@ -60,7 +60,7 @@ namespace SADI.UserControls
         public DataTable SeccionesT
         {
             get { return _seccionest; }
-            set { _seccionest = value; }
+            set { _seccionest = value; LLenarComboSecciones(); }
         }
         /// <summary>
         /// Tabla con el Registro de las Series de la Sección
@@ -384,7 +384,7 @@ namespace SADI.UserControls
         {
             _seriedoctal = (_usuario.Fondo.Id.ToString().Length == 1 ? "0" + _usuario.Fondo.Id.ToString() : _usuario.Fondo.Id.ToString()) + ".";
             _seriedoctal += (_usuario.SubFondo.Id.ToString().Length == 1 ? "0" + _usuario.SubFondo.Id.ToString() : _usuario.SubFondo.Id.ToString()) + ".";
-            _seriedoctal += (_usuario.UnidadAdmva.Id.ToString().Length == 1 ? "0" + _usuario.UnidadAdmva.Id.ToString() : _usuario.UnidadAdmva.Id.ToString()) + ".";
+            _seriedoctal += (_usuario.Departamento.Id.ToString().Length == 1 ? "0" + _usuario.Departamento.Id.ToString() : _usuario.Departamento.Id.ToString()) + ".";
             _seriedoctal += (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeccion.SelectedValue.ToString() : "XX") + ".";
             _seriedoctal += (cboSeries.SelectedValue != null ? (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeries.SelectedValue.ToString() : "XX"):"XX" )+ ".";
             _seriedoctal += Consecutivo() + ".";
@@ -632,7 +632,7 @@ namespace SADI.UserControls
             }
             else
             {
-                return (string.IsNullOrEmpty(GetConsecutivo())?"0000":GetConsecutivo());
+                return (string.IsNullOrEmpty(GetConsecutivo())?"0001":GetConsecutivo());
             }
         }
         /// <summary>
@@ -650,8 +650,8 @@ namespace SADI.UserControls
             else//Intento NO Exitoso
             {
                 MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" +
-                    rc.Error.ToUpper(), ":: mensaje decontrol serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
-                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    rc.Error.ToUpper(), ":: mensaje de control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 

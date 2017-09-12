@@ -266,7 +266,7 @@ namespace SADI.Clases.Controladores
 
                 string proce = "sp_combos_usuarios_atributos";//Nombre del procedimiento
                 List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
-                lista.Add(new Parametros(@"opc", "4"));//OPción a ejecutar dentro del procedimiento
+                lista.Add(new Parametros(@"opc", "5"));//OPción a ejecutar dentro del procedimiento
                 lista.Add(new Parametros(@"usr", string.Empty));//Identificador del Usuario
                 lista.Add(new Parametros(@"sec", t.Seccion.Id));//Identificador de la Sección
                 lista.Add(new Parametros(@"ser", t.Serie.Id.ToString()));//Identificador de la serie

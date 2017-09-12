@@ -35,8 +35,8 @@ namespace SADI
         }
         private void Inicio_Load(object sender, EventArgs e)
         {
-            //um.Id = Utilerias.IdUsuario;
-            um.Id = 9;
+            um.Id = Utilerias.IdUsuario;
+            //um.Id = 9;
             this.llenarObjetoUsuario();
             this.Text = "..:: Sistame de Adminitración Arcivística ISSSTESON ::..";
             this.Text += "\t" + "Usuario :" + um.Nombre + " " + um.Paterno + " " + um.Materno;
@@ -59,7 +59,7 @@ namespace SADI
             {
                 if (uc.Tabla.Rows.Count > 0)// SI trae el registro
                 {
-                    um.Id = (int)uc.Tabla.Rows[0][0];
+                    //um.Id = (int)uc.Tabla.Rows[0][0];
                     um.Usuario = (string)uc.Tabla.Rows[0][1];
                     um.Contraseña = (string)uc.Tabla.Rows[0][2];
                     um.Nombre = (string)uc.Tabla.Rows[0][3];
