@@ -59,6 +59,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtConsecutivo = new System.Windows.Forms.TextBox();
             this.chkConsecutivo = new System.Windows.Forms.CheckBox();
+            this.chkAddTema = new System.Windows.Forms.CheckBox();
+            this.chkDigitalizado = new System.Windows.Forms.CheckBox();
             this.gpoCrearSerieDoctal.SuspendLayout();
             this.gpoDetallesDoc.SuspendLayout();
             this.gpoCveSevi.SuspendLayout();
@@ -292,7 +294,7 @@
             // 
             this.chkStatus.AutoSize = true;
             this.chkStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStatus.Location = new System.Drawing.Point(8, 485);
+            this.chkStatus.Location = new System.Drawing.Point(8, 516);
             this.chkStatus.Name = "chkStatus";
             this.chkStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.chkStatus.Size = new System.Drawing.Size(139, 19);
@@ -304,7 +306,7 @@
             // 
             this.txtOtraInfo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOtraInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOtraInfo.Location = new System.Drawing.Point(501, 366);
+            this.txtOtraInfo.Location = new System.Drawing.Point(501, 399);
             this.txtOtraInfo.Multiline = true;
             this.txtOtraInfo.Name = "txtOtraInfo";
             this.txtOtraInfo.Size = new System.Drawing.Size(378, 112);
@@ -314,7 +316,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(495, 346);
+            this.label10.Location = new System.Drawing.Point(495, 379);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(154, 15);
             this.label10.TabIndex = 16;
@@ -324,7 +326,7 @@
             // 
             this.txtDescExpe.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtDescExpe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescExpe.Location = new System.Drawing.Point(8, 366);
+            this.txtDescExpe.Location = new System.Drawing.Point(8, 399);
             this.txtDescExpe.Multiline = true;
             this.txtDescExpe.Name = "txtDescExpe";
             this.txtDescExpe.Size = new System.Drawing.Size(475, 112);
@@ -334,7 +336,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(5, 346);
+            this.label8.Location = new System.Drawing.Point(5, 379);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(191, 15);
             this.label8.TabIndex = 14;
@@ -346,7 +348,7 @@
             this.txtNombreExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombreExp.Location = new System.Drawing.Point(8, 308);
             this.txtNombreExp.Name = "txtNombreExp";
-            this.txtNombreExp.Size = new System.Drawing.Size(433, 20);
+            this.txtNombreExp.Size = new System.Drawing.Size(410, 20);
             this.txtNombreExp.TabIndex = 13;
             // 
             // label7
@@ -404,10 +406,37 @@
             this.chkConsecutivo.UseVisualStyleBackColor = true;
             this.chkConsecutivo.CheckedChanged += new System.EventHandler(this.chkConsecutivo_CheckedChanged);
             // 
+            // chkAddTema
+            // 
+            this.chkAddTema.AutoSize = true;
+            this.chkAddTema.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAddTema.Location = new System.Drawing.Point(424, 310);
+            this.chkAddTema.Name = "chkAddTema";
+            this.chkAddTema.Size = new System.Drawing.Size(105, 17);
+            this.chkAddTema.TabIndex = 20;
+            this.chkAddTema.Text = "Agregar Tema";
+            this.chkAddTema.UseVisualStyleBackColor = true;
+            this.chkAddTema.CheckedChanged += new System.EventHandler(this.chkAddTema_CheckedChanged);
+            // 
+            // chkDigitalizado
+            // 
+            this.chkDigitalizado.AutoSize = true;
+            this.chkDigitalizado.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDigitalizado.Location = new System.Drawing.Point(8, 346);
+            this.chkDigitalizado.Name = "chkDigitalizado";
+            this.chkDigitalizado.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.chkDigitalizado.Size = new System.Drawing.Size(193, 19);
+            this.chkDigitalizado.TabIndex = 21;
+            this.chkDigitalizado.Text = "Tiene Archivo Digitalizado";
+            this.chkDigitalizado.UseVisualStyleBackColor = true;
+            this.chkDigitalizado.CheckedChanged += new System.EventHandler(this.chkDigitalizado_CheckedChanged);
+            // 
             // SerieDocumental
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkDigitalizado);
+            this.Controls.Add(this.chkAddTema);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.chkStatus);
             this.Controls.Add(this.txtOtraInfo);
@@ -421,7 +450,7 @@
             this.Controls.Add(this.gpoDetallesDoc);
             this.Controls.Add(this.gpoCrearSerieDoctal);
             this.Name = "SerieDocumental";
-            this.Size = new System.Drawing.Size(890, 508);
+            this.Size = new System.Drawing.Size(890, 540);
             this.gpoCrearSerieDoctal.ResumeLayout(false);
             this.gpoCrearSerieDoctal.PerformLayout();
             this.gpoDetallesDoc.ResumeLayout(false);
@@ -470,5 +499,7 @@
         private System.Windows.Forms.TextBox txtConsecutivo;
         private System.Windows.Forms.CheckBox chkConsecutivo;
         private System.Windows.Forms.Label lblSerieDoctal;
+        private System.Windows.Forms.CheckBox chkAddTema;
+        private System.Windows.Forms.CheckBox chkDigitalizado;
     }
 }

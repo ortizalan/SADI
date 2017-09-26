@@ -258,8 +258,16 @@ namespace SADI.Clases.Controladores {
                     c += 1;// Aumentar el contador
                 }
 
-                string proce = "";//Nombre del Procedimiento
+                string proce = "sp_registros_seleccion";//Nombre del Procedimiento
                 List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
+                lista.Add(new Parametros(@"opc", "1"));
+                lista.Add(new Parametros(@"fondo", code[0]));
+                lista.Add(new Parametros(@"subfondo", code[1]));
+                lista.Add(new Parametros(@"departamento", code[2]));
+                lista.Add(new Parametros(@"seccion", code[3]));
+                lista.Add(new Parametros(@"serie", code[4]));
+                lista.Add(new Parametros(@"consecutivo", string.Empty));
+                lista.Add(new Parametros(@"año", r.FechaInicio.Year.ToString()));
 
                 if (Abrir())//Intentar abrir la conexión
                 {

@@ -33,7 +33,8 @@ namespace SADI.Clases
         protected Conexion()
         {
             // Parámetros de la Conexión protegidos en la Librería DatosBD
-            _connection = new SqlConnection("Server =" + DatosUsuarios.Servidor + "; Initial Catalog =" + DatosUsuarios.BaseDeDatos + ";Persist Security Info=False;Integrated Security=true;");
+            _connection = new SqlConnection("Server =" + DatosUsuarios.Servidor + "; Initial Catalog =" + 
+                DatosUsuarios.BaseDeDatos + ";Persist Security Info=False;Integrated Security=true;");
         }
         /// <summary>
         /// Destructor de la Clase
@@ -42,8 +43,35 @@ namespace SADI.Clases
         {
 
         }
+       
         /// <summary>
-        /// Método Público para Establecer la Conexión a la Base de Datos
+        /// Acceder de manera interna al Adaptador
+        /// </summary>
+        private SqlDataAdapter Adapter
+        {
+            get { return _adapter; }
+            set { _adapter = value; }
+        }
+        
+        /// <summary>
+        /// Acceder de manera interna al comando
+        /// </summary>
+        private SqlCommand Command
+        {
+            get { return _command; }
+            set { _command = value; }
+        }
+
+        /// <summary>
+        /// Acceder de manera interna a la Conexion
+        /// </summary>
+        private SqlConnection Connection
+        {
+            get { return _connection; }
+        }
+
+        /// <summary>
+        /// Función Público para Establecer la Conexión a la Base de Datos
         /// </summary>
         /// <returns>valor Boleano</returns>
         protected bool Abrir()
@@ -64,14 +92,7 @@ namespace SADI.Clases
             else
             { return false; }// No está cerrada la conexión 
         }
-        /// <summary>
-        /// Acceder de manera interna al Adaptador
-        /// </summary>
-        private SqlDataAdapter Adapter
-        {
-            get { return _adapter; }
-            set { _adapter = value; }
-        }
+
         /// <summary>
         /// Método Público para Cerrar la Coenxión de la Base de Datos
         /// </summary>
@@ -92,22 +113,6 @@ namespace SADI.Clases
             }
             else
             { return false; }
-        }
-        /// <summary>
-        /// Acceder de manera interna al comando
-        /// </summary>
-        private SqlCommand Command
-        {
-            get { return _command; }
-            set { _command = value; }
-        }
-
-        /// <summary>
-        /// Acceder de manera interna a la Conexion
-        /// </summary>
-        private SqlConnection Connection
-        {
-            get { return _connection; }
         }
 
         /// <summary>

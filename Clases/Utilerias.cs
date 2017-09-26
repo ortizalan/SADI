@@ -130,6 +130,16 @@ namespace SADI.Clases
             }
         }
         /// <summary>
+        /// Función para convertir arreglo de bytes a Base64String
+        /// </summary>
+        /// <param name="bytes">Documento en Arreglo de Bytes</param>
+        /// <returns>string</returns>
+        public static string BytesToBase64(byte[] bytes)
+        {
+            string result = Convert.ToBase64String(bytes);
+            return result;
+        }
+        /// <summary>
         /// Función para Convertir una Cadena a Imagen
         /// </summary>
         /// <param name="base46string">Imagen convertida en Cadena</param>
@@ -144,6 +154,16 @@ namespace SADI.Clases
                 Image imagen = Image.FromStream(ms, true);
                 return imagen;
             }
+        }
+        /// <summary>
+        /// Función para convertis Base64String a Bytes
+        /// </summary>
+        /// <param name="bytes">cadena a convertir</param>
+        /// <returns>byte[]</returns>
+        public static byte[] Base64ToBytes(string bytes)
+        {
+            byte[] byts = Convert.FromBase64String(bytes);
+            return byts;
         }
         /// <summary>
         /// Función para darle un Cierto Formato al DataGrid

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +18,11 @@ namespace SADI.UserControls
 {
     public partial class SerieDocumental : UserControl
     {
+        
+
         #region Propiedades
         private int opc;// -- 1) Ingresar -- 2)Editar -- 3)Detalle
+        private DigitalizacionesModel dm = new DigitalizacionesModel();//Instancia del Objeto Digitalizaciones
         private RegistrosModel rm = new RegistrosModel();//Instancia del Modelo de Registro
         private RegistrosController rc = new RegistrosController();//Instancia del Controlador del Registro
         private UsuariosModel _usuario = new UsuariosModel();//Instancia de UsuariosModel
@@ -43,6 +48,13 @@ namespace SADI.UserControls
         private string _seriedoctal;//Propiedad de la SerieDocumental;
         private string _cvesevi;//Propiedad d ela clave SEVI
         private string _consecutivo;//Propiedad del Consecutivo de la Serie Documental
+        private bool _agregarTema;//Propiedad para indicar si se vá a agregar un tema
+        private bool _digitalizado;// Propiedad para Verificar si Exiten Documentos Digitalizados
+        private string _extension;
+        private byte[] _documento;
+        /// 
+        /// 
+        private OpenFileDialog _ofd;//
         #endregion
 
         #region Eventos Públicos
@@ -94,6 +106,11 @@ namespace SADI.UserControls
             get { return _valorDoctalt; }
             set { _valorDoctalt = value; }
         }
+        /// <summary>
+        /// Acceder al Objeto DigitalizacionModel
+        /// </summary>
+        public DigitalizacionesModel Digitalizacion
+        { get { return dm; } set { dm = value; } }
         /// <summary>
         /// Acceder al Obento SeccionesModel
         /// </summary>
@@ -220,14 +237,47 @@ namespace SADI.UserControls
         {
             get { return _usuario.SubFondo.Id; }
         }
+        /// <summary>
+        /// Indicar si se vá a agregar tema o no
+        /// </summary>
+        public bool AgregarTema
+        {
+            get { return _agregarTema; }
+            set
+            {
+                _agregarTema = value;
+                if (value)
+                { chkAddTema.Checked = true; }
+                else { chkAddTema.Checked = false; }
+            }
+        }
+        /// <summary>
+        /// Acceso a la Propiedad Digitalizado
+        /// </summary>
+        public bool Digitalizado
+        { get { return _digitalizado; } set { _digitalizado = value; chkDigitalizado.Checked = value; } }
+        /// <summary>
+        /// Acceder a la Propiedad Formato
+        /// </summary>
+        public string Extension
+        { get { return _extension; } set { _extension = value; } }
+        /// <summary>
+        /// Acceder a la propiedad Documento
+        /// </summary>
+        public byte[] Documento
+        {
+            get { return _documento; }
+            set { _documento = value; }
+        }
         #endregion
-        
+
         /// <summary>
         /// Constructor de la Clase
         /// </summary>
         public SerieDocumental()
         {
             InitializeComponent();
+            FechaSerie = dtpFecha.Value;
         }
 
         #region Métdos Internos
@@ -266,9 +316,11 @@ namespace SADI.UserControls
             if (SeccionesT.Rows.Count > 0)//Verificar que existen registros
             {
                 //Si existen Registros
+
                 cboSeccion.DataSource = SeccionesT;//
                 cboSeccion.ValueMember = SeccionesT.Columns[0].ColumnName;//
                 cboSeccion.DisplayMember = SeccionesT.Columns[1].ColumnName;//
+
             }
             else//No existen Registros
             {
@@ -386,10 +438,11 @@ namespace SADI.UserControls
             _seriedoctal += (_usuario.SubFondo.Id.ToString().Length == 1 ? "0" + _usuario.SubFondo.Id.ToString() : _usuario.SubFondo.Id.ToString()) + ".";
             _seriedoctal += (_usuario.Departamento.Id.ToString().Length == 1 ? "0" + _usuario.Departamento.Id.ToString() : _usuario.Departamento.Id.ToString()) + ".";
             _seriedoctal += (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeccion.SelectedValue.ToString() : "XX") + ".";
-            _seriedoctal += (cboSeries.SelectedValue != null ? (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeries.SelectedValue.ToString() : "XX"):"XX" )+ ".";
+            _seriedoctal += (cboSeries.SelectedValue != null ? (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeries.SelectedValue.ToString() : "00") : "00") + ".";
             _seriedoctal += Consecutivo() + ".";
             _seriedoctal += dtpFecha.Value.Year.ToString();
             NumeroSerieDocumental = _seriedoctal;
+            
         }
 
         #endregion
@@ -472,6 +525,22 @@ namespace SADI.UserControls
             if (cboTema.SelectedValue.ToString() != "System.Data.DataRowView")
             {
                 Tema.Id = (int)cboTema.SelectedValue;
+                if (TemasT.Rows.Count > 0)
+                {
+                    txtNombreExp.Enabled = false;
+                    if (cboTema.Text != "System.Data.DataRowView")
+                    {
+                        NombreExpediente = cboTema.Text;
+                        txtNombreExp.Text = NombreExpediente;
+                        chkAddTema.Checked = false;
+                    }
+                }
+                else
+                {
+                    txtNombreExp.Text = string.Empty;
+                    NombreExpediente = string.Empty;
+                    txtNombreExp.Enabled = true;
+                }
             }
         }
         /// <summary>
@@ -632,19 +701,22 @@ namespace SADI.UserControls
             }
             else
             {
-                return (string.IsNullOrEmpty(GetConsecutivo())?"0001":GetConsecutivo());
+                return (GetConsecutivo() ? "0001" : _consecutivo);
             }
         }
         /// <summary>
         /// Obtener el Consecutivo de la Serie Documental
         /// </summary>
         /// <returns></returns>
-        public string GetConsecutivo()
+        public bool GetConsecutivo()
         {
             rm.SerieDoctal = NumeroSerieDocumental;
+            rm.FechaInicio = FechaSerie;
 
             if (rc.ConsecutivoRegistroSeries(rm))//Intentar la Consulta del Procedimiento
             {
+                _consecutivo = "0000";
+                return true;
 
             }
             else//Intento NO Exitoso
@@ -652,10 +724,8 @@ namespace SADI.UserControls
                 MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" +
                     rc.Error.ToUpper(), ":: mensaje de control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
+                return false;
             }
-
-            return string.Empty;
         }
         #endregion
 
@@ -688,7 +758,7 @@ namespace SADI.UserControls
 
         private void chkConsecutivo_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkConsecutivo.Checked)//Verificar si está seleccionado
+            if (chkConsecutivo.Checked)//Verificar si está seleccionado
             {
                 //Si lo está
                 txtConsecutivo.Enabled = true;
@@ -704,6 +774,55 @@ namespace SADI.UserControls
         private void txtConsecutivo_TextChanged(object sender, EventArgs e)
         {
             ActualizarSerieDocumental();
+        }
+        ///<summary>
+        /// Cambio del valor del CheckBox Agregar Tema
+        ///</summary>
+        private void chkAddTema_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAddTema.Checked)
+            {
+                if (_temast.Rows.Count > 0)
+                {
+                    txtNombreExp.Enabled = true;
+                    txtNombreExp.Text = string.Empty;
+                    cboTema.Enabled = false;
+                }
+            }
+            else
+            {
+                txtNombreExp.Enabled = false;
+                if (_temast.Rows.Count < 1)
+                {
+                    cboTema.Enabled = true;
+                }
+            }
+        }
+        /// <summary>
+        /// Método para indicar si la serie cuenta con archivo Digitalizado
+        /// </summary>
+        private void chkDigitalizado_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkDigitalizado.Checked)
+            {
+                _ofd = new OpenFileDialog();
+                _ofd.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|PDF Files(*.pdf)|*.pdf";
+                _ofd.Title = "eliga archivo a guardar".ToUpper();
+                if(_ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Digitalizacion.Extension = Path.GetExtension(_ofd.FileName);
+                    Digitalizacion.Documento = File.ReadAllBytes(_ofd.FileName);
+                    Digitalizacion.NombreDoc = Path.GetFileName(_ofd.FileName);
+                    Digitalizacion.Tamaño = Digitalizacion.Documento.Length;
+                    Digitalizacion.Folio = 0;
+                }
+            }
+            else
+            {
+
+            }
+
+            _digitalizado = chkDigitalizado.Checked;//Asignar valor a propiedad Digitalizado
         }
     }
 }

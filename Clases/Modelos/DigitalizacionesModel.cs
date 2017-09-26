@@ -27,7 +27,11 @@ namespace SADI.Clases.Modelos {
 		/// <summary>
 		/// Propiedad que representa el código de la serie documental del documento
 		/// </summary>
-		private RegistrosModel _seriedoctal;
+		private RegistrosModel _seriedoctal = new RegistrosModel();
+        /// <summary>
+        /// Propiedad del Nombre del Documento
+        /// </summary>
+        private string _nombredoc;
 		/// <summary>
 		/// Propiedad que representa al digitalización del documento
 		/// </summary>
@@ -36,6 +40,14 @@ namespace SADI.Clases.Modelos {
 		/// Propiedad que representa el folio del documento
 		/// </summary>
 		private int _folio;
+        /// <summary>
+        /// Propiedad de la Extensión del Documento
+        /// </summary>
+        private string _extension;
+        /// <summary>
+        /// Propiedad del Tamaño del Documento
+        /// </summary>
+        private int _tamaño;
 
         /// <summary>
         /// Constructo Vacio
@@ -45,19 +57,27 @@ namespace SADI.Clases.Modelos {
 		}
 
 		/// <summary>
-		/// Constructor de la Clase
-		/// </summary>
-		/// <param name="id">Identificador del Modelo</param>
-		/// <param name="seried">Serie Documental del Modelos</param>
-		/// <param name="doc">Documeto</param>
-		/// <param name="folio">Folio del Documento</param>
-		public DigitalizacionesModel(int id, RegistrosModel seried, byte[] doc, int folio){
+        /// Constructor de la Clase
+        /// </summary>
+        /// <param name="id">Identificador del Documento</param>
+        /// <param name="seried">Serie Documental del Documento</param>
+        /// <param name="nombredoc">Nombre del Documento</param>
+        /// <param name="doc">Documento en byte[]</param>
+        /// <param name="folio">Folio del Documento</param>
+        /// <param name="ext">Extensión del Documento</param>
+        /// <param name="size">Tamaño del Documento</param>
+		public DigitalizacionesModel(int id, RegistrosModel seried,string nombredoc, byte[] doc, int folio,string ext,int size){
             this.Id = id;
             this.SDoctal = seried;
+            this.NombreDoc = nombredoc;
             this.Documento = doc;
             this.Folio = folio;
+            this.Extension = ext;
+            this.Tamaño = size;
 		}
-
+        /// <summary>
+        /// Destructor de la Clase
+        /// </summary>
 		~DigitalizacionesModel(){
 
 		}
@@ -78,6 +98,12 @@ namespace SADI.Clases.Modelos {
             set { _seriedoctal = value; }
 		}
 
+        /// <summary>
+        /// Acceder a la Propiedad Nombre del Documento
+        /// </summary>
+        public string NombreDoc
+        { get { return _nombredoc; } set { _nombredoc = value; } }
+
 		/// <summary>
 		/// Acceder a la Propiedad del Documento digitalizado
 		/// </summary>
@@ -93,6 +119,18 @@ namespace SADI.Clases.Modelos {
             get { return _folio; }
             set { _folio = value; }
 		}
+
+        /// <summary>
+        /// Acceder a la Propiedad de la Extensión del Documento
+        /// </summary>
+        public string Extension
+        { get { return _extension; } set { _extension = value; } }
+
+        /// <summary>
+        /// Acceder a la Propiedad del Tamaño del Documento
+        /// </summary>
+        public int Tamaño
+        { get { return _tamaño; } set { _tamaño = value; } }
 
 	}//end DigitalizacionesModel
 

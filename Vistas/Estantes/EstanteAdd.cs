@@ -89,7 +89,9 @@ namespace SADI.Vistas.Estantes
 
             catGeoCtrll.ReLoad();
         }
-
+        /// <summary>
+        /// Método para cargar la Información del Control al Objeto
+        /// </summary>
         private void DeCtrlaObjeto()
         {
             em.Id = catGeoCtrll.Id;
@@ -97,5 +99,6 @@ namespace SADI.Vistas.Estantes
             em.Foto = catGeoCtrll.Imagen;
             em.Formato = catGeoCtrll.Formato;
         }
+      
     }
 }

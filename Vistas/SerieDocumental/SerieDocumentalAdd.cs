@@ -48,14 +48,16 @@ namespace SADI.Vistas.SerieDocumental
         {
             InitializeComponent();
             am.Usuario = u;
-            LLenarControl();
+            LLenarClasificaciones();
+            LLenarValoracionesDoctales();
+            LLenarSeccionesUsuario();
             SerieControlEventArgs ev = new SerieControlEventArgs { Opcion = 1 };
             ctrlSerieDocumental.SerieDocumental_Load(u,ev);
             //LLenarControl();
             ctrlSerieDocumental.cboSeccionCambioValor += new EventHandler(ctrlSerieDocumental_cboSeccionCambioValor);
             ctrlSerieDocumental.cboSerieCambioValor += new EventHandler(ctrlSerieDocumental_cboSerieCambioValor);
             ctrlSerieDocumental.CargaDeControl += new EventHandler(ctrlSerieDocumentl_CargaControl);
-
+            LLenarControl();
         }
 
         private void ctrlSerieDocumentl_CargaControl(object sender, EventArgs e)
@@ -100,26 +102,8 @@ namespace SADI.Vistas.SerieDocumental
         /// </summary>
         private void LLenarControl()
         {
-            if (secc.ConsultarSeccionesXusuario(am))
-            {
-                if (secc.Tabla.Rows.Count > 0)
-                {
-                    ctrlSerieDocumental.SeccionesT = secc.Tabla;
-                }
-                else
-                {
-                    MessageBox.Show("no existen registros para la búsqueda de series.".ToUpper(),":: mesnaje desde la consulta de serie ::".ToUpper(),
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            else
-            {
-                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + secc.Error,
-                    ":: mensae desde la consulta de la serie ::".ToUpper(),
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-            }
-            /////
+            
+            ///
             if(!string.IsNullOrEmpty(ctrlSerieDocumental.Seccion.Id))
             {
                 am.Seccion.Id = ctrlSerieDocumental.Seccion.Id;
@@ -135,27 +119,70 @@ namespace SADI.Vistas.SerieDocumental
                     }
                 }
             }
-            if(cc.ConsultarRegistros())
+           
+           
+        }
+        /// <summary>
+        /// Enviar La Tabla de Clasificaciones Documentales al Control
+        /// </summary>
+        private void LLenarClasificaciones()
+        {
+            if (cc.ConsultarRegistros())
             {
-                if(cc.Tabla.Rows.Count > 0)
+                if (cc.Tabla.Rows.Count > 0)
                 {
                     ctrlSerieDocumental.ClasificacionesT = cc.Tabla;
                 }
                 else
                 {
-                    MessageBox.Show("clasificaciones");
+                    MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + cc.Error.ToUpper(),
+                        ":: mensaje desde ingresar serie documental ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            if(vdc.ConsultarRegistros())
+        }
+        /// <summary>
+        /// Enviar la Tabla de Voloración Documental al Control
+        /// </summary>
+        private void LLenarValoracionesDoctales()
+        {
+            if (vdc.ConsultarRegistros())
             {
-                if(vdc.Tabla.Rows.Count > 0)
+                if (vdc.Tabla.Rows.Count > 0)
                 {
                     ctrlSerieDocumental.ValoracionesDocaltesT = vdc.Tabla;
                 }
                 else
                 {
-                    MessageBox.Show("Valoracion Documental");
+                    MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + vdc.Error.ToUpper(),
+                        ":: mensaje desde ingresar serie documental ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+        /// <summary>
+        /// LLenar las Secciones Asignadas al Usuario
+        /// </summary>
+        private void LLenarSeccionesUsuario()
+        {
+            if (secc.ConsultarSeccionesXusuario(am))
+            {
+                if (secc.Tabla.Rows.Count > 0)
+                {
+                    ctrlSerieDocumental.SeccionesT = secc.Tabla;
+                }
+                else
+                {
+                    MessageBox.Show("no existen registros para la búsqueda de series.".ToUpper(), ":: mesnaje desde la consulta de serie ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + secc.Error,
+                    ":: mensae desde la consulta de la serie ::".ToUpper(),
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
         }
 

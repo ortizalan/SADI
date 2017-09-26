@@ -210,10 +210,7 @@ namespace SADI.UserControls
                 this.Imagen = ImagenPb.Image;
                 this.Formato = this.obtenerExtensionImagen(Path.GetExtension(of.FileName));
             }
-            //if (ImagenPb.Image != null)
-            //{
-            //    Imagen = this.Imagen2Byte(ImagenPb.Image);
-            //}
+
         }
         /// <summary>
         /// Convertir Imagen a Arreglos de bytes
@@ -228,8 +225,6 @@ namespace SADI.UserControls
         /// <summary>
         /// Método al cambiar los valores del combo Lados
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cboLados_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboLados.SelectedValue.ToString() != "System.Data.DataRowView")
@@ -240,8 +235,6 @@ namespace SADI.UserControls
         /// <summary>
         /// Método para el cambio de valores del combo SubNiveles
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cboSubNiveles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboSubNiveles.SelectedValue.ToString() != "System.Data.DataRowView")
@@ -451,5 +444,6 @@ namespace SADI.UserControls
 
             //return extension;
         }
+
     }
 }
