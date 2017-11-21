@@ -18,7 +18,7 @@ namespace SADI.UserControls
 {
     public partial class SerieDocumental : UserControl
     {
-        
+
 
         #region Propiedades
         private int opc;// -- 1) Ingresar -- 2)Editar -- 3)Detalle
@@ -43,8 +43,8 @@ namespace SADI.UserControls
         private DateTime _fechaSerie;//Propiedad de la Fecha de creación de la Serie
         private DateTime _fechaCierreSerie;//Propiedad de la fecha del cierre de la propiedad
         private string _nomexpe;//Propiedad el Nombre del Expediente
-        private string _descripcion;//Propiedad de la descripción del expediente
-        private string _infoadicional;//Propiedad de la Infromación Adicional del Expediente
+        private string _descripcion;//Descripción del Expediente
+        private string _otrainfo;//Propiedad de Otra Información del Expediente
         private string _seriedoctal;//Propiedad de la SerieDocumental;
         private string _cvesevi;//Propiedad d ela clave SEVI
         private string _consecutivo;//Propiedad del Consecutivo de la Serie Documental
@@ -52,6 +52,10 @@ namespace SADI.UserControls
         private bool _digitalizado;// Propiedad para Verificar si Exiten Documentos Digitalizados
         private string _extension;
         private byte[] _documento;
+        private ToolTip _myToolTip;
+        private DataTable _DTdigitalizados;
+        //private TextBox _txtBoxDesc = new TextBox();
+        //private TextBox _txtBoxOtraInf = new TextBox();
         /// 
         /// 
         private OpenFileDialog _ofd;//
@@ -189,7 +193,7 @@ namespace SADI.UserControls
         public string NombreExpediente
         {
             get { return _nomexpe; }
-            set { _nomexpe = value; }
+            set { _nomexpe = value; txtNombreExp.Text = _nomexpe; }//Asignar el valor al textbox
         }
         /// <summary>
         /// Acceder a la Descripción de la Serie Documental
@@ -202,10 +206,10 @@ namespace SADI.UserControls
         /// <summary>
         /// Acceder a la Propiedad Información Adicional de la Serie
         /// </summary>
-        public string InfoAdicional
+        public string OtraInfo
         {
-            get { return _infoadicional; }
-            set { _infoadicional = value; }
+            get { return _otrainfo; }
+            set { _otrainfo = value; }
         }
         /// <summary>
         /// Acceder a la Propiedad Número d Serie Documental
@@ -243,13 +247,6 @@ namespace SADI.UserControls
         public bool AgregarTema
         {
             get { return _agregarTema; }
-            set
-            {
-                _agregarTema = value;
-                if (value)
-                { chkAddTema.Checked = true; }
-                else { chkAddTema.Checked = false; }
-            }
         }
         /// <summary>
         /// Acceso a la Propiedad Digitalizado
@@ -269,6 +266,11 @@ namespace SADI.UserControls
             get { return _documento; }
             set { _documento = value; }
         }
+        /// <summary>
+        /// Acceso a la Tabla con los archivos Digitalizados
+        /// </summary>
+        public DataTable DTDigitalizados
+        { get { return _DTdigitalizados; } }
         #endregion
 
         /// <summary>
@@ -278,6 +280,10 @@ namespace SADI.UserControls
         {
             InitializeComponent();
             FechaSerie = dtpFecha.Value;
+            cmdAddFiles.Visible = false;
+            cmdAddFiles.Enabled = false;
+            cmdChangeFile.Visible = false;
+            cmdChangeFile.Enabled = false;
         }
 
         #region Métdos Internos
@@ -442,7 +448,7 @@ namespace SADI.UserControls
             _seriedoctal += Consecutivo() + ".";
             _seriedoctal += dtpFecha.Value.Year.ToString();
             NumeroSerieDocumental = _seriedoctal;
-            
+
         }
 
         #endregion
@@ -463,7 +469,7 @@ namespace SADI.UserControls
             ValorDoctal.Id = (int)cboValorDoctal.SelectedValue;
             NombreExpediente = txtNombreExp.Text;
             Descripcion = txtDescExpe.Text;
-            InfoAdicional = (!string.IsNullOrEmpty(txtOtraInfo.Text) ? txtOtraInfo.Text : string.Empty);
+            OtraInfo = (!string.IsNullOrEmpty(txtOtraInfo.Text) ? txtOtraInfo.Text : null);
             Estatus = chkStatus.Checked;
         }
 
@@ -584,50 +590,58 @@ namespace SADI.UserControls
 
         #region Funciones Públicas
 
+        /// <summary>
+        /// Función para Validar los campos dentro del control
+        /// </summary>
+        /// <returns>Boleano</returns>
         public bool ValidarCampos()
         {
+            //Asignar la Fecha de la Serie
+            FechaSerie = dtpFecha.Value;
+            //Asignar el Nombre de Expediente
+            if (!string.IsNullOrEmpty(txtNombreExp.Text)) { NombreExpediente = txtNombreExp.Text; }
+
             if (!string.IsNullOrEmpty(Seccion.Id))//VAlidar que no venga vacío el identificador de Seccion
             {
-                if (Serie.Id > 0)
+                if (Serie.Id > 0)// VAlidar que la serie seleccionada sea válida
                 {
-                    if (!string.IsNullOrEmpty(NombreExpediente))
+                    if (Clasificacion.Id > 0)
                     {
-                        if (Clasificacion.Id > 0)
+                        if (ValorDoctal.Id > 0)
                         {
-                            if (ValorDoctal.Id > 0)
+                            if (!string.IsNullOrEmpty(txtDescExpe.Text))
                             {
-                                if (!string.IsNullOrEmpty(Descripcion))
+                                Descripcion = txtDescExpe.Text;
+
+                                if (!string.IsNullOrEmpty(txtOtraInfo.Text)) { OtraInfo = txtOtraInfo.Text; }
+
+                                if (chkTieneSevi.Checked)// Si está seleccionado la opción de clave SEVI
                                 {
-                                    if (chkTieneSevi.Checked)
+                                    if (string.IsNullOrEmpty(txtCveSevi.Text))//Validar que se ingrese clave SEVI
                                     {
-                                        if (!string.IsNullOrEmpty(ClaveSEVI))
-                                        {
-                                            return true;
-                                        }
-                                        else
-                                        {
-                                            MessageBox.Show("debe de ingresar la clave sevi.".ToUpper(),
-                                            ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
-                                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            return false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        return true;
+                                        MessageBox.Show("debe de ingresar una clave sevi".ToUpper(),
+                                        ":: mensaje desde el control serie documental, opció ; ".ToUpper() + Opciones().ToUpper() + " ::",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return false;
                                     }
                                 }
-                                else
+                                if(chkAddTema.Checked)// Si está seleccionado el Agregar el Tema/Nombre Expediente
                                 {
-                                    MessageBox.Show("debe de ingresar una descripción de la serie documental.".ToUpper(),
-                                    ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    return false;
+                                    if(string.IsNullOrEmpty(txtNombreExp.Text))
+                                    {
+                                        MessageBox.Show("debe de ingresar un tema".ToUpper(),
+                                        ":: mensae desde el control serie documental".ToUpper() + Opciones().ToUpper() + " ::",
+                                        MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                        return false;
+                                    }
                                 }
+
+
+                                return true;
                             }
                             else
                             {
-                                MessageBox.Show("debe seleccionar un valor documental de la serie documental.".ToUpper(),
+                                MessageBox.Show("debe de ingresar una descripción de la serie documental.".ToUpper(),
                                 ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return false;
@@ -635,7 +649,7 @@ namespace SADI.UserControls
                         }
                         else
                         {
-                            MessageBox.Show("debe seleccionar una clasificación de la serie documental.".ToUpper(),
+                            MessageBox.Show("debe seleccionar un valor documental de la serie documental.".ToUpper(),
                             ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return false;
@@ -643,11 +657,12 @@ namespace SADI.UserControls
                     }
                     else
                     {
-                        MessageBox.Show("debe de ingresar un nombre de expediente.".ToUpper(),
+                        MessageBox.Show("debe seleccionar una clasificación de la serie documental.".ToUpper(),
                         ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
+
                 }
                 else
                 {
@@ -660,8 +675,8 @@ namespace SADI.UserControls
             else
             {
                 MessageBox.Show("seleccione una opción de la secciones.".ToUpper(),
-                    ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ":: mensaje desde control serie documental, opción : ".ToUpper() + Opciones().ToUpper() + " ::",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -701,7 +716,10 @@ namespace SADI.UserControls
             }
             else
             {
-                return (GetConsecutivo() ? "0001" : _consecutivo);
+                if (GetConsecutivo())
+                { return _consecutivo; }
+                else
+                { return "0001"; }
             }
         }
         /// <summary>
@@ -711,13 +729,39 @@ namespace SADI.UserControls
         public bool GetConsecutivo()
         {
             rm.SerieDoctal = NumeroSerieDocumental;
-            rm.FechaInicio = FechaSerie;
+            rm.FechaInicio = dtpFecha.Value;
 
             if (rc.ConsecutivoRegistroSeries(rm))//Intentar la Consulta del Procedimiento
             {
-                _consecutivo = "0000";
-                return true;
+                //_consecutivo = "0000";
+                if(rc.Tabla.Rows.Count > 0)
+                {
+                    int valcons = ((int)rc.Tabla.Rows[0][0]) + 1;
+                    string cons = valcons.ToString();
 
+                    switch(cons.Length)
+                    {
+                        case 1:
+                            _consecutivo = "000" + cons;
+                            break;
+                        case 2:
+                            _consecutivo = "00" + cons;
+                            break;
+                        case 3:
+                            _consecutivo = "0" + cons;
+                            break;
+                        case 4:
+                            _consecutivo = cons;
+                            break;
+                        default:
+                            _consecutivo = "0000";
+                            break;
+                    }
+                    return true;
+                }
+                else
+                { _consecutivo = "0000"; return false; }
+                
             }
             else//Intento NO Exitoso
             {
@@ -753,6 +797,7 @@ namespace SADI.UserControls
 
         private void dtpFecha_ValueChanged(object sender, EventArgs e)
         {
+            FechaSerie = dtpFecha.Value;
             ActualizarSerieDocumental();
         }
 
@@ -797,32 +842,118 @@ namespace SADI.UserControls
                     cboTema.Enabled = true;
                 }
             }
+
+            _agregarTema = chkAddTema.Checked;
         }
         /// <summary>
         /// Método para indicar si la serie cuenta con archivo Digitalizado
         /// </summary>
         private void chkDigitalizado_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkDigitalizado.Checked)
+            if (chkDigitalizado.Checked)
             {
+                formatDigitalizados();
                 _ofd = new OpenFileDialog();
-                _ofd.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|PDF Files(*.pdf)|*.pdf";
+                _ofd.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|" +
+                    "PDF Files(*.pdf)|*.pdf|Documento Word(*.doc)|*.doc|Documento Word(*.docx)|*.docx|" +
+                    "Hoja de Cálculo(*.xls)|*.xls|Hoja de Cálculo(*.xlsx)|*.xlsx|Todos Los Archivos(*.*)|*.*";
                 _ofd.Title = "eliga archivo a guardar".ToUpper();
-                if(_ofd.ShowDialog() == DialogResult.OK)
+                if (_ofd.ShowDialog() == DialogResult.OK)
                 {
-                    Digitalizacion.Extension = Path.GetExtension(_ofd.FileName);
-                    Digitalizacion.Documento = File.ReadAllBytes(_ofd.FileName);
-                    Digitalizacion.NombreDoc = Path.GetFileName(_ofd.FileName);
-                    Digitalizacion.Tamaño = Digitalizacion.Documento.Length;
-                    Digitalizacion.Folio = 0;
+                    byte[] docu = File.ReadAllBytes(_ofd.FileName);
+                    DataRow r = _DTdigitalizados.NewRow();
+                    r["extension"] = Path.GetExtension(_ofd.FileName);
+                    r["documento"] = docu;
+                    r["nombredoc"] = Path.GetFileName(_ofd.FileName);
+                    r["tamaño"] = File.ReadAllBytes(_ofd.FileName).Length;
+                    r["folio"] = _DTdigitalizados.Rows.Count + 1;
+                    _DTdigitalizados.Rows.Add(r);
                 }
+                cmdAddFiles.Enabled = true;
+                cmdAddFiles.Visible = true;
+                lblArchivoDig.Text = Path.GetFileName(_ofd.FileName);
             }
-            else
+            else // No Agregar Archivo Digitalizado, eliminar todos los que hayamos Cargado
             {
-
+                _DTdigitalizados.Clear();
+                cmdAddFiles.Enabled = false;
+                cmdAddFiles.Visible = false;
+                lblArchivoDig.Text = "::";
             }
+
 
             _digitalizado = chkDigitalizado.Checked;//Asignar valor a propiedad Digitalizado
+        }
+        /// <summary>
+        /// Agregar más Archivos Digitalizados
+        /// </summary>
+        private void cmdAddFiles_Click(object sender, EventArgs e)
+        {
+            DataRow[] foundRows = null;
+            _myToolTip = new ToolTip();
+            _myToolTip.ToolTipIcon = ToolTipIcon.None;
+            _myToolTip.IsBalloon = true;
+            _myToolTip.ShowAlways = true;
+
+            if (_ofd.ShowDialog() == DialogResult.OK)
+            {
+                //Stream myStream;
+                //myStream = _ofd.OpenFile();
+                byte[] docu = File.ReadAllBytes(_ofd.FileName);
+
+                DataRow r = _DTdigitalizados.NewRow();
+                r["extension"] = Path.GetExtension(_ofd.FileName);
+                r["documento"] = docu;
+                r["nombredoc"] = Path.GetFileName(_ofd.FileName);
+                r["tamaño"] = File.ReadAllBytes(_ofd.FileName).Length;
+                r["folio"] = _DTdigitalizados.Rows.Count + 1;
+                string expression = "nombredoc = " + "'" + r["nombredoc"].ToString() + "'";
+                foundRows = _DTdigitalizados.Select(expression);
+                if (foundRows.Length == 0)
+                {
+                    _DTdigitalizados.Rows.Add(r);
+                }
+                else
+                {
+                    MessageBox.Show("ya existe este archivo.".ToUpper(), ":: mensaje desde el control seire documental ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+
+            string _archivos = string.Empty;
+
+            foreach (DataRow r in _DTdigitalizados.Rows)
+            {
+                _archivos += r["nombredoc"].ToString() + "\n";
+            }
+
+            _myToolTip.SetToolTip(lblArchivoDig, _archivos);
+        }
+        /// <summary>
+        /// Formato de la tabla que guarda los documentos digitalizados
+        /// </summary>
+        private void formatDigitalizados()
+        {
+            _DTdigitalizados = new DataTable();//Inicializar la tabla
+            _DTdigitalizados.Columns.Add("extension");
+            _DTdigitalizados.Columns.Add("documento",typeof(byte[]));
+            _DTdigitalizados.Columns.Add("nombredoc");
+            _DTdigitalizados.Columns.Add("tamaño");
+            _DTdigitalizados.Columns.Add("folio");
+        }
+        /// <summary>
+        /// Dejar el Control de Nombre de Expediente
+        /// </summary>
+        private void txtNombreExp_Leave(object sender, EventArgs e)
+        {
+            if (chkAddTema.Checked)//Si está seleccionado 
+            {
+                if (!string.IsNullOrEmpty(txtNombreExp.Text))//Que no esté vació el campo
+                {
+                    this.Tema.Tema = txtNombreExp.Text;
+                }
+            }
         }
     }
 }

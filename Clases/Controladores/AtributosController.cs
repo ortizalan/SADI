@@ -188,9 +188,52 @@ namespace SADI.Clases.Controladores
             { return false; }
         }
         /// <summary>
-        /// Consultar en los Atributos las Secciones Dadas de ALta el Usuario
+        /// Función para el Ingreso Automático de un Tema
         /// </summary>
-        /// <param name="o">Objeto del tipo Atributos</param>
+        /// <param name="o">Objeto del Tipo AtributosModel</param>
         /// <returns>Boleano</returns>
+        public bool IngresoAutomaticoAtributo(object o)
+        {
+            if(o.GetType() == typeof(AtributosModel))//Verificar que el Objeto sea del tipo de Controlador Adecuado
+            {
+                var a = (AtributosModel)o;
+                // Mismo tipo
+                string proce = "sp_atributos_seleccion";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();
+                lista.Add(new Parametros(@"opc", "4"));//Indicar la opción a ejecutar dentro del procedimiento
+                lista.Add(new Parametros(@"usr", a.Usuario.Id.ToString()));//Identificador del Usuario
+                lista.Add(new Parametros(@"sec", a.Seccion.Id));//Identificador de la Sección
+                lista.Add(new Parametros(@"ser", a.Serie.Id.ToString()));//Identificador de la Serie
+                lista.Add(new Parametros(@"tema", a.Temas.Id.ToString()));//Identificador del Tema
+
+                if(Abrir())//Intentar Abrir la Conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        if(EjecutarProcedimiento(proce, lista))//Intentar Ejecutar el Procedimiento
+                        { return true; }//Intento Exitoso
+                        else//Intento NO exitoso, Consulte Error
+                        { return false; }
+                    }
+                    catch(Exception e)
+                    {
+                        Error = e.Message.ToString();
+                        return false;
+                    }
+                    finally { Cerrar(); }
+                }
+                else//Intento no Exitoso
+                {
+                    return false;
+                }
+
+            }
+            else//No son del mismo tipo
+            {
+                Error = "el objeto no es del tipo esperado.".ToUpper();//Indicarl el Error
+                return false;//Señalar que existe error
+            }
+        }
     }
 }

@@ -50,12 +50,14 @@
             SADI.Clases.Modelos.ValoresDoctalesModel valoresDoctalesModel2 = new SADI.Clases.Modelos.ValoresDoctalesModel();
             this.cmdOUT = new System.Windows.Forms.Button();
             this.ctrlSerieDocumental = new SADI.UserControls.SerieDocumental();
+            this.cmdIN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmdOUT
             // 
             this.cmdOUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdOUT.Location = new System.Drawing.Point(770, 529);
+            this.cmdOUT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdOUT.Location = new System.Drawing.Point(770, 545);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(122, 42);
             this.cmdOUT.TabIndex = 11;
@@ -65,7 +67,6 @@
             // 
             // ctrlSerieDocumental
             // 
-            this.ctrlSerieDocumental.AgregarTema = false;
             clasificacionesModel1.Clasificacion = null;
             clasificacionesModel1.Id = 0;
             this.ctrlSerieDocumental.Clasificacion = clasificacionesModel1;
@@ -88,7 +89,6 @@
             fondosModel1.Fondo = null;
             fondosModel1.Id = 0;
             registrosModel1.Fondo = fondosModel1;
-            registrosModel1.NombreExp = null;
             registrosModel1.NumHojas = 0;
             registrosModel1.OtraInfo = null;
             registrosModel1.SerieDoctal = null;
@@ -121,8 +121,7 @@
             this.ctrlSerieDocumental.Extension = null;
             this.ctrlSerieDocumental.FechaCierreSerie = new System.DateTime(((long)(0)));
             this.ctrlSerieDocumental.FechaSerie = new System.DateTime(((long)(0)));
-            this.ctrlSerieDocumental.InfoAdicional = null;
-            this.ctrlSerieDocumental.Location = new System.Drawing.Point(8, 5);
+            this.ctrlSerieDocumental.Location = new System.Drawing.Point(2, 3);
             this.ctrlSerieDocumental.Name = "ctrlSerieDocumental";
             this.ctrlSerieDocumental.NombreExpediente = null;
             this.ctrlSerieDocumental.NumeroSerieDocumental = null;
@@ -136,7 +135,7 @@
             seriesModel2.Seccion = seccionesModel4;
             seriesModel2.Serie = null;
             this.ctrlSerieDocumental.Serie = seriesModel2;
-            this.ctrlSerieDocumental.Size = new System.Drawing.Size(890, 545);
+            this.ctrlSerieDocumental.Size = new System.Drawing.Size(890, 536);
             this.ctrlSerieDocumental.TabIndex = 12;
             temasModel2.Id = 0;
             seccionesModel5.Id = null;
@@ -155,11 +154,23 @@
             valoresDoctalesModel2.Valor = null;
             this.ctrlSerieDocumental.ValorDoctal = valoresDoctalesModel2;
             // 
+            // cmdIN
+            // 
+            this.cmdIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdIN.Location = new System.Drawing.Point(628, 545);
+            this.cmdIN.Name = "cmdIN";
+            this.cmdIN.Size = new System.Drawing.Size(136, 42);
+            this.cmdIN.TabIndex = 13;
+            this.cmdIN.Text = ":: INGRESAR ::";
+            this.cmdIN.UseVisualStyleBackColor = true;
+            this.cmdIN.Click += new System.EventHandler(this.cmdIN_Click);
+            // 
             // SerieDocumentalAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 580);
+            this.ClientSize = new System.Drawing.Size(904, 596);
+            this.Controls.Add(this.cmdIN);
             this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.ctrlSerieDocumental);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -172,5 +183,6 @@
         #endregion
         private System.Windows.Forms.Button cmdOUT;
         private UserControls.SerieDocumental ctrlSerieDocumental;
+        private System.Windows.Forms.Button cmdIN;
     }
 }

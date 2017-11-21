@@ -61,6 +61,9 @@
             this.chkConsecutivo = new System.Windows.Forms.CheckBox();
             this.chkAddTema = new System.Windows.Forms.CheckBox();
             this.chkDigitalizado = new System.Windows.Forms.CheckBox();
+            this.lblArchivoDig = new System.Windows.Forms.Label();
+            this.cmdChangeFile = new System.Windows.Forms.Button();
+            this.cmdAddFiles = new System.Windows.Forms.Button();
             this.gpoCrearSerieDoctal.SuspendLayout();
             this.gpoDetallesDoc.SuspendLayout();
             this.gpoCveSevi.SuspendLayout();
@@ -306,10 +309,10 @@
             // 
             this.txtOtraInfo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOtraInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOtraInfo.Location = new System.Drawing.Point(501, 399);
+            this.txtOtraInfo.Location = new System.Drawing.Point(498, 399);
             this.txtOtraInfo.Multiline = true;
             this.txtOtraInfo.Name = "txtOtraInfo";
-            this.txtOtraInfo.Size = new System.Drawing.Size(378, 112);
+            this.txtOtraInfo.Size = new System.Drawing.Size(381, 112);
             this.txtOtraInfo.TabIndex = 17;
             // 
             // label10
@@ -350,6 +353,7 @@
             this.txtNombreExp.Name = "txtNombreExp";
             this.txtNombreExp.Size = new System.Drawing.Size(410, 20);
             this.txtNombreExp.TabIndex = 13;
+            this.txtNombreExp.Leave += new System.EventHandler(this.txtNombreExp_Leave);
             // 
             // label7
             // 
@@ -431,10 +435,44 @@
             this.chkDigitalizado.UseVisualStyleBackColor = true;
             this.chkDigitalizado.CheckedChanged += new System.EventHandler(this.chkDigitalizado_CheckedChanged);
             // 
+            // lblArchivoDig
+            // 
+            this.lblArchivoDig.AutoSize = true;
+            this.lblArchivoDig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArchivoDig.Location = new System.Drawing.Point(207, 348);
+            this.lblArchivoDig.Name = "lblArchivoDig";
+            this.lblArchivoDig.Size = new System.Drawing.Size(15, 13);
+            this.lblArchivoDig.TabIndex = 22;
+            this.lblArchivoDig.Text = "::";
+            // 
+            // cmdChangeFile
+            // 
+            this.cmdChangeFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdChangeFile.Location = new System.Drawing.Point(471, 342);
+            this.cmdChangeFile.Name = "cmdChangeFile";
+            this.cmdChangeFile.Size = new System.Drawing.Size(125, 23);
+            this.cmdChangeFile.TabIndex = 23;
+            this.cmdChangeFile.Text = "Cambiar Archivo";
+            this.cmdChangeFile.UseVisualStyleBackColor = true;
+            // 
+            // cmdAddFiles
+            // 
+            this.cmdAddFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdAddFiles.Location = new System.Drawing.Point(599, 342);
+            this.cmdAddFiles.Name = "cmdAddFiles";
+            this.cmdAddFiles.Size = new System.Drawing.Size(153, 23);
+            this.cmdAddFiles.TabIndex = 24;
+            this.cmdAddFiles.Text = "Agregar Otro Archivo";
+            this.cmdAddFiles.UseVisualStyleBackColor = true;
+            this.cmdAddFiles.Click += new System.EventHandler(this.cmdAddFiles_Click);
+            // 
             // SerieDocumental
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmdAddFiles);
+            this.Controls.Add(this.cmdChangeFile);
+            this.Controls.Add(this.lblArchivoDig);
             this.Controls.Add(this.chkDigitalizado);
             this.Controls.Add(this.chkAddTema);
             this.Controls.Add(this.groupBox1);
@@ -488,9 +526,9 @@
         private System.Windows.Forms.CheckBox chkTieneSevi;
         private System.Windows.Forms.GroupBox gpoSerieDoctal;
         private System.Windows.Forms.CheckBox chkStatus;
-        private System.Windows.Forms.TextBox txtOtraInfo;
+        public System.Windows.Forms.TextBox txtOtraInfo = new System.Windows.Forms.TextBox(); //
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtDescExpe;
+        public System.Windows.Forms.TextBox txtDescExpe = new System.Windows.Forms.TextBox(); //
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtNombreExp;
         private System.Windows.Forms.Label label7;
@@ -501,5 +539,8 @@
         private System.Windows.Forms.Label lblSerieDoctal;
         private System.Windows.Forms.CheckBox chkAddTema;
         private System.Windows.Forms.CheckBox chkDigitalizado;
+        private System.Windows.Forms.Label lblArchivoDig;
+        private System.Windows.Forms.Button cmdChangeFile;
+        private System.Windows.Forms.Button cmdAddFiles;
     }
 }

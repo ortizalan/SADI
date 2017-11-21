@@ -95,6 +95,16 @@
       <HintPath>..\packages\FluentAssertions.4.19.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -235,11 +245,23 @@
     <Compile Include="UserControls\CatalogosGeoLocalizaControl.Designer.cs">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ExcelViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ExcelViewerControl.Designer.cs">
+      <DependentUpon>ExcelViewerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SerieDocumental.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\SerieDocumental.Designer.cs">
       <DependentUpon>SerieDocumental.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WordViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\WordViewerControl.Designer.cs">
+      <DependentUpon>WordViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Atributos\AtributosAdd.cs">
       <SubType>Form</SubType>
@@ -258,6 +280,24 @@
     </Compile>
     <Compile Include="Vistas\Atributos\Presumir.Designer.cs">
       <DependentUpon>Presumir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\VisorPDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\VisorPDF.Designer.cs">
+      <DependentUpon>VisorPDF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\VisorWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\VisorWord.Designer.cs">
+      <DependentUpon>VisorWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\VisorExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\VisorExcel.Designer.cs">
+      <DependentUpon>VisorExcel.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Estantes\EstanteAdd.cs">
       <SubType>Form</SubType>
@@ -397,14 +437,29 @@
     <EmbeddedResource Include="UserControls\CatalogosGeoLocalizaControl.resx">
       <DependentUpon>CatalogosGeoLocalizaControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ExcelViewerControl.resx">
+      <DependentUpon>ExcelViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SerieDocumental.resx">
       <DependentUpon>SerieDocumental.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\WordViewerControl.resx">
+      <DependentUpon>WordViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Atributos\AtributosAdd.resx">
       <DependentUpon>AtributosAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Atributos\Presumir.resx">
       <DependentUpon>Presumir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Digitalizacion\VisorPDF.resx">
+      <DependentUpon>VisorPDF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Digitalizacion\VisorWord.resx">
+      <DependentUpon>VisorWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Digitalizacion\VisorExcel.resx">
+      <DependentUpon>VisorExcel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Estantes\EstanteAdd.resx">
       <DependentUpon>EstanteAdd.cs</DependentUpon>
@@ -512,12 +567,56 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="ACTIVEXLib">
+      <Guid>{EA3E6E3C-5130-49C1-8EDE-F889CD0F4429}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="CRQUERYENGINE">
       <Guid>{E4B81D51-FB89-4D07-84A3-00BA9B71D76E}</Guid>
       <VersionMajor>13</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="LCC11">
+      <Guid>{EDCD5812-6A06-43C3-AFAC-46EF5D14E22C}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
@@ -536,6 +635,15 @@
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="XDocsDesigner">
+      <Guid>{FD34A372-115F-43CA-8D6F-BBD45FD6F828}</Guid>
+      <VersionMajor>3</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>

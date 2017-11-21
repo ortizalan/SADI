@@ -7,6 +7,7 @@ using SADI.Vistas.Usuarios;
 using SADI.Vistas.Filas;
 using SADI.Vistas.Estantes;
 using SADI.Vistas.Niveles;
+using SADI.Vistas.Digitalizacion;
 using SADI.Vistas.SerieDocumental;
 using SADI.Clases;
 using SADI.Reportes.Catalogos;
@@ -190,6 +191,20 @@ namespace SADI
 
             }
 
+        }
+
+        private void visorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VisorWord frmVwWord = new VisorWord();
+            frmVwWord.MdiParent = this;
+            frmVwWord.Show();
+        }
+
+        private void visorExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VisorExcel frmVwExcel = new VisorExcel();
+            frmVwExcel.MdiParent = this;
+            frmVwExcel.Show();
         }
     }
 }

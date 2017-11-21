@@ -57,7 +57,6 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"subfondo", string.Empty));// Vacío
                         lista.Add(new Parametros(@"fecini", string.Empty));// Vacío
                         lista.Add(new Parametros(@"fecfin", string.Empty));// Vacio
-                        lista.Add(new Parametros(@"nomexp", string.Empty));// Vacío
                         lista.Add(new Parametros(@"desc", string.Empty));// Vacío
                         lista.Add(new Parametros(@"numhojas", string.Empty)); // Vacío
                         lista.Add(new Parametros(@"cvesevi", string.Empty)); // Vacío
@@ -110,7 +109,6 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"subfondo", r.SubFondo.Id.ToString()));// Indicarle la Identificación del Subfondo
                         lista.Add(new Parametros(@"fecini", r.FechaInicio.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Inicio del Expediente
                         lista.Add(new Parametros(@"fecfin", (r.FechaCierre != null ? r.FechaCierre.Value.ToString("yyyy-MM-dd"):null)));// Indicarle la Fecha de Cierre del Expediente
-                        lista.Add(new Parametros(@"nomexp", r.NombreExp));// Indcar el Nombre del Expediente
                         lista.Add(new Parametros(@"desc", r.Descripcion));// Indicar la Descripción del Expediente
                         lista.Add(new Parametros(@"numhojas", r.NumHojas.ToString())); // Indicar el Número de Hojas del Expediente
                         lista.Add(new Parametros(@"cvesevi", r.CveSevi)); // Indicar la Clave SEVI
@@ -158,11 +156,11 @@ namespace SADI.Clases.Controladores {
                         List<Parametros> lista = new List<Parametros>();// Crear una lista de Parámetros
                         lista.Add(new Parametros(@"opc", "2")); // Indicarle la Opción a ejecutar al Procedimiento
                         lista.Add(new Parametros(@"seriedoc", r.SerieDoctal)); // Indicarle el Idetificador del registro
+                        lista.Add(new Parametros(@"tema", r.Tema.Id.ToString()));
                         lista.Add(new Parametros(@"fondo", r.Fondo.Id.ToString())); // Indicarle la Identificación del Fondo
                         lista.Add(new Parametros(@"subfondo", r.SubFondo.Id.ToString()));// Indicarle la Identificación del Subfondo
-                        lista.Add(new Parametros(@"fecini", r.FechaInicio.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Inicio del Expediente
-                        lista.Add(new Parametros(@"fecfin", (r.FechaCierre!= null ? r.FechaCierre.Value.ToString("yyyy-MM-dd"):null)));// Indicarle la Fecha de Cierre del Expediente
-                        lista.Add(new Parametros(@"nomexp", r.NombreExp));// Indcar el Nombre del Expediente
+                        lista.Add(new Parametros(@"fecini", r.FechaInicio.ToString("yyyyMMdd")));// Indicarle la Fecha de Inicio del Expediente
+                        lista.Add(new Parametros(@"fecfin", r.FechaInicio.ToString("yyyyMMdd")));// Indicarle la Fecha de Cierre del Expediente
                         lista.Add(new Parametros(@"desc", r.Descripcion));// Indicar la Descripción del Expediente
                         lista.Add(new Parametros(@"numhojas", r.NumHojas.ToString())); // Indicar el Número de Hojas del Expediente
                         lista.Add(new Parametros(@"cvesevi", r.CveSevi)); // Indicar la Clave SEVI
@@ -212,7 +210,6 @@ namespace SADI.Clases.Controladores {
                     lista.Add(new Parametros(@"subfondo", string.Empty));// Vacío
                     lista.Add(new Parametros(@"fecini", string.Empty));// Vacío
                     lista.Add(new Parametros(@"fecfin", null));// Vacio
-                    lista.Add(new Parametros(@"nomexp", string.Empty));// Vacío
                     lista.Add(new Parametros(@"desc", string.Empty));// Vacío
                     lista.Add(new Parametros(@"numhojas", string.Empty)); // Vacío
                     lista.Add(new Parametros(@"cvesevi", string.Empty)); // Vacío

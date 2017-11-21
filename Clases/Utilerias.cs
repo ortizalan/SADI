@@ -184,6 +184,29 @@ namespace SADI.Clases
 
             return dgv;
         }
+        /// <summary>
+        /// Función para Guardar Cadena con Saltos de Línea
+        /// </summary>
+        /// <param name="cadena">TextBox</param>
+        /// <returns>Cadena con Salto de Línea</returns>
+        public static string CadenaConSaltoLines(TextBox cadena)
+        {
+            int lineaActual = 1;
+            string texto = string.Empty;
+            int inicio = 0;
+            for(int x = 0; x<cadena.Text.Length;x++)
+            {
+                int linea = cadena.GetLineFromCharIndex(x);
+                if(linea > lineaActual)
+                {
+                    texto += cadena.Text.Substring(inicio, x - inicio) + Environment.NewLine;
+                    inicio += 1;
+                    lineaActual = linea;
+                }
+            }
+
+            return texto;
+        }
     }
 
     /// <summary>

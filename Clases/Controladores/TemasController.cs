@@ -299,5 +299,40 @@ namespace SADI.Clases.Controladores
                 return false;
             }
         }
+        /// <summary>
+        /// Función para consultar el Último Registro Ingresado
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public bool ConsultarUltimoRegistroIngresado()
+        {
+            string proce = "sp_temas_seleccion";
+            List<Parametros> lista = new List<Parametros>();
+            lista.Add(new Parametros(@"opc", "1"));//Indicarle la opción a ejecutar dentro del procedimiento
+            lista.Add(new Parametros(@"id", string.Empty));//Vacío
+            lista.Add(new Parametros(@"sec", string.Empty));//Vacío
+            lista.Add(new Parametros(@"ser", string.Empty));//Vacío
+            lista.Add(new Parametros(@"tema", string.Empty));//Vacío
+
+            if(Abrir())//Intentar Abrir la conexión
+            {
+                try//Intentar
+                {
+                    if (ConsultarProcedimiento(proce, lista))//Consultar el Procedimiento
+                    { return true; }//Intento Exitoso
+                    else//Intento Fallido
+                    { return false; }
+                }
+                catch(Exception e)//Atrapar el Error
+                {
+                    Error = e.Message.ToString();//Guardar el Error
+                    return false;//Indicar que existe el Error
+                }
+                finally { Cerrar(); }//Cerrar la Conexión
+            }
+            else//Intento Fallido
+            {
+                return false;
+            }
+        }
     }
 }

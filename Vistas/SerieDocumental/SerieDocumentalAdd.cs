@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,7 @@ namespace SADI.Vistas.SerieDocumental
     public partial class SerieDocumentalAdd : Form
     {
         #region Propiedades
+
         UsuariosModel um = new UsuariosModel();//Instancia de UsuariosModel
         AtributosModel am = new AtributosModel();//Instancia de AtributosModel
         AtributosController ac = new AtributosController();//Instancia de AtribitosController
@@ -29,9 +31,11 @@ namespace SADI.Vistas.SerieDocumental
         RegistrosController rc = new RegistrosController();//Instancia del Controlador Registros
         ClasificacionesController cc = new ClasificacionesController();//Controlador de las Clasificaciones
         ValoresDoctalesController vdc = new ValoresDoctalesController();//Controlador de las Valoraciones Documentales
-
+        DigitalizacionesModel dm = new DigitalizacionesModel();// Modelo de las Digitalizaciones
+        DigitalizacionesController dc = new DigitalizacionesController();//Controlador de las Digitalizaciones
+        TextBox txtDesc = new TextBox();
+        TextBox txtOtrai = new TextBox();
         #endregion
-
 
         /// <summary>
         /// Constructor de la Forma
@@ -48,6 +52,7 @@ namespace SADI.Vistas.SerieDocumental
         {
             InitializeComponent();
             am.Usuario = u;
+            
             LLenarClasificaciones();
             LLenarValoracionesDoctales();
             LLenarSeccionesUsuario();
@@ -115,12 +120,10 @@ namespace SADI.Vistas.SerieDocumental
                     }
                     else
                     {
-                        MessageBox.Show("Series VAcias");
+                        MessageBox.Show("Series Vacias");
                     }
                 }
             }
-           
-           
         }
         /// <summary>
         /// Enviar La Tabla de Clasificaciones Documentales al Control
@@ -190,6 +193,133 @@ namespace SADI.Vistas.SerieDocumental
         {
             Close();
         }
+        /// <summary>
+        /// Método para Ingresar el Registro de la Serie Documental
+        /// </summary>
+        private void cmdIN_Click(object sender, EventArgs e)
+        {
+            if(ctrlSerieDocumental.ValidarCampos())//Validar los campos del Control de Usuario
+            {
+                txtDesc.Text = ctrlSerieDocumental.Descripcion;
+                txtOtrai.Text = ctrlSerieDocumental.OtraInfo; 
 
+                rm.SerieDoctal = ctrlSerieDocumental.NumeroSerieDocumental;//Ingresar la serie Documental
+                if(ctrlSerieDocumental.AgregarTema)//Hay que ingresar el Tema del Expediente a la Base de Datos
+                {
+                    tm.Seccion.Id = ctrlSerieDocumental.Seccion.Id;//Identificador de la Sección
+                    tm.Serie.Id = ctrlSerieDocumental.Serie.Id;//Identificador de la Serie
+                    tm.Tema = ctrlSerieDocumental.NombreExpediente;//Descripción del Tema
+                    
+
+                    if (tc.IngresarRegisto(tm))//Intentar Ingresar el Tema
+                    {
+                        int lastReg;
+                        if(tc.ConsultarUltimoRegistroIngresado())//Intentar Obtener el Último Registro Ingresado
+                        {
+                            lastReg = (int)tc.Tabla.Rows[0][0];//Identificador del Último Registro
+                            rm.Tema.Id = lastReg;//Asignar último Registro al modelo Registros
+                        }
+                        else//Intento NO exitoso, Consultar Error
+                        {
+                            MessageBox.Show("ocurrió el siguiente error : " + "\n" + tc.Error.ToUpper(),
+                                ":: mensaje desde ingresar serie documental-ingreso automático de atributo ::".ToUpper(),
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;//Salir 
+                        }
+                        am.Seccion.Id = tm.Seccion.Id;
+                        am.Serie.Id = tm.Serie.Id;
+                        am.Temas.Id = lastReg;
+                        if(ac.IngresoAutomaticoAtributo(am))//Intentar Agregar el Atributo al Usuario
+                        { }//Intento Exitoso
+                        else//Intento no Exitoso, Salir
+                        {
+                            MessageBox.Show("ocurrió el siguiente error : " + "\n" + ac.Error.ToUpper(), 
+                                ":: mensaje desde ingresar serie documental-ingreso automático de atributo ::".ToUpper(),
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;//Salir
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("ocurrió el siguiente error : ".ToUpper() + "\n" +
+                            tc.Error, ":: mensaje desde forma ingresar serie documental ::".ToUpper(),
+                            MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        return;//Salir
+                    }
+                }
+                else//No Seleccionaron Agregar Tema
+                {
+                    rm.Tema.Id = ctrlSerieDocumental.Tema.Id;
+                }
+                rm.Fondo.Id = ctrlSerieDocumental.Fondo;
+                rm.SubFondo.Id = ctrlSerieDocumental.SubFondo;
+                rm.FechaInicio = ctrlSerieDocumental.FechaSerie;
+                rm.FechaInicio = ctrlSerieDocumental.FechaSerie;
+                //rm.Descripcion = Utilerias.CadenaConSaltoLines(txtDesc);
+                //rm.OtraInfo = Utilerias.CadenaConSaltoLines(txtOtrai);
+                rm.Descripcion = ctrlSerieDocumental.Descripcion;
+                rm.OtraInfo = (!string.IsNullOrEmpty(ctrlSerieDocumental.OtraInfo) ? ctrlSerieDocumental.OtraInfo:string.Empty);
+                rm.NumHojas = 0;
+                rm.CveSevi = (!string.IsNullOrEmpty(ctrlSerieDocumental.ClaveSEVI) ? ctrlSerieDocumental.ClaveSEVI : string.Empty );
+                rm.ValorDoctal.Id = ctrlSerieDocumental.ValorDoctal.Id;
+                rm.Clasificacion.Id = ctrlSerieDocumental.Clasificacion.Id;
+                rm.Estatus = true;
+
+                if(rc.IngresarRegisto(rm))//Intentar Ingresar el Registro
+                {
+                    //Intento Exitoso
+
+                    ///<summary>
+                    /// Agregar Documentos Digitalizados
+                    /// </summary>
+                    if (ctrlSerieDocumental.Digitalizado)//Verificar si existen documentos digitalizados
+                    {
+                        int c = 0;
+                        // Si existen documentos digitalizados
+                        foreach (DataRow r in ctrlSerieDocumental.DTDigitalizados.Rows)
+                        {
+                            //Ingresasr uno por uno los documentos digitalizados
+                            byte[] docu = (byte[])r["documento"];
+                            dm.SDoctal.SerieDoctal = rm.SerieDoctal;
+                            dm.Documento = docu;
+                            dm.NombreDoc = r["nombredoc"].ToString();
+                            dm.Extension = r["extension"].ToString();
+                            dm.Tamaño = Convert.ToInt32(r["tamaño"]);
+                            dm.Folio = Convert.ToInt32(r["folio"]);
+                            if(dc.IngresarRegisto(dm))//Intentar Ingresar Registro
+                            {
+                                //Intento Exitoso
+                                c += 1;
+                            }
+                            else
+                            {
+                                MessageBox.Show("ocurrió el siguente error : ".ToUpper() + "\n" + dc.Error.ToUpper(),
+                                    ":: mensaje desde ingresar serie documental-ingresar archivos digitales ::".ToUpper(),
+                                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
+
+                        DialogResult result =  MessageBox.Show("se ingresó la serie documental con exito,".ToUpper() + "\n" +
+                            "la serie documental cuenta con ".ToUpper() + c.ToString() + "archivos digitalizados".ToUpper(),
+                            ":: mensaje desde ingresar serie documental ::".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if(result == DialogResult.OK)//
+                        { Close(); }//Cerar la ventana
+                    }
+                }
+                else//Intento NO Exitoso
+                {
+                    MessageBox.Show("no se ingresó el registro, ocurrió el siguiente error : ".ToUpper() + "\n" + rc.Error.ToUpper(),
+                        ":: mensaje desde agregar serie documental ::".ToUpper(),
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;//Salir
+                }
+            }
+            else//No paso Validación Control Serie Documental
+            {
+
+            }
+        }
     }
 }

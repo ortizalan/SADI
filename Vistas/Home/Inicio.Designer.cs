@@ -73,6 +73,8 @@
             this.pocisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rEPORTESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSecciones = new System.Windows.Forms.ToolStripMenuItem();
+            this.visorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.visorExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -409,7 +411,9 @@
             // rEPORTESToolStripMenuItem
             // 
             this.rEPORTESToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuSecciones});
+            this.MenuSecciones,
+            this.visorToolStripMenuItem,
+            this.visorExcelToolStripMenuItem});
             this.rEPORTESToolStripMenuItem.Name = "rEPORTESToolStripMenuItem";
             this.rEPORTESToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.rEPORTESToolStripMenuItem.Text = "REPORTES";
@@ -420,6 +424,20 @@
             this.MenuSecciones.Size = new System.Drawing.Size(152, 22);
             this.MenuSecciones.Text = "Secciones";
             this.MenuSecciones.Click += new System.EventHandler(this.MenuSecciones_Click);
+            // 
+            // visorToolStripMenuItem
+            // 
+            this.visorToolStripMenuItem.Name = "visorToolStripMenuItem";
+            this.visorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visorToolStripMenuItem.Text = "Visor";
+            this.visorToolStripMenuItem.Click += new System.EventHandler(this.visorToolStripMenuItem_Click);
+            // 
+            // visorExcelToolStripMenuItem
+            // 
+            this.visorExcelToolStripMenuItem.Name = "visorExcelToolStripMenuItem";
+            this.visorExcelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visorExcelToolStripMenuItem.Text = "Visor Excel";
+            this.visorExcelToolStripMenuItem.Click += new System.EventHandler(this.visorExcelToolStripMenuItem_Click);
             // 
             // Inicio
             // 
@@ -488,5 +506,7 @@
         private System.Windows.Forms.ToolStripMenuItem editarNivelesMenu;
         private System.Windows.Forms.ToolStripMenuItem rEPORTESToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MenuSecciones;
+        private System.Windows.Forms.ToolStripMenuItem visorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem visorExcelToolStripMenuItem;
     }
 }

@@ -141,7 +141,10 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"opc", "2"));// Mandarle la opción al procedimiento
                         lista.Add(new Parametros(@"id", di.Id.ToString()));// Identificador del Registro
                         lista.Add(new Parametros(@"seriedoc", di.SDoctal.SerieDoctal));// Serie Documetal
-                        lista.Add(new Parametros(@"docu", di.Documento.ToString()));// Documento Digitalizado
+                        lista.Add(new Parametros(@"docu", Utilerias.BytesToBase64(di.Documento)));// Documento Digitalizado
+                        lista.Add(new Parametros(@"nomdocu", di.NombreDoc));//Nombre del Documento Digitalizado
+                        lista.Add(new Parametros(@"exte", di.Extension));//Extensión del documento digitalizado
+                        lista.Add(new Parametros(@"filesize", di.Tamaño.ToString()));
                         lista.Add(new Parametros(@"folio", di.Folio.ToString()));// Folio del Documento
 
                         string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento

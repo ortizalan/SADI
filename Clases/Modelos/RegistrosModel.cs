@@ -45,10 +45,6 @@ namespace SADI.Clases.Modelos {
 		/// </summary>
 		private DateTime? _fechacierre;
 		/// <summary>
-		/// Propiedad que contiene el nombre del expediente
-		/// </summary>
-		private string _nombreexp;
-		/// <summary>
 		/// Propiedad con la descripción del expediente
 		/// </summary>
 		private string _descripcion;
@@ -133,14 +129,6 @@ namespace SADI.Clases.Modelos {
 		public DateTime? FechaCierre{
             get { return _fechacierre; }
             set { _fechacierre = value; }
-		}
-
-		/// <summary>
-		/// Acceder a la Propiedad Nombre de Expediente
-		/// </summary>
-		public string NombreExp{
-            get { return _nombreexp; }
-            set { _nombreexp = value; }
 		}
 
 		/// <summary>

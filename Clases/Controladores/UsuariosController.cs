@@ -399,7 +399,10 @@ namespace SADI.Clases.Controladores {
                 return false;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool PruebaTablaTemp()
         {
             // Prueba de utilización de tablas temporales
