@@ -26,7 +26,7 @@ namespace SADI.Vistas.Digitalizacion
 
             if(r == DialogResult.OK)
             {
-                ctrlExcelViewer.LoadDocument(ofd.FileName);
+                //ctrlExcelViewer.LoadDocument(ofd.FileName);
             }
 
         }

@@ -153,6 +153,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AxSHDocVw\DWebBrowserEvents2_NavigateComplete2Event.cs" />
+    <Compile Include="AxSHDocVw\DWebBrowserEvents2_NavigateComplete2EventHandler.cs" />
     <Compile Include="Clases\Conexion.cs" />
     <Compile Include="Clases\Controladores\AreasMedicasController.cs" />
     <Compile Include="Clases\Controladores\AtributosController.cs" />
@@ -281,6 +283,12 @@
     <Compile Include="Vistas\Atributos\Presumir.Designer.cs">
       <DependentUpon>Presumir.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Digitalizacion\FrmVisorOffice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Digitalizacion\FrmVisorOffice.Designer.cs">
+      <DependentUpon>FrmVisorOffice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Digitalizacion\VisorPDF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -391,6 +399,12 @@
     <Compile Include="Vistas\Niveles\NivelList.Designer.cs">
       <DependentUpon>NivelList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\SerieDocumental\SerieDocumentalView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\SerieDocumental\SerieDocumentalView.Designer.cs">
+      <DependentUpon>SerieDocumentalView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\SerieDocumental\SerieDocumentalAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +466,9 @@
     <EmbeddedResource Include="Vistas\Atributos\Presumir.resx">
       <DependentUpon>Presumir.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Digitalizacion\FrmVisorOffice.resx">
+      <DependentUpon>FrmVisorOffice.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Digitalizacion\VisorPDF.resx">
       <DependentUpon>VisorPDF.cs</DependentUpon>
     </EmbeddedResource>
@@ -510,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Niveles\NivelList.resx">
       <DependentUpon>NivelList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\SerieDocumental\SerieDocumentalView.resx">
+      <DependentUpon>SerieDocumentalView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\SerieDocumental\SerieDocumentalAdd.resx">
       <DependentUpon>SerieDocumentalAdd.cs</DependentUpon>

@@ -258,6 +258,7 @@ namespace SADI.Clases.Controladores {
                 string proce = "sp_registros_seleccion";//Nombre del Procedimiento
                 List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
                 lista.Add(new Parametros(@"opc", "1"));
+                lista.Add(new Parametros(@"seriedoc", string.Empty));//Vacío
                 lista.Add(new Parametros(@"fondo", code[0]));
                 lista.Add(new Parametros(@"subfondo", code[1]));
                 lista.Add(new Parametros(@"departamento", code[2]));
@@ -293,6 +294,67 @@ namespace SADI.Clases.Controladores {
                 Error = "el objeto no es del tipo registromodel.";
                 return false;
             }
+        }
+        /// <summary>
+        /// Función para Eliminar el Registro de la Serie Documental si falla el ingreso a la Bitácora
+        /// </summary>
+        /// <param name="o">Objeto del tipo Registro</param>
+        /// <returns></returns>
+        public bool EliminarRegistroFallido(object o)
+        {
+            if(o.GetType() == typeof(RegistrosModel))//Verificar que objeto sea del tipo RegistrosModel
+            {
+                var r = (RegistrosModel)o; //Catear la variable al Tipo del Objeto
+
+                string proce = "sp_registros_seleccion"; //Nombre del Procedimiento
+
+                List<Parametros> lista = new List<Parametros>(); //Lista de parámetros del Procedimiento
+                lista.Add(new Parametros(@"opc", "2"));//Opción a ejecutar en el Procedimiento
+                lista.Add(new Parametros(@"seriedoc", r.SerieDoctal));//campo vacío
+                lista.Add(new Parametros(@"fondo", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"subfondo", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"departamento", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"seccion",string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"serie", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"conecutivo", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"año", string.Empty));//Campo Vacío
+
+                if(Abrir())//Intentar abrir la conexión
+                {
+                    //Intento Exitoso
+                    try
+                    {
+                        //Intentar
+                        if(EjecutarProcedimiento(proce,lista))//Ejecutar el Procedimiento
+                        {
+                            //Intento Exitoso
+                            return true;
+                        }
+                        else
+                        {
+                            //Intento NO Existoso, Consultar Error
+                            return false;
+                        }
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();
+                        return false;
+                    }
+                    finally//Por Último
+                    { Cerrar(); }//Cerrar Conexión
+                }
+                else//Intento NO Exitoso, Consultar Error
+                {
+                    return false;
+                }
+            }
+            else//No son del mismo Tipo
+            {
+                Error = "el objeto no es del tipo registrosmodel.cs".ToUpper();
+                return false;
+            }
+
         }
 
 	}//end RegistrosController

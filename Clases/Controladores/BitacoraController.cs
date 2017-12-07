@@ -13,13 +13,14 @@ namespace SADI.Clases.Controladores
         /// Constructor de la Clase
         /// </summary>
 		public BitacoraController()
-		{
-			
-		}
+        {
+
+        }
         /// <summary>
         /// Destructor de la Clase
         /// </summary>
-        ~BitacoraController() {
+        ~BitacoraController()
+        {
         }
 
         /// <summary>
@@ -29,11 +30,11 @@ namespace SADI.Clases.Controladores
         /// <returns>Bolean</returns>
         public override bool ConsultarRegistro(object o)
         {
-            if(o.GetType() == typeof(BitacoraModel))// Verificar si el Objeto es del Tipo BitacoraModel
+            if (o.GetType() == typeof(BitacoraModel))// Verificar si el Objeto es del Tipo BitacoraModel
             {
                 var b = (BitacoraModel)o;// Castear variable "b" al tipo BitacoraModel
 
-                if(Abrir())// Intento de Abrir la conexión
+                if (Abrir())// Intento de Abrir la conexión
                 {
                     // Intento Exitoso
                     try
@@ -47,6 +48,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"usr", string.Empty));
                         lista.Add(new Parametros(@"comp", string.Empty));
                         lista.Add(new Parametros(@"idcom", string.Empty));
+                        lista.Add(new Parametros(@"macadd", string.Empty));
 
                         string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 
@@ -55,7 +57,7 @@ namespace SADI.Clases.Controladores
                         else
                         { return false; }// Consulta NO Exitosa, consultar Error
                     }
-                    catch(Exception e)// Cachar error
+                    catch (Exception e)// Cachar error
                     {
                         Error = e.Message.ToString();// Guardar el Error
                         return false;// Indicar que existió falló
@@ -86,7 +88,7 @@ namespace SADI.Clases.Controladores
                     try
                     {
                         List<Parametros> lista = new List<Parametros>();// Crear una Arreglo de Parámetros
-                        lista.Add(new Parametros(@"opc", "2"));// Enviar la opción al procedimiento
+                        lista.Add(new Parametros(@"opc", "3"));// Enviar la opción al procedimiento
                         lista.Add(new Parametros(@"id", b.Id.ToString()));// La identificación del registro
                         lista.Add(new Parametros(@"seriedoc", b.Registro.SerieDoctal));// Serie Documental del Movimiento
                         lista.Add(new Parametros(@"fecha", b.Fecha.ToString("yyyy-MM-dd")));// Fecha del Movimiento
@@ -94,6 +96,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"usr", b.Usuario.Id.ToString()));// Identificador del Usuario
                         lista.Add(new Parametros(@"comp", b.Computadora));// Nombre de la Computadora
                         lista.Add(new Parametros(@"idcom", b.IdComputadora));// Identificador de la Computadora
+                        lista.Add(new Parametros(@"macadd", b.MacAddress));
 
                         string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 
@@ -133,7 +136,7 @@ namespace SADI.Clases.Controladores
                     try
                     {
                         List<Parametros> lista = new List<Parametros>();// Crear una Arreglo de Parámetros
-                        lista.Add(new Parametros(@"opc", "3"));// Enviar la opción al procedimiento
+                        lista.Add(new Parametros(@"opc", "2"));// Enviar la opción al procedimiento
                         lista.Add(new Parametros(@"id", b.Id.ToString()));// La identificación del registro
                         lista.Add(new Parametros(@"seriedoc", b.Registro.SerieDoctal));// Serie Documental del Movimiento
                         lista.Add(new Parametros(@"fecha", b.Fecha.ToString("yyyy-MM-dd")));// Fecha del Movimiento
@@ -141,6 +144,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"usr", b.Usuario.Id.ToString()));// Identificador del Usuario
                         lista.Add(new Parametros(@"comp", b.Computadora));// Nombre de la Computadora
                         lista.Add(new Parametros(@"idcom", b.IdComputadora));// Identificador de la Computadora
+                        lista.Add(new Parametros(@"macadd", b.MacAddress));
 
                         string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 
@@ -169,38 +173,39 @@ namespace SADI.Clases.Controladores
         /// <returns>Boleano</returns>
         public override bool ConsultarRegistros()
         {
-                if (Abrir())// Intento de Abrir la conexión
+            if (Abrir())// Intento de Abrir la conexión
+            {
+                // Intento Exitoso
+                try
                 {
-                    // Intento Exitoso
-                    try
-                    {
-                        List<Parametros> lista = new List<Parametros>();// Crear una Arreglo de Parámetros
-                        lista.Add(new Parametros(@"opc", "1"));// Enviar la opción al procedimiento
-                        lista.Add(new Parametros(@"id", string.Empty));// La identificación del registro
-                        lista.Add(new Parametros(@"seriedoc", string.Empty));// Serie Documental del Movimiento
-                        lista.Add(new Parametros(@"fecha", string.Empty));// Fecha del Movimiento
-                        lista.Add(new Parametros(@"mov", string.Empty));// Tipo del Moviemiento
-                        lista.Add(new Parametros(@"usr", string.Empty));// Identificador del Usuario
-                        lista.Add(new Parametros(@"comp", string.Empty));// Nombre de la Computadora
-                        lista.Add(new Parametros(@"idcom", string.Empty));// Identificador de la Computadora
+                    List<Parametros> lista = new List<Parametros>();// Crear una Arreglo de Parámetros
+                    lista.Add(new Parametros(@"opc", "1"));// Enviar la opción al procedimiento
+                    lista.Add(new Parametros(@"id", string.Empty));// La identificación del registro
+                    lista.Add(new Parametros(@"seriedoc", string.Empty));// Serie Documental del Movimiento
+                    lista.Add(new Parametros(@"fecha", string.Empty));// Fecha del Movimiento
+                    lista.Add(new Parametros(@"mov", string.Empty));// Tipo del Moviemiento
+                    lista.Add(new Parametros(@"usr", string.Empty));// Identificador del Usuario
+                    lista.Add(new Parametros(@"comp", string.Empty));// Nombre de la Computadora
+                    lista.Add(new Parametros(@"idcom", string.Empty));// Identificador de la Computadora
+                    lista.Add(new Parametros(@"macadd", string.Empty));
 
-                        string proce = "sp_bitacora_crud";// Nombre del Procedimiento
+                    string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 
-                        if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
-                        { return true; }// Consulta Exitosa, Consultar Tabla
-                        else
-                        { return false; }// Consulta NO Exitosa, consultar Error
-                    }
-                    catch (Exception e)// Cachar error
-                    {
-                        Error = e.Message.ToString();// Guardar el Error
-                        return false;// Indicar que existió falló
-                    }
-                    finally { Cerrar(); }// Cerrar Conexción
+                    if (EjecutarProcedimiento(proce, lista))// Consultar el Procedimiento
+                    { return true; }// Consulta Exitosa, Consultar Tabla
+                    else
+                    { return false; }// Consulta NO Exitosa, consultar Error
                 }
-                else
-                { return false; }// No se estableció la conexión, consultar Error
-            
+                catch (Exception e)// Cachar error
+                {
+                    Error = e.Message.ToString();// Guardar el Error
+                    return false;// Indicar que existió falló
+                }
+                finally { Cerrar(); }// Cerrar Conexción
+            }
+            else
+            { return false; }// No se estableció la conexión, consultar Error
+
             throw new NotImplementedException();
         }
     }

@@ -202,9 +202,15 @@ namespace SADI
 
         private void visorExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VisorExcel frmVwExcel = new VisorExcel();
+            FrmVisorOffice frmVwExcel = new FrmVisorOffice();
             frmVwExcel.MdiParent = this;
             frmVwExcel.Show();
+        }
+
+        private void verSeriesActivasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SerieDocumentalView ViewSeries = new SerieDocumentalView();
+
         }
     }
 }

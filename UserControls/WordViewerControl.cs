@@ -109,5 +109,6 @@ namespace SADI.UserControls
             return Path.Combine(Path.GetTempPath(),
                 Path.ChangeExtension(Path.GetRandomFileName(), extension));
         }
+
     }
 }

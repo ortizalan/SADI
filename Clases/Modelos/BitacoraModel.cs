@@ -45,9 +45,14 @@ namespace SADI.Clases.Modelos {
 		/// </summary>
 		private string _computadora;
 		/// <summary>
-		/// Propiedad de la IP o MAC Address desde dónde se realizó el movimiento
+		/// Propiedad de la IP desde dónde se realizó el movimiento
 		/// </summary>
 		private string _idcomputadora;
+        /// <summary>
+        /// Propiedad de la Mac Address de la computadora desde dónde se realizó el moviemiento
+        /// </summary>
+        private string _macaddress;
+
         /// <summary>
         /// Constructor de la clase
         /// </summary>
@@ -71,7 +76,7 @@ namespace SADI.Clases.Modelos {
         /// <param name="comp">Computadora desde dónde se realizó el movimiento</param>
         /// <param name="idcomp">identificador de la computadora desde dónde se realizó el movimiento</param>
         public BitacoraModel(int id, RegistrosModel registro, DateTime fec, MovimientosModel mov,
-            UsuariosModel usr, string comp, string idcomp)
+            UsuariosModel usr, string comp, string idcomp, string macadd)
         {
             this.Id = id;
             this.Registro = registro;
@@ -136,6 +141,14 @@ namespace SADI.Clases.Modelos {
             get { return _idcomputadora; }
             set { _idcomputadora = value; }
 		}
+        /// <summary>
+        /// Acceso a la Propiedad MacAddress del Modelo
+        /// </summary>
+        public string MacAddress
+        {
+            get { return _macaddress; }
+            set { _macaddress = value; }
+        }
 
 	}//end BitacoraModel
 

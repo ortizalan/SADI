@@ -75,6 +75,7 @@
             this.MenuSecciones = new System.Windows.Forms.ToolStripMenuItem();
             this.visorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visorExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verSeriesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +100,8 @@
             this.GenerarNvaSerieMenu,
             this.EditarSerieMenu,
             this.ActualizarSerieMenu,
-            this.CerrarSerieMenu});
+            this.CerrarSerieMenu,
+            this.verSeriesActivasToolStripMenuItem});
             this.SerieDoctalesMenu.Image = global::SADI.Properties.Resources.Files_icon;
             this.SerieDoctalesMenu.Name = "SerieDoctalesMenu";
             this.SerieDoctalesMenu.Size = new System.Drawing.Size(163, 20);
@@ -421,23 +423,31 @@
             // MenuSecciones
             // 
             this.MenuSecciones.Name = "MenuSecciones";
-            this.MenuSecciones.Size = new System.Drawing.Size(152, 22);
+            this.MenuSecciones.Size = new System.Drawing.Size(129, 22);
             this.MenuSecciones.Text = "Secciones";
             this.MenuSecciones.Click += new System.EventHandler(this.MenuSecciones_Click);
             // 
             // visorToolStripMenuItem
             // 
             this.visorToolStripMenuItem.Name = "visorToolStripMenuItem";
-            this.visorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visorToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.visorToolStripMenuItem.Text = "Visor";
             this.visorToolStripMenuItem.Click += new System.EventHandler(this.visorToolStripMenuItem_Click);
             // 
             // visorExcelToolStripMenuItem
             // 
             this.visorExcelToolStripMenuItem.Name = "visorExcelToolStripMenuItem";
-            this.visorExcelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visorExcelToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.visorExcelToolStripMenuItem.Text = "Visor Excel";
             this.visorExcelToolStripMenuItem.Click += new System.EventHandler(this.visorExcelToolStripMenuItem_Click);
+            // 
+            // verSeriesActivasToolStripMenuItem
+            // 
+            this.verSeriesActivasToolStripMenuItem.Image = global::SADI.Properties.Resources.Files_icon;
+            this.verSeriesActivasToolStripMenuItem.Name = "verSeriesActivasToolStripMenuItem";
+            this.verSeriesActivasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verSeriesActivasToolStripMenuItem.Text = "Ver Series Activas";
+            this.verSeriesActivasToolStripMenuItem.Click += new System.EventHandler(this.verSeriesActivasToolStripMenuItem_Click);
             // 
             // Inicio
             // 
@@ -508,5 +518,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuSecciones;
         private System.Windows.Forms.ToolStripMenuItem visorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visorExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verSeriesActivasToolStripMenuItem;
     }
 }

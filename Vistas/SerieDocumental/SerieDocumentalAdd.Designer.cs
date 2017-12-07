@@ -49,8 +49,8 @@
             SADI.Clases.Modelos.SeccionesModel seccionesModel6 = new SADI.Clases.Modelos.SeccionesModel();
             SADI.Clases.Modelos.ValoresDoctalesModel valoresDoctalesModel2 = new SADI.Clases.Modelos.ValoresDoctalesModel();
             this.cmdOUT = new System.Windows.Forms.Button();
-            this.ctrlSerieDocumental = new SADI.UserControls.SerieDocumental();
             this.cmdIN = new System.Windows.Forms.Button();
+            this.ctrlSerieDocumental = new SADI.UserControls.SerieDocumental();
             this.SuspendLayout();
             // 
             // cmdOUT
@@ -64,6 +64,17 @@
             this.cmdOUT.Text = ":: SALIR ::";
             this.cmdOUT.UseVisualStyleBackColor = true;
             this.cmdOUT.Click += new System.EventHandler(this.cmdOUT_Click);
+            // 
+            // cmdIN
+            // 
+            this.cmdIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdIN.Location = new System.Drawing.Point(628, 545);
+            this.cmdIN.Name = "cmdIN";
+            this.cmdIN.Size = new System.Drawing.Size(136, 42);
+            this.cmdIN.TabIndex = 13;
+            this.cmdIN.Text = ":: INGRESAR ::";
+            this.cmdIN.UseVisualStyleBackColor = true;
+            this.cmdIN.Click += new System.EventHandler(this.cmdIN_Click);
             // 
             // ctrlSerieDocumental
             // 
@@ -120,11 +131,12 @@
             this.ctrlSerieDocumental.Estatus = false;
             this.ctrlSerieDocumental.Extension = null;
             this.ctrlSerieDocumental.FechaCierreSerie = new System.DateTime(((long)(0)));
-            this.ctrlSerieDocumental.FechaSerie = new System.DateTime(((long)(0)));
-            this.ctrlSerieDocumental.Location = new System.Drawing.Point(2, 3);
+            this.ctrlSerieDocumental.FechaSerie = new System.DateTime(2017, 11, 30, 14, 13, 25, 825);
+            this.ctrlSerieDocumental.Location = new System.Drawing.Point(12, -1);
             this.ctrlSerieDocumental.Name = "ctrlSerieDocumental";
             this.ctrlSerieDocumental.NombreExpediente = null;
             this.ctrlSerieDocumental.NumeroSerieDocumental = null;
+            this.ctrlSerieDocumental.OtraInfo = null;
             seccionesModel3.Id = null;
             seccionesModel3.Seccion = null;
             this.ctrlSerieDocumental.Seccion = seccionesModel3;
@@ -135,8 +147,8 @@
             seriesModel2.Seccion = seccionesModel4;
             seriesModel2.Serie = null;
             this.ctrlSerieDocumental.Serie = seriesModel2;
-            this.ctrlSerieDocumental.Size = new System.Drawing.Size(890, 536);
-            this.ctrlSerieDocumental.TabIndex = 12;
+            this.ctrlSerieDocumental.Size = new System.Drawing.Size(890, 540);
+            this.ctrlSerieDocumental.TabIndex = 14;
             temasModel2.Id = 0;
             seccionesModel5.Id = null;
             seccionesModel5.Seccion = null;
@@ -154,25 +166,14 @@
             valoresDoctalesModel2.Valor = null;
             this.ctrlSerieDocumental.ValorDoctal = valoresDoctalesModel2;
             // 
-            // cmdIN
-            // 
-            this.cmdIN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdIN.Location = new System.Drawing.Point(628, 545);
-            this.cmdIN.Name = "cmdIN";
-            this.cmdIN.Size = new System.Drawing.Size(136, 42);
-            this.cmdIN.TabIndex = 13;
-            this.cmdIN.Text = ":: INGRESAR ::";
-            this.cmdIN.UseVisualStyleBackColor = true;
-            this.cmdIN.Click += new System.EventHandler(this.cmdIN_Click);
-            // 
             // SerieDocumentalAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(904, 596);
+            this.Controls.Add(this.ctrlSerieDocumental);
             this.Controls.Add(this.cmdIN);
             this.Controls.Add(this.cmdOUT);
-            this.Controls.Add(this.ctrlSerieDocumental);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SerieDocumentalAdd";
             this.Text = "SerieDocumentalAdd";
@@ -182,7 +183,8 @@
 
         #endregion
         private System.Windows.Forms.Button cmdOUT;
-        private UserControls.SerieDocumental ctrlSerieDocumental;
+       
         private System.Windows.Forms.Button cmdIN;
+        private UserControls.SerieDocumental ctrlSerieDocumental;
     }
 }

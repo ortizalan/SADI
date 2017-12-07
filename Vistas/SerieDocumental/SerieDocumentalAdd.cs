@@ -33,6 +33,8 @@ namespace SADI.Vistas.SerieDocumental
         ValoresDoctalesController vdc = new ValoresDoctalesController();//Controlador de las Valoraciones Documentales
         DigitalizacionesModel dm = new DigitalizacionesModel();// Modelo de las Digitalizaciones
         DigitalizacionesController dc = new DigitalizacionesController();//Controlador de las Digitalizaciones
+        BitacoraController bc = new BitacoraController();//Controlador de la Bitácora
+        BitacoraModel bm = new BitacoraModel();//Modelo de la Bitácora
         TextBox txtDesc = new TextBox();
         TextBox txtOtrai = new TextBox();
         #endregion
@@ -268,6 +270,45 @@ namespace SADI.Vistas.SerieDocumental
                 if(rc.IngresarRegisto(rm))//Intentar Ingresar el Registro
                 {
                     //Intento Exitoso
+
+                    //////////////////////////////////////////////
+                    //// INGRESO A LA BITACORA DEL MOVIMIENTO ////
+                    //////////////////////////////////////////////
+                    #region Ingresar a la Bitacora
+
+                    bm.Registro.SerieDoctal = rm.SerieDoctal;
+                    bm.Fecha = DateTime.Now;
+                    bm.Movimiento.Id = 1;
+                    bm.Usuario.Id = am.Usuario.Id;
+                    bm.Computadora = System.Net.Dns.GetHostName();
+                    System.Net.IPAddress[] ipaddress = System.Net.Dns.GetHostAddresses(bm.Computadora);
+
+                    foreach(System.Net.IPAddress ip in ipaddress)
+                    {
+                        if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            bm.IdComputadora = ip.ToString();
+                        }
+                        if(ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                        {
+                            bm.MacAddress = ip.ToString();
+                        }
+                    }
+
+                    ///Ingresar a la Bitácora el Movimiento
+                    if(bc.IngresarRegisto(bm))
+                    {
+                        //Intento Exitoso
+                    }
+                    else
+                    {
+                        MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + bc.Error.ToUpper(),
+                            "..:: mensaje desde ingresar serie documental/bitácora ::..".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        rc.EliminarRegistroFallido(rm);
+                    }
+
+                    #endregion
 
                     ///<summary>
                     /// Agregar Documentos Digitalizados
