@@ -16,14 +16,14 @@ namespace SADI.Reportes.Catalogos {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class SeccionesReporte : ReportClass {
+    public class CrystalReport1 : ReportClass {
         
-        public SeccionesReporte() {
+        public CrystalReport1() {
         }
         
         public override string ResourceName {
             get {
-                return "SeccionesReporte.rpt";
+                return "CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SADI.Reportes.Catalogos {
         
         public override string FullResourceName {
             get {
-                return "SADI.Reportes.Catalogos.SeccionesReporte.rpt";
+                return "SADI.Reportes.Catalogos.CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace SADI.Reportes.Catalogos {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedSeccionesReporte : Component, ICachedReport {
+    public class CachedCrystalReport1 : Component, ICachedReport {
         
-        public CachedSeccionesReporte() {
+        public CachedCrystalReport1() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace SADI.Reportes.Catalogos {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            SeccionesReporte rpt = new SeccionesReporte();
+            CrystalReport1 rpt = new CrystalReport1();
             rpt.Site = this.Site;
             return rpt;
         }

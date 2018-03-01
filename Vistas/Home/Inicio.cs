@@ -158,9 +158,11 @@ namespace SADI
         private void GenerarNvaSerieMenu_Click(object sender, EventArgs e)
         {
             //Usuario temporal, es para pruebas
-           
-            SerieDocumentalAdd nsd = new SerieDocumentalAdd(um);
-            nsd.MdiParent = this;
+
+            SerieDocumentalAdd nsd = new SerieDocumentalAdd(um)
+            {
+                MdiParent = this
+            };
             nsd.Show();
         }
 

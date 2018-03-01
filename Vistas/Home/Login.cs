@@ -36,67 +36,98 @@ namespace SADI.Vistas.Home
 
         private void cmdIN_Click(object sender, EventArgs e)
         {
-            if(this.validarControles())
+            if (this.validarControles())
             {
                 this.llenarObjetoUsuario();
-                if(uc.validarUsuario(um))
+                if (uc.validarUsuario(um))//Verificar si existe el usuario
                 {
-                    if(uc.validarContraseña(um))
+                    if (uc.Tabla.Rows.Count > 0)//Ver si existe registro del usuario
                     {
-                        if (uc.obtenerId_Estatus(um))
+                        if (uc.validarContraseña(um))//Verificar si es correcta la contraseña
                         {
-                            if ((bool)uc.Tabla.Rows[0][1])
+                            if (uc.Tabla.Rows.Count > 0)// SI es correcta la contraseña
                             {
-                                Utilerias.IdUsuario = (int)uc.Tabla.Rows[0][0];
-                                this.DialogResult = DialogResult.OK;
+                                if (uc.obtenerId_Estatus(um))//Verificar el Estatus del Usuario
+                                {
+                                    if ((bool)uc.Tabla.Rows[0][1])//Validar el Estatus
+                                    {
+                                        Utilerias.IdUsuario = (int)uc.Tabla.Rows[0][0];
+                                        this.DialogResult = DialogResult.OK;//Estatus Activo
+                                    }
+                                    else//Estatus Inactivo
+                                    {
+                                        MessageBox.Show("usuario desactivado.".ToUpper(),
+                                            "..:: mensaje del sistema ::..".ToUpper(),
+                                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Ocurrió el siguiente error :" +
+                                        "\n" + uc.Error, "..:: mensaje desde el login del sistema ::..".ToUpper(),
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    this.Close();
+                                }
                             }
-                            else
+                            else // No es correcta la contraseña
                             {
-                                MessageBox.Show("usuario desactivado.".ToUpper(),
-                                    "..:: mensaje del sistema ::..".ToUpper(),
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show("la contraseña proporcionada es incorrecta.".ToUpper() + "\n" +
+                            "intente nuevamente.".ToUpper(), ":: mensaje desde login ::".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                // Limpiar los campos y enfocar en el usuario
+                                txtContraseña.Clear();
+                                txtContraseña.Focus();
+                                return;
                             }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ocurrió el siguiente error :" +
-                                "\n" + uc.Error, "..:: mensaje desde el login del sistema ::..".ToUpper(),
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
+                    else //NO Existe el Usuario en la Base de Datos
+                    {
+                        MessageBox.Show("no existe el usuario en la base de datos.".ToUpper() + "\n" +
+                            "intente nuevamente.".ToUpper(), ":: mensaje desde login ::".ToUpper(),
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        // Limpiar los campos y enfocar en el usuario
+                        txtUsuario.Clear();
+                        txtContraseña.Clear();
+                        txtUsuario.Focus();
+                        return;
+                    }
                 }
-                else
+                else// No Existe Usuario
                 {
+                    //Mostrar el Error
                     MessageBox.Show("Ocurrió el siguiente error :" +
-                        "\n" + uc.Error,"..:: mensaje desde el login del sistema ::..".ToUpper(),
+                        "\n" + uc.Error, "..:: mensaje desde el login del sistema ::..".ToUpper(),
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();//Cerrar la ventana / aplicación
                 }
             }
         }
-       /// <summary>
-       /// Validaciones de los Controles
-       /// </summary>
-       /// <returns>Boleano</returns>
+        /// <summary>
+        /// Validaciones de los Controles
+        /// </summary>
+        /// <returns>Boleano</returns>
         private bool validarControles()
         {
-            if(!string.IsNullOrEmpty(txtUsuario.Text))// Qué no esté vacío el campo de usuario
+            if (!string.IsNullOrEmpty(txtUsuario.Text))// Qué no esté vacío el campo de usuario
             {
-                if(txtUsuario.Text.Length >= 6)// Usuario no puede ser menor a 6 caracteres
+                if (txtUsuario.Text.Length >= 6)// Usuario no puede ser menor a 6 caracteres
                 {
-                    if(!string.IsNullOrEmpty(txtContraseña.Text))//Que no esté vacío el campo de contraseña
+                    if (!string.IsNullOrEmpty(txtContraseña.Text))//Que no esté vacío el campo de contraseña
                     {
-                        if(txtContraseña.Text.Length >= 6)// si contraseña es menor a 6 Caracteres
+                        if (txtContraseña.Text.Length >= 6)// si contraseña es menor a 6 Caracteres
                         {
-                            return true;
+                            return true;// Todo bien
                         }
                         else
                         {
                             MessageBox.Show("la contraseña no puede ser menor a 6 caracteres.".ToUpper(),
                                 "..:: mensaje del sistema ::..".ToUpper(),
-                                MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             txtContraseña.SelectAll();
                             txtContraseña.Focus();
-                            return false;
+                            return false;//Envia Advertencia
                         }
                     }
                     else
@@ -105,10 +136,10 @@ namespace SADI.Vistas.Home
                             "..:: mensaje del sistema ::..".ToUpper(),
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         txtContraseña.Focus();
-                        return false;
+                        return false;//Envía Advertencia
                     }
                 }
-                else
+                else//Si está vacío el campo de la contraseña
                 {
                     MessageBox.Show("el campo usuario no puede ser menor a 6 caracteres.".ToUpper(),
                         "..:: mensaje del sistema ::..".ToUpper(),

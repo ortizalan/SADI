@@ -144,7 +144,7 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"usr", b.Usuario.Id.ToString()));// Identificador del Usuario
                         lista.Add(new Parametros(@"comp", b.Computadora));// Nombre de la Computadora
                         lista.Add(new Parametros(@"idcom", b.IdComputadora));// Identificador de la Computadora
-                        lista.Add(new Parametros(@"macadd", b.MacAddress));
+                        //lista.Add(new Parametros(@"macadd", b.MacAddress));
 
                         string proce = "sp_bitacora_crud";// Nombre del Procedimiento
 

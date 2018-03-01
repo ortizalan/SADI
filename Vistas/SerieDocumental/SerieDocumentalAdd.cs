@@ -132,13 +132,13 @@ namespace SADI.Vistas.SerieDocumental
         /// </summary>
         private void LLenarClasificaciones()
         {
-            if (cc.ConsultarRegistros())
+            if (cc.ConsultarRegistros())//Hacer la consulta de las Clasificaciones Doscumentales
             {
-                if (cc.Tabla.Rows.Count > 0)
+                if (cc.Tabla.Rows.Count > 0)//Si existen registros en la consulta
                 {
-                    ctrlSerieDocumental.ClasificacionesT = cc.Tabla;
+                    ctrlSerieDocumental.ClasificacionesT = cc.Tabla;// LLenar Tabla de Clasificaciones del Control Serie Documental
                 }
-                else
+                else//Consulta NO Exitosa
                 {
                     MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + cc.Error.ToUpper(),
                         ":: mensaje desde ingresar serie documental ::".ToUpper(),
@@ -276,22 +276,22 @@ namespace SADI.Vistas.SerieDocumental
                     //////////////////////////////////////////////
                     #region Ingresar a la Bitacora
 
-                    bm.Registro.SerieDoctal = rm.SerieDoctal;
-                    bm.Fecha = DateTime.Now;
-                    bm.Movimiento.Id = 1;
-                    bm.Usuario.Id = am.Usuario.Id;
-                    bm.Computadora = System.Net.Dns.GetHostName();
-                    System.Net.IPAddress[] ipaddress = System.Net.Dns.GetHostAddresses(bm.Computadora);
+                    bm.Registro.SerieDoctal = rm.SerieDoctal;//Número de la serie documental
+                    bm.Fecha = DateTime.Now;//Fecha del movimiento
+                    bm.Movimiento.Id = 1;//Id del movimiento
+                    bm.Usuario.Id = am.Usuario.Id;//Id del usuario
+                    bm.Computadora = System.Net.Dns.GetHostName();//Nombre de la computadora
+                    System.Net.IPAddress[] ipaddress = System.Net.Dns.GetHostAddresses(bm.Computadora);//IP de la computadora
 
                     foreach(System.Net.IPAddress ip in ipaddress)
                     {
                         if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                         {
-                            bm.IdComputadora = ip.ToString();
+                            bm.IdComputadora = ip.ToString();//Identificar si es es IP
                         }
                         if(ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
                         {
-                            bm.MacAddress = ip.ToString();
+                            bm.MacAddress = ip.ToString();//Identificar si es MacAddress
                         }
                     }
 
@@ -300,7 +300,7 @@ namespace SADI.Vistas.SerieDocumental
                     {
                         //Intento Exitoso
                     }
-                    else
+                    else//Intento NO Exitoso, mostrar el Error
                     {
                         MessageBox.Show("ocurrió el siguiente error :".ToUpper() + "\n" + bc.Error.ToUpper(),
                             "..:: mensaje desde ingresar serie documental/bitácora ::..".ToUpper(),
@@ -356,6 +356,12 @@ namespace SADI.Vistas.SerieDocumental
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;//Salir
                 }
+
+                ////////////////////////////////////////////
+                ///////////// Limpiar Control///////////////
+                ////////////////////////////////////////////
+
+
             }
             else//No paso Validación Control Serie Documental
             {

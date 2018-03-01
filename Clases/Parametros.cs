@@ -33,10 +33,6 @@ namespace SADI.Clases {
             ValorParametro = valor;
 		}
 
-		~Parametros(){
-
-		}
-
 		/// <summary>
 		/// Asignar el Nombre del Parámetro
 		/// </summary>

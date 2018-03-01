@@ -258,7 +258,7 @@ namespace SADI.Clases.Controladores {
                 string proce = "sp_registros_seleccion";//Nombre del Procedimiento
                 List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
                 lista.Add(new Parametros(@"opc", "1"));
-                lista.Add(new Parametros(@"seriedoc", string.Empty));//Vacío
+                //lista.Add(new Parametros(@"seriedoc", string.Empty));//Vacío
                 lista.Add(new Parametros(@"fondo", code[0]));
                 lista.Add(new Parametros(@"subfondo", code[1]));
                 lista.Add(new Parametros(@"departamento", code[2]));
@@ -310,7 +310,7 @@ namespace SADI.Clases.Controladores {
 
                 List<Parametros> lista = new List<Parametros>(); //Lista de parámetros del Procedimiento
                 lista.Add(new Parametros(@"opc", "2"));//Opción a ejecutar en el Procedimiento
-                lista.Add(new Parametros(@"seriedoc", r.SerieDoctal));//campo vacío
+                //lista.Add(new Parametros(@"seriedoc", r.SerieDoctal));//campo vacío
                 lista.Add(new Parametros(@"fondo", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"subfondo", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"departamento", string.Empty));//Campo Vacío
