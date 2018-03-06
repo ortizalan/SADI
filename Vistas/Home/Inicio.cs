@@ -12,7 +12,7 @@ using SADI.Vistas.SerieDocumental;
 using SADI.Clases;
 using SADI.Reportes.Catalogos;
 using SADI.Reportes;
-using SADI.DataSets.Catalogos;
+using SADI.DataSets.CatalogosRepos;
 
 namespace SADI
 {
@@ -166,47 +166,54 @@ namespace SADI
             nsd.Show();
         }
 
-        private void MenuSecciones_Click(object sender, EventArgs e)
-        {
-            ReportesVista RepoView = new ReportesVista();//Instancia de la Forma
-            SeccionesReporte repo = new SeccionesReporte();//Instancia del Reporte
-            DSCatalogos DS = new DSCatalogos();//Instancia del DataSet
-            SeccionesController sc = new SeccionesController();//Instancia del Controlador
-            if(sc.ConsultarRegistros())//Intentamos la COnsulta
-            {
-                //INtento Exitoso
-                foreach(DataRow dtr in sc.Tabla.Rows)//Barremos la Tabla
-                {
-                    DataRow dsr = DS.Secciones.NewRow();//Renglón de la tabla Secciones
-                    dsr[0] = dtr[0];//Identificador
-                    dsr[1] = dtr[1];//Descripcion
-                    DS.Secciones.Rows.Add(dsr);//Agregamos el Renglón a la Tabla
-                }
+        //private void MenuSecciones_Click(object sender, EventArgs e)
+        //{
+        //    ReportesVista RepoView = new ReportesVista();//Instancia de la Forma
+        //    SeccionesReporte repo = new SeccionesReporte();//Instancia del Reporte
+        //    DSCatalogos DS = new DSCatalogos();//Instancia del DataSet
+        //    SeccionesController sc = new SeccionesController();//Instancia del Controlador
+        //    if(sc.ConsultarRegistros())//Intentamos la COnsulta
+        //    {
+        //        //INtento Exitoso
+        //        foreach(DataRow dtr in sc.Tabla.Rows)//Barremos la Tabla
+        //        {
+        //            DataRow dsr = DS.Secciones.NewRow();//Renglón de la tabla Secciones
+        //            dsr[0] = dtr[0];//Identificador
+        //            dsr[1] = dtr[1];//Descripcion
+        //            DS.Secciones.Rows.Add(dsr);//Agregamos el Renglón a la Tabla
+        //        }
 
-                repo.SetDataSource(DS);//Indicamos la fuente de datos al reporte
-                RepoView.crViewer.ReportSource = repo;//Indicamos el reporte al Viewer
-                RepoView.MdiParent = this;//Indicamos la forma contenedora
-                RepoView.Show();//Mostramos el Reporte
-            }
-            else//Intento NO Exitoso, Consultar Error
-            {
+        //        repo.SetDataSource(DS);//Indicamos la fuente de datos al reporte
+        //        RepoView.crViewer.ReportSource = repo;//Indicamos el reporte al Viewer
+        //        RepoView.MdiParent = this;//Indicamos la forma contenedora
+        //        RepoView.Show();//Mostramos el Reporte
+        //    }
+        //    else//Intento NO Exitoso, Consultar Error
+        //    {
 
-            }
+        //    }
 
-        }
+        //}
 
         private void visorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VisorWord frmVwWord = new VisorWord();
-            frmVwWord.MdiParent = this;
-            frmVwWord.Show();
+            //VisorWord frmVwWord = new VisorWord();
+            //frmVwWord.MdiParent = this;
+            //frmVwWord.Show();
+            FrmVisorOffice visor = new FrmVisorOffice();
+            visor.MdiParent=this;
+            visor.Show();
+
         }
 
         private void visorExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmVisorOffice frmVwExcel = new FrmVisorOffice();
-            frmVwExcel.MdiParent = this;
-            frmVwExcel.Show();
+            //FrmVisorOffice frmVwExcel = new FrmVisorOffice();
+            //frmVwExcel.MdiParent = this;
+            //frmVwExcel.Show();
+            VisorPDF visor = new VisorPDF();
+            visor.MdiParent = this;
+            visor.Show();
         }
 
         private void verSeriesActivasToolStripMenuItem_Click(object sender, EventArgs e)

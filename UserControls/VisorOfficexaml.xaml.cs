@@ -19,13 +19,16 @@ using System.Windows.Shapes;
 namespace SADI.UserControls
 {
     /// <summary>
-    /// Interaction logic for VisorOfficexaml.xaml
+    /// Control del Visor Office
     /// </summary>
     public partial class VisorOfficexaml : System.Windows.Controls.UserControl
     {
         System.Windows.Xps.Packaging.XpsDocument xpsDoc;
         public static bool officeFileOpen_Status = false;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public VisorOfficexaml()
         {
             InitializeComponent();
@@ -35,26 +38,26 @@ namespace SADI.UserControls
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             string xpsFilePath = String.Empty;
-            // Set filter for file extension and default file extension 
+            // Filtro para seleccionar documentos de Office 
             dlg.DefaultExt = ".txt";
             dlg.Filter = "Office Files(*.docx;*.doc;*.xlsx;*.xls;*.pptx;*.ppt)|*.docx;*.doc;*.xlsx;*.xls;*.pptx;*.ppt";
 
-            // Display OpenFileDialog by calling ShowDialog method 
+            // Mostrar OpenFileDialog a través del método ShowDialog 
             Nullable<bool> result = dlg.ShowDialog();
 
-            // Get the selected file name and display in a TextBox 
+            //Tomar el Nombre del Archivo Seleccionado y mostrarlos en el TextBox
             if (result == true)
             {
-                string filename = dlg.FileName;
-                xpsFilePath = System.Environment.CurrentDirectory + "\\" + dlg.SafeFileName + ".xps";
-                SourceUrl.Text = filename;
+                string filename = dlg.FileName;//Guardar el Nombre del Archivo
+                xpsFilePath = System.Environment.CurrentDirectory + "\\" + dlg.SafeFileName + ".xps";// Cambiar el Nombre del Archivo (extensión)
+                SourceUrl.Text = filename;//Indicarle el Nombre del Archivo a la fuente
             }
 
-            var convertResults = OfficeToXps.ConvertToXps(SourceUrl.Text, ref xpsFilePath);
-            switch (convertResults.Result)
+            var convertResults = OfficeToXps.ConvertToXps(SourceUrl.Text, ref xpsFilePath);//Conversión del archivo a XPS
+            switch (convertResults.Result)//Evaluar la Conversión
             {
-                case ConversionResult.OK:
-                    xpsDoc = new System.Windows.Xps.Packaging.XpsDocument(xpsFilePath, FileAccess.ReadWrite);
+                case ConversionResult.OK://Conversión Correcta
+                    xpsDoc = new System.Windows.Xps.Packaging.XpsDocument(xpsFilePath, FileAccess.ReadWrite);//Asignar el Documento XPS
                     documentViewer1.Document = xpsDoc.GetFixedDocumentSequence();
                     officeFileOpen_Status = true;
                     break;
@@ -132,6 +135,11 @@ namespace SADI.UserControls
             }
         }
 
+        /// <summary>
+        /// Método para la Selección de Una Sola Página
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Single_Page_Image_Click(object sender, RoutedEventArgs e)
         {
             MyPopUp.IsOpen = true;
@@ -139,7 +147,11 @@ namespace SADI.UserControls
             MyPopUp.PlacementTarget = Single_Page_Image;
             Keyboard.Focus(PageNumberBox);
         }
-
+        /// <summary>
+        /// Salvar una sola Página como Imagen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SinglePageImage_Click(object sender, RoutedEventArgs e)
         {
             MyPopUp.IsOpen = false;
@@ -195,7 +207,11 @@ namespace SADI.UserControls
                 System.Windows.MessageBox.Show("Please Select a Folder Loaction to Store the Images", "Select a Folder Loaction", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
+        /// <summary>
+        /// Método para guardar la Ruta de la Conversión
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DestinationLoaction_Click(object sender, RoutedEventArgs e)
         {
             if (officeFileOpen_Status)

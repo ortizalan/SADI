@@ -44,7 +44,7 @@
             this.dgvSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeries.Location = new System.Drawing.Point(0, 32);
             this.dgvSeries.Name = "dgvSeries";
-            this.dgvSeries.Size = new System.Drawing.Size(588, 303);
+            this.dgvSeries.Size = new System.Drawing.Size(605, 303);
             this.dgvSeries.TabIndex = 0;
             // 
             // dgvDigitalizados
@@ -54,7 +54,7 @@
             this.dgvDigitalizados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDigitalizados.Location = new System.Drawing.Point(593, 32);
             this.dgvDigitalizados.Name = "dgvDigitalizados";
-            this.dgvDigitalizados.Size = new System.Drawing.Size(377, 303);
+            this.dgvDigitalizados.Size = new System.Drawing.Size(394, 303);
             this.dgvDigitalizados.TabIndex = 1;
             // 
             // label1
@@ -83,6 +83,7 @@
             // 
             // cmdOUT
             // 
+            this.cmdOUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdOUT.Location = new System.Drawing.Point(845, 389);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(118, 55);
@@ -94,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(970, 452);
+            this.ClientSize = new System.Drawing.Size(987, 452);
             this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

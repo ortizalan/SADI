@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace SADI.DataSets.Catalogos {
+namespace SADI.DataSets.CatalogosRepos {
     
     
     /// <summary>

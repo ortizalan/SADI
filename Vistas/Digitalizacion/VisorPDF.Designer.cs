@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 360);
+            this.ClientSize = new System.Drawing.Size(473, 526);
             this.Name = "VisorPDF";
             this.Text = "VisorPDF";
             this.ResumeLayout(false);

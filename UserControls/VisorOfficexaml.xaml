@@ -32,10 +32,10 @@
         <!--<TextBlock Height="Auto" Width="Auto" FontSize="150" HorizontalAlignment="Left"  Name="textBlock1" Text="TextBlock" VerticalAlignment="Top" />-->
         <StackPanel Orientation="Horizontal" Margin="0,5,0,5" HorizontalAlignment="Center">
             <TextBlock x:Name="SourceUrl" Opacity="0.5"  Margin="20,0,10,0" Text="Open a Source File(.docx,.xlsx,.pptx)"></TextBlock>
-            <Button x:Name="OpenSourceFile"  Margin="20,0,10,0" Content="OpenSourceFile(.docx,.xlsx,.pptx)" Click="OpenSourceFile_Click"></Button>
-            <Button x:Name="ConvertImages"  Margin="20,0,10,0" Content="Convert all the Pages to Images" Click="ConvertImages_Click"></Button>
-            <Button x:Name="Single_Page_Image" Margin="20,0,10,0" Content="Convert a Particular Page to Image" Click="Single_Page_Image_Click"></Button>
-            <Button x:Name="DestinationLoaction"  Margin="20,0,10,0" Content="Convert to XPS Document" Click="DestinationLoaction_Click"></Button>
+            <Button x:Name="OpenSourceFile"  Margin="20,0,10,0" Content="Abrir Documentos Office(.docx,.xlsx,.pptx)" Click="OpenSourceFile_Click"></Button>
+            <Button x:Name="ConvertImages"  Margin="20,0,10,0" Content="Convertir Páginas a Imagen" Click="ConvertImages_Click"></Button>
+            <Button x:Name="Single_Page_Image" Margin="20,0,10,0" Content="Convertir Una Página a Imagen" Click="Single_Page_Image_Click"></Button>
+            <Button x:Name="DestinationLoaction"  Margin="20,0,10,0" Content="Convertir a Documento XPS" Click="DestinationLoaction_Click"></Button>
         </StackPanel>
         <DocumentViewer Grid.Row="1" HorizontalAlignment="Left" Name="documentViewer1" VerticalAlignment="Top" Margin="36,0,0,0"/>
     </Grid>

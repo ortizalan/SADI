@@ -35,6 +35,7 @@
             this.EditarSerieMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ActualizarSerieMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.CerrarSerieMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.verSeriesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TransferenciasMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EnviarTransferenciaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ImprimirCaratulaMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +76,6 @@
             this.MenuSecciones = new System.Windows.Forms.ToolStripMenuItem();
             this.visorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visorExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verSeriesActivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSADI.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,14 +102,12 @@
             this.ActualizarSerieMenu,
             this.CerrarSerieMenu,
             this.verSeriesActivasToolStripMenuItem});
-            this.SerieDoctalesMenu.Image = global::SADI.Properties.Resources.Files_icon;
             this.SerieDoctalesMenu.Name = "SerieDoctalesMenu";
-            this.SerieDoctalesMenu.Size = new System.Drawing.Size(163, 20);
+            this.SerieDoctalesMenu.Size = new System.Drawing.Size(147, 20);
             this.SerieDoctalesMenu.Text = "SERIES DOCUMENTALES";
             // 
             // GenerarNvaSerieMenu
             // 
-            this.GenerarNvaSerieMenu.Image = global::SADI.Properties.Resources.Add_File_icon;
             this.GenerarNvaSerieMenu.Name = "GenerarNvaSerieMenu";
             this.GenerarNvaSerieMenu.Size = new System.Drawing.Size(180, 22);
             this.GenerarNvaSerieMenu.Text = "Generar Nueva Serie";
@@ -117,24 +115,28 @@
             // 
             // EditarSerieMenu
             // 
-            this.EditarSerieMenu.Image = global::SADI.Properties.Resources.File_Edit_icon;
             this.EditarSerieMenu.Name = "EditarSerieMenu";
             this.EditarSerieMenu.Size = new System.Drawing.Size(180, 22);
             this.EditarSerieMenu.Text = "Editar Serie";
             // 
             // ActualizarSerieMenu
             // 
-            this.ActualizarSerieMenu.Image = global::SADI.Properties.Resources.File_icon;
             this.ActualizarSerieMenu.Name = "ActualizarSerieMenu";
             this.ActualizarSerieMenu.Size = new System.Drawing.Size(180, 22);
             this.ActualizarSerieMenu.Text = "Actualizar Serie";
             // 
             // CerrarSerieMenu
             // 
-            this.CerrarSerieMenu.Image = global::SADI.Properties.Resources.File_Block_icon;
             this.CerrarSerieMenu.Name = "CerrarSerieMenu";
             this.CerrarSerieMenu.Size = new System.Drawing.Size(180, 22);
             this.CerrarSerieMenu.Text = "Cerrar Serie";
+            // 
+            // verSeriesActivasToolStripMenuItem
+            // 
+            this.verSeriesActivasToolStripMenuItem.Name = "verSeriesActivasToolStripMenuItem";
+            this.verSeriesActivasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verSeriesActivasToolStripMenuItem.Text = "Ver Series Activas";
+            this.verSeriesActivasToolStripMenuItem.Click += new System.EventHandler(this.verSeriesActivasToolStripMenuItem_Click);
             // 
             // TransferenciasMenu
             // 
@@ -142,9 +144,8 @@
             this.EnviarTransferenciaMenu,
             this.ImprimirCaratulaMenu,
             this.ImprimirInventarioMenu});
-            this.TransferenciasMenu.Image = global::SADI.Properties.Resources.Arrow_Shuffle_icon;
             this.TransferenciasMenu.Name = "TransferenciasMenu";
-            this.TransferenciasMenu.Size = new System.Drawing.Size(131, 20);
+            this.TransferenciasMenu.Size = new System.Drawing.Size(115, 20);
             this.TransferenciasMenu.Text = "TRANSFERENCIAS";
             // 
             // EnviarTransferenciaMenu
@@ -167,9 +168,8 @@
             // 
             // pRÉSTAMOSToolStripMenuItem
             // 
-            this.pRÉSTAMOSToolStripMenuItem.Image = global::SADI.Properties.Resources.Box_withFolders_icon;
             this.pRÉSTAMOSToolStripMenuItem.Name = "pRÉSTAMOSToolStripMenuItem";
-            this.pRÉSTAMOSToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.pRÉSTAMOSToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.pRÉSTAMOSToolStripMenuItem.Text = "PRÉSTAMOS";
             // 
             // toolStripMenuItem1
@@ -178,9 +178,8 @@
             this.lugaresDisponiblesToolStripMenuItem,
             this.asignarLugarToolStripMenuItem,
             this.buscarCajaToolStripMenuItem});
-            this.toolStripMenuItem1.Image = global::SADI.Properties.Resources.Maps_Worldwide_Location_icon;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(142, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(126, 20);
             this.toolStripMenuItem1.Text = "GEOLOCALIZACIÓN";
             // 
             // lugaresDisponiblesToolStripMenuItem
@@ -212,9 +211,8 @@
             this.seriesToolStripMenuItem,
             this.clasificaciónDoctalToolStripMenuItem,
             this.geoLocalizacionToolStripMenuItem});
-            this.pRÉSTAMOSToolStripMenuItem1.Image = global::SADI.Properties.Resources.Folder_Archive_icon;
             this.pRÉSTAMOSToolStripMenuItem1.Name = "pRÉSTAMOSToolStripMenuItem1";
-            this.pRÉSTAMOSToolStripMenuItem1.Size = new System.Drawing.Size(102, 20);
+            this.pRÉSTAMOSToolStripMenuItem1.Size = new System.Drawing.Size(86, 20);
             this.pRÉSTAMOSToolStripMenuItem1.Text = "CATÁLOGOS";
             // 
             // usuariosToolStripMenuItem
@@ -230,7 +228,6 @@
             // 
             // nuevoToolStripMenuItem
             // 
-            this.nuevoToolStripMenuItem.Image = global::SADI.Properties.Resources.user2_add;
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo Usuario";
@@ -238,14 +235,12 @@
             // 
             // editarToolStripMenuItem1
             // 
-            this.editarToolStripMenuItem1.Image = global::SADI.Properties.Resources.user2_edit;
             this.editarToolStripMenuItem1.Name = "editarToolStripMenuItem1";
             this.editarToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.editarToolStripMenuItem1.Text = "Editar Usuario";
             // 
             // verUsuariosToolStripMenuItem
             // 
-            this.verUsuariosToolStripMenuItem.Image = global::SADI.Properties.Resources.user2_search;
             this.verUsuariosToolStripMenuItem.Name = "verUsuariosToolStripMenuItem";
             this.verUsuariosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.verUsuariosToolStripMenuItem.Text = "Ver Usuarios";
@@ -423,31 +418,22 @@
             // MenuSecciones
             // 
             this.MenuSecciones.Name = "MenuSecciones";
-            this.MenuSecciones.Size = new System.Drawing.Size(129, 22);
+            this.MenuSecciones.Size = new System.Drawing.Size(152, 22);
             this.MenuSecciones.Text = "Secciones";
-            this.MenuSecciones.Click += new System.EventHandler(this.MenuSecciones_Click);
             // 
             // visorToolStripMenuItem
             // 
             this.visorToolStripMenuItem.Name = "visorToolStripMenuItem";
-            this.visorToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.visorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.visorToolStripMenuItem.Text = "Visor";
             this.visorToolStripMenuItem.Click += new System.EventHandler(this.visorToolStripMenuItem_Click);
             // 
             // visorExcelToolStripMenuItem
             // 
             this.visorExcelToolStripMenuItem.Name = "visorExcelToolStripMenuItem";
-            this.visorExcelToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.visorExcelToolStripMenuItem.Text = "Visor Excel";
+            this.visorExcelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.visorExcelToolStripMenuItem.Text = "Visor PDF";
             this.visorExcelToolStripMenuItem.Click += new System.EventHandler(this.visorExcelToolStripMenuItem_Click);
-            // 
-            // verSeriesActivasToolStripMenuItem
-            // 
-            this.verSeriesActivasToolStripMenuItem.Image = global::SADI.Properties.Resources.Files_icon;
-            this.verSeriesActivasToolStripMenuItem.Name = "verSeriesActivasToolStripMenuItem";
-            this.verSeriesActivasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.verSeriesActivasToolStripMenuItem.Text = "Ver Series Activas";
-            this.verSeriesActivasToolStripMenuItem.Click += new System.EventHandler(this.verSeriesActivasToolStripMenuItem_Click);
             // 
             // Inicio
             // 

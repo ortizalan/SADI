@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.visorOfficexaml1 = new SADI.UserControls.VisorOfficexaml();
             this.SuspendLayout();
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(3, 2);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(1028, 623);
+            this.elementHost1.TabIndex = 0;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.visorOfficexaml1;
             // 
             // FrmVisorOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1183, 661);
+            this.ClientSize = new System.Drawing.Size(1031, 626);
+            this.Controls.Add(this.elementHost1);
             this.Name = "FrmVisorOffice";
             this.Text = "FrmVisorOffice";
             this.ResumeLayout(false);
@@ -42,5 +54,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private UserControls.VisorOfficexaml visorOfficexaml1;
     }
 }

@@ -164,7 +164,7 @@
     <Compile Include="Clases\Parametros.cs" />
     <Compile Include="Clases\EventsArgs\TemasSeriesEventArgs.cs" />
     <Compile Include="Clases\Utilerias.cs" />
-    <Compile Include="DataSets\Catalogos\DSCatalogos.Designer.cs">
+    <Compile Include="DataSets\CatalogosRepos\DSCatalogos.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DSCatalogos.xsd</DependentUpon>
@@ -508,15 +508,15 @@
     <EmbeddedResource Include="Vistas\Usuarios\modificarUsuariocs.resx">
       <DependentUpon>modificarUsuariocs.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DataSets\Catalogos\DSCatalogos.xsc">
+    <None Include="DataSets\CatalogosRepos\DSCatalogos.xsc">
       <DependentUpon>DSCatalogos.xsd</DependentUpon>
     </None>
-    <None Include="DataSets\Catalogos\DSCatalogos.xsd">
+    <None Include="DataSets\CatalogosRepos\DSCatalogos.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DSCatalogos.Designer.cs</LastGenOutput>
     </None>
-    <None Include="DataSets\Catalogos\DSCatalogos.xss">
+    <None Include="DataSets\CatalogosRepos\DSCatalogos.xss">
       <DependentUpon>DSCatalogos.xsd</DependentUpon>
     </None>
     <None Include="packages.config">

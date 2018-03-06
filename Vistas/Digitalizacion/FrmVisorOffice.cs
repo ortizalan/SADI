@@ -13,6 +13,9 @@ namespace SADI.Vistas.Digitalizacion
 {
     public partial class FrmVisorOffice : Form
     {
-
+        public FrmVisorOffice()
+        {
+            InitializeComponent();
+        }
     }
 }
