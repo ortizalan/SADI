@@ -215,11 +215,12 @@ namespace SADI
             visor.MdiParent = this;
             visor.Show();
         }
-
+        // Ver Series Activas
         private void verSeriesActivasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SerieDocumentalView ViewSeries = new SerieDocumentalView();
-
+            SerieDocumentalView Series = new SerieDocumentalView(um);
+            Series.MdiParent = this;
+            Series.Show();
         }
     }
 }

@@ -15,34 +15,39 @@ using SADI.Clases.Modelos;
 
 
 using SADI.Clases;
-namespace SADI.Clases.Controladores {
-	/// <summary>
-	/// Controlador del Modelo Registros
-	/// </summary>
-	public class RegistrosController : Metodos {
+namespace SADI.Clases.Controladores
+{
+    /// <summary>
+    /// Controlador del Modelo Registros
+    /// </summary>
+    public class RegistrosController : Metodos
+    {
         /// <summary>
         /// Constructor de la Clase
         /// </summary>
-		public RegistrosController(){
+		public RegistrosController()
+        {
 
-		}
+        }
         /// <summary>
         /// Destructor de la Clase
         /// </summary>
-		~RegistrosController(){
+		~RegistrosController()
+        {
 
-		}
+        }
 
-		/// <summary>
+        /// <summary>
         /// Método para consultar 
         /// </summary>
         /// <param name="o">Objeto del Tipo RegistrosModel</param>
         /// <returns></returns>
-		public override bool ConsultarRegistro(object o){
+        public override bool ConsultarRegistro(object o)
+        {
 
-			if(o.GetType() == typeof(RegistrosModel))// Verificar que el Objeto sea del Tipo RegistrosModel
+            if (o.GetType() == typeof(RegistrosModel))// Verificar que el Objeto sea del Tipo RegistrosModel
             {
-                if(Abrir())//Intentar Abrir la Conexión
+                if (Abrir())//Intentar Abrir la Conexión
                 {
                     // Intento Exitoso
                     var r = (RegistrosModel)o; // Castear la Variable "r" al tipo RegistrosModel
@@ -67,12 +72,12 @@ namespace SADI.Clases.Controladores {
 
                         string proce = "sp_registros_crud";
 
-                        if(ConsultarProcedimiento(proce,lista))// Intentar Consultar el Procedimiento
+                        if (ConsultarProcedimiento(proce, lista))// Intentar Consultar el Procedimiento
                         { return true; }// Consulta exitosa, Ver Tabla
                         else
                         { return false; }// Consulta NO exitosa, ver Error
                     }
-                    catch(Exception e)// Atrapar el Error
+                    catch (Exception e)// Atrapar el Error
                     {
                         Error = e.Message.ToString(); // Guardar el Error
                         return false;// Indicar que existe un error
@@ -84,13 +89,14 @@ namespace SADI.Clases.Controladores {
             }
             else
             { return false; }// No es del tipo RegistroModel
-		}
-		/// <summary>
+        }
+        /// <summary>
         /// Método para Actualizar Registro
         /// </summary>
         /// <param name="o">Objeto del Tipo RegistrosModel</param>
         /// <returns>Boleano</returns>
-		public override bool ActualizarRegistro(object o){
+        public override bool ActualizarRegistro(object o)
+        {
 
             if (o.GetType() == typeof(RegistrosModel))// Verificar que el Objeto sea del Tipo RegistrosModel
             {
@@ -108,14 +114,14 @@ namespace SADI.Clases.Controladores {
                         lista.Add(new Parametros(@"fondo", r.Fondo.Id.ToString())); // Indicarle la Identificación del Fondo
                         lista.Add(new Parametros(@"subfondo", r.SubFondo.Id.ToString()));// Indicarle la Identificación del Subfondo
                         lista.Add(new Parametros(@"fecini", r.FechaInicio.ToString("yyyy-MM-dd")));// Indicarle la Fecha de Inicio del Expediente
-                        lista.Add(new Parametros(@"fecfin", (r.FechaCierre != null ? r.FechaCierre.Value.ToString("yyyy-MM-dd"):null)));// Indicarle la Fecha de Cierre del Expediente
+                        lista.Add(new Parametros(@"fecfin", (r.FechaCierre != null ? r.FechaCierre.Value.ToString("yyyy-MM-dd") : null)));// Indicarle la Fecha de Cierre del Expediente
                         lista.Add(new Parametros(@"desc", r.Descripcion));// Indicar la Descripción del Expediente
                         lista.Add(new Parametros(@"numhojas", r.NumHojas.ToString())); // Indicar el Número de Hojas del Expediente
                         lista.Add(new Parametros(@"cvesevi", r.CveSevi)); // Indicar la Clave SEVI
                         lista.Add(new Parametros(@"valordoc", r.ValorDoctal.Id.ToString())); // Señalar el identificador del Valor Documental
                         lista.Add(new Parametros(@"clasi", r.Clasificacion.Id.ToString()));// Señalar la Identificación de la Clasificación del Expediente
                         lista.Add(new Parametros(@"otrainfo", r.OtraInfo));// Indicarle Otra Información sobre el Expediente
-                        lista.Add(new Parametros(@"esta", (r.Estatus== true?"1":"0")));// Indicar si está activo o no el Expediente (cierre o no)
+                        lista.Add(new Parametros(@"esta", (r.Estatus == true ? "1" : "0")));// Indicar si está activo o no el Expediente (cierre o no)
 
                         string proce = "sp_registros_crud";// Indicarle el Procedimiento
 
@@ -137,12 +143,13 @@ namespace SADI.Clases.Controladores {
             else
             { return false; }// No es del tipo RegistroModel
         }
-		/// <summary>
+        /// <summary>
         /// Método para Ingresar un Registro
         /// </summary>
         /// <param name="o">Objeto del tipo RegistrosModel</param>
         /// <returns>Boleano</returns>
-		public override bool IngresarRegisto(object o){
+        public override bool IngresarRegisto(object o)
+        {
 
             if (o.GetType() == typeof(RegistrosModel))// Verificar que el Objeto sea del Tipo RegistrosModel
             {
@@ -189,13 +196,15 @@ namespace SADI.Clases.Controladores {
             else
             {
                 Error = "el objeto no es del tipo registrosmodel";
-                return false; }// No es del tipo RegistroModel
+                return false;
+            }// No es del tipo RegistroModel
         }
         /// <summary>
         /// Método para Consultar Todos los Registros en RegistrosModel
         /// </summary>
         /// <returns>Boleano</returns>
-		public override bool ConsultarRegistros(){
+		public override bool ConsultarRegistros()
+        {
 
             if (Abrir())//Intentar Abrir la Conexión
             {
@@ -242,14 +251,14 @@ namespace SADI.Clases.Controladores {
         /// <returns></returns>
         public bool ConsecutivoRegistroSeries(object o)
         {
-            if(o.GetType() == typeof(RegistrosModel))//Verificar que el Objeto sea del Tipo RegistrosModel
+            if (o.GetType() == typeof(RegistrosModel))//Verificar que el Objeto sea del Tipo RegistrosModel
             {
                 //SI Son del mismo tipo
                 var r = (RegistrosModel)o;//Castear la variable "r" al tipo RegistroModel
                 string[] codigos = r.SerieDoctal.Split('.');//Separar los códigos que conjuntan la serie documental
                 int c = 0;//Contador
-                string[] code= new string[codigos.Length];//Arreglo para los códigos de la serie documental
-                foreach(string codigo in codigos)//Barrer la serie documental
+                string[] code = new string[codigos.Length];//Arreglo para los códigos de la serie documental
+                foreach (string codigo in codigos)//Barrer la serie documental
                 {
                     code[c] = codigo;//guardar código en arreglo
                     c += 1;// Aumentar el contador
@@ -266,6 +275,7 @@ namespace SADI.Clases.Controladores {
                 lista.Add(new Parametros(@"serie", code[4]));
                 lista.Add(new Parametros(@"consecutivo", string.Empty));
                 lista.Add(new Parametros(@"año", r.FechaInicio.Year.ToString()));
+                lista.Add(new Parametros(@"usr", string.Empty));//Usuario vacío, no se necesita en esta consulta
 
                 if (Abrir())//Intentar abrir la conexión
                 {
@@ -302,7 +312,7 @@ namespace SADI.Clases.Controladores {
         /// <returns></returns>
         public bool EliminarRegistroFallido(object o)
         {
-            if(o.GetType() == typeof(RegistrosModel))//Verificar que objeto sea del tipo RegistrosModel
+            if (o.GetType() == typeof(RegistrosModel))//Verificar que objeto sea del tipo RegistrosModel
             {
                 var r = (RegistrosModel)o; //Catear la variable al Tipo del Objeto
 
@@ -314,18 +324,19 @@ namespace SADI.Clases.Controladores {
                 lista.Add(new Parametros(@"fondo", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"subfondo", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"departamento", string.Empty));//Campo Vacío
-                lista.Add(new Parametros(@"seccion",string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"seccion", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"serie", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"conecutivo", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"año", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"usr", string.Empty));//Campo Vacío
 
-                if(Abrir())//Intentar abrir la conexión
+                if (Abrir())//Intentar abrir la conexión
                 {
                     //Intento Exitoso
                     try
                     {
                         //Intentar
-                        if(EjecutarProcedimiento(proce,lista))//Ejecutar el Procedimiento
+                        if (EjecutarProcedimiento(proce, lista))//Ejecutar el Procedimiento
                         {
                             //Intento Exitoso
                             return true;
@@ -336,7 +347,7 @@ namespace SADI.Clases.Controladores {
                             return false;
                         }
                     }
-                    catch(Exception e)//Atrapar el Error
+                    catch (Exception e)//Atrapar el Error
                     {
                         Error = e.Message.ToString();
                         return false;
@@ -356,7 +367,63 @@ namespace SADI.Clases.Controladores {
             }
 
         }
+        /// <summary>
+        /// Función para seleccionar las Series Según Usuario
+        /// </summary>
+        /// <param name="o">Objeto del tipo Registro</param>
+        /// <returns></returns>
+        public bool SeleccionarSeriesXUsuario(object o)
+        {
+            if (o.GetType() == typeof(RegistrosModel))//Validar que el Objeto sea del Tipo RegistrosModel
+            {
+                var r = (RegistrosModel)o;
+                string proce = "sp_registros_seleccion";
 
-	}//end RegistrosController
+                List<Parametros> lista = new List<Parametros>();
+                lista.Add(new Parametros(@"opc", "2"));
+                lista.Add(new Parametros(@"fondo", string.Empty));
+                lista.Add(new Parametros(@"subfondo", string.Empty));
+                lista.Add(new Parametros(@"departamento", string.Empty));
+                lista.Add(new Parametros(@"seccion", string.Empty));
+                lista.Add(new Parametros(@"serie", string.Empty));
+                lista.Add(new Parametros(@"consecutivo", string.Empty));
+                lista.Add(new Parametros(@"año", string.Empty));
+                lista.Add(new Parametros(@"usr", r.Usuario.Id.ToString()));
+
+                if(Abrir())//Intentar abrir la conexión
+                {
+                    //Conexión Exitosa
+                    try
+                    {
+                        //Intentar la Consulta
+                        if(ConsultarProcedimiento(proce, lista))
+                        {
+                            return true;//Intento Exitoso
+                        }
+                        else
+                        {
+                            return false;//Intento NO Exitoso
+                        }
+                    }
+                    catch(Exception e)//Atrapar el Error
+                    {
+                        Error = e.Message.ToString();//Guardar el Error
+                        return false;//Indicar que existe el error
+                    }
+                    finally { Cerrar(); }//Cerrar la Conexión
+                }
+                else//Intento fallido
+                {
+                    return false;
+                }
+            }
+            else//No son del mismi tipo
+            {
+                Error = "el objeto no es edl tipo registromodel.cs".ToUpper();
+                return false;
+            }
+        }
+
+    }//end RegistrosController
 
 }//end namespace Controladores

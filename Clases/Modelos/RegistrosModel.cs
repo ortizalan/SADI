@@ -72,6 +72,10 @@ namespace SADI.Clases.Modelos {
 		/// Propiedad con el estatus del expediente
 		/// </summary>
 		private bool _estatus;
+        /// <summary>
+        /// Propiedad del Tipo Usuario
+        /// </summary>
+        private UsuariosModel _usuario = new UsuariosModel();
 
 		/// <summary>
 		/// Constructor del Modelo
@@ -186,6 +190,14 @@ namespace SADI.Clases.Modelos {
             get { return _estatus; }
             set { _estatus = value; }
 		}
+        /// <summary>
+        /// Acceder a la Propiedad Usuario
+        /// </summary>
+        public UsuariosModel Usuario
+        {
+            get { return _usuario; }
+            set { _usuario = value; }
+        }
 
 	}//end RegistrosModel
 

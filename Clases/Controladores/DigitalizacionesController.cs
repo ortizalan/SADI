@@ -15,36 +15,41 @@ using SADI.Clases.Modelos;
 
 
 using SADI.Clases;
-namespace SADI.Clases.Controladores {
-	/// <summary>
-	/// Controlador para el Modelo Digitalizaciones
-	/// </summary>
-	public class DigitalizacionesController : Metodos {
+namespace SADI.Clases.Controladores
+{
+    /// <summary>
+    /// Controlador para el Modelo Digitalizaciones
+    /// </summary>
+    public class DigitalizacionesController : Metodos
+    {
         /// <summary>
         /// Constructor de Clase
         /// </summary>
-		public DigitalizacionesController(){
+		public DigitalizacionesController()
+        {
 
-		}
+        }
         /// <summary>
         /// Destructor
         /// </summary>
-		~DigitalizacionesController(){
+		~DigitalizacionesController()
+        {
 
-		}
+        }
 
-		/// <summary>
-		/// Método Para Consultar un Registro
-		/// </summary>
-		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
-		public override bool ConsultarRegistro(Object o){
+        /// <summary>
+        /// Método Para Consultar un Registro
+        /// </summary>
+        /// <returns>Boleano</returns>
+        /// <param name="o">Objeto del Tipo class</param>
+        public override bool ConsultarRegistro(Object o)
+        {
 
             if (o.GetType() == typeof(DigitalizacionesModel))// Verificar si el objeto es del tipo DigitalizacionesModel
             {
                 var di = (DigitalizacionesModel)o; // Castear variable "di" al tipo Digitalización Model
 
-                if(Abrir())// Intentar Abrir la Conexión
+                if (Abrir())// Intentar Abrir la Conexión
                 {
                     // Intento Exitoso
                     try
@@ -75,14 +80,15 @@ namespace SADI.Clases.Controladores {
             }
             else
             { return false; }// No es del tipo DigitalizacionesModel
-		}
+        }
 
-		/// <summary>
-		/// Método Para Actualizar los Registros
-		/// </summary>
-		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo class</param>
-		public override bool ActualizarRegistro(Object o){
+        /// <summary>
+        /// Método Para Actualizar los Registros
+        /// </summary>
+        /// <returns>Boleano</returns>
+        /// <param name="o">Objeto del Tipo class</param>
+        public override bool ActualizarRegistro(Object o)
+        {
 
             if (o.GetType() == typeof(DigitalizacionesModel))// Verificar si el objeto es del tipo DigitalizacionesModel
             {
@@ -121,12 +127,13 @@ namespace SADI.Clases.Controladores {
             { return false; }// No es del tipo DigitalizacionesModel
         }
 
-		/// <summary>
-		/// Método para Ingresar un Registro
-		/// </summary>
-		/// <returns>Boleano</returns>
-		/// <param name="o">Objeto del Tipo Class</param>
-		public override bool IngresarRegisto(Object o){
+        /// <summary>
+        /// Método para Ingresar un Registro
+        /// </summary>
+        /// <returns>Boleano</returns>
+        /// <param name="o">Objeto del Tipo Class</param>
+        public override bool IngresarRegisto(Object o)
+        {
 
             if (o.GetType() == typeof(DigitalizacionesModel))// Verificar si el objeto es del tipo DigitalizacionesModel
             {
@@ -168,11 +175,12 @@ namespace SADI.Clases.Controladores {
             { return false; }// No es del tipo DigitalizacionesModel
         }
 
-		/// <summary>
-		/// Método para Consultar Todos los Registros
-		/// </summary>
-		/// <returns>Boleano</returns>
-		public override bool ConsultarRegistros(){
+        /// <summary>
+        /// Método para Consultar Todos los Registros
+        /// </summary>
+        /// <returns>Boleano</returns>
+        public override bool ConsultarRegistros()
+        {
 
             if (Abrir())// Intentar Abrir la Conexión
             {
@@ -204,6 +212,53 @@ namespace SADI.Clases.Controladores {
             { return false; }// Intento de Conexión Fallido, Consultar Error
         }
 
-	}//end DigitalizacionesController
+        /// <summary>
+        /// Función para Buscar Expedientes Digitalizados de la Serie Documental
+        /// </summary>
+        /// <param name="o">Objeto del Tipo Digitalización</param>
+        /// <returns></returns>
+        public bool ExpedientesPorSerieDoctal(Object o)
+        {
+            if (o.GetType() == typeof(DigitalizacionesModel))//Verificar que el objeto sea del tipo Digitalizaciones
+            {
+                var d = (DigitalizacionesModel)o;//Castear la variable "d" al tipo DigitalizacionModel
+
+                string proce = "sp_digitalizacion_seleccion";//Nombre del Procecimiento a ejecutar
+
+                List<Parametros> lista = new List<Parametros>();//Lista del tipo Parámetros
+                lista.Add(new Parametros(@"opc", "1"));//Oción a ejecutar dentro del Procedimiento
+                lista.Add(new Parametros(@"serie", d.SDoctal.SerieDoctal));//´Serie Documental
+
+                try//Intentar
+                {
+                    if (Abrir())//Intentar Abrir la Conexión
+                    {
+                        //Conexión Exitosa
+                        if (ConsultarProcedimiento(proce, lista))//Intentar la Consulta del Procedimiento
+                        { return true; }//Consulta Exitosa
+                        else
+                        { return false; }//Consulta NO Exitosa, consultar Error
+                    }
+                    else//Conexión Fallida
+                    {
+                        return false;//Indicar que existe un error
+                    }
+                }
+                catch (Exception e)//Atrapar el Error
+                {
+                    Error = e.Message.ToUpper();//Guardar el Error
+                    return false;
+                }
+                finally { Cerrar(); }//Cerrar la Conexión
+
+            }
+            else//No es del mismo tipo
+            {
+                Error = "el objeto no es del tipo digitalizacionmodel".ToUpper();//Indicar el Error
+                return false;//Indicar que existe el Error
+            }
+        }
+
+    }//end DigitalizacionesController
 
 }//end namespace Controladores

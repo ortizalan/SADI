@@ -44,17 +44,18 @@
             this.dgvSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeries.Location = new System.Drawing.Point(0, 32);
             this.dgvSeries.Name = "dgvSeries";
-            this.dgvSeries.Size = new System.Drawing.Size(605, 303);
+            this.dgvSeries.Size = new System.Drawing.Size(730, 303);
             this.dgvSeries.TabIndex = 0;
+            this.dgvSeries.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeries_CellContentClick);
             // 
             // dgvDigitalizados
             // 
             this.dgvDigitalizados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDigitalizados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDigitalizados.Location = new System.Drawing.Point(593, 32);
+            this.dgvDigitalizados.Location = new System.Drawing.Point(736, 32);
             this.dgvDigitalizados.Name = "dgvDigitalizados";
-            this.dgvDigitalizados.Size = new System.Drawing.Size(394, 303);
+            this.dgvDigitalizados.Size = new System.Drawing.Size(465, 303);
             this.dgvDigitalizados.TabIndex = 1;
             // 
             // label1
@@ -63,7 +64,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(666, 11);
+            this.label1.Location = new System.Drawing.Point(856, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(233, 13);
             this.label1.TabIndex = 2;
@@ -75,7 +76,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(157, 11);
+            this.label2.Location = new System.Drawing.Point(241, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(253, 13);
             this.label2.TabIndex = 3;
@@ -84,18 +85,19 @@
             // cmdOUT
             // 
             this.cmdOUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdOUT.Location = new System.Drawing.Point(845, 389);
+            this.cmdOUT.Location = new System.Drawing.Point(1071, 385);
             this.cmdOUT.Name = "cmdOUT";
             this.cmdOUT.Size = new System.Drawing.Size(118, 55);
             this.cmdOUT.TabIndex = 4;
             this.cmdOUT.Text = ":: SALIR ::";
             this.cmdOUT.UseVisualStyleBackColor = true;
+            this.cmdOUT.Click += new System.EventHandler(this.cmdOUT_Click);
             // 
             // SerieDocumentalView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 452);
+            this.ClientSize = new System.Drawing.Size(1201, 452);
             this.Controls.Add(this.cmdOUT);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
