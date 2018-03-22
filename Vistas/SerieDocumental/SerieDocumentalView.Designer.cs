@@ -44,7 +44,7 @@
             this.dgvSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeries.Location = new System.Drawing.Point(0, 32);
             this.dgvSeries.Name = "dgvSeries";
-            this.dgvSeries.Size = new System.Drawing.Size(730, 303);
+            this.dgvSeries.Size = new System.Drawing.Size(779, 322);
             this.dgvSeries.TabIndex = 0;
             this.dgvSeries.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeries_CellContentClick);
             // 
@@ -53,9 +53,9 @@
             this.dgvDigitalizados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDigitalizados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDigitalizados.Location = new System.Drawing.Point(736, 32);
+            this.dgvDigitalizados.Location = new System.Drawing.Point(785, 32);
             this.dgvDigitalizados.Name = "dgvDigitalizados";
-            this.dgvDigitalizados.Size = new System.Drawing.Size(465, 303);
+            this.dgvDigitalizados.Size = new System.Drawing.Size(416, 322);
             this.dgvDigitalizados.TabIndex = 1;
             // 
             // label1

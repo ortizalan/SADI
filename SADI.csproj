@@ -101,7 +101,7 @@
     <Compile Include="AxSHDocVw\DWebBrowserEvents2_NavigateComplete2Event.cs" />
     <Compile Include="AxSHDocVw\DWebBrowserEvents2_NavigateComplete2EventHandler.cs" />
     <Compile Include="Clases\Conexion.cs" />
-    <Compile Include="Clases\Controladores\AreasMedicasController.cs" />
+    <Compile Include="Clases\Controladores\AreasController.cs" />
     <Compile Include="Clases\Controladores\AtributosController.cs" />
     <Compile Include="Clases\Controladores\BitacoraController.cs" />
     <Compile Include="Clases\Controladores\CajasController.cs" />
@@ -132,7 +132,7 @@
     <Compile Include="Clases\EventsArgs\SerieControlEventArgs.cs" />
     <Compile Include="Clases\EventsArgs\TablaEventArgs.cs" />
     <Compile Include="Clases\Metodos.cs" />
-    <Compile Include="Clases\Modelos\AreasMedicasModel.cs" />
+    <Compile Include="Clases\Modelos\AreasModel.cs" />
     <Compile Include="Clases\Modelos\AtributosModel.cs" />
     <Compile Include="Clases\Modelos\BitacoraModel.cs" />
     <Compile Include="Clases\Modelos\CajasModel.cs" />

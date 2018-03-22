@@ -52,8 +52,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.cboArea = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.cboDepartamento = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.cboSubFondo = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -243,15 +241,13 @@
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.cboArea);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.cboDepartamento);
-            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.cboSubFondo);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(311, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(417, 255);
+            this.groupBox3.Size = new System.Drawing.Size(417, 207);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DATOS ADMINISTRATIVOS :";
@@ -260,7 +256,7 @@
             // 
             this.cboServicios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboServicios.FormattingEnabled = true;
-            this.cboServicios.Location = new System.Drawing.Point(66, 208);
+            this.cboServicios.Location = new System.Drawing.Point(66, 175);
             this.cboServicios.Name = "cboServicios";
             this.cboServicios.Size = new System.Drawing.Size(345, 21);
             this.cboServicios.TabIndex = 9;
@@ -269,7 +265,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 211);
+            this.label14.Location = new System.Drawing.Point(4, 178);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(63, 13);
             this.label14.TabIndex = 10;
@@ -279,7 +275,7 @@
             // 
             this.cboSubArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSubArea.FormattingEnabled = true;
-            this.cboSubArea.Location = new System.Drawing.Point(66, 178);
+            this.cboSubArea.Location = new System.Drawing.Point(66, 145);
             this.cboSubArea.Name = "cboSubArea";
             this.cboSubArea.Size = new System.Drawing.Size(345, 21);
             this.cboSubArea.TabIndex = 7;
@@ -288,7 +284,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 182);
+            this.label13.Location = new System.Drawing.Point(4, 149);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(64, 13);
             this.label13.TabIndex = 8;
@@ -298,7 +294,7 @@
             // 
             this.cboArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboArea.FormattingEnabled = true;
-            this.cboArea.Location = new System.Drawing.Point(66, 147);
+            this.cboArea.Location = new System.Drawing.Point(66, 114);
             this.cboArea.Name = "cboArea";
             this.cboArea.Size = new System.Drawing.Size(345, 21);
             this.cboArea.TabIndex = 5;
@@ -307,30 +303,12 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 145);
+            this.label12.Location = new System.Drawing.Point(6, 117);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(54, 26);
+            this.label12.Size = new System.Drawing.Size(42, 13);
             this.label12.TabIndex = 6;
-            this.label12.Text = "AREA\r\nMÉDICA :";
-            // 
-            // cboDepartamento
-            // 
-            this.cboDepartamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDepartamento.FormattingEnabled = true;
-            this.cboDepartamento.Location = new System.Drawing.Point(112, 116);
-            this.cboDepartamento.Name = "cboDepartamento";
-            this.cboDepartamento.Size = new System.Drawing.Size(299, 21);
-            this.cboDepartamento.TabIndex = 3;
-            this.cboDepartamento.SelectedValueChanged += new System.EventHandler(this.cboDepartamento_SelectedValueChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 119);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(103, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "DEPARTAMENTO :";
+            this.label12.Text = "ÁREA :";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // cboSubFondo
             // 
@@ -417,8 +395,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cboArea;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cboDepartamento;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cboServicios;
         private System.Windows.Forms.Label label14;
     }

@@ -63,9 +63,8 @@ namespace SADI.Clases.Controladores
                 List<Parametros> lista = new List<Parametros>();//Lista de Parámetros
                 lista.Add(new Parametros(@"opc","1"));//OPción a ejecutar en el Procedimiento
                 lista.Add(new Parametros(@"id", string.Empty));//Vacío
-                lista.Add(new Parametros(@"subfondo", sa.SubFondo.Id.ToString()));//Identificador del Subfondo
-                lista.Add(new Parametros(@"departamento", sa.DepartamentoId.Id.ToString()));//Identificador del Departamento
-                lista.Add(new Parametros(@"area", sa.AreaMedicaId.Id.ToString()));//Identificador de la Area Méidca
+                lista.Add(new Parametros(@"subfondo", sa.SUBFondo.Id.ToString()));//Identificador del Subfondo
+                lista.Add(new Parametros(@"area", sa.AreaId.Id.ToString()));//Identificador de la Area Médica
                 lista.Add(new Parametros(@"subarea", string.Empty));//Vacío
 
                 if (Abrir())//Intentar Abrir la Conexión

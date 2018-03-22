@@ -68,13 +68,12 @@ namespace SADI
                     um.Materno = (string)uc.Tabla.Rows[0][5];
                     um.Fondo.Id = (int)uc.Tabla.Rows[0][6];
                     um.SubFondo.Id = (int)uc.Tabla.Rows[0][7];
-                    um.Departamento.Id = (int)uc.Tabla.Rows[0][8];
-                    um.AreaMedica.Id = (int)uc.Tabla.Rows[0][9];
-                    um.SubArea.Id = (int)uc.Tabla.Rows[0][10];
-                    um.Servicio.Id = (int)uc.Tabla.Rows[0][11];
-                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][12];
-                    um.Email = (string)uc.Tabla.Rows[0][13];
-                    um.Estatus = (bool)uc.Tabla.Rows[0][14];
+                    um.Area.Id = (int)uc.Tabla.Rows[0][8];
+                    um.SubArea.Id = (int)uc.Tabla.Rows[0][9];
+                    um.Servicio.Id = (int)uc.Tabla.Rows[0][10];
+                    um.Jerarquia.Id = (int)uc.Tabla.Rows[0][11];
+                    um.Email = (string)uc.Tabla.Rows[0][12];
+                    um.Estatus = (bool)uc.Tabla.Rows[0][13];
                 }
             }
             else// No se pudo realizar la COnsulta
@@ -221,6 +220,13 @@ namespace SADI
             SerieDocumentalView Series = new SerieDocumentalView(um);
             Series.MdiParent = this;
             Series.Show();
+        }
+
+        private void verUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listaUsuarios usrView = new listaUsuarios();
+            usrView.MdiParent = this;
+            usrView.Show();
         }
     }
 }

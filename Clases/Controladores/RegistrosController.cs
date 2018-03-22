@@ -270,9 +270,11 @@ namespace SADI.Clases.Controladores
                 //lista.Add(new Parametros(@"seriedoc", string.Empty));//Vacío
                 lista.Add(new Parametros(@"fondo", code[0]));
                 lista.Add(new Parametros(@"subfondo", code[1]));
-                lista.Add(new Parametros(@"departamento", code[2]));
-                lista.Add(new Parametros(@"seccion", code[3]));
-                lista.Add(new Parametros(@"serie", code[4]));
+                lista.Add(new Parametros(@"area", code[2]));
+                lista.Add(new Parametros(@"subarea", code[3]));
+                lista.Add(new Parametros(@"servicio", code[4]));
+                lista.Add(new Parametros(@"seccion", code[5]));
+                lista.Add(new Parametros(@"serie", code[6]));
                 lista.Add(new Parametros(@"consecutivo", string.Empty));
                 lista.Add(new Parametros(@"año", r.FechaInicio.Year.ToString()));
                 lista.Add(new Parametros(@"usr", string.Empty));//Usuario vacío, no se necesita en esta consulta
@@ -323,7 +325,9 @@ namespace SADI.Clases.Controladores
                 //lista.Add(new Parametros(@"seriedoc", r.SerieDoctal));//campo vacío
                 lista.Add(new Parametros(@"fondo", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"subfondo", string.Empty));//Campo Vacío
-                lista.Add(new Parametros(@"departamento", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"area", string.Empty));//Campo Vacío
+                lista.Add(new Parametros(@"subarea", string.Empty));
+                lista.Add(new Parametros(@"servicio", string.Empty));
                 lista.Add(new Parametros(@"seccion", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"serie", string.Empty));//Campo Vacío
                 lista.Add(new Parametros(@"conecutivo", string.Empty));//Campo Vacío
@@ -383,7 +387,9 @@ namespace SADI.Clases.Controladores
                 lista.Add(new Parametros(@"opc", "2"));
                 lista.Add(new Parametros(@"fondo", string.Empty));
                 lista.Add(new Parametros(@"subfondo", string.Empty));
-                lista.Add(new Parametros(@"departamento", string.Empty));
+                lista.Add(new Parametros(@"area", string.Empty));
+                lista.Add(new Parametros(@"subarea", string.Empty));
+                lista.Add(new Parametros(@"servicio", string.Empty));
                 lista.Add(new Parametros(@"seccion", string.Empty));
                 lista.Add(new Parametros(@"serie", string.Empty));
                 lista.Add(new Parametros(@"consecutivo", string.Empty));

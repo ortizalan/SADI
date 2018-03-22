@@ -27,8 +27,7 @@ namespace SADI.Clases.Modelos {
 		private JerarquiasModel _jerarquia = new JerarquiasModel();
         private FondosModel _fondo = new FondosModel();
         private SubFondosModel _subfondo = new SubFondosModel();
-        private DepartamentosModel _departamento = new DepartamentosModel();
-        private AreasMedicasModel _areamedica = new AreasMedicasModel();
+        private AreasModel _area = new AreasModel();
         private SubAreasModel _subarea = new SubAreasModel();
         private ServiciosModel _servicio = new ServiciosModel();
 		private string _materno;
@@ -132,15 +131,10 @@ namespace SADI.Clases.Modelos {
             set { _subfondo = value; }
         }
         /// <summary>
-        /// Acceso a la Propiedad Departamento
-        /// </summary>
-        public DepartamentosModel Departamento
-        { get { return _departamento; } set { _departamento = value; } }
-        /// <summary>
         /// Acceso a la Propiedad Area Médica
         /// </summary>
-        public AreasMedicasModel AreaMedica
-        { get { return _areamedica; } set { _areamedica = value; } }
+        public AreasModel Area
+        { get { return _area; } set { _area = value; } }
         /// <summary>
         /// Acceso a la Propiedad SubArea Médica
         /// </summary>

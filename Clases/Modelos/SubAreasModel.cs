@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace SADI.Clases.Modelos
 {
-    public class SubAreasModel :AreasMedicasModel
+    public class SubAreasModel :AreasModel
     {
-        private AreasMedicasModel _areamedica = new AreasMedicasModel();//Propiedad de AreasMedicasModel
+        private AreasModel _area = new AreasModel();//Propiedad de AreasMedicasModel
         private string _subarea;// descripción de registro del modelo
 
         /// <summary>
         /// Acceso a la Propiedad AreasMedicasModel
         /// </summary>
-        public AreasMedicasModel AreaMedicaId
-        { get { return _areamedica; } set { _areamedica = value; } }
+        public AreasModel AreaId
+        { get { return _area; } set { _area = value; } }
         /// <summary>
         /// Acceso a la descripción del registro del Modelo
         /// </summary>

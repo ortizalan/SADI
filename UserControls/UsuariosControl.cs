@@ -21,8 +21,7 @@ namespace SADI.UserControls
         private int _opcion; //Opcion para Validar Las Operaciones a Realizar con el Control
         private DataTable _jerarquias;// Tabla para llenar el Combo Jerarquías
         private DataTable _subfondos;// Tabla para llenar el Combo SubFondos
-        private DataTable _departamentos;//Tabla para llenar combo Departamentos
-        private DataTable _areasmedicas;//Tabla para llenar las Áreas Médicas
+        private DataTable _areas;//Tabla para llenar las Áreas Médicas
         private DataTable _subareas;// Tabla para llenar las SubÁreas Médicas
         private DataTable _servicios;//Tabla para llenar los Servicios de las SubAreas
         private string _nombre;// Propiedad para el nombre del Usuario
@@ -44,7 +43,6 @@ namespace SADI.UserControls
         #region Eventos Públicos
 
         public event EventHandler cboSubFondosChange;//Manejador del Evento
-        public event EventHandler cboDepartamentosChange;//Manejador del Evento
         public event EventHandler cboAreasMedicasChange;//Manejador del Evento
         public event EventHandler cboSubAreasChange;//Manejador del Evento
         public event EventHandler cboServiciosChange;//Manejador del Evento
@@ -92,21 +90,17 @@ namespace SADI.UserControls
                 this.LLenarSubfondos();
             }
         }
-        /// <summary>
-        /// Acceder a los Valores de los Departamentos
-        /// </summary>
-        public DataTable Departamentos
-        { set { _departamentos = value; LLenarDepartamentos(); } }
+        
         /// <summary>
         /// Acceder a los Valores de las Áreas Médicas
         /// </summary>
-        public DataTable AreasMedicas
-        { set { _areasmedicas = value; LLenarAreasMedicas(); } }
+        public DataTable Areas
+        { set { _areas = value; LLenarAreas(); } }
         /// <summary>
         /// Acceder a los Valores de las SubÁreas Méidcas
         /// </summary>
         public DataTable SubAreas
-        { set { _subareas = value; LLenarSubAreaMedica(); } }
+        { set { _subareas = value; LLenarSubArea(); } }
         /// <summary>
         /// Acceder a los Valores de los Serevicios de las SubÁreas
         /// </summary>
@@ -258,20 +252,11 @@ namespace SADI.UserControls
                                         {
                                             if(_idSubFondo >0)//Validar que esté seleccionado algún subfondo
                                             {
-                                                if(_idDepartamento > 0)//Validar que esté seleccionado algún departamento
-                                                {
                                                     return true;
-                                                }
-                                                else
-                                                {
-                                                    MessageBox.Show("selecciones un departamento.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                    cboDepartamento.SelectedIndex = 0;
-                                                    return false;
-                                                }
                                             }
                                             else
                                             {
-                                                MessageBox.Show("selecciones un sunfondo.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                MessageBox.Show("selecciones un subfondo.".ToUpper(), "..:: advertencia del control usuario ::..".ToUpper(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                                 cboSubFondo.SelectedIndex = 0;
                                                 return false;
                                             }
@@ -412,39 +397,16 @@ namespace SADI.UserControls
             else
             { cboSubFondo.DataSource = null; }
         }
-        //Método para llenar el Combobox de los Departamentos
-        private void LLenarDepartamentos()
-        {
-            if (_departamentos != null)
-            {
-                if (_departamentos.Rows.Count > 0)
-                {
-                    cboDepartamento.DataSource = _departamentos;
-                    cboDepartamento.ValueMember = _departamentos.Columns[0].ColumnName;
-                    cboDepartamento.DisplayMember = _departamentos.Columns[2].ColumnName;
-                }
-                else
-                {
-                    cboDepartamento.DataSource = null;
-                }
-
-            }
-            else
-            {
-                cboDepartamento.DataSource = null;
-            }
-
-        }
         //Método para llenar el Combobox de las Áreas Médicas
-        private void LLenarAreasMedicas()
+        private void LLenarAreas()
         {
-            if (_areasmedicas != null)
+            if (_areas != null)
             {
-                if (_areasmedicas.Rows.Count > 0)
+                if (_areas.Rows.Count > 0)
                 {
-                    cboArea.DataSource = _areasmedicas;
-                    cboArea.ValueMember = _areasmedicas.Columns[0].ColumnName;
-                    cboArea.DisplayMember = _areasmedicas.Columns[3].ColumnName;
+                    cboArea.DataSource = _areas;
+                    cboArea.ValueMember = _areas.Columns[0].ColumnName;
+                    cboArea.DisplayMember = _areas.Columns[2].ColumnName;
                 }
                 else
                 {
@@ -458,7 +420,7 @@ namespace SADI.UserControls
 
         }
         //Método para llenar el Combobox de las SubÁreas Médicas
-        private void LLenarSubAreaMedica()
+        private void LLenarSubArea()
         {
             if (_subareas != null)
             {
@@ -466,7 +428,7 @@ namespace SADI.UserControls
                 {
                     cboSubArea.DataSource = _subareas;
                     cboSubArea.ValueMember = _subareas.Columns[0].ColumnName;
-                    cboSubArea.DisplayMember = _subareas.Columns[4].ColumnName;
+                    cboSubArea.DisplayMember = _subareas.Columns[3].ColumnName;
                 }
                 else
                 {
@@ -488,7 +450,7 @@ namespace SADI.UserControls
                 {
                     cboServicios.DataSource = _servicios;
                     cboServicios.ValueMember = _servicios.Columns[0].ColumnName;
-                    cboServicios.DisplayMember = _servicios.Columns[5].ColumnName;
+                    cboServicios.DisplayMember = _servicios.Columns[4].ColumnName;
                 }
                 else
                 {
@@ -682,31 +644,6 @@ namespace SADI.UserControls
                 }
             }
         }
-        //Cambio de Valor Seleccionado en Combobox Departamentos
-        private void cboDepartamento_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cboDepartamentosChange != null)
-            {
-                if (cboDepartamento.SelectedValue != null)
-                {
-                    if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
-                    {
-                        _idDepartamento = (int)cboDepartamento.SelectedValue;
-                        cboDepartamentosChange(this, e);
-                    }
-                }
-            }
-            else
-            {
-                if (cboDepartamento.SelectedValue != null)
-                {
-                    if (cboDepartamento.SelectedValue.ToString() != "System.Data.DataRowView")
-                    {
-                        _idDepartamento = (int)cboDepartamento.SelectedValue;
-                    }
-                }
-            }
-        }
         //Cambio de Valor Selecionado en Combobox Área Médica
         private void cboArea_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -782,6 +719,7 @@ namespace SADI.UserControls
                 }
             }
         }
+
     }
 }
 

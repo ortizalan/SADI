@@ -442,7 +442,9 @@ namespace SADI.UserControls
         {
             _seriedoctal = (_usuario.Fondo.Id.ToString().Length == 1 ? "0" + _usuario.Fondo.Id.ToString() : _usuario.Fondo.Id.ToString()) + ".";
             _seriedoctal += (_usuario.SubFondo.Id.ToString().Length == 1 ? "0" + _usuario.SubFondo.Id.ToString() : _usuario.SubFondo.Id.ToString()) + ".";
-            _seriedoctal += (_usuario.Departamento.Id.ToString().Length == 1 ? "0" + _usuario.Departamento.Id.ToString() : _usuario.Departamento.Id.ToString()) + ".";
+            _seriedoctal += (_usuario.Area.Id.ToString().Length == 1 ? "0" + _usuario.Area.Id.ToString() : _usuario.Area.Id.ToString()) + ".";
+            _seriedoctal += (_usuario.SubArea.Id.ToString().Length == 1 ? "0" + _usuario.SubArea.Id.ToString() : _usuario.SubArea.Id.ToString()) + ".";
+            _seriedoctal += (_usuario.Servicio.Id.ToString().Length == 1 ? "0" + _usuario.Servicio.Id.ToString() : _usuario.Servicio.Id.ToString()) + ".";
             _seriedoctal += (cboSeccion.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeccion.SelectedValue.ToString() : "XX") + ".";
             _seriedoctal += (cboSeries.SelectedValue != null ? (cboSeries.SelectedValue.ToString() != "System.Data.DataRowView" ? cboSeries.SelectedValue.ToString() : "00") : "00") + ".";
             _seriedoctal += Consecutivo() + ".";

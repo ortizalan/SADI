@@ -41,31 +41,30 @@ namespace SADI.Clases.Controladores {
             {
                 var u = (UsuariosModel)o; // Casteamos el Objeto al tipo UsuariosModel
 
-                if(Abrir()) // Si Abre la conexión
+                string proce = "sp_usuarios_crud";// Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();
+                lista.Add(new Parametros(@"opc", "3"));// Opción para actualizar dentro del procedimiento
+                lista.Add(new Parametros(@"id", u.Id.ToString()));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
+                lista.Add(new Parametros(@"usr", u.Usuario));// Nombre de Usuario
+                lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));// Contraseña del Usuario
+                lista.Add(new Parametros(@"nom", u.Nombre));// Nombre del Usuario
+                lista.Add(new Parametros(@"pat", u.Paterno));// Apellido Paterno del Usuario
+                lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
+                lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));// Fondo al que pertence el Usuario
+                lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));//Indicar el SubFondo
+                lista.Add(new Parametros(@"departamento", u.Departamento.Id.ToString()));//Identificador del Departmanto
+                lista.Add(new Parametros(@"areamedica", u.Area.Id.ToString()));//Identificador de la Area Médica
+                lista.Add(new Parametros(@"subarea", u.SubArea.Id.ToString()));//Identificador de la SubArea Médica
+                lista.Add(new Parametros(@"servicio", u.Servicio.Id.ToString()));//Identificador del Servicio de la SubArea
+                lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario
+                lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
+                lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
+
+                if (Abrir()) // Si Abre la conexión
                 {
                     try
                     {
-                        List<Parametros> lista = new List<Parametros>();
-                        lista.Add(new Parametros(@"opc", "3"));// Opción para actualizar dentro del procedimiento
-                        lista.Add(new Parametros(@"id", u.Id.ToString()));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
-                        lista.Add(new Parametros(@"usr", u.Usuario));// Nombre de Usuario
-                        lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));// Contraseña del Usuario
-                        lista.Add(new Parametros(@"nom", u.Nombre));// Nombre del Usuario
-                        lista.Add(new Parametros(@"pat", u.Paterno));// Apellido Paterno del Usuario
-                        lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
-                        lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));// Fondo al que pertence el Usuario
-                        lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));//Indicar el SubFondo
-                        lista.Add(new Parametros(@"departamento", u.Departamento.Id.ToString()));//Identificador del Departmanto
-                        lista.Add(new Parametros(@"areamedica", u.AreaMedica.Id.ToString()));//Identificador de la Area Médica
-                        lista.Add(new Parametros(@"subarea", u.SubArea.Id.ToString()));//Identificador de la SubArea Médica
-                        lista.Add(new Parametros(@"servicio", u.Servicio.Id.ToString()));//Identificador del Servicio de la SubArea
-                        lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario
-                        lista.Add(new Parametros(@"email",(!string.IsNullOrEmpty(u.Email)?u.Email:string.Empty)));//Si cuenta con Dirección email, si no campo vació
-                        lista.Add(new Parametros(@"est", (u.Estatus == true ? "1" : "0")));// Si es verdadero = Activo :1; si es Falso = inactivo : 0
-
-                        string proce = "sp_usuarios_crud";// Nombre del Procedimiento
-
-                        if(EjecutarProcedimiento(proce, lista))
+                        if(EjecutarProcedimiento(proce, lista))//Intentar ejecutar el Procedimiento
                         { return true; }// Se ejecutó el procedimiento exitosamente
                         else { return false; }// No se ejecutó el procedimiento, ver Error
                     }
@@ -92,31 +91,31 @@ namespace SADI.Clases.Controladores {
             if (o.GetType() == typeof(UsuariosModel))
             {
                 var u = (UsuariosModel)o;
-                if (Abrir())
+
+                string proce = "sp_usuarios_crud";// Nombre del procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista Genérica de Parámetros
+                lista.Add(new Parametros(@"opc", "4"));// Opcioón para consultar un registro solamente
+                lista.Add(new Parametros(@"id", u.Id.ToString()));// Identificador del registro
+                lista.Add(new Parametros(@"usr", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"pwd", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"nom", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"pat", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"mat", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"fondo", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"subfondo", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"area", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"subarea", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"servicio", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"jera", string.Empty));//Parámetro Vacío
+                lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
+                lista.Add(new Parametros(@"est", string.Empty));//Parámetro Vacío
+
+                if (Abrir())//Intentar Abrir la Conexion
                 {
+                    //Intento Exitoso
                     try
                     {
-                        List<Parametros> lista = new List<Parametros>();
-                        lista.Add(new Parametros(@"opc", "4"));// Opcioón para consultar un registro solamente
-                        lista.Add(new Parametros(@"id", u.Id.ToString()));// Identificador del registro
-                        lista.Add(new Parametros(@"usr", string.Empty));
-                        lista.Add(new Parametros(@"pwd", string.Empty));
-                        lista.Add(new Parametros(@"nom", string.Empty));
-                        lista.Add(new Parametros(@"pat", string.Empty));
-                        lista.Add(new Parametros(@"mat", string.Empty));
-                        lista.Add(new Parametros(@"fondo", string.Empty));
-                        lista.Add(new Parametros(@"subfondo", string.Empty));
-                        lista.Add(new Parametros(@"departamento", string.Empty));
-                        lista.Add(new Parametros(@"areamedica", string.Empty));
-                        lista.Add(new Parametros(@"subarea", string.Empty));
-                        lista.Add(new Parametros(@"servicio", string.Empty));
-                        lista.Add(new Parametros(@"jera", string.Empty));
-                        lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
-                        lista.Add(new Parametros(@"est", string.Empty));
-
-                        string proce = "sp_usuarios_crud";// Nombre del procedimiento
-
-                        if (ConsultarProcedimiento(proce, lista))
+                        if (ConsultarProcedimiento(proce, lista))//Intentar la Consulta
                         {
                             return true;// Consulta exitosa
                         }
@@ -144,28 +143,27 @@ namespace SADI.Clases.Controladores {
 
             if (Abrir())//Abrir La Conexión
             {
+                string proce = "sp_usuarios_crud";
+
+                List<Parametros> lista = new List<Parametros>();
+                lista.Add(new Parametros(@"opc", "1"));// Opción para actualizar dentro del procedimiento
+                lista.Add(new Parametros(@"id", string.Empty));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
+                lista.Add(new Parametros(@"usr", string.Empty));//Vacío
+                lista.Add(new Parametros(@"pwd", string.Empty));//Vacío
+                lista.Add(new Parametros(@"nom", string.Empty));//Vacío
+                lista.Add(new Parametros(@"pat", string.Empty));//Vacío
+                lista.Add(new Parametros(@"mat", string.Empty));//Vacío
+                lista.Add(new Parametros(@"fondo", string.Empty));//Vacío
+                lista.Add(new Parametros(@"subfondo", string.Empty));//Vacío
+                lista.Add(new Parametros(@"area", string.Empty));//Vacío
+                lista.Add(new Parametros(@"subarea", string.Empty));//Vacío
+                lista.Add(new Parametros(@"servicio", string.Empty));//Vacío
+                lista.Add(new Parametros(@"jera", string.Empty));//Vacío
+                lista.Add(new Parametros(@"email", string.Empty));//Vacío
+                lista.Add(new Parametros(@"est", string.Empty));//Vacío
+
                 try
                 {
-                    List<Parametros> lista = new List<Parametros>();
-                    lista.Add(new Parametros(@"opc", "1"));// Opción para actualizar dentro del procedimiento
-                    lista.Add(new Parametros(@"id", string.Empty));// Todos los parámetros deben de ir en string/cadena clase nativa del CLR
-                    lista.Add(new Parametros(@"usr", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"pwd", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"nom", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"pat", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"mat", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"fondo", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"subfondo", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"departamento", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"areamedica",string.Empty));//Vacío
-                    lista.Add(new Parametros(@"subarea", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"servicio", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"jera", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"email", string.Empty));//Vacío
-                    lista.Add(new Parametros(@"est", string.Empty));//Vacío
-
-                    string proce = "sp_usuarios_crud";
-
                     if (ConsultarProcedimiento(proce, lista))
                     { return true; }
                     else
@@ -192,31 +190,29 @@ namespace SADI.Clases.Controladores {
             {
                 var u = (UsuariosModel)o;// Castear la variable al tipo UsuariosModel
 
-                if(Abrir())// Intentar Abrir la Conexión
+                string proce = "sp_usuarios_crud";//Nombre del Procedimiento
+                List<Parametros> lista = new List<Parametros>();//Lista Genérica de Parámetros
+                lista.Add(new Parametros(@"opc", "2"));// Opción para Ingresar Registro dentro del procedimiento
+                lista.Add(new Parametros(@"id", u.Id.ToString()));//Identificador del usuario
+                lista.Add(new Parametros(@"usr", u.Usuario));//Usuario
+                lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));//Descenriptar la contraseña
+                lista.Add(new Parametros(@"nom", u.Nombre));//Nombre del Usuarop
+                lista.Add(new Parametros(@"pat", u.Paterno));//Apellido Paterno del Usuario
+                lista.Add(new Parametros(@"mat", (!string.IsNullOrEmpty(u.Materno) ? u.Materno : string.Empty)));// Validar el Apellido Materno
+                lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));//Identificado del Fondo (Dependencia)
+                lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));//Identificador del SubFondo (Subdirección)
+                lista.Add(new Parametros(@"area", u.Area.Id.ToString()));//Identificador de la Área
+                lista.Add(new Parametros(@"subarea", u.SubArea.Id.ToString()));//Identificador de la SubÁrea
+                lista.Add(new Parametros(@"servicio", u.Servicio.Id.ToString()));//Identificador del Servicio
+                lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));//Identificador de la Jerarquía
+                lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
+                lista.Add(new Parametros(@"est", "1"));// Si se vá a ingresar, siempre será activo
+
+                if (Abrir())// Intentar Abrir la Conexión
                 {
                     // Si se estableció la conexión
                     try
                     {
-                        List<Parametros> lista = new List<Parametros>();
-                        lista.Add(new Parametros(@"opc", "2"));// Opción para Ingresar Registro dentro del procedimiento
-                        lista.Add(new Parametros(@"id", u.Id.ToString()));
-                        lista.Add(new Parametros(@"usr", u.Usuario));
-                        lista.Add(new Parametros(@"pwd", Seguridad.Encriptar(u.Contraseña)));
-                        lista.Add(new Parametros(@"nom", u.Nombre));
-                        lista.Add(new Parametros(@"pat", u.Paterno));
-                        lista.Add(new Parametros(@"mat", (!string.IsNullOrEmpty(u.Materno) ? u.Materno : string.Empty)));// Validar que la variable materno no sea nula
-                        lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));
-                        lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));
-                        lista.Add(new Parametros(@"departamento", u.Departamento.Id.ToString()));
-                        lista.Add(new Parametros(@"areamedica", u.AreaMedica.Id.ToString()));
-                        lista.Add(new Parametros(@"subarea", u.SubArea.Id.ToString()));
-                        lista.Add(new Parametros(@"servicio", u.Servicio.Id.ToString()));
-                        lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));
-                        lista.Add(new Parametros(@"email", (!string.IsNullOrEmpty(u.Email) ? u.Email : string.Empty)));//Si cuenta con Dirección email, si no campo vació
-                        lista.Add(new Parametros(@"est", "1"));// Si se vá a ingresar, siempre será activo
-
-                        string proce = "sp_usuarios_crud";
-
                         if(EjecutarProcedimiento(proce, lista))// Ejecutar el procedimiento
                         { return true; }// Operación Exitosa
                         else
