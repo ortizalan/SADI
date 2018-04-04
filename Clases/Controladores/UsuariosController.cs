@@ -52,8 +52,7 @@ namespace SADI.Clases.Controladores {
                 lista.Add(new Parametros(@"mat", u.Materno));// Apellido Materno del Usuario
                 lista.Add(new Parametros(@"fondo", u.Fondo.Id.ToString()));// Fondo al que pertence el Usuario
                 lista.Add(new Parametros(@"subfondo", u.SubFondo.Id.ToString()));//Indicar el SubFondo
-                lista.Add(new Parametros(@"departamento", u.Departamento.Id.ToString()));//Identificador del Departmanto
-                lista.Add(new Parametros(@"areamedica", u.Area.Id.ToString()));//Identificador de la Area Médica
+                lista.Add(new Parametros(@"area", u.Area.Id.ToString()));//Identificador de la Area Médica
                 lista.Add(new Parametros(@"subarea", u.SubArea.Id.ToString()));//Identificador de la SubArea Médica
                 lista.Add(new Parametros(@"servicio", u.Servicio.Id.ToString()));//Identificador del Servicio de la SubArea
                 lista.Add(new Parametros(@"jera", u.Jerarquia.Id.ToString()));// Jerarquía del Usuario

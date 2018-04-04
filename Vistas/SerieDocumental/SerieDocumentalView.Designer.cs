@@ -46,7 +46,7 @@
             this.dgvSeries.Name = "dgvSeries";
             this.dgvSeries.Size = new System.Drawing.Size(779, 322);
             this.dgvSeries.TabIndex = 0;
-            this.dgvSeries.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeries_CellContentClick);
+            this.dgvSeries.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeries_RowEnter);
             // 
             // dgvDigitalizados
             // 
@@ -57,6 +57,7 @@
             this.dgvDigitalizados.Name = "dgvDigitalizados";
             this.dgvDigitalizados.Size = new System.Drawing.Size(416, 322);
             this.dgvDigitalizados.TabIndex = 1;
+            this.dgvDigitalizados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDigitalizados_CellClick);
             // 
             // label1
             // 

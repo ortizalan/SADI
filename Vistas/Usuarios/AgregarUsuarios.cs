@@ -126,7 +126,6 @@ namespace SADI.Vistas.Usuarios
             um.Jerarquia.Id = usrCtrl.IdJerarquia;
             um.SubFondo.Id = usrCtrl.IdSubFondo;
             um.Fondo.Id = 63;
-            um.Departamento.Id = usrCtrl.IdDepartamento;
             um.Area.Id = usrCtrl.IdAreaMedica;
             um.SubArea.Id = usrCtrl.IdSubAreaMedica;
             um.Servicio.Id = usrCtrl.IdServicios;

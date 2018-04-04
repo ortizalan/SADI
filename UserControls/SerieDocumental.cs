@@ -856,9 +856,9 @@ namespace SADI.UserControls
             {
                 formatDigitalizados();
                 _ofd = new OpenFileDialog();
-                _ofd.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|" +
-                    "PDF Files(*.pdf)|*.pdf|Documento Word(*.doc)|*.doc|Documento Word(*.docx)|*.docx|" +
-                    "Hoja de Cálculo(*.xls)|*.xls|Hoja de Cálculo(*.xlsx)|*.xlsx|Todos Los Archivos(*.*)|*.*";
+                _ofd.Filter = "Todos Los Archivos(*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|" +
+                    "PDF Files(*.pdf)|*.pdf|Documento Word(*.doc)|*.doc|Documento Word(*.docx)|*.docx|Presentación Power Point (*.ppt)|*.ppt|" +
+                    "Presentación Power Point(*.pptx)|*.pptx|Hoja de Cálculo(*.xls)|*.xls|Hoja de Cálculo(*.xlsx)|*.xlsx";
                 _ofd.Title = "eliga archivo a guardar".ToUpper();
                 if (_ofd.ShowDialog() == DialogResult.OK)
                 {

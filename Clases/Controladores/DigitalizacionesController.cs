@@ -59,6 +59,9 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"id", di.Id.ToString()));// Identificador del Registro
                         lista.Add(new Parametros(@"seriedoc", string.Empty));// VAcío
                         lista.Add(new Parametros(@"docu", string.Empty));// Vacio
+                        lista.Add(new Parametros(@"nomdocu", string.Empty));//Vacío
+                        lista.Add(new Parametros(@"exte", string.Empty));//Vacío
+                        lista.Add(new Parametros(@"filesize", string.Empty));//Vacío
                         lista.Add(new Parametros(@"folio", string.Empty));// Vacío
 
                         string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento
@@ -104,6 +107,9 @@ namespace SADI.Clases.Controladores
                         lista.Add(new Parametros(@"id", di.Id.ToString()));// Identificador del Registro
                         lista.Add(new Parametros(@"seriedoc", di.SDoctal.SerieDoctal));// Serie Documetal
                         lista.Add(new Parametros(@"docu", di.Documento.ToString()));// Documento Digitalizado
+                        lista.Add(new Parametros(@"nomdocu", di.NombreDoc));//Nombre del Documento
+                        lista.Add(new Parametros(@"exte", di.Extension));//Extensión, tipo de documento
+                        lista.Add(new Parametros(@"filesize", di.Tamaño.ToString()));//Tamaño del Documento (en bytes);
                         lista.Add(new Parametros(@"folio", di.Folio.ToString()));// Folio del Documento
 
                         string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento
@@ -192,6 +198,9 @@ namespace SADI.Clases.Controladores
                     lista.Add(new Parametros(@"id", string.Empty));// Vacío
                     lista.Add(new Parametros(@"seriedoc", string.Empty));// VAcío
                     lista.Add(new Parametros(@"docu", string.Empty));// Vacio
+                    lista.Add(new Parametros(@"nomdocu", string.Empty));//Vacío
+                    lista.Add(new Parametros(@"exte", string.Empty));//Vacío
+                    lista.Add(new Parametros(@"filesize", string.Empty));//Vacío
                     lista.Add(new Parametros(@"folio", string.Empty));// Vacío
 
                     string proce = "sp_digitalizacion_crud";// Indicarle el Procedimiento

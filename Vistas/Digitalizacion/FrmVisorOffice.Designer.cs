@@ -28,34 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.VisorDocsOffice = new System.Windows.Forms.Integration.ElementHost();
             this.visorOfficexaml1 = new SADI.UserControls.VisorOfficexaml();
             this.SuspendLayout();
             // 
-            // elementHost1
+            // VisorDocsOffice
             // 
-            this.elementHost1.Location = new System.Drawing.Point(3, 2);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(1028, 623);
-            this.elementHost1.TabIndex = 0;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.visorOfficexaml1;
+            this.VisorDocsOffice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VisorDocsOffice.Location = new System.Drawing.Point(0, 0);
+            this.VisorDocsOffice.Name = "VisorDocsOffice";
+            this.VisorDocsOffice.Size = new System.Drawing.Size(1031, 626);
+            this.VisorDocsOffice.TabIndex = 0;
+            this.VisorDocsOffice.Text = "elementHost1";
+            this.VisorDocsOffice.Child = this.visorOfficexaml1;
             // 
             // FrmVisorOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 626);
-            this.Controls.Add(this.elementHost1);
+            this.Controls.Add(this.VisorDocsOffice);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmVisorOffice";
+            this.ShowIcon = false;
             this.Text = "FrmVisorOffice";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private System.Windows.Forms.Integration.ElementHost VisorDocsOffice;
         private UserControls.VisorOfficexaml visorOfficexaml1;
     }
 }
