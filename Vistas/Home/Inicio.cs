@@ -196,12 +196,7 @@ namespace SADI
 
         private void visorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //VisorWord frmVwWord = new VisorWord();
-            //frmVwWord.MdiParent = this;
-            //frmVwWord.Show();
-            FrmVisorOffice visor = new FrmVisorOffice();
-            visor.MdiParent=this;
-            visor.Show();
+        
 
         }
 

@@ -189,7 +189,9 @@ namespace SADI.Vistas.SerieDocumental
                 FileStream fs = new FileStream(tmpFile, FileMode.Create, FileAccess.Write);
                 fs.Write(fileBytes, 0, fileBytes.Length);
                 //fs.Seek(0, SeekOrigin.Begin);
-                FrmVisorOffice visor = new FrmVisorOffice(fs.Name);
+                Utilerias.Path = fs.Name;
+                fs.Close();
+                VisorOffice visor = new VisorOffice();
                 visor.MdiParent = this.MdiParent;
                 visor.Show();
 
@@ -205,7 +207,17 @@ namespace SADI.Vistas.SerieDocumental
             return false;
         }
 
+        private void SerieDocumentalView_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        private void SerieDocumentalView_Enter(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Maximized;
+        }
+
+        
     }
 }
 

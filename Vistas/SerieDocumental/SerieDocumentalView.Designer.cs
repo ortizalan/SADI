@@ -109,6 +109,8 @@
             this.Name = "SerieDocumentalView";
             this.ShowIcon = false;
             this.Text = "SerieDcoumentalView";
+            this.Load += new System.EventHandler(this.SerieDocumentalView_Load);
+            this.Enter += new System.EventHandler(this.SerieDocumentalView_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDigitalizados)).EndInit();
             this.ResumeLayout(false);

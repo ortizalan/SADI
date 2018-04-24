@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SADI.Clases;
 
 
 namespace SADI.UserControls
@@ -23,7 +24,7 @@ namespace SADI.UserControls
     /// </summary>
     public partial class VisorOfficexaml : System.Windows.Controls.UserControl
     {
-        System.Windows.Xps.Packaging.XpsDocument xpsDoc;
+        public System.Windows.Xps.Packaging.XpsDocument xpsDoc;
         public static bool officeFileOpen_Status = false;
         private string _path;//Recibe el path del archivo
         string filename;
@@ -35,29 +36,27 @@ namespace SADI.UserControls
         { get { return _path; } set { _path = value; } }
 
         /// <summary>
-        /// 
+        /// Constructor de la Clase
         /// </summary>
         public VisorOfficexaml()
         {
             InitializeComponent();
-            filename = Path;//Ruta del archivo de office
-            CargarArchivoVisor();
+            filename = Utilerias.Path;//Ruta del archivo de office
+            //Loaded += VisorOfficexaml_Loaded;
         }
 
-        public VisorOfficexaml(string path)
+        private void VisorOfficexaml_Loaded(object sender, EventArgs e)
         {
-            InitializeComponent();
-            Path = path;//Ruta del archivo de office
             CargarArchivoVisor();
         }
 
         private void CargarArchivoVisor()
         {
-            if (!string.IsNullOrEmpty(Path))//Que no esté vacía la ruta del archivo
+            if (!string.IsNullOrEmpty(filename))//Que no esté vacía la ruta del archivo
             {
                 string xpsFilePath = String.Empty;// Cadena vacía para biscar el archivo XPS
-                
-                xpsFilePath = Path + ".xps";//Agregarle la extensión al archivo de Office
+
+                xpsFilePath = filename + ".xps";//Agregarle la extensión al archivo de Office
                 var convertResults = OfficeToXps.ConvertToXps(filename, ref xpsFilePath);//Conversión del archivo a XPS
                 switch (convertResults.Result)//Evaluar la Conversión
                 {
@@ -96,57 +95,58 @@ namespace SADI.UserControls
 
         //private void OpenSourceFile_Click(object sender, RoutedEventArgs e)
         //{
-        //    //Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-        //    //string xpsFilePath = String.Empty;
-        //    // Filtro para seleccionar documentos de Office 
-        //    //dlg.DefaultExt = ".txt";
-        //    //dlg.Filter = "Office Files(*.docx;*.doc;*.xlsx;*.xls;*.pptx;*.ppt)|*.docx;*.doc;*.xlsx;*.xls;*.pptx;*.ppt";
+        //    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+        //    string xpsFilePath = String.Empty;
+        //    //Filtro para seleccionar documentos de Office
+        //    dlg.DefaultExt = ".txt";
+        //    dlg.Filter = "Office Files(*.docx;*.doc;*.xlsx;*.xls;*.pptx;*.ppt)|*.docx;*.doc;*.xlsx;*.xls;*.pptx;*.ppt";
 
-        //    // Mostrar OpenFileDialog a través del método ShowDialog 
-        //    //Nullable<bool> result = dlg.ShowDialog();
+        //    //Mostrar OpenFileDialog a través del método ShowDialog
+        //    Nullable<bool> result = dlg.ShowDialog();
 
         //    //Tomar el Nombre del Archivo Seleccionado y mostrarlos en el TextBox
-        //    //if (result == true)
-        //    //{
-        //    //string filename = dlg.FileName;//Guardar el Nombre del Archivo
-        //    //string filename = Path;//Guardar el Nombre del Archivo
-        //                           //dlg.FileName = Path;
-        //                           //string filename = Path;//Guardar el Nombre del Archivo
-        //                           //xpsFilePath = System.Environment.CurrentDirectory + "\\" + dlg.SafeFileName + ".xps";// Cambiar el Nombre del Archivo (extensión)
-        //    //xpsFilePath = Path + ".xps";// Cambiar el Nombre del Archivo (extensión)
-        //                                //xpsFilePath = filename + ".xps";
-        //    //SourceUrl.Text = filename;//Indicarle el Nombre del Archivo a la fuente
-        //    //}
+        //    if (result == true)
+        //    {
+        //        string filename = dlg.FileName;//Guardar el Nombre del Archivo
+        //        //string filename = Path;//Guardar el Nombre del Archivo
+        //        dlg.FileName = Path;
+        //        //string filename = Path;//Guardar el Nombre del Archivo
+        //        xpsFilePath = System.Environment.CurrentDirectory + "\\" + dlg.SafeFileName + ".xps";// Cambiar el Nombre del Archivo (extensión)
+        //        xpsFilePath = Path + ".xps";// Cambiar el Nombre del Archivo (extensión)
+        //        xpsFilePath = filename + ".xps";
+        //        SourceUrl.Text = filename;//Indicarle el Nombre del Archivo a la fuente
+        //    }
 
-        //    //var convertResults = OfficeToXps.ConvertToXps(SourceUrl.Text, ref xpsFilePath);//Conversión del archivo a XPS
-        //    //switch (convertResults.Result)//Evaluar la Conversión
-        //    //{
-        //    //    case ConversionResult.OK://Conversión Correcta
-        //    //        xpsDoc = new System.Windows.Xps.Packaging.XpsDocument(xpsFilePath, FileAccess.Read);//Asignar el Documento XPS
-        //    //        documentViewer1.Document = xpsDoc.GetFixedDocumentSequence();
-        //    //        officeFileOpen_Status = true;
-        //    //        break;
+        //    var convertResults = OfficeToXps.ConvertToXps(SourceUrl.Text, ref xpsFilePath);//Conversión del archivo a XPS
+        //    switch (convertResults.Result)//Evaluar la Conversión
+        //    {
+        //        case ConversionResult.OK://Conversión Correcta
+        //            xpsDoc = new System.Windows.Xps.Packaging.XpsDocument(xpsFilePath, FileAccess.Read);//Asignar el Documento XPS
+        //            documentViewer1.Document = xpsDoc.GetFixedDocumentSequence();
+        //            officeFileOpen_Status = true;
+        //            break;
 
-        //    //    case ConversionResult.InvalidFilePath:
-        //    //        // Handle bad file path or file missing
-        //    //        break;
-        //    //    case ConversionResult.UnexpectedError:
-        //    //        // This should only happen if the code is modified poorly
-        //    //        break;
-        //    //    case ConversionResult.ErrorUnableToInitializeOfficeApp:
-        //    //        // Handle Office 2007 (Word | Excel | PowerPoint) not installed
-        //    //        break;
-        //    //    case ConversionResult.ErrorUnableToOpenOfficeFile:
-        //    //        // Handle source file being locked or invalid permissions
-        //    //        break;
-        //    //    case ConversionResult.ErrorUnableToAccessOfficeInterop:
-        //    //        // Handle Office 2007 (Word | Excel | PowerPoint) not installed
-        //    //        break;
-        //    //    case ConversionResult.ErrorUnableToExportToXps:
-        //    //        // Handle Microsoft Save As PDF or XPS Add-In missing for 2007
-        //    //        break;
-        //    //}
+        //        case ConversionResult.InvalidFilePath:
+        //            // Handle bad file path or file missing
+        //            break;
+        //        case ConversionResult.UnexpectedError:
+        //            // This should only happen if the code is modified poorly
+        //            break;
+        //        case ConversionResult.ErrorUnableToInitializeOfficeApp:
+        //            // Handle Office 2007 (Word | Excel | PowerPoint) not installed
+        //            break;
+        //        case ConversionResult.ErrorUnableToOpenOfficeFile:
+        //            // Handle source file being locked or invalid permissions
+        //            break;
+        //        case ConversionResult.ErrorUnableToAccessOfficeInterop:
+        //            // Handle Office 2007 (Word | Excel | PowerPoint) not installed
+        //            break;
+        //        case ConversionResult.ErrorUnableToExportToXps:
+        //            // Handle Microsoft Save As PDF or XPS Add-In missing for 2007
+        //            break;
+        //    }
         //}
+
         private void ConvertImages_Click(object sender, RoutedEventArgs e)
         {
             try

@@ -238,11 +238,11 @@
     <Compile Include="Vistas\Atributos\Presumir.Designer.cs">
       <DependentUpon>Presumir.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Digitalizacion\FrmVisorOffice.cs">
+    <Compile Include="Vistas\Digitalizacion\VisorOffice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Digitalizacion\FrmVisorOffice.Designer.cs">
-      <DependentUpon>FrmVisorOffice.cs</DependentUpon>
+    <Compile Include="Vistas\Digitalizacion\VisorOffice.Designer.cs">
+      <DependentUpon>VisorOffice.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Digitalizacion\VisorPDF.cs">
       <SubType>Form</SubType>
@@ -425,8 +425,8 @@
     <EmbeddedResource Include="Vistas\Atributos\Presumir.resx">
       <DependentUpon>Presumir.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Digitalizacion\FrmVisorOffice.resx">
-      <DependentUpon>FrmVisorOffice.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Digitalizacion\VisorOffice.resx">
+      <DependentUpon>VisorOffice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Digitalizacion\VisorPDF.resx">
       <DependentUpon>VisorPDF.cs</DependentUpon>

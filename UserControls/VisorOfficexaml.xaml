@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SADI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1200">
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Loaded="VisorOfficexaml_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
@@ -30,10 +31,11 @@
         </StackPanel>
 
         <!--<TextBlock Height="Auto" Width="Auto" FontSize="150" HorizontalAlignment="Left"  Name="textBlock1" Text="TextBlock" VerticalAlignment="Top" />-->
-        <StackPanel Orientation="Horizontal" Margin="36,10,606,0" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Margin="244,10,174,0" HorizontalAlignment="Center" Width="782">
             <Button x:Name="ConvertImages"  Margin="20,0,10,0" Content="Convertir Páginas a Imagen" Click="ConvertImages_Click"/>
             <Button x:Name="Single_Page_Image" Margin="20,0,10,0" Content="Convertir Una Página a Imagen" Click="Single_Page_Image_Click"/>
             <Button x:Name="DestinationLoaction"  Margin="20,0,10,0" Content="Convertir a Documento XPS" Click="DestinationLoaction_Click"/>
+            <TextBlock x:Name="SourceUrl" Opacity="0.5"  Margin="20,0,10,0" Text="Open a Source File(.docx,.xlsx,.pptx)"></TextBlock>
         </StackPanel>
         <DocumentViewer Grid.Row="1" HorizontalAlignment="Left" Name="documentViewer1" VerticalAlignment="Top" Margin="36,0,0,0"/>
     </Grid>
