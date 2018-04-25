@@ -205,9 +205,7 @@ namespace SADI
             //FrmVisorOffice frmVwExcel = new FrmVisorOffice();
             //frmVwExcel.MdiParent = this;
             //frmVwExcel.Show();
-            VisorPDF visor = new VisorPDF();
-            visor.MdiParent = this;
-            visor.Show();
+            
         }
         // Ver Series Activas
         private void verSeriesActivasToolStripMenuItem_Click(object sender, EventArgs e)

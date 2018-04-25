@@ -191,9 +191,33 @@ namespace SADI.Vistas.SerieDocumental
                 //fs.Seek(0, SeekOrigin.Begin);
                 Utilerias.Path = fs.Name;
                 fs.Close();
-                VisorOffice visor = new VisorOffice();
-                visor.MdiParent = this.MdiParent;
-                visor.Show();
+
+                switch(Path.GetExtension(Utilerias.Path))
+                {
+                    case ".pdf":
+                        VisorPdf visorpdf = new VisorPdf();
+                        visorpdf.MdiParent = this.MdiParent;
+                        visorpdf.Show();
+                        break;
+
+                    case ".doc":
+                    case ".docx":
+                    case ".xls":
+                    case ".xslx":
+                    case ".ppt":
+                    case ".pptx":
+                        VisorOffice visor = new VisorOffice();
+                        visor.MdiParent = this.MdiParent;
+                        visor.Show();
+                        break;
+
+                    default:
+                        //Poner código aquí.. cuando se espera un resultado por 
+                        //default
+                        break;
+                           
+                }
+                
 
             }
             else

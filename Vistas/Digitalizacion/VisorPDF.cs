@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SADI.Clases;
 
-namespace SADI.Vistas.Digitalizacion
+namespace SADI.Vistas
 {
-    public partial class VisorPDF : Form
+    public partial class VisorPdf : Form
     {
-        public VisorPDF()
+        public VisorPdf()
         {
             InitializeComponent();
+        }
+
+        private void VisorPdf_Load(object sender, EventArgs e)
+        {
+            pdfViewer1.LoadFile(Utilerias.Path);
         }
     }
 }
