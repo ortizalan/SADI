@@ -57,6 +57,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Pruebas\C#\WPFPDFViewer\sourceCode\sourceCode\WPFPdfViewer\bin\Debug\AxInterop.AcroPDFLib.dll</HintPath>
     </Reference>
+    <Reference Include="ComponentPro.Pdf, Version=6.8.20.4155, Culture=neutral, PublicKeyToken=0efede2d78b28dff, processorArchitecture=MSIL" />
     <Reference Include="CRVsPackageLib, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -69,6 +70,9 @@
       <HintPath>..\DatosBD\DatosBD\bin\Debug\DatosBD.dll</HintPath>
     </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -79,15 +83,13 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
     </Reference>
-    <Reference Include="PDFViewer">
-      <HintPath>..\..\Librerias\PDFViewer\PDFViewer\bin\Debug\PDFViewer.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xaml" />
@@ -211,9 +213,6 @@
     </Compile>
     <Compile Include="UserControls\SerieDocumental.Designer.cs">
       <DependentUpon>SerieDocumental.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\VisofPdfxaml.xaml.cs">
-      <DependentUpon>VisofPdfxaml.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\VisorOfficexaml.xaml.cs">
       <DependentUpon>VisorOfficexaml.xaml</DependentUpon>
@@ -493,9 +492,6 @@
     <None Include="DataSets\CatalogosRepos\DSCatalogos.xss">
       <DependentUpon>DSCatalogos.xsd</DependentUpon>
     </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -651,10 +647,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UserControls\VisofPdfxaml.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\VisorOfficexaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
